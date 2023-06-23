@@ -13,7 +13,7 @@ function Footer() {
         </a>
       </p>
       <p className="mt-2 text-sm">
-        ©2023, Ashfak Ahmed Niloy. All Rights Reserved
+        ©2023, Ashfak Ahmed Niloy. All Rights Reserved.
       </p>
     </div>
   );
