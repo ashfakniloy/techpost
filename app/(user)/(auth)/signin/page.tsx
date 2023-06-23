@@ -213,7 +213,7 @@ function UserSigninPage() {
                 disabled={isSubmitting}
               >
                 {isSubmitting && (
-                  <span className="absolute flex left-[105px] items-center inset-y-0">
+                  <span className="absolute flex left-[80px] lg:left-[105px] items-center inset-y-0">
                     <Loader width="30" />
                   </span>
                 )}

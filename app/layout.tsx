@@ -3,6 +3,7 @@ import ToastNotification from "@/components/ToastNotification";
 import { Roboto, Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import ThemeWrapper from "@/components/Theme/ThemeWrapper";
+import Log from "@/components/Log";
 
 const roboto = Roboto({
   weight: "400",
@@ -48,6 +49,7 @@ export default function RootLayout({
             <SessionProvider>{children}</SessionProvider>
           </div>
         </ThemeWrapper>
+        <Log />
       </body>
     </html>
   );
