@@ -1,0 +1,19 @@
+/* .ql-picker-label {
+  @apply text-white;
+}
+
+.ql-formats > button {
+  @apply text-white;
+}
+
+.ql-bold > button {
+  @apply text-white;
+} */
+
+.quill * {
+  @apply text-base;
+}
+
+.ql-align-center {
+  @apply text-center;
+}

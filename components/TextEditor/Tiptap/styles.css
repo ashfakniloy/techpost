@@ -1,0 +1,101 @@
+.ProseMirror {
+  @apply p-2 max-h-[560px] overflow-y-auto outline-none rounded-md rounded-t-none border border-t-0 border-gray-300 dark:border-gray-700 focus:border-stone-600 dark:focus:border-stone-500 min-h-[400px] max-w-full scrollbar-thin scrollbar-track-gray-200 dark:scrollbar-track-gray-800 scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700;
+}
+
+.ProseMirror > * + * {
+  /* margin-top: 0.75em; */
+  @apply mt-4;
+}
+
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  /* line-height: 1.1; */
+  @apply leading-[1.1];
+}
+
+.ProseMirror > h1 {
+  @apply text-3xl font-bold;
+}
+.ProseMirror > h2 {
+  @apply text-2xl font-bold;
+}
+.ProseMirror > h3 {
+  @apply text-xl font-bold;
+}
+
+.ProseMirror > p {
+  @apply text-base;
+}
+
+.ProseMirror > ul {
+  @apply ml-5 list-disc;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  @apply px-4 py-0;
+}
+
+.ProseMirror code {
+  /* background-color: #008000;
+  color: yellow; */
+  @apply text-yellow-200 bg-transparent;
+}
+
+.ProseMirror pre {
+  /* background: #0d0d0d;
+  color: #fff;
+  font-family: "JetBrainsMono", monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem; */
+  @apply bg-[#0d0d0d] text-white font-["JetBrainsMono",monospace] py-3 px-4 rounded-lg;
+}
+
+.ProseMirror pre code {
+  /* color: inherit;
+  padding: 0;
+  background: none;
+  font-size: 0.8rem; */
+  @apply p-0 text-xs text-inherit bg-none;
+}
+
+.ProseMirror img {
+  /* max-width: 100%;
+  height: auto; */
+  @apply h-auto max-w-full;
+}
+
+.ProseMirror a {
+  /* max-width: 100%;
+  height: auto; */
+  @apply text-blue-400 underline hover:text-blue-800 dark:hover:text-blue-600;
+}
+
+.ProseMirror blockquote {
+  /* padding-left: 1rem;
+  border-left: 2px solid #9c9c9c; */
+  @apply pl-4 border-l-2 border-[#9c9c9c];
+}
+
+.ProseMirror hr {
+  /* border: none;
+  border-top: 2px solid #9c9c9c;
+  margin: 2rem 0; */
+  @apply my-8 border-t border-gray-400 dark:border-gray-600;
+}
+
+.tiptap-toolbar {
+  @apply z-10 flex flex-wrap items-center gap-1 p-2 bg-gray-50 shadow-md rounded-t-md dark:bg-custom-gray2;
+}
+
+.tiptap-toolbar button {
+  @apply hover:bg-gray-300 dark:hover:bg-gray-700 px-1 min-w-[30px] h-[28px] flex justify-center items-center rounded disabled:opacity-50 disabled:hover:!bg-transparent;
+}
+
+.tiptap-toolbar .is-active {
+  @apply bg-gray-300 dark:bg-gray-700;
+}

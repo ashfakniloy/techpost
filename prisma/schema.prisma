@@ -1,0 +1,153 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  username String @unique
+  email    String @unique
+  password String
+  Post     Post[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile         Profile?
+  likes           Like[]
+  comments        Comment[]
+  commentsLikes   CommentLike[]
+  commentsReplies CommentReply[]
+}
+
+model Profile {
+  id       String  @id @default(uuid())
+  bio      String?
+  facebook String?
+  twitter  String?
+  imageUrl String?
+  imageId  String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  @@unique([id, userId])
+}
+
+model Post {
+  id String @id @default(cuid())
+
+  title    String @unique
+  // category String
+  imageUrl String
+  imageId  String
+  article  String
+
+  category     Category @relation(fields: [categoryName], references: [name])
+  categoryName String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String
+  likes    Like[]
+  comments Comment[]
+  // views           Int            @default(0)
+  views    View[]
+
+  commentsReplies CommentReply[]
+
+  @@unique([id, userId])
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  posts     Post[]
+}
+
+model View {
+  id Int @id @default(autoincrement())
+
+  deviceId String
+
+  createdAt DateTime @default(now())
+
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  @@unique([postId, deviceId])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@unique([postId, userId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  comment String
+
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  commentsLikes   CommentLike[]
+  commentsReplies CommentReply[]
+}
+
+model CommentLike {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String
+
+  // post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  // postId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@unique([commentId, userId])
+}
+
+model CommentReply {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  commentReply String
+
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String
+
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
