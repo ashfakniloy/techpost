@@ -1,30 +1,18 @@
+import space from "@/public/images/space.jpg";
+import robotics from "@/public/images/robotics.jpg";
+import programming from "@/public/images/programming.jpg";
+
 export const categories = [
   {
-    name: "programming",
-    count: 45,
+    name: "Programming",
+    img: programming,
   },
   {
-    name: "robotics",
-    count: 10,
+    name: "Robotics",
+    img: robotics,
   },
   {
-    name: "space",
-    count: 18,
-  },
-  {
-    name: "architects",
-    count: 12,
-  },
-  {
-    name: "aeronautics",
-    count: 8,
-  },
-  {
-    name: "mechanical",
-    count: 15,
-  },
-  {
-    name: "electrical",
-    count: 23,
+    name: "Space",
+    img: space,
   },
 ];

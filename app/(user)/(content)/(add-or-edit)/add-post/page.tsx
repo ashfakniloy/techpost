@@ -5,7 +5,7 @@ async function AddPostPage() {
   const { data: categories } = await getCategories();
   // console.log("categories", categories);
 
-  const allcategories = categories.map((category) => category.name);
+  const allcategories: any = categories.map((category) => category.name);
 
   return (
     <div>
