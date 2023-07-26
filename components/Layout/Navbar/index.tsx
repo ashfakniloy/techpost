@@ -51,7 +51,7 @@ function Navbar({
   }, [pathname]);
 
   const getNavLinks = () => {
-    if (session) {
+    if (session && session.user.role === "USER") {
       return navLinksSigned(categories);
     } else {
       return navLinksUnsigned(categories);

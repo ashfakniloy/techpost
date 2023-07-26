@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { Prisma } from "@prisma/client";
 
 export async function PUT(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -59,18 +60,18 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const usernameExists = await prisma.user.findUnique({
-      where: {
-        username: username,
-      },
-    });
+    // const usernameExists = await prisma.user.findUnique({
+    //   where: {
+    //     username: username,
+    //   },
+    // });
 
-    if (usernameExists) {
-      return NextResponse.json(
-        { error: "Username already exists" },
-        { status: 400 }
-      );
-    }
+    // if (usernameExists) {
+    //   return NextResponse.json(
+    //     { error: "Username already exists" },
+    //     { status: 400 }
+    //   );
+    // }
 
     try {
       const response = await prisma.user.update({
@@ -85,7 +86,16 @@ export async function PUT(request: NextRequest) {
         response,
       });
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
+
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === "P2002") {
+          return NextResponse.json(
+            { error: "Username already exists" },
+            { status: 400 }
+          );
+        }
+      }
       return NextResponse.json({ error }, { status: 400 });
     }
   }
@@ -100,18 +110,18 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const emailExists = await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-    });
+    // const emailExists = await prisma.user.findUnique({
+    //   where: {
+    //     email: email,
+    //   },
+    // });
 
-    if (emailExists) {
-      return NextResponse.json(
-        { error: "Email already exists" },
-        { status: 400 }
-      );
-    }
+    // if (emailExists) {
+    //   return NextResponse.json(
+    //     { error: "Email already exists" },
+    //     { status: 400 }
+    //   );
+    // }
 
     try {
       const response = await prisma.user.update({
@@ -126,7 +136,16 @@ export async function PUT(request: NextRequest) {
         response,
       });
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
+
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === "P2002") {
+          return NextResponse.json(
+            { error: "Email already exists" },
+            { status: 400 }
+          );
+        }
+      }
       return NextResponse.json({ error }, { status: 400 });
     }
   }
@@ -160,9 +179,7 @@ export async function PUT(request: NextRequest) {
   }
 }
 
-// export async function DELETE(request: NextRequest) {
-export async function POST(request: NextRequest) {
-  //temporaty fix, until nextjs bug resolves
+export async function DELETE(request: NextRequest) {
   const session = await getServerSession(authOptions);
 
   if (!session) {

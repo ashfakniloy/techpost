@@ -122,20 +122,7 @@ function Sidebar({
             </button>
 
             <div className="mt-4 mb-7">
-              {!session ? (
-                <div className="flex items-center justify-between">
-                  <Link href="/signup">
-                    <button className="w-[120px] py-2 text-sm font-bold bg-transparent border-2 border-gray-400 dark:hover:bg-gray-400 dark:hover:text-gray-900 rounded-md">
-                      Sign Up
-                    </button>
-                  </Link>
-                  <Link href="/signin">
-                    <button className="w-[120px] py-2 text-sm font-bold bg-gray-900 border-gray-900 text-gray-200 dark:text-gray-900 border-2 dark:border-gray-200 dark:bg-gray-200  rounded-md">
-                      Sign In
-                    </button>
-                  </Link>
-                </div>
-              ) : (
+              {session && session.user.role === "USER" ? (
                 <div className="flex gap-5 p-3 bg-gray-200 rounded-lg dark:bg-custom-gray3">
                   <div className="">
                     {imageUrl ? (
@@ -167,6 +154,19 @@ function Sidebar({
                       Sign out
                     </button>
                   </div>
+                </div>
+              ) : (
+                <div className="flex items-center justify-between">
+                  <Link href="/signup">
+                    <button className="w-[120px] py-2 text-sm font-bold bg-transparent border-2 border-gray-400 dark:hover:bg-gray-400 dark:hover:text-gray-900 rounded-md">
+                      Sign Up
+                    </button>
+                  </Link>
+                  <Link href="/signin">
+                    <button className="w-[120px] py-2 text-sm font-bold bg-gray-900 border-gray-900 text-gray-200 dark:text-gray-900 border-2 dark:border-gray-200 dark:bg-gray-200  rounded-md">
+                      Sign In
+                    </button>
+                  </Link>
                 </div>
               )}
             </div>

@@ -78,7 +78,7 @@ function CommentLikeButton({
   };
 
   const handleClick = async () => {
-    if (session) {
+    if (session && session.user.role === "USER") {
       if (hasLiked) {
         await handleUnlike();
         router.refresh();

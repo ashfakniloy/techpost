@@ -53,8 +53,7 @@ function DeleteAccount({
 
     const url = "/api/account";
     const response = await fetch(url, {
-      // method: "DELETE",
-      method: "POST", //temporaty fix, until nextjs bug resolves
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },

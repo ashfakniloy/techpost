@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { revalidatePath } from "next/cache";
+import cloudinary from "@/lib/cloudinary";
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -32,6 +33,21 @@ export async function POST(request: NextRequest) {
       { error: "All fields are required" },
       { status: 400 }
     );
+  }
+
+  const { title } = body;
+
+  const postTitleExists = await prisma.post.findFirst({
+    where: {
+      title: {
+        equals: title,
+        mode: "insensitive",
+      },
+    },
+  });
+
+  if (postTitleExists) {
+    return NextResponse.json({ error: "Post title exists" }, { status: 400 });
   }
 
   try {
@@ -102,6 +118,21 @@ export async function PUT(request: NextRequest) {
     );
   }
 
+  const { title } = body;
+
+  const postTitleExists = await prisma.post.findFirst({
+    where: {
+      title: {
+        equals: title,
+        mode: "insensitive",
+      },
+    },
+  });
+
+  if (postTitleExists) {
+    return NextResponse.json({ error: "Post title exists" }, { status: 400 });
+  }
+
   try {
     const response = await prisma.post.update({
       where: {
@@ -136,10 +167,15 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const isAdmin = session.user.role === "ADMIN";
+
   const { searchParams } = request.nextUrl;
   const postId = searchParams.get("postId");
+  const imageId = searchParams.get("imageId");
 
-  if (typeof postId !== "string") {
+  // return NextResponse.json({ success: session }, { status: 200 });
+
+  if (typeof postId !== "string" || typeof imageId !== "string") {
     return NextResponse.json(
       { error: "Invalid Searchparams" },
       { status: 400 }
@@ -147,14 +183,24 @@ export async function DELETE(request: NextRequest) {
   }
 
   try {
-    const response = await prisma.post.delete({
-      where: {
-        id_userId: {
-          id: postId,
-          userId: session.user.id,
-        },
-      },
-    });
+    const response = isAdmin
+      ? await prisma.post.delete({
+          where: {
+            id: postId,
+          },
+        })
+      : await prisma.post.delete({
+          where: {
+            id_userId: {
+              id: postId,
+              userId: session.user.id,
+            },
+          },
+        });
+
+    if (response) {
+      const imageDeleteResponse = await cloudinary.v2.uploader.destroy(imageId);
+    }
 
     // revalidatePath("/");
     // revalidatePath("/my-profile");

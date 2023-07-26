@@ -175,11 +175,13 @@ import { Loader3 } from "../Loaders/Loader";
 export const FileField = ({
   label,
   name,
+  isAdmin,
   ...props
 }: {
   label?: string;
   name: string;
   required?: boolean;
+  isAdmin?: boolean;
 }) => {
   const {
     register,
@@ -268,7 +270,13 @@ export const FileField = ({
       <label htmlFor={name} className="inline-block mb-2">
         {label}
       </label>
-      <div className="w-[170px] h-[170px] relative rounded-md bg-gray-200 dark:bg-custom-gray2 flex justify-center items-center">
+      <div
+        className={`w-[170px] h-[170px] relative rounded-md flex justify-center items-center ${
+          isAdmin
+            ? "bg-gray-200 dark:bg-custom-gray5"
+            : "bg-gray-200 dark:bg-custom-gray2"
+        }`}
+      >
         {imageValue && imageId ? (
           <div className="relative w-[170px] h-[170px]">
             <Image
@@ -323,7 +331,11 @@ export const FileField = ({
                 <label
                   htmlFor={name}
                   title="Choose an image from your device"
-                  className="bg-gray-50 shadow-md active:scale-95 transition-transform duration-100 dark:bg-custom-gray3 text-sm font-bold px-3 py-1.5 rounded flex items-center cursor-pointer gap-1"
+                  className={` shadow-md active:scale-95 transition-transform duration-100 text-sm font-bold px-3 py-1.5 rounded flex items-center cursor-pointer gap-1 ${
+                    isAdmin
+                      ? "bg-gray-50 dark:bg-custom-gray6"
+                      : "bg-gray-50 dark:bg-custom-gray3"
+                  }`}
                 >
                   <span className="w-5 h-5">
                     <PlusIcon />

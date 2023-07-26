@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["jsonProtocol"]
+  provider = "prisma-client-js"
+  // previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
@@ -11,12 +11,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Admin {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String @unique
+  role     String @default("ADMIN")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model User {
   id       String @id @default(uuid())
   username String @unique
   email    String @unique
   password String
-  Post     Post[]
+  posts    Post[]
+  role     String @default("USER")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -54,7 +65,10 @@ model Post {
   imageId  String
   article  String
 
-  category     Category @relation(fields: [categoryName], references: [name])
+  // articleImages   ArticleImages? @relation(fields: [articleImagesId], references: [id])
+  // articleImagesId String?
+
+  category     Category @relation(fields: [categoryName], references: [name], onDelete: Cascade)
   categoryName String
 
   createdAt DateTime @default(now())
@@ -72,11 +86,33 @@ model Post {
   @@unique([id, userId])
 }
 
+// model ArticleImages {
+//   id       String   @id @default(cuid())
+//   imageIds String[]
+//   Post     Post[]
+// }
+
 model Category {
-  id        String   @id @default(cuid())
-  name      String   @unique
+  id     String  @id @default(cuid())
+  name   String  @unique
+  posts  Post[]
+  quotes Quote[]
+
+  imageUrl String
+  imageId  String
+
   createdAt DateTime @default(now())
-  posts     Post[]
+  updatedAt DateTime @updatedAt
+}
+
+model Quote {
+  id     String @id @default(cuid())
+  author String
+  quote  String
+
+  createdAt  DateTime @default(now())
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String
 }
 
 model View {

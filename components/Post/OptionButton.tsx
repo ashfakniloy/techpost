@@ -6,16 +6,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "../ui/alert-dialog";
+// import {
+//   AlertDialog,
+//   AlertDialogAction,
+//   AlertDialogCancel,
+//   AlertDialogContent,
+//   AlertDialogFooter,
+//   AlertDialogHeader,
+//   AlertDialogTitle,
+// } from "../ui/alert-dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import Modal from "../Modal";
 
 function OptionButton({
   title,
@@ -28,10 +29,10 @@ function OptionButton({
   imageId: string;
   redirectAfterDelete?: string;
 }) {
-  const { node, toggle: showOptions, setToggle: setShowOptions } = useToggle();
+  // const { node, toggle: showOptions, setToggle: setShowOptions } = useToggle();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [postDeleted, setPostDeleted] = useState(false);
+  // const [postDeleted, setPostDeleted] = useState(false);
 
   const router = useRouter();
 
@@ -41,7 +42,7 @@ function OptionButton({
 
     const toastDeletePost = toast.loading("Loading...");
 
-    const url = `/api/post?postId=${postId}`;
+    const url = `/api/post?postId=${postId}&imageId=${imageId}`;
     const response = await fetch(url, {
       method: "DELETE",
     });
@@ -64,28 +65,28 @@ function OptionButton({
 
     setShowDeleteModal(false);
     setIsDeleting(false);
-    setPostDeleted(true);
+    // setPostDeleted(true);
   };
 
-  useEffect(() => {
-    const deletcloudinaryimage = async () => {
-      const response = await fetch(`/api/image?imageId=${imageId}`, {
-        method: "DELETE",
-      });
+  // useEffect(() => {
+  //   const deletcloudinaryimage = async () => {
+  //     const response = await fetch(`/api/image?imageId=${imageId}`, {
+  //       method: "DELETE",
+  //     });
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (response.ok) {
-        console.log("success deleted cloudinary image", data);
-      } else {
-        console.log("error deleted cloudinary image", data);
-      }
-    };
+  //     if (response.ok) {
+  //       console.log("success deleted cloudinary image", data);
+  //     } else {
+  //       console.log("error deleted cloudinary image", data);
+  //     }
+  //   };
 
-    imageId && postDeleted && deletcloudinaryimage();
+  //   imageId && postDeleted && deletcloudinaryimage();
 
-    return () => setPostDeleted(false);
-  }, [postDeleted]);
+  //   return () => setPostDeleted(false);
+  // }, [postDeleted]);
 
   return (
     <>
@@ -137,7 +138,17 @@ function OptionButton({
         </PopoverContent>
       </Popover>
 
-      <AlertDialog
+      <Modal
+        showModal={showDeleteModal}
+        setShowModal={setShowDeleteModal}
+        isPending={isDeleting}
+        title={`Are you sure you want to delete post "${title}"?`}
+        handleAction={handleDelete}
+        color="bg-gray-50"
+        colorDark="dark:bg-custom-gray2"
+      />
+
+      {/* <AlertDialog
         open={showDeleteModal || isDeleting}
         onOpenChange={setShowDeleteModal}
       >
@@ -157,7 +168,7 @@ function OptionButton({
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
-      </AlertDialog>
+      </AlertDialog> */}
 
       {/* {showDeleteModal && (
         <div className="fixed inset-0 z-20 w-full h-screen overflow-y-hidden bg-black bg-opacity-50">

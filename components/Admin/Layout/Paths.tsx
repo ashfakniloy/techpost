@@ -1,0 +1,49 @@
+"use client";
+
+import { ChevronDoubleRightIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
+import { usePathname, useParams } from "next/navigation";
+
+function Paths() {
+  const pathname = usePathname();
+  const params = useParams();
+
+  console.log("params", params);
+  const paths = pathname.split("/");
+  const pathsFiltered = paths.filter((path) => path !== "");
+
+  const pathsWithLinks = pathsFiltered.reduce<{ name: string; link: string }[]>(
+    (acc, value, index) => {
+      const link = `/${pathsFiltered.slice(0, index + 1).join("/")}`;
+
+      acc.push({
+        name: value === "admin" ? "homepage" : value,
+        link: link,
+      });
+
+      return acc;
+    },
+    []
+  );
+
+  return (
+    <div className="ml-1 mt-2 text-gray-300 text-sm flex">
+      {pathsWithLinks.map((path, i) => (
+        <div key={i} className="flex items-center">
+          <Link href={path.link} className="">
+            <span className="hover:underline capitalize">
+              {path.name.split("_").join(" ")}
+            </span>
+          </Link>
+          {i < pathsWithLinks.length - 1 && (
+            <span className="mx-2">
+              <ChevronDoubleRightIcon className="h-3.5 w-3.5" />
+            </span>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default Paths;

@@ -53,7 +53,7 @@ async function SinglePostPage({ params: { postId } }: Props) {
           <div className="overflow-hidden">
             <div className="mb-4 text-gray-700 dark:text-gray-300 ">
               <Link
-                href={`/category/${post.categoryName}`}
+                href={`/category/${post.categoryName.split(" ").join("_")}`}
                 className="capitalize text-sm lg:text-base hover:text-blue-800 dark:hover:text-blue-500"
               >
                 {post.categoryName}

@@ -104,42 +104,74 @@ export const authOptions: NextAuthOptions = {
       name: "credentials",
       credentials: {},
       authorize: async (credentials) => {
-        const { email, password } = credentials as {
+        const { email, password, role } = credentials as {
           email: string;
           password: string;
+          role: string;
         };
 
-        const response = await prisma.user.findUnique({
-          where: {
-            email: email,
-          },
-          include: {
-            profile: {
-              select: {
-                imageUrl: true,
+        if (role === "USER") {
+          const response = await prisma.user.findUnique({
+            where: {
+              email: email,
+            },
+            include: {
+              profile: {
+                select: {
+                  imageUrl: true,
+                },
               },
             },
-          },
-        });
+          });
 
-        if (!response) {
-          throw new Error("Incorrect Email");
+          if (!response) {
+            throw new Error("Incorrect Email");
+          }
+
+          if (response.password !== password) {
+            throw new Error("Incorrect Password");
+          }
+
+          console.log("auth response", response);
+
+          const user = {
+            id: response.id,
+            username: response.username,
+            email: response.email,
+            imageUrl: response.profile?.imageUrl,
+            role: response.role,
+          };
+
+          return user;
         }
 
-        if (response.password !== password) {
-          throw new Error("Incorrect Password");
+        if (role === "ADMIN") {
+          const response = await prisma.admin.findUnique({
+            where: {
+              email: email,
+            },
+          });
+
+          if (!response) {
+            throw new Error("Incorrect Email");
+          }
+
+          if (response.password !== password) {
+            throw new Error("Incorrect Password");
+          }
+
+          // console.log("auth response", response);
+
+          const user = {
+            id: response.id,
+            email: response.email,
+            role: response.role,
+          };
+
+          return user;
         }
 
-        // console.log("auth response", response);
-
-        const user = {
-          id: response.id,
-          username: response.username,
-          email: response.email,
-          imageUrl: response.profile?.imageUrl,
-        };
-
-        return user;
+        return null;
       },
     }),
   ],

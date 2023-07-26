@@ -2,38 +2,70 @@ import Image from "next/image";
 import space from "@/public/images/space.jpg";
 import robotics from "@/public/images/robotics.jpg";
 import programming from "@/public/images/programming.jpg";
+import { getCategoryByName } from "@/prisma/find/getCategoryByName";
+import { notFound } from "next/navigation";
 
-function CategoryTopSection({ categoryName }: { categoryName: string }) {
-  const getImage = () => {
-    switch (categoryName) {
-      case "programming":
-        return programming;
-      case "robotics":
-        return robotics;
-      case "space":
-        return space;
+async function CategoryTopSection({ categoryName }: { categoryName: string }) {
+  // const getImage = () => {
+  //   switch (categoryName) {
+  //     case "programming":
+  //       return programming;
+  //     case "robotics":
+  //       return robotics;
+  //     case "space":
+  //       return space;
 
-      default:
-        return space;
-    }
+  //     default:
+  //       return space;
+  //   }
+  // };
+
+  // const imageSrc = getImage();
+
+  const { data: category } = await getCategoryByName({
+    categoryName: categoryName,
+  });
+
+  if (!category) {
+    notFound();
+  }
+
+  const generateRandom = (maxLimit = 0) => {
+    const randomNumber = Math.floor(Math.random() * maxLimit);
+
+    return randomNumber;
   };
 
-  const imageSrc = getImage();
+  const randomIndex = generateRandom(category?.quotes.length);
+  // generateRandom(500)
+
+  // console.log("random", randomIndex);
+
+  const randomQuote = category.quotes[randomIndex];
 
   return (
     <div className="relative bg-black">
-      {categoryName && (
-        <div className="-mt-5 w-full h-[250px] lg:h-[400px] relative">
-          <Image
-            src={imageSrc}
-            alt="category"
-            fill
-            className="object-cover opacity-75"
-          />
+      {/* {categoryName && ( */}
+      <div className="-mt-5 w-full h-[250px] lg:h-[400px] relative">
+        <Image
+          src={category.imageUrl}
+          alt={category.name}
+          fill
+          className="object-cover opacity-75"
+        />
+      </div>
+      {/* )} */}
+      <div className="absolute flex flex-col justify-center items-center text-white inset-0 font-montserrat select-none">
+        <h1 className="text-3xl lg:text-5xl tracking-wider font-bold capitalize">
+          {category.name}
+        </h1>
+
+        <div className="mt-8 w-[500px]">
+          <p className="text-center italic">
+            {randomQuote.quote}{" "}
+            <span className="font-semibold"> - {randomQuote.author}</span>
+          </p>
         </div>
-      )}
-      <div className="absolute flex flex-col justify-center items-center text-white inset-0 text-3xl lg:text-5xl  font-montserrat tracking-wider font-bold capitalize select-none">
-        {categoryName}
       </div>
     </div>
   );

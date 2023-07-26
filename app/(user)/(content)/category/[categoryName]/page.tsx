@@ -10,12 +10,13 @@ import PostsSkeleton from "@/components/Skeleton/PostsSkeleton";
 import Categories from "@/components/Post/Categories";
 import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
 import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";
+import { getCategoryByName } from "@/prisma/find/getCategoryByName";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
 // export const fetchCache = "force-no-store";
 
-type Props = SearchParams & {
+type CategoryPageProps = SearchParams & {
   params: {
     categoryName: string;
   };
@@ -53,29 +54,37 @@ async function CategoryPosts({
 async function CategoryPage({
   params: { categoryName },
   searchParams: { page, limit, sort },
-}: Props) {
+}: CategoryPageProps) {
   const pageNumber = Number(page);
   const limitNumber = Number(limit);
 
-  const { data: categories } = await getCategories();
+  // const { data: categories } = await getCategories();
 
-  const allCategories = categories.map((category) => category.name);
+  // const allCategories = categories.map((category) => category.name);
 
-  if (!allCategories.includes(categoryName)) {
+  // if (!allCategories.includes(categoryName)) {
+  //   notFound();
+  // }
+
+  const { data: category } = await getCategoryByName({ categoryName });
+
+  if (!category) {
     notFound();
   }
 
+  const titleModified = categoryName.split("_").join(" ");
+
   const getCardTitle = () => {
-    if (!sort || sort === "recent") return `Popular from ${categoryName}`;
-    if (sort === "popular") return `Recent from ${categoryName}`;
-    return `Popular from ${categoryName}`;
+    if (!sort || sort === "recent") return `Popular from ${titleModified}`;
+    if (sort === "popular") return `Recent from ${titleModified}`;
+    return `Popular from ${titleModified}`;
   };
 
   const cardTitle = getCardTitle();
 
   const getPostsTitle = () => {
-    if (!sort || sort === "recent") return `Recent Posts from ${categoryName}`;
-    if (sort === "popular") return `Popular Posts from ${categoryName}`;
+    if (!sort || sort === "recent") return `Recent Posts from ${titleModified}`;
+    if (sort === "popular") return `Popular Posts from ${titleModified}`;
     return "invalid";
   };
 

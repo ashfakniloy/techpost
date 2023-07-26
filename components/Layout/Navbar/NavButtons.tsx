@@ -35,20 +35,7 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
 
   return (
     <>
-      {!session ? (
-        <div className="flex items-center gap-7">
-          <Link href="/signup">
-            <button className="px-3 py-1 text-sm text-gray-700 dark:text-gray-200 font-bold bg-transparent border-2 border-gray-300 dark:border-gray-400 hover:bg-gray-300 dark:hover:bg-gray-400 dark:hover:text-gray-900 rounded-md">
-              Sign Up
-            </button>
-          </Link>
-          <Link href="/signin">
-            <button className="px-3 py-1 text-sm font-bold bg-gray-900 border-2 border-gray-900 text-gray-200 dark:text-gray-900 dark:border-gray-200 dark:bg-gray-200 rounded-md">
-              Sign In
-            </button>
-          </Link>
-        </div>
-      ) : (
+      {session && session.user.role === "USER" ? (
         <div ref={profileNode} className="relative">
           <button
             onClick={() => setShowProfile(!showProfile)}
@@ -89,6 +76,19 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
               </div>
             </div>
           )}
+        </div>
+      ) : (
+        <div className="flex items-center gap-7">
+          <Link href="/signup">
+            <button className="px-3 py-1 text-sm text-gray-700 dark:text-gray-200 font-bold bg-transparent border-2 border-gray-300 dark:border-gray-400 hover:bg-gray-300 dark:hover:bg-gray-400 dark:hover:text-gray-900 rounded-md">
+              Sign Up
+            </button>
+          </Link>
+          <Link href="/signin">
+            <button className="px-3 py-1 text-sm font-bold bg-gray-900 border-2 border-gray-900 text-gray-200 dark:text-gray-900 dark:border-gray-200 dark:bg-gray-200 rounded-md">
+              Sign In
+            </button>
+          </Link>
         </div>
       )}
     </>

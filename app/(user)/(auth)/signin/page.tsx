@@ -160,6 +160,7 @@ function UserSigninPage() {
     const response = await signIn("credentials", {
       email: values.email,
       password: values.password,
+      role: "USER",
       // callbackUrl: `${window.location.origin}`,
       redirect: false,
     });

@@ -27,6 +27,7 @@ function ViewCount({ postId }: { postId: string }) {
       if (response.ok) {
         console.log("viewed success", data);
         router.refresh();
+        // await fetch(`/api/revalidate?path=/admin`);
       } else {
         console.log("viewed error", data);
       }

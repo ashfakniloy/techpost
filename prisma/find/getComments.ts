@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@prisma/client";
 
 export async function getComments({ postId }: { postId: string }) {
   const count = await prisma.comment.count({
@@ -10,6 +11,10 @@ export async function getComments({ postId }: { postId: string }) {
   const data = await prisma.comment.findMany({
     where: {
       postId: postId,
+    },
+
+    orderBy: {
+      createdAt: "desc",
     },
 
     include: {
@@ -56,6 +61,13 @@ export async function getComments({ postId }: { postId: string }) {
           },
         },
       },
+
+      _count: {
+        select: {
+          commentsLikes: true,
+          commentsReplies: true,
+        },
+      },
     },
   });
 
@@ -64,3 +76,7 @@ export async function getComments({ postId }: { postId: string }) {
     data,
   };
 }
+
+export type CommentTypes = Prisma.PromiseReturnType<
+  typeof getComments
+>["data"][number];

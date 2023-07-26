@@ -23,7 +23,7 @@ function ReplyWrapper({
   const router = useRouter();
 
   const handleReplyClick = () => {
-    if (session) {
+    if (session && session.user.role === "USER") {
       setOpenReplyForm(!openReplyForm);
     } else {
       router.push("/signin");

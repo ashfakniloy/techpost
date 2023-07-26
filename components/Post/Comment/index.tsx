@@ -31,7 +31,7 @@ async function Comment({
   return (
     // <CommentWrapper>
     <div id="comments" className="min-w-[296px] max-w-[401px] lg:max-w-[716px]">
-      {session ? (
+      {session && session.user.role === "USER" ? (
         <CommentForm postId={postId} />
       ) : (
         <Link href="/signin" className="text-blue-500">

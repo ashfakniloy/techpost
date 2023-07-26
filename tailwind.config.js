@@ -5,6 +5,7 @@ module.exports = {
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   theme: {
     container: {
@@ -17,15 +18,13 @@ module.exports = {
       },
     },
     extend: {
-      fontFamily: {
-        roboto: ["var(--font-roboto)"],
-        montserrat: ["var(--font-montserrat)"],
-      },
       colors: {
         "custom-gray": "#1B1A1A",
         "custom-gray2": "#262525",
         "custom-gray3": "#3C3B3B",
         "custom-gray4": "#222121",
+        "custom-gray5": "#15192A",
+        "custom-gray6": "#1C2339",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

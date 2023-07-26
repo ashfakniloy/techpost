@@ -194,7 +194,7 @@ function PostLikeButton({
   };
 
   const handleClick = async () => {
-    if (session) {
+    if (session && session.user.role === "USER") {
       if (hasLiked) {
         await handleUnlike();
       } else {
@@ -210,6 +210,7 @@ function PostLikeButton({
       {/* {session && ( */}
       <button
         // formAction={handleClick}
+        id="autoClickTest"
         type="button"
         className={`font-bold active:scale-125 h-6 w-6 ${
           like ? "text-blue-500" : "text-emerald-400"

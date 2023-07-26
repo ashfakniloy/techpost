@@ -1,5 +1,7 @@
 // import { StaticImageData } from "next/image";
 
+// import { Comment, Profile, User } from "@prisma/client";
+
 // type Post = {
 //   title: string;
 //   category: string;
@@ -15,6 +17,7 @@ type SearchParams = {
     page: string;
     limit: string;
     sort: string;
+    search: string;
   };
 };
 
@@ -78,3 +81,9 @@ type FormProps = {
   imageUrl: string;
   imageId: string;
 };
+
+// type CommentProps = Comment & {
+//   user: User & {
+//     profile: Profile;
+//   };
+// };

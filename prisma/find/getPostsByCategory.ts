@@ -28,7 +28,10 @@ export async function getPostsByCategory({
         },
 
         where: {
-          categoryName: categoryName,
+          categoryName: {
+            equals: categoryName,
+            mode: "insensitive",
+          },
         },
 
         take: limitNumber || PER_PAGE,

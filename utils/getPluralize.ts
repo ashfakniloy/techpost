@@ -1,7 +1,9 @@
-export const getPluralize = (
-  count: number,
-  name: string,
-  suffix: string = "s"
-) => {
-  return count > 1 ? `${count} ${name}${suffix}` : `${count} ${name}`;
+type PluralizeProps = {
+  count: number;
+  name: string;
+  plural: string;
+};
+
+export const getPluralize = ({ count, name, plural }: PluralizeProps) => {
+  return count > 1 ? `${count} ${plural}` : `${count} ${name}`;
 };
