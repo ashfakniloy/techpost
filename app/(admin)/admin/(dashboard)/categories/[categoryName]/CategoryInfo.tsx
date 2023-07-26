@@ -1,5 +1,6 @@
 import Section from "@/components/Admin/Section";
-import { getFormatedDate } from "@/utils/getFormatedDate";
+import { ClientFormattedDate } from "@/components/ClientFormattedDate";
+// import { getFormatedDate } from "@/utils/getFormatedDate";
 import Image from "next/image";
 
 type CategoryInfoProps = {
@@ -34,11 +35,13 @@ function CategoryInfo({
     },
     {
       name: "Created At",
-      value: getFormatedDate(created_at),
+      // value: getFormatedDate(created_at),
+      value: <ClientFormattedDate date={created_at} />,
     },
     {
       name: "Updated At",
-      value: getFormatedDate(updated_at),
+      // value: getFormatedDate(updated_at),
+      value: <ClientFormattedDate date={updated_at} />,
     },
   ];
   return (
