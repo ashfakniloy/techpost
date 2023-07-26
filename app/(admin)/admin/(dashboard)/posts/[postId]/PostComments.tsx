@@ -243,11 +243,7 @@
 
 // export default PostComments;
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { CommentTypes, getComments } from "@/prisma/find/getComments";
-import { getFormatedDate } from "@/utils/getFormatedDate";
-import { getTimeDistance } from "@/utils/getTimeDistance";
 import Image from "next/image";
 import Link from "next/link";
 import { repliesColumn } from "@/components/Admin/DataTable/components/columns/repliesColumn";
@@ -257,7 +253,6 @@ import {
   ChevronDoubleRightIcon,
   ChevronLeftIcon,
 } from "@heroicons/react/24/outline";
-import { likesColumns } from "@/components/Admin/DataTable/components/columns/likesColumn";
 import { commentLikesColumn } from "@/components/Admin/DataTable/components/columns/commentLikesColumn";
 import Section from "@/components/Admin/Section";
 

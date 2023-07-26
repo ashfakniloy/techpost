@@ -4,12 +4,13 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import Link from "next/link";
-import { getFormatedDate } from "@/utils/getFormatedDate";
+
 import { CommentsAction } from "../actions/commentsAction";
 import { DataTableColumnHeader } from "../data-table-column-header";
 import type { CommentTypes } from "@/prisma/find/getComments";
 import { getPluralize } from "@/utils/getPluralize";
 import { usePathname } from "next/navigation";
+import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 
 type User = {
   id: string;
@@ -237,7 +238,7 @@ export const commentsColumn: ColumnDef<CommentTypes>[] = [
     ),
     cell: ({ row }) => (
       <div className="w-[100px]">
-        {getFormatedDate(row.getValue("createdAt"))}
+        <ClientFormattedDate date={row.getValue("createdAt")} />
       </div>
     ),
   },

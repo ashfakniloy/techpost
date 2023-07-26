@@ -1,7 +1,6 @@
 "use client";
 
 import { format } from "date-fns-tz";
-// import { format } from "date-fns";
 
 export const ClientFormattedDate = ({ date }: { date: Date }) => {
   const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -12,5 +11,5 @@ export const ClientFormattedDate = ({ date }: { date: Date }) => {
     timeZone: clientTimezone,
   });
 
-  return <>{formattedDate}</>;
+  return <>{clientTimezone ? formattedDate : ""}</>;
 };

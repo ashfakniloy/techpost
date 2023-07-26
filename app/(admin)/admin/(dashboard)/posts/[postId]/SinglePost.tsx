@@ -1,10 +1,9 @@
-import { getFormatedDate } from "@/utils/getFormatedDate";
 import { Post, Profile, User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import parser from "html-react-parser";
 import "@/components/TextEditor/Tiptap/styles.css";
-import { notFound } from "next/navigation";
+import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 
 type SinglePostProps =
   | (Post & {
@@ -72,7 +71,9 @@ function SinglePost({ post }: { post: SinglePostProps }) {
                 </Link>
               </p>
             </div>
-            <p className="">{getFormatedDate(post.createdAt)}</p>
+            <p>
+              <ClientFormattedDate date={post.createdAt} />
+            </p>
           </div>
           {/* {session?.user.id === post.user.id && (
                     <OptionButton

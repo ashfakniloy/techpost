@@ -2,9 +2,9 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "../data-table-column-header";
-import { getFormatedDate } from "@/utils/getFormatedDate";
 
 import { Like } from "@/types";
+import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 
 // type CommentLikes = CommentTypes["commentsLikes"][number];
 
@@ -61,7 +61,9 @@ export const likesColumns: ColumnDef<Like>[] = [
       <DataTableColumnHeader column={column} title="Liked at" />
     ),
     cell: ({ row }) => (
-      <div className="w-auto">{getFormatedDate(row.getValue("createdAt"))}</div>
+      <div className="w-auto">
+        <ClientFormattedDate date={row.getValue("createdAt")} />
+      </div>
     ),
   },
   // {

@@ -2,10 +2,10 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "../data-table-column-header";
-import { getFormatedDate } from "@/utils/getFormatedDate";
 
 // import { CommentLike } from "@/types";
 import { CommentTypes } from "@/prisma/find/getComments";
+import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 
 type CommentLike = CommentTypes["commentsLikes"][number];
 
@@ -62,7 +62,9 @@ export const commentLikesColumn: ColumnDef<CommentLike>[] = [
       <DataTableColumnHeader column={column} title="Liked at" />
     ),
     cell: ({ row }) => (
-      <div className="w-auto">{getFormatedDate(row.getValue("createdAt"))}</div>
+      <div className="w-auto">
+        <ClientFormattedDate date={row.getValue("createdAt")} />
+      </div>
     ),
   },
   // {

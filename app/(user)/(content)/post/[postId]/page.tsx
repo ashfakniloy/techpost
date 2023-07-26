@@ -10,7 +10,6 @@ import OptionButton from "@/components/Post/OptionButton";
 import PostLike from "@/components/Post/PostLike";
 import ViewCount from "@/components/Post/ViewCount";
 import { getPluralize } from "@/utils/getPluralize";
-import { getFormatedDate } from "@/utils/getFormatedDate";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Suspense } from "react";
 import RelatedPosts from "./RelatedPosts";
@@ -19,6 +18,7 @@ import UsersMorePosts from "./UsersMorePosts";
 import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";
 import Categories from "@/components/Post/Categories";
 import "@/components/TextEditor/Tiptap/styles.css";
+import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -97,7 +97,9 @@ async function SinglePostPage({ params: { postId } }: Props) {
                         </Link>
                       </p>
                     </div>
-                    <p className="">{getFormatedDate(post.createdAt)}</p>
+                    <p>
+                      <ClientFormattedDate date={post.createdAt} />
+                    </p>
                   </div>
                   {session?.user.id === post.user.id && (
                     <OptionButton

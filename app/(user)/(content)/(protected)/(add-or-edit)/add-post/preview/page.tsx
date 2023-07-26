@@ -7,7 +7,7 @@ import parser from "html-react-parser";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { getFormatedDate } from "@/utils/getFormatedDate";
+import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 
 function PostPreviewPage() {
   const router = useRouter();
@@ -135,7 +135,10 @@ function PostPreviewPage() {
                 {/* </Link> */}
               </p>
             </div>
-            <p className="">{getFormatedDate(currentDate)}</p>
+
+            <p>
+              <ClientFormattedDate date={currentDate} />
+            </p>
           </div>
         </div>
 

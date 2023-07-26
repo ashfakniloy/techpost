@@ -7,6 +7,7 @@ import { DataTableColumnHeader } from "../data-table-column-header";
 import { format } from "date-fns";
 import { UsersActions } from "../actions/UsersActions";
 import { User } from "../../data/schema";
+import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 
 export const usersColumns: ColumnDef<User>[] = [
   {
@@ -93,9 +94,10 @@ export const usersColumns: ColumnDef<User>[] = [
       <DataTableColumnHeader mannualSort column={column} title="Created at" />
     ),
     cell: ({ row }) => (
-      <div className="w-[100px]">
+      <div className="w-[150px]">
         {/* {getFormatedDate(row.getValue("createdAt"))} */}
-        {format(new Date(row.getValue("createdAt")), "MMMM dd yyyy")}
+        {/* {format(new Date(row.getValue("createdAt")), "MMMM dd yyyy")} */}
+        <ClientFormattedDate date={row.getValue("createdAt")} />
       </div>
     ),
   },

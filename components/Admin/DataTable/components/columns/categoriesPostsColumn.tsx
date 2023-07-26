@@ -6,6 +6,7 @@ import { Post } from "../../data/schema";
 import { DataTableColumnHeader } from "../data-table-column-header";
 import { format } from "date-fns";
 import { PostsActions } from "../actions/PostsActions";
+import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 
 export const categoriesPostsColumn: ColumnDef<Post>[] = [
   {
@@ -104,8 +105,13 @@ export const categoriesPostsColumn: ColumnDef<Post>[] = [
       <DataTableColumnHeader mannualSort column={column} title="Created at" />
     ),
     cell: ({ row }) => (
-      <div className="w-[100px]">
-        {format(new Date(row.getValue("createdAt")), "MMMM dd yyyy")}
+      // <div className="w-[100px]">
+      //   {format(new Date(row.getValue("createdAt")), "MMMM dd yyyy")}
+      // </div>
+      <div className="w-[150px]">
+        {/* {getFormatedDate(row.getValue("createdAt"))} */}
+        {/* {format(new Date(row.getValue("createdAt")), "MMMM dd yyyy")} */}
+        <ClientFormattedDate date={row.getValue("createdAt")} />
       </div>
     ),
   },

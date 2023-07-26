@@ -8,11 +8,11 @@ import { PostsActions } from "../actions/PostsActions";
 import Image from "next/image";
 import Link from "next/link";
 import { getTimeDistance } from "@/utils/getTimeDistance";
-import { getFormatedDate } from "@/utils/getFormatedDate";
 
 import { DataTableColumnHeader } from "../data-table-column-header";
 import type { CommentTypes } from "@/prisma/find/getComments";
 import { RepliesAction } from "../actions/repliesAction";
+import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 
 type CommentReply = CommentTypes["commentsReplies"][number];
 
@@ -118,7 +118,7 @@ export const repliesColumn: ColumnDef<CommentReply>[] = [
     ),
     cell: ({ row }) => (
       <div className="w-[100px]">
-        {getFormatedDate(row.getValue("createdAt"))}
+        <ClientFormattedDate date={row.getValue("createdAt")} />
       </div>
     ),
   },
