@@ -18,6 +18,7 @@ import { userSchema } from "../../data/schema";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Modal from "@/components/Modal";
+import Link from "next/link";
 
 interface UsersActions<TData> {
   row: Row<TData>;
@@ -79,14 +80,16 @@ export function UsersActions<TData>({ row }: UsersActions<TData>) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
-          <DropdownMenuItem>
-            <Eye className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-            View
-          </DropdownMenuItem>
-          <DropdownMenuItem>
+          <Link href={`/admin/users/${user.username}`}>
+            <DropdownMenuItem>
+              <Eye className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+              View
+            </DropdownMenuItem>
+          </Link>
+          {/* <DropdownMenuItem>
             <Pen className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Edit
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setShowDeleteModal(true)}>
             <Trash className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />

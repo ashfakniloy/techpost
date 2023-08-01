@@ -23,7 +23,7 @@ function CategoryInfo({
   const infoData = [
     {
       name: "Name",
-      value: category_name,
+      value: <span className="capitalize">{category_name}</span>,
     },
     {
       name: "Total Quotes",
@@ -42,6 +42,7 @@ function CategoryInfo({
       value: <ClientFormattedDate date={updated_at} />,
     },
   ];
+
   return (
     <Section title="Category Info" className="min-w-[500px] h-[548px]">
       <div className="relative h-[200px]">
@@ -57,7 +58,7 @@ function CategoryInfo({
         {infoData.map((info, i) => (
           <div key={i} className="w-full flex">
             <p className="w-2/5">{info.name}</p>
-            <p className="capitalize">{info.value}</p>
+            <p className="">{info.value}</p>
           </div>
         ))}
       </div>

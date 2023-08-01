@@ -1,6 +1,7 @@
 import { getProfileByUsername } from "@/prisma/find/getProfileByUsername";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 async function ProfileTopSection({ username }: { username: string }) {
   // await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -8,7 +9,7 @@ async function ProfileTopSection({ username }: { username: string }) {
   const { data: profile } = await getProfileByUsername({ username });
 
   if (!profile) {
-    return <p className="text-xl text-center">Profile not found</p>;
+    notFound();
   }
 
   return (
@@ -31,7 +32,7 @@ async function ProfileTopSection({ username }: { username: string }) {
         )}
       </div>
       <div className="flex-1 lg:mt-3">
-        <h4 className="text-2xl lg:text-3xl font-bold">
+        <h4 className="text-2xl lg:text-3xl font-bold capitalize">
           {profile?.user.username}
         </h4>
         <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-400">

@@ -14,7 +14,10 @@ type SessionProps = {
   session: Session | null;
 };
 
-type Props = Omit<Post, "userId" | "views" | "updatedAt"> & {
+type CardProps = Omit<
+  Post,
+  "userId" | "views" | "updatedAt" | "editorsChoice"
+> & {
   user: {
     id: string;
     username: string;
@@ -36,14 +39,16 @@ function Card({
   article,
   session,
   _count,
-}: Props & SessionProps) {
+}: CardProps & SessionProps) {
   // const parsedArticle = parser(
-  //   article.replace(/<(img|iframe) .*?>/g, "") || ""
+  //   article.replace(/<(img|iframe)\b[^>]*>/g, "") || ""
   // );
-
-  const parsedArticle = parser(
-    article.replace(/<(img|iframe)\b[^>]*>/g, "") || ""
-  );
+  const parsedArticle =
+    parser(
+      article
+        .replace(/<(img|iframe)\b[^>]*>/g, "")
+        .replace(/<a\b[^>]*>(.*?)<\/a>/g, "<p>$1</p>")
+    ) || "";
 
   return (
     <div className="transition-shadow max-h-[290px] lg:max-h-[412px] duration-300 bg-gray-50 rounded-md shadow-md group dark:bg-custom-gray2 hover:shadow-lg">

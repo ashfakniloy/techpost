@@ -80,7 +80,7 @@ const CommentsCell = ({
                 href={`${pathname}?showLikes=${id}`}
                 scroll={false}
                 replace={true}
-                className="bg-blue-700 px-2.5 py-1 rounded-full text-xs font-medium hover:underline"
+                className="bg-blue-300 dark:bg-blue-700 px-2.5 py-1 rounded-full text-xs font-medium hover:underline"
               >
                 {getPluralize({
                   count: _count.commentsLikes,
@@ -94,7 +94,7 @@ const CommentsCell = ({
                 href={`${pathname}?showReplies=${id}`}
                 scroll={false}
                 replace={true}
-                className="bg-gray-700 px-2.5 py-1 rounded-full text-xs font-medium hover:underline"
+                className="bg-gray-300 dark:bg-gray-700 px-2.5 py-1 rounded-full text-xs font-medium hover:underline"
               >
                 {getPluralize({
                   count: _count.commentsReplies,

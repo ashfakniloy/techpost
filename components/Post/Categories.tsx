@@ -1,4 +1,3 @@
-// import { categories } from "@/data/categories";
 import { getCategories } from "@/prisma/find/getCategories";
 import Link from "next/link";
 
@@ -19,10 +18,11 @@ async function Categories() {
           >
             <p className="text-gray-900 capitalize dark:text-gray-50 link">
               <Link
-                href={`/category/${category.name
-                  .split(" ")
-                  .join("_")
-                  .toLowerCase()}`}
+                href={`/category/${category.name.toLowerCase()}`}
+                // href={`/category/${category.name
+                //   .split(" ")
+                //   .join("_")
+                //   .toLowerCase()}`}
               >
                 {category.name}
               </Link>

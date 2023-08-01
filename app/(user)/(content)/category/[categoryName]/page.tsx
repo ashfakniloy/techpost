@@ -66,25 +66,31 @@ async function CategoryPage({
   //   notFound();
   // }
 
-  const { data: category } = await getCategoryByName({ categoryName });
+  const categoryNameDecoded = decodeURIComponent(categoryName);
+
+  const { data: category } = await getCategoryByName({
+    categoryName: categoryNameDecoded,
+  });
 
   if (!category) {
     notFound();
   }
 
-  const titleModified = categoryName.split("_").join(" ");
+  // const categoryNameDecoded = categoryName.split("_").join(" ");
 
   const getCardTitle = () => {
-    if (!sort || sort === "recent") return `Popular from ${titleModified}`;
-    if (sort === "popular") return `Recent from ${titleModified}`;
-    return `Popular from ${titleModified}`;
+    if (!sort || sort === "recent")
+      return `Popular from ${categoryNameDecoded}`;
+    if (sort === "popular") return `Recent from ${categoryNameDecoded}`;
+    return `Popular from ${categoryNameDecoded}`;
   };
 
   const cardTitle = getCardTitle();
 
   const getPostsTitle = () => {
-    if (!sort || sort === "recent") return `Recent Posts from ${titleModified}`;
-    if (sort === "popular") return `Popular Posts from ${titleModified}`;
+    if (!sort || sort === "recent")
+      return `Recent Posts from ${categoryNameDecoded}`;
+    if (sort === "popular") return `Popular Posts from ${categoryNameDecoded}`;
     return "invalid";
   };
 
@@ -92,7 +98,7 @@ async function CategoryPage({
 
   return (
     <div>
-      <CategoryTopSection categoryName={categoryName} />
+      <CategoryTopSection categoryName={categoryNameDecoded} />
 
       <div className="lg:flex items-start justify-between gap-5 mt-10 lg:mt-20">
         <div className="lg:flex-1 lg:max-w-[796px]">
@@ -105,7 +111,7 @@ async function CategoryPage({
           ) : (
             <Suspense key={page || sort} fallback={<PostsSkeleton />}>
               <CategoryPosts
-                categoryName={categoryName}
+                categoryName={categoryNameDecoded}
                 limitNumber={limitNumber}
                 pageNumber={pageNumber}
                 sort={sort}
@@ -120,7 +126,7 @@ async function CategoryPage({
             fallback={<PostsCardSkeleton heading={cardTitle} />}
           >
             <CategorySideSection
-              categoryName={categoryName}
+              categoryName={categoryNameDecoded}
               sort={sort}
               cardTitle={cardTitle}
             />

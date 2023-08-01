@@ -1,7 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 
-export async function getComments({ postId }: { postId: string }) {
+export async function getComments({
+  postId,
+  take,
+}: {
+  postId: string;
+  take?: number;
+}) {
   const count = await prisma.comment.count({
     where: {
       postId: postId,
@@ -16,6 +22,8 @@ export async function getComments({ postId }: { postId: string }) {
     orderBy: {
       createdAt: "desc",
     },
+
+    take: take,
 
     include: {
       user: {

@@ -43,13 +43,13 @@ export function DataTablePagination<TData>({
     //   );
     // }
 
-    const hasSort = searchParams.has("sort");
-    const hasSearch = searchParams.has("search");
+    const hasSort = searchParams?.has("sort");
+    const hasSearch = searchParams?.has("search");
 
-    const sortParam = searchParams.get("sort");
-    const searchParam = searchParams.get("search");
-    const limitParam = searchParams.get("limit");
-    const pageParam = searchParams.get("page");
+    const sortParam = searchParams?.get("sort");
+    const searchParam = searchParams?.get("search");
+    const limitParam = searchParams?.get("limit");
+    const pageParam = searchParams?.get("page");
 
     const limitNumber = Number(limitParam) || 10;
     const pageNumber = Number(pageParam);
@@ -63,7 +63,7 @@ export function DataTablePagination<TData>({
       const nextPage = pageNumber === 0 ? 2 : pageNumber + 1;
 
       // const path = hasSort
-      //   ? `${pathname}?sort=${searchParams.get(
+      //   ? `${pathname}?sort=${searchParams?.get(
       //       "sort"
       //     )}&page=${nextPage}&limit=${limit}`
       //   : `${pathname}?page=${nextPage}&limit=${limit}`;
@@ -119,7 +119,7 @@ export function DataTablePagination<TData>({
       const prevPage = pageNumber - 1;
 
       // const path = hasSort
-      //   ? `${pathname}?sort=${searchParams.get(
+      //   ? `${pathname}?sort=${searchParams?.get(
       //       "sort"
       //     )}&page=${prevPage}&limit=${limitNumber}`
       //   : `${pathname}?page=${prevPage}&limit=${limitNumber}`;
@@ -176,7 +176,7 @@ export function DataTablePagination<TData>({
         hasSort && hasSearch
           ? `${pathname}?sort=${sortParam}&search=${searchParam}&limit=${value}`
           : hasSort
-          ? `${pathname}?sort=${searchParams.get("sort")}&limit=${value}`
+          ? `${pathname}?sort=${searchParams?.get("sort")}&limit=${value}`
           : hasSearch
           ? `${pathname}?search=${searchParam}&limit=${value}`
           : `${pathname}?limit=${value}`;

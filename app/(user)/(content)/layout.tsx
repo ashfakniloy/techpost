@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Footer from "@/components/Layout/Footer";
 import Navbar from "@/components/Layout/Navbar";
+import DeviceIdSet from "@/components/Post/DeviceIdSet";
 import { getCategories } from "@/prisma/find/getCategories";
 import { getProfileByUserId } from "@/prisma/find/getProfileByUserId";
 import { getServerSession } from "next-auth";
@@ -31,6 +32,8 @@ async function UserLayout({ children }: { children: React.ReactNode }) {
       />
       <div className="my-5">{children}</div>
       <Footer />
+
+      <DeviceIdSet isAdmin={session?.user.role === "ADMIN"} />
     </div>
   );
 }

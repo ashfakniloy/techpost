@@ -9,9 +9,12 @@ async function AdminUsersPage({
   const limitNumber = Number(limit);
   const pageNumber = Number(page);
 
-  const sortValues = sort?.split("%20").join("").split(".");
+  // const sortValues = sort?.split("%20").join("").split(".");
+  const sortValues = sort?.split(".");
   const sortBy = sortValues?.[0];
   const orderBy = sortValues?.[1];
+
+  // await new Promise((resolve) => setTimeout(resolve, 5000));
 
   const { users, usersCount } = await getAllUsersAdmin({
     limitNumber: limitNumber || 10,
@@ -27,14 +30,16 @@ async function AdminUsersPage({
 
   return (
     <Section title="All Users">
-      <DataTable
-        columns={usersColumns}
-        data={users}
-        searchBy="username"
-        count={usersCount}
-        deleteUrl={`/api/admin/user`}
-        mannualControl
-      />
+      {users && (
+        <DataTable
+          columns={usersColumns}
+          data={users}
+          searchBy="username"
+          count={usersCount}
+          deleteUrl={`/api/admin/user`}
+          mannualControl
+        />
+      )}
     </Section>
   );
 }

@@ -62,11 +62,13 @@ export async function POST(request: NextRequest) {
       // },
     });
 
-    // revalidatePath("/");
+    revalidatePath("/");
     // revalidatePath("/my-profile");
     // revalidatePath("/category/[categoryName]");
     // revalidatePath("/user/[username]");
     // revalidatePath("/post/[postId]");
+    // revalidatePath("/");
+    // revalidatePath("/admin");
 
     return NextResponse.json({
       message: "Post created successfully",

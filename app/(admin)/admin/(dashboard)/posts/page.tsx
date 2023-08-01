@@ -21,11 +21,11 @@ async function AdminPostsPage({
   //   pageNumber,
   // });
 
-  const sortValues = sort?.split("%20").join("").split(".");
+  const sortValues = sort?.split(".");
   const sortBy = sortValues?.[0];
   const orderBy = sortValues?.[1];
 
-  const { data, count } = await getAllPostsAdmin({
+  const { data: posts, count } = await getAllPostsAdmin({
     limitNumber: limitNumber || 10,
     pageNumber,
     sortBy: sortBy,
@@ -36,14 +36,16 @@ async function AdminPostsPage({
 
   return (
     <Section title="All Posts">
-      <DataTable
-        columns={postsColumns}
-        data={data}
-        count={count}
-        searchBy="title"
-        deleteUrl={`/api/admin/post`}
-        mannualControl
-      />
+      {posts && (
+        <DataTable
+          columns={postsColumns}
+          data={posts}
+          count={count}
+          searchBy="title"
+          deleteUrl={`/api/admin/post`}
+          mannualControl
+        />
+      )}
     </Section>
   );
 }

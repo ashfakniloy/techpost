@@ -30,7 +30,7 @@ export const navLinksSigned = (categories: Category[]) => {
       name: "Categories",
       subLinks: categories.map((categoty) => ({
         name: categoty.name,
-        link: `/category/${categoty.name.split(" ").join("_").toLowerCase()}`,
+        link: `/category/${categoty.name.toLowerCase()}`,
       })),
     },
     {

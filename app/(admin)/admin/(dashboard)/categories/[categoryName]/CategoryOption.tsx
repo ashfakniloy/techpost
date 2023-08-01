@@ -30,10 +30,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { z } from "zod";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Pen, Trash } from "lucide-react";
+import { Eye, Pen, Trash } from "lucide-react";
 import Modal from "@/components/Modal";
+import Link from "next/link";
 
-type CategoryOption = {
+type CategoryOptionProps = {
   id: string;
   name: string;
   imageUrl: string;
@@ -50,7 +51,7 @@ function CategoryOption({
   imageUrl,
   imageId,
   quotes,
-}: CategoryOption) {
+}: CategoryOptionProps) {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -163,12 +164,7 @@ function CategoryOption({
       });
       console.log("success", data);
 
-      router.replace(
-        `/admin/categories/${data.response.name
-          .split(" ")
-          .join("_")
-          .toLowerCase()}`
-      );
+      router.replace(`/admin/categories/${data.response.name.toLowerCase()}`);
       setShowEditModal(false);
     } else {
       toast.error(`${data.error}`, {
@@ -189,6 +185,12 @@ function CategoryOption({
           <Button variant="default">Option</Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
+          <Link href={`/category/${name}`} target="_blank">
+            <DropdownMenuItem>
+              <Eye className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+              View in site
+            </DropdownMenuItem>
+          </Link>
           <DropdownMenuItem onClick={() => setShowEditModal(true)}>
             <Pen className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Edit
@@ -205,11 +207,12 @@ function CategoryOption({
         {/* <AlertDialogTrigger asChild>
         <Button variant="default">Edit category</Button>
       </AlertDialogTrigger> */}
-        <AlertDialogContent className="relative bg-custom-gray6 py-10 px-0 rounded-lg max-w-[700px]">
+        <AlertDialogContent className="relative bg-gray-50 dark:bg-custom-gray6 py-10 px-0 rounded-lg max-w-[700px]">
           <div className="">
             <button
               type="button"
-              className="absolute top-2 right-2 rounded-full overflow-hidden flex justify-end disabled:cursor-not-allowed"
+              title="Close"
+              className="absolute top-2 right-2 rounded-full overflow-hidden flex justify-end hover:scale-110 transition-transform duration-100 disabled:cursor-not-allowed"
               onClick={() => setShowEditModal(false)}
               disabled={isSubmitting}
             >
@@ -248,7 +251,9 @@ function CategoryOption({
                       <Button
                         type="button"
                         onClick={() => setShowEditModal(false)}
-                        className="w-full bg-emerald-700 hover:bg-emerald-600 text-white"
+                        // className="w-full bg-emerald-700 hover:bg-emerald-600 text-white"
+                        variant="outline"
+                        className="w-full border-gray-700 dark:border-gray-400"
                         disabled={isDeleting}
                       >
                         Cancel

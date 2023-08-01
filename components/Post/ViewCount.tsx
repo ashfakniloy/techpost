@@ -1,20 +1,21 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useId } from "react";
+import { useEffect } from "react";
 import Cookies from "js-cookie";
-import { v4 as uuidv4 } from "uuid";
 
-function ViewCount({ postId }: { postId: string }) {
+function ViewCount({ postId, isAdmin }: { postId: string; isAdmin: boolean }) {
   const router = useRouter();
 
   useEffect(() => {
+    if (isAdmin) return;
+
     const deviceId = Cookies.get("deviceId");
 
-    if (!deviceId) {
-      const newDeviceId = uuidv4();
-      Cookies.set("deviceId", newDeviceId);
-    }
+    // if (!deviceId) {
+    //   const newDeviceId = uuidv4();
+    //   Cookies.set("deviceId", newDeviceId);
+    // }
 
     const countView = async () => {
       const url = `/api/post/view?postId=${postId}&deviceId=${deviceId}`;
@@ -25,7 +26,7 @@ function ViewCount({ postId }: { postId: string }) {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("viewed success", data);
+        // console.log("viewed success", data);
         router.refresh();
         // await fetch(`/api/revalidate?path=/admin`);
       } else {

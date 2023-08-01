@@ -7,6 +7,8 @@ import { getAllPosts } from "@/prisma/find/getAllPosts";
 import PostsView from "@/components/Post/PostsView";
 import Categories from "@/components/Post/Categories";
 import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";
+import EditorsChoice from "./EditorsChoice";
+import { headers } from "next/headers";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -34,6 +36,14 @@ async function Posts({
 }
 
 function HomePage({ searchParams: { page, limit, sort } }: SearchParams) {
+  // const headersList = headers();
+  // const userAgent = headersList.get("user-agent");
+
+
+  // const isMobileView = userAgent!.match(
+  //   /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+  // );
+
   const pageNumber = Number(page);
   const limitNumber = Number(limit);
 
@@ -56,6 +66,12 @@ function HomePage({ searchParams: { page, limit, sort } }: SearchParams) {
   return (
     <div className="lg:flex items-start justify-between gap-5">
       <div className="lg:flex-1 lg:max-w-[796px]">
+        {/* <p className="">{`Device test: ${
+          isMobileView ? "Mobile" : "Desktop"
+        }`}</p> */}
+
+        {(!pageNumber || pageNumber === 1) && <EditorsChoice />}
+
         <PostsHeader postsTitle={postsTitle} />
 
         {postsTitle === "invalid" ? (
@@ -73,7 +89,7 @@ function HomePage({ searchParams: { page, limit, sort } }: SearchParams) {
         )}
       </div>
 
-      <div className="hidden lg:flex flex-col gap-5 lg:sticky top-[97px]">
+      <div className="hidden lg:flex flex-col gap-5 ">
         <Suspense
           key={sort}
           fallback={<PostsCardSkeleton heading={cardTitle} />}

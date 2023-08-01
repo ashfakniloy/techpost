@@ -40,19 +40,17 @@ export function DataTableColumnHeader<TData, TValue>({
   const searchParams = useSearchParams();
 
   if (mannualSort) {
-    const hasSearch = searchParams.has("search");
-    const searchParam = searchParams.get("search");
+    const hasSearch = searchParams?.has("search");
+    const searchParam = searchParams?.get("search");
 
-    const sortParam = searchParams.get("sort");
-    const limitParam = searchParams.get("limit");
+    const sortParam = searchParams?.get("sort");
+    const limitParam = searchParams?.get("limit");
 
     const limitNumber = Number(limitParam) || 10;
 
     const sortValues = sortParam?.split(".");
     const sortBy = sortValues?.[0];
     const orderBy = sortValues?.[1];
-
-    const paramTitle = sortBy?.split("%20").join(" ");
 
     // if (!column.getCanSort()) {
     //   return <div className={cn(className)}>{title}</div>;
@@ -77,8 +75,8 @@ export function DataTableColumnHeader<TData, TValue>({
             >
               <span>{title}</span>
 
-              {paramTitle ? (
-                paramTitle === title.toLowerCase() ? (
+              {sortBy ? (
+                sortBy === title.toLowerCase() ? (
                   orderBy === "desc" ? (
                     <SortDesc className="ml-2 h-4 w-4" />
                   ) : orderBy === "asc" ? (

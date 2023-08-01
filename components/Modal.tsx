@@ -13,9 +13,10 @@ type ModalProps = {
   showModal: boolean;
   isPending: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  handleAction: () => Promise<void>;
+  handleAction: () => void;
   color?: string;
   colorDark?: string;
+  as?: string;
 };
 
 function Modal({
@@ -24,6 +25,7 @@ function Modal({
   isPending,
   setShowModal,
   handleAction,
+  as = "Delete",
   color = "bg-gray-50 ",
   colorDark = "dark:bg-custom-gray6",
 }: ModalProps) {
@@ -41,8 +43,12 @@ function Modal({
           >
             Cancel
           </AlertDialogCancel>
-          <AlertDialogAction disabled={isPending} onClick={handleAction}>
-            Delete
+          <AlertDialogAction
+            disabled={isPending}
+            onClick={handleAction}
+            className="capitalize"
+          >
+            {as}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

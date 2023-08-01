@@ -37,6 +37,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Modal from "@/components/Modal";
 import Link from "next/link";
+import { PostAdminTypes } from "@/prisma/find/admin/getAllPostsAdmin";
 
 interface PostsActions<TData> {
   row: Row<TData>;
@@ -53,7 +54,7 @@ export function PostsActions<TData>({
 // deleteUrl,
 // imageId,
 PostsActions<TData>) {
-  const post = postSchema.parse(row.original);
+  const post = row.original as PostAdminTypes;
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -120,10 +121,10 @@ PostsActions<TData>) {
               View
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuItem>
+          {/* <DropdownMenuItem>
             <Pen className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Edit
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setShowDeleteModal(true)}>
             <Trash className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />

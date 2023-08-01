@@ -32,11 +32,12 @@ import { DataTableToolbar } from "../components/data-table-toolbar";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  searchBy: string;
+  searchBy?: string;
   count?: number;
   deleteUrl?: string;
   disableRowSelect?: boolean;
   disableSearch?: boolean;
+  disablePagination?: boolean;
   mannualControl?: boolean;
 }
 
@@ -48,6 +49,7 @@ export function DataTable<TData, TValue>({
   deleteUrl,
   disableRowSelect = false,
   disableSearch,
+  disablePagination,
   mannualControl,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
@@ -110,11 +112,14 @@ export function DataTable<TData, TValue>({
         disableRowSelect={disableRowSelect}
         disableSearch={disableSearch}
       />
-      <div className="border-y border-slate-700">
-        <Table>
+      <div className="border-y border-gray-300 dark:border-slate-700">
+        <Table className="">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="border-slate-700">
+              <TableRow
+                key={headerGroup.id}
+                className="border-gray-300 dark:border-slate-700"
+              >
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
@@ -137,7 +142,7 @@ export function DataTable<TData, TValue>({
                   key={row.id}
                   // key={row.original.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="border-slate-700 relative"
+                  className="border-gray-300 dark:border-slate-700 relative"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
@@ -165,11 +170,14 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination
-        table={table}
-        count={count}
-        mannualControl={mannualControl}
-      />
+
+      {!disablePagination && (
+        <DataTablePagination
+          table={table}
+          count={count}
+          mannualControl={mannualControl}
+        />
+      )}
     </div>
   );
 }

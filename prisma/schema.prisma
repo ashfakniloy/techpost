@@ -83,6 +83,8 @@ model Post {
 
   commentsReplies CommentReply[]
 
+  editorsChoice Boolean @default(false)
+
   @@unique([id, userId])
 }
 

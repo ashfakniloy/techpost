@@ -13,7 +13,10 @@ type SessionProps = {
   session: Session | null;
 };
 
-type Props = Omit<Post, "userId" | "views" | "updatedAt"> & {
+type ListProps = Omit<
+  Post,
+  "userId" | "views" | "updatedAt" | "editorsChoice"
+> & {
   user: {
     id: string;
     username: string;
@@ -35,14 +38,17 @@ function List({
   article,
   session,
   _count,
-}: Props & SessionProps) {
+}: ListProps & SessionProps) {
   // const parsedArticle = parser(
   //   article.replace(/<(img|iframe) .*?>/g, "") || ""
   // );
 
-  const parsedArticle = parser(
-    article.replace(/<(img|iframe)\b[^>]*>/g, "") || ""
-  );
+  const parsedArticle =
+    parser(
+      article
+        .replace(/<(img|iframe)\b[^>]*>/g, "")
+        .replace(/<a\b[^>]*>(.*?)<\/a>/g, "<p>$1</p>")
+    ) || "";
 
   return (
     <div className="transition-shadow duration-300 p-2 lg:p-4 h-[96px] lg:h-[167px] bg-gray-50 rounded-md shadow-md dark:bg-custom-gray2 hover:shadow-lg">

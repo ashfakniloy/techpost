@@ -1,16 +1,54 @@
 // import DashBoardCards from "@/components/Admin/Cards";
+import { getPostsPerMonth } from "@/prisma/find/admin/getPostsPerMonth";
 import Counts from "./Counts";
-// import { getViewCountPerDay } from "@/prisma/find/getViewCountPerDay";
+import { getViewCountPerDay } from "@/prisma/find/getViewCountPerDay";
+import PostsOverview from "./PostsOverview";
+import { Suspense } from "react";
+import UsersOverview from "./UsersOverview";
+import { getUsersperMonth } from "@/prisma/find/admin/getUsersPerMonth";
+import ViewsOverview from "./ViewsOverview";
+import { getPostsViewsPerMonth } from "@/prisma/find/admin/getPostsViewsPerMonth";
+import { getAllPosts } from "@/prisma/find/getAllPosts";
+import Section from "@/components/Admin/Section";
+import { DataTable } from "@/components/Admin/DataTable/components/data-table";
+import { popularPostsColumn } from "@/components/Admin/DataTable/components/columns/popularPostsColumn";
 
-function AdminDashboardPage() {
-  // const { postsViewPerDate } = await getViewCountPerDay();
+async function AdminDashboardPage() {
+  // const { postsPermonth } = await getViewCountPerDay();
+  const { postsPermonth } = await getPostsPerMonth();
+  const { usersPerMonth } = await getUsersperMonth();
+  const { postsViewsPerMonth } = await getPostsViewsPerMonth();
+  const { data: popularPosts } = await getAllPosts({
+    limitNumber: 5,
+    sort: "popular",
+  });
 
-  // console.log("perdate", postsViewPerDate);
+  // console.log("postspermonthcount", postsPermonth);
 
   return (
-    <div className="">
+    <div className="space-y-6">
       {/* <DashBoardCards /> */}
       <Counts />
+
+      <div className="grid grid-cols-2 gap-6">
+        <UsersOverview usersData={usersPerMonth} />
+
+        <PostsOverview postsData={postsPermonth} />
+
+        <ViewsOverview viewsData={postsViewsPerMonth} />
+
+        <Section title="Popular Posts">
+          {popularPosts && (
+            <DataTable
+              columns={popularPostsColumn}
+              data={popularPosts}
+              disablePagination
+              disableRowSelect
+              disableSearch
+            />
+          )}
+        </Section>
+      </div>
     </div>
   );
 }

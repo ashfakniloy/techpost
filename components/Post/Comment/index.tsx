@@ -8,20 +8,28 @@ import { getTimeDistance } from "@/utils/getTimeDistance";
 import CommentRepliesList from "./CommentReply";
 import CommentReply from "./CommentReply";
 import CommentOption from "./CommentOption";
-import CommentWrapper from "./CommentWrapper";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 async function Comment({
   postId,
   authorId,
+  showCommentsParam,
 }: {
   postId: string;
   authorId: string;
+  showCommentsParam: string;
 }) {
   const session = await getServerSession(authOptions);
 
+  const addComments = 5;
+
+  const showComments = Number(showCommentsParam) || addComments;
+
+  const showCommentsIncrement = showComments + addComments;
+
   const { data: comments, count: totalComments } = await getComments({
     postId,
+    take: showComments,
   });
   // const totalComments = data.commentsCount;
   // const comments = data.comments;
@@ -29,7 +37,6 @@ async function Comment({
   // console.log("comments", comments);
 
   return (
-    // <CommentWrapper>
     <div id="comments" className="min-w-[296px] max-w-[401px] lg:max-w-[716px]">
       {session && session.user.role === "USER" ? (
         <CommentForm postId={postId} />
@@ -121,14 +128,27 @@ async function Comment({
           ))}
         </div>
 
-        {/* <div className="flex justify-center mt-3">
-          <button className="px-5 py-1.5 rounded text-sm font-bold bg-blue-600 text-gray-50">
-            View more comments
-          </button>
-        </div> */}
+        {/* {totalComments >= comments.length + 1 && ( */}
+        {comments.length !== totalComments && (
+          <div className="flex justify-center mt-3">
+            <Link
+              href={`/post/${postId}?showComments=${showCommentsIncrement}`}
+              scroll={false}
+              replace={true}
+              className="px-6 py-2 rounded-full text-sm font-bold bg-gray-800 text-white dark:text-black dark:bg-gray-100"
+            >
+              {`Show ${
+                totalComments - comments.length < addComments
+                  ? totalComments - comments.length
+                  : addComments
+              } more ${
+                totalComments - comments.length > 1 ? "comments" : "comment"
+              }`}
+            </Link>
+          </div>
+        )}
       </div>
     </div>
-    // </CommentWrapper>
   );
 }
 

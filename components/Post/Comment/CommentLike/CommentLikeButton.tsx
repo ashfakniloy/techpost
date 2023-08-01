@@ -92,7 +92,7 @@ function CommentLikeButton({
   };
 
   return (
-    <div ref={node} className="flex items-center text-sm relative z-10">
+    <div ref={node} className="flex items-center text-sm relative">
       <button
         className={`mr-2 lg:mr-3 font-bold active:scale-125 h-6 w-6 ${
           like ? "text-blue-500" : "text-emerald-400"

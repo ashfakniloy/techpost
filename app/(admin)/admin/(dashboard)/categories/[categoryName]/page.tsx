@@ -27,7 +27,17 @@ async function CategoryPageAdmin({
   searchParams: { page, limit, sort, search },
 }: CategoryPageProps) {
   // const { data: categories } = await getCategories();
-  const { data: category } = await getCategoryByName({ categoryName });
+  // await new Promise((resolve) => setTimeout(resolve, 5000));
+
+  const categoryNameDecoded = decodeURIComponent(categoryName);
+
+  // console.log("categoryname", categoryName);
+  // console.log("categorynamedecoded", categoryNameDecoded);
+  // console.log("search", search);
+
+  const { data: category } = await getCategoryByName({
+    categoryName: categoryNameDecoded,
+  });
 
   // const allCategories = categories.map((category) => category.name);
 
@@ -46,9 +56,11 @@ async function CategoryPageAdmin({
   //   pageNumber,
   // });
 
-  const sortValues = sort?.split("%20").join("").split(".");
+  const sortValues = sort?.split(".");
   const sortBy = sortValues?.[0];
   const orderBy = sortValues?.[1];
+
+  console.log("sortvalues", sortValues);
 
   const { data: categoryPosts, count } = await getAllPostsAdmin({
     limitNumber: limitNumber || 10,
@@ -56,15 +68,14 @@ async function CategoryPageAdmin({
     sortBy: sortBy,
     order: orderBy,
     title: search,
-    categoryName: categoryName,
+    categoryName: categoryNameDecoded,
   });
 
-  console.log("data", category);
+  // console.log("data", category);
 
   const SectionTitle = (
     <span>
-      All posts from{" "}
-      <span className="capitalize">{categoryName.split("_").join(" ")}</span>
+      All posts from <span className="capitalize">{categoryNameDecoded}</span>
     </span>
   );
 
@@ -94,14 +105,16 @@ async function CategoryPageAdmin({
         </div>
 
         <Section title={SectionTitle}>
-          <DataTable
-            columns={categoriesPostsColumn}
-            data={categoryPosts}
-            count={count}
-            searchBy="title"
-            deleteUrl={`/api/admin/post`}
-            mannualControl
-          />
+          {categoryPosts && (
+            <DataTable
+              columns={categoriesPostsColumn}
+              data={categoryPosts}
+              count={count}
+              searchBy="title"
+              deleteUrl={`/api/admin/post`}
+              mannualControl
+            />
+          )}
         </Section>
       </div>
     </div>

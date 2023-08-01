@@ -9,30 +9,29 @@ function Paths() {
   const params = useParams();
 
   console.log("params", params);
-  const paths = pathname.split("/");
-  const pathsFiltered = paths.filter((path) => path !== "");
+  const paths = pathname?.split("/");
+  const pathsFiltered = paths?.filter((path) => path !== "");
 
-  const pathsWithLinks = pathsFiltered.reduce<{ name: string; link: string }[]>(
-    (acc, value, index) => {
-      const link = `/${pathsFiltered.slice(0, index + 1).join("/")}`;
+  const pathsWithLinks = pathsFiltered?.reduce<
+    { name: string; link: string }[]
+  >((acc, value, index) => {
+    const link = `/${pathsFiltered.slice(0, index + 1).join("/")}`;
 
-      acc.push({
-        name: value === "admin" ? "homepage" : value,
-        link: link,
-      });
+    acc.push({
+      name: value === "admin" ? "homepage" : value,
+      link: link,
+    });
 
-      return acc;
-    },
-    []
-  );
+    return acc;
+  }, []);
 
   return (
-    <div className="ml-1 mt-2 text-gray-300 text-sm flex">
-      {pathsWithLinks.map((path, i) => (
+    <div className="ml-1 mt-2 text-gray-600 dark:text-gray-300 text-sm flex">
+      {pathsWithLinks?.map((path, i) => (
         <div key={i} className="flex items-center">
           <Link href={path.link} className="">
             <span className="hover:underline capitalize">
-              {path.name.split("_").join(" ")}
+              {decodeURIComponent(path.name)}
             </span>
           </Link>
           {i < pathsWithLinks.length - 1 && (

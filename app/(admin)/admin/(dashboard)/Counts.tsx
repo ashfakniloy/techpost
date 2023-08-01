@@ -38,14 +38,16 @@ async function Counts() {
       {cardList.map((card, i) => (
         <div
           key={i}
-          className="h-[120px] w-full bg-custom-gray6 rounded-lg shadow-md px-8 py-6 hover:shadow-lg transition-shadow duration-300 group cursor-pointer"
+          className="h-[120px] w-full bg-gray-50 dark:bg-custom-gray6 rounded-lg shadow-md px-8 py-6 hover:shadow-lg transition-shadow duration-300 group cursor-pointer"
         >
           <div className="flex justify-between items-center h-full">
-            <div className=" h-[52px] w-[52px] p-2.5 bg-cyan-900/70 rounded-full">
+            <div className=" h-[52px] w-[52px] p-2.5 bg-gray-200 dark:bg-cyan-900/70 rounded-full">
               <span className="">{card.icon}</span>
             </div>
             <div className="flex flex-col items-center gap-1.5">
-              <p className="text-sm text-gray-300">{card.title}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                {card.title}
+              </p>
               <h3 className="text-2xl font-bold">{card.count}</h3>
             </div>
           </div>

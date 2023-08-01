@@ -4,6 +4,7 @@ import Link from "next/link";
 import parser from "html-react-parser";
 import "@/components/TextEditor/Tiptap/styles.css";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
+import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 
 type SinglePostProps =
   | (Post & {
@@ -33,7 +34,19 @@ function SinglePost({ post }: { post: SinglePostProps }) {
   if (!post) return;
 
   return (
-    <div className="p-6 rounded-lg bg-custom-gray6 w-[850px]">
+    <div className="p-6 rounded-lg bg-gray-50 dark:bg-custom-gray6 w-[850px] shadow-md">
+      <div className="mb-4 flex justify-between">
+        <div className="">
+          <Link
+            href={`/admin/categories/${post.categoryName}`}
+            className="capitalize text-sm lg:text-base text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-500"
+          >
+            {post.categoryName}
+          </Link>
+        </div>
+
+        {post.editorsChoice && <EditorsChoiceBadge />}
+      </div>
       <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
         <h1 className="text-2xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 font-montserrat">
           {post.title}

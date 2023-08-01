@@ -1,5 +1,4 @@
 import { Loader2 } from "@/components/Loaders/Loader";
-import React from "react";
 
 function EditProfileLoadingPage() {
   return (

@@ -102,11 +102,12 @@ function AddCategory() {
       <AlertDialogTrigger asChild>
         <Button variant="default">Add category</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent className="relative bg-custom-gray6 py-10 px-0 rounded-lg max-w-[700px]">
+      <AlertDialogContent className="relative bg-gray-50 dark:bg-custom-gray6 py-10 px-0 rounded-lg max-w-[700px]">
         <div className="">
           <button
             type="button"
-            className="absolute top-2 right-2 rounded-full overflow-hidden flex justify-end disabled:cursor-not-allowed"
+            title="Close"
+            className="absolute top-2 right-2 rounded-full overflow-hidden flex justify-end hover:scale-110 transition-transform duration-100 disabled:cursor-not-allowed"
             onClick={() => setShowModal(false)}
             disabled={isSubmitting}
           >
@@ -145,7 +146,9 @@ function AddCategory() {
                     <Button
                       type="button"
                       onClick={() => setShowModal(false)}
-                      className="w-full bg-emerald-700 hover:bg-emerald-600 text-white"
+                      // className="w-full bg-emerald-700 hover:bg-emerald-600 text-white"
+                      variant="outline"
+                      className="w-full border-gray-700 dark:border-gray-400"
                       disabled={isSubmitting}
                     >
                       Cancel

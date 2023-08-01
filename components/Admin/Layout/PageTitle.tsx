@@ -21,12 +21,13 @@ const iconMappings: IconMappings = {
 
 function PageTitle() {
   const pathname = usePathname();
+  const pathnameDecoded = decodeURIComponent(pathname!!);
   const pageTitle =
-    pathname === "/admin"
+    pathnameDecoded === "/admin"
       ? "dashboard"
-      : pathname.split("/admin/").join("").split("_").join(" ");
+      : pathnameDecoded?.split("/admin/").join("");
 
-  const pathSegments = pathname.split("/").filter((path) => path !== "");
+  const pathSegments = pathname?.split("/").filter((path) => path !== "");
 
   // console.log("pathSegments", pathSegments);
 
@@ -34,7 +35,7 @@ function PageTitle() {
     if (pathname === "/admin") {
       return <ChartPieIcon />;
     } else {
-      const pageName = pathSegments.find((path) => path in iconMappings);
+      const pageName = pathSegments?.find((path) => path in iconMappings);
 
       const IconComponent = pageName ? iconMappings[pageName] : null;
       return IconComponent;

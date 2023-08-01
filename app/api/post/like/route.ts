@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -39,6 +40,18 @@ export async function POST(req: NextRequest) {
         },
       },
     });
+
+    const revalidatePaths = ["/admin/posts"];
+
+    await fetch("/api/revalidate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ paths: revalidatePaths }),
+    });
+
+    // revalidatePath("/admin/posts");
 
     return NextResponse.json({ message: "Liked Successfully", response });
   } catch (error) {
@@ -83,6 +96,18 @@ export async function DELETE(req: NextRequest) {
     // const filteredRes = response.post.likes.filter(
     //   (like) => like.userId !== session.user.id
     // );
+
+    const revalidatePaths = "/admin/posts";
+
+    await fetch("/api/revalidate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ paths: revalidatePaths }),
+    });
+
+    // revalidatePath("/admin/posts");
 
     return NextResponse.json({
       message: "Unliked Successfully",

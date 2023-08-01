@@ -19,19 +19,26 @@ import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";
 import Categories from "@/components/Post/Categories";
 import "@/components/TextEditor/Tiptap/styles.css";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
+import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
 // export const fetchCache = "force-no-store";
 
-type Props = {
+type SinglePostPageProps = {
   params: {
     category: string;
     postId: string;
   };
+  searchParams: {
+    showComments: string;
+  };
 };
 
-async function SinglePostPage({ params: { postId } }: Props) {
+async function SinglePostPage({
+  params: { postId },
+  searchParams: { showComments },
+}: SinglePostPageProps) {
   const session = await getServerSession(authOptions);
 
   // await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -46,18 +53,22 @@ async function SinglePostPage({ params: { postId } }: Props) {
 
   return (
     <div>
-      <ViewCount postId={postId} />
+      <ViewCount postId={postId} isAdmin={session?.user.role === "ADMIN"} />
 
       <div className="flex items-start justify-between gap-5">
         <div className="flex-1 max-w-full lg:max-w-[796px]">
           <div className="overflow-hidden">
-            <div className="mb-4 text-gray-700 dark:text-gray-300 ">
-              <Link
-                href={`/category/${post.categoryName.split(" ").join("_")}`}
-                className="capitalize text-sm lg:text-base hover:text-blue-800 dark:hover:text-blue-500"
-              >
-                {post.categoryName}
-              </Link>
+            <div className="mb-4 flex justify-between items-center">
+              <div className=" text-gray-700 dark:text-gray-300 ">
+                <Link
+                  href={`/category/${post.categoryName}`}
+                  className="capitalize text-sm lg:text-base hover:text-blue-800 dark:hover:text-blue-500"
+                >
+                  {post.categoryName}
+                </Link>
+              </div>
+
+              {post.editorsChoice && <EditorsChoiceBadge />}
             </div>
             <div className="">
               <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
@@ -142,7 +153,11 @@ async function SinglePostPage({ params: { postId } }: Props) {
           </div>
 
           <div className="mt-5">
-            <Comment postId={postId} authorId={post.userId} />
+            <Comment
+              postId={postId}
+              authorId={post.userId}
+              showCommentsParam={showComments}
+            />
           </div>
         </div>
 

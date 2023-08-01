@@ -5,7 +5,12 @@ import Link from "next/link";
 import { usePathname, useRouter, useParams } from "next/navigation";
 import { ChevronDownIcon, ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { adminLinks } from "./adminLinks";
-import { categories } from "@/data/categories";
+import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
+import { Separator } from "@/components/ui/separator";
+import { MoonIcon } from "@heroicons/react/24/outline";
+import DarkMode from "../DarkMode";
+import { signOut } from "next-auth/react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 function AdminSidebar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -23,16 +28,16 @@ function AdminSidebar() {
 
   const activeClass = (path: string, name: string) => {
     // router.pathname === path
-    const paths = pathname.split("/");
+    const paths = pathname?.split("/");
 
-    if (pathname === path || paths.includes(name.toLowerCase())) {
-      return "bg-cyan-900 text-white";
+    if (pathname === path || paths?.includes(name.toLowerCase())) {
+      return "bg-cyan-200 dark:bg-cyan-900";
     }
     // if (router.pathname.includes(path)) {
     //   return "bg-cyan-700 text-white";
     // }
 
-    return "text-custom-blue2 hover:text-white hover:bg-cyan-900/50";
+    return "text-custom-blue2 hover:bg-cyan-200/50 dark:hover:bg-cyan-900/50";
   };
 
   // const activeSubLinkClass = (navLink: string, i: number) => {
@@ -75,6 +80,16 @@ function AdminSidebar() {
     return () => document.body.classList.remove("overflow-y-hidden");
   }, [showMenu]);
 
+  const handleSignOut = () => {
+    signOut({
+      // redirect: false,
+      callbackUrl: `${window.location.origin}/admin/signin`,
+    });
+
+    // router.refresh();
+    // router.push("/signin");
+  };
+
   return (
     <div
       className={`
@@ -87,105 +102,99 @@ function AdminSidebar() {
     >
       <div
         // ref={node}
-        className={`h-screen overflow-y-auto bg-custom-gray6 z-30 top-0 bottom-0 fixed lg:sticky sidebar text-white lg:translate-x-0 w-[264px] lg:w-[290px] ease-out duration-300 ${
+        className={`h-screen overflow-y-auto bg-gray-50 dark:bg-custom-gray6 shadow-md z-30 top-0 bottom-0 fixed lg:sticky sidebar  lg:translate-x-0 w-[264px] lg:w-[290px] ease-out duration-300 ${
           showMenu ? "translate-x-0" : "-translate-x-full"
         }
       `}
       >
-        <div className="">
-          <div className="pl-[40px] text-white py-7 font-semibold flex justify-between items-center">
-            <h1 className="text-xl lg:text-2xl">Admin Dashboard</h1>
-            <span
-              className="p-1 mr-5 rounded-full border-2 border-custom-blue2 text-custom-blue2 lg:hidden"
-              onClick={() => setShowMenu(!showMenu)}
-            >
-              <ChevronLeftIcon className="h-5 w-5" />
-            </span>
-          </div>
+        <div className="flex flex-col justify-between h-full overflow-hidden">
+          <div className="">
+            <div className="pl-[40px]  py-7 font-semibold flex justify-between items-center">
+              <h1 className="text-xl lg:text-2xl">Admin Dashboard</h1>
+              <span
+                className="p-1 mr-5 rounded-full border-2 border-custom-blue2 text-custom-blue2 lg:hidden"
+                onClick={() => setShowMenu(!showMenu)}
+              >
+                <ChevronLeftIcon className="h-5 w-5" />
+              </span>
+            </div>
 
-          <div className="mt-3 mx-[25px] space-y-2">
-            {adminLinks?.map((navLink, i) => (
-              <div key={i} className="">
-                {/* temporary fix router.refresh until nextjs fix caching revalidate issue */}
-                <Link href={navLink.link} onClick={() => router.refresh()}>
-                  <div
-                    // key={i}
-                    className={`px-3 py-3 flex justify-between items-center font-semibold transition duration-300 rounded-lg ${activeClass(
-                      navLink.link,
-                      navLink.name
-                    )}`}
-                    // onClick={() => setShowSubMenu("")}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="h-5 w-5">{navLink.icon}</span>
-
-                      <p className="text-sm">{navLink.name}</p>
-                    </div>
-                  </div>
-                </Link>
-                {/* {!navLink.subLinks ? (
-                  <Link href={navLink.link} passHref>
+            {/* <ScrollArea className="mt-3 my-0 h-[620px] "> */}
+            <div className="mx-[25px] space-y-2">
+              {adminLinks?.map((navLink, i) => (
+                <div key={i} className="">
+                  {/* temporary fix router.refresh until nextjs fix caching revalidate issue */}
+                  <Link href={navLink.link}>
                     <div
                       // key={i}
-                      className={`px-3 py-3 flex justify-between items-center font-semibold transition duration-300 rounded-md ${activeClass(
-                        navLink.link
+                      className={`px-3 py-3 flex justify-between items-center font-semibold  rounded-lg ${activeClass(
+                        navLink.link,
+                        navLink.name
                       )}`}
                       // onClick={() => setShowSubMenu("")}
                     >
                       <div className="flex items-center gap-3">
-                        <span className="h-[18px] w-[18px]">
-                          {navLink.icon}
-                        </span>
+                        <span className="h-5 w-5">{navLink.icon}</span>
 
                         <p className="text-sm">{navLink.name}</p>
                       </div>
                     </div>
                   </Link>
-                ) : (
-                  <div
-                    onClick={() => menu(i)}
-                    className={`px-3 py-3 font-semibold transition duration-300 rounded-md cursor-pointer ${activeSubLinkClass(
-                      navLink,
-                      i
-                    )}`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="h-4 w-4">{navLink.icon}</span>
-                        <p className="text-sm">{navLink.name}</p>
-                      </div>
+                </div>
+              ))}
 
-                      <span
-                        className={
-                          showSubMenu === i ? "rotate-180" : "rotate-0"
-                        }
-                      >
-                        <ChevronDownIcon className="h-4 w-4" />
-                      </span>
-                    </div>
+              {/* {[...Array(10)].map((_, i) => (
+                <div
+                  key={i}
+                  className={`px-3 py-3 flex justify-between items-center font-semibold rounded-lg`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="h-5 w-5">
+                      <MoonIcon className="stroke-blue-600 dark:stroke-blue-300" />
+                    </span>
+
+                    <p className="text-sm">Example</p>
                   </div>
-                )} */}
-                {/* {showSubMenu === i && (
-                  <div className="pt-2 space-y-2">
-                    {navLink.subLinks.map((subLink, i) => (
-                      <div key={i} className="">
-                        <Link href={subLink.link}>
-                          <p
-                            className={`text-sm px-14 py-3 flex justify-between items-center font-semibold transition duration-300 rounded-md ${
-                              router.pathname === subLink.link
-                                ? "bg-custom-blue5 text-white"
-                                : "text-custom-blue2 hover:text-white hover:bg-custom-blue5/50"
-                            }`}
-                          >
-                            {subLink.name}
-                          </p>
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
-                )} */}
+                </div>
+              ))} */}
+            </div>
+            {/* </ScrollArea> */}
+          </div>
+
+          <div className="mb-6 p-5">
+            <Separator className="my-4 bg-gray-300 dark:bg-gray-600" />
+
+            <div className="space-y-2">
+              <div className="px-3 py-3 flex justify-between items-center">
+                <div className="flex items-center gap-3 font-semibold rounded-lg">
+                  <span className="h-5 w-5">
+                    <MoonIcon className="stroke-blue-600 dark:stroke-blue-300" />
+                  </span>
+                  <p className="text-sm">Dark Theme</p>
+                </div>
+
+                <DarkMode />
               </div>
-            ))}
+
+              <div className="flex flex-col items-center gap-3 p-3 bg-gray-600/10 dark:bg-gray-400/10 rounded-lg">
+                <p className="font-medium text-sm text-gray-600 dark:text-gray-300">
+                  Signed in as Admin
+                </p>
+
+                <div className="flex justify-center">
+                  <button
+                    type="button"
+                    className="px-6 py-1.5 text-sm flex items-center gap-1 font-semibold rounded-full border border-gray-400 hover:border-black hover:text-white hover:bg-black dark:border-gray-500 dark:hover:border-white dark:hover:bg-white dark:hover:text-black transition-color duration-200"
+                    onClick={handleSignOut}
+                  >
+                    <span className="h-5 w-5">
+                      <ArrowLeftOnRectangleIcon className="stroke-red-600 dark:stroke-red-300" />
+                    </span>
+                    <p>Sign out</p>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

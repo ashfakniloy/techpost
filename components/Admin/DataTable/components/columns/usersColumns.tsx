@@ -6,10 +6,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "../data-table-column-header";
 import { format } from "date-fns";
 import { UsersActions } from "../actions/UsersActions";
-import { User } from "../../data/schema";
+// import { User } from "../../data/schema";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
+import { User } from "@prisma/client";
 
-export const usersColumns: ColumnDef<User>[] = [
+type UserProps = User & {
+  _count: {
+    posts: number;
+  };
+};
+
+export const usersColumns: ColumnDef<UserProps>[] = [
   {
     id: "select",
     header: ({ table }) => (

@@ -246,7 +246,7 @@ export function DynamicField({
           <button
             type="button"
             title={`Add another field`}
-            className="mt-2 text-xs font-bold bg-gray-800 px-4 py-2 rounded border border-transparent hover:border-gray-500"
+            className="mt-[22px] text-xs font-bold bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded border border-transparent hover:border-gray-500"
             onClick={() => append({})}
           >
             Add another

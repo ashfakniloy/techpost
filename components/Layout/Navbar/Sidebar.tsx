@@ -65,7 +65,7 @@ function Sidebar({
       .flatMap((navLink) => navLink.subLinks?.map((subLink) => subLink.link))
       .filter((link) => link !== undefined);
 
-    !subLinks.includes(pathname) && setShowSidebarSubMenu(null);
+    pathname && !subLinks.includes(pathname) && setShowSidebarSubMenu(null);
   }, [pathname]);
 
   const activeSubLinkClass = (

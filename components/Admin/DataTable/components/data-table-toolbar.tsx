@@ -19,7 +19,7 @@ import { Post } from "../data/schema";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
-  searchBy: string;
+  searchBy?: string;
   defaultSort?: string;
   defaultOrder?: "asc" | "desc";
   mannualControl?: boolean;
@@ -96,19 +96,19 @@ export function DataTableToolbar<TData>({
   const [searchTitle, setSearchTitle] = useState<string | null>(null);
   const debouncedValue = useDebounce(searchTitle, 500);
 
-  const hasSort = searchParams.has("sort");
-  const sortParam = searchParams.get("sort");
-  const limit = searchParams.get("limit");
-  const search = searchParams.get("search");
+  const hasSort = searchParams?.has("sort");
+  const sortParam = searchParams?.get("sort");
+  const limit = searchParams?.get("limit");
+  const search = searchParams?.get("search");
 
   const limitNumber = Number(limit) || 10;
 
-  const sortValues = sortParam?.split("%20").join("").split(".");
+  const sortValues = sortParam?.split(".");
   const sortBy = sortValues?.[0];
   const orderBy = sortValues?.[1];
 
   useEffect(() => {
-    setSearchTitle(search);
+    search && setSearchTitle(search);
     !search && setSearchTitle(null);
   }, [search]);
 
@@ -119,8 +119,10 @@ export function DataTableToolbar<TData>({
       ? `${pathname}?search=${debouncedValue}&limit=${limitNumber}`
       : pathname;
 
-    debouncedValue && router.push(path, { scroll: false });
-    debouncedValue === "" && router.push(pathname, { scroll: false });
+    debouncedValue && path && router.push(path, { scroll: false });
+    debouncedValue === "" &&
+      pathname &&
+      router.push(pathname, { scroll: false });
   }, [debouncedValue]);
 
   if (mannualControl) {
@@ -181,7 +183,7 @@ export function DataTableToolbar<TData>({
             <button
               type="button"
               className="p-1 ml-1 rounded-md hover:bg-gray-700"
-              onClick={() => router.replace(pathname)}
+              onClick={() => pathname && router.replace(pathname)}
             >
               <X className="w-4 h-4" />
             </button>
@@ -194,7 +196,7 @@ export function DataTableToolbar<TData>({
   } else {
     return (
       <div className="flex items-center justify-end  space-x-2">
-        {!disableSearch && (
+        {!disableSearch && searchBy && (
           <Input
             placeholder={`Find ${searchBy}`}
             value={

@@ -1,7 +1,4 @@
 import Image from "next/image";
-import space from "@/public/images/space.jpg";
-import robotics from "@/public/images/robotics.jpg";
-import programming from "@/public/images/programming.jpg";
 import { getCategoryByName } from "@/prisma/find/getCategoryByName";
 import { notFound } from "next/navigation";
 

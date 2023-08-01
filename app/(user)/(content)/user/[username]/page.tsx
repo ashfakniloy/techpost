@@ -52,7 +52,7 @@ function UserPage({
   params: { username },
   searchParams: { page, limit, sort },
 }: Props) {
-  const usernameFormatted = username.split("%20").join(" ");
+  const usernameDecoded = decodeURIComponent(username);
   const pageNumber = Number(page);
   const limitNumber = Number(limit);
 
@@ -64,8 +64,8 @@ function UserPage({
 
   const getPostsTitle = () => {
     if (!sort || sort === "recent")
-      return `Recent Posts from ${usernameFormatted}`;
-    if (sort === "popular") return `Popular Posts from ${usernameFormatted}`;
+      return `Recent Posts from ${usernameDecoded}`;
+    if (sort === "popular") return `Popular Posts from ${usernameDecoded}`;
     return "invalid";
   };
 
@@ -78,7 +78,7 @@ function UserPage({
       </div>
 
       <Suspense fallback={<ProfileTopSkeleton />}>
-        <ProfileTopSection username={usernameFormatted} />
+        <ProfileTopSection username={usernameDecoded} />
       </Suspense>
 
       <div className="lg:flex items-start justify-between gap-5 mt-10 lg:mt-20">
@@ -92,7 +92,7 @@ function UserPage({
           ) : (
             <Suspense key={page || sort} fallback={<PostsSkeleton />}>
               <UserPosts
-                username={usernameFormatted}
+                username={usernameDecoded}
                 limitNumber={limitNumber}
                 pageNumber={pageNumber}
                 sort={sort}
@@ -108,7 +108,7 @@ function UserPage({
           >
             <ProfileSideSection
               cardTitle={cardTitle()}
-              username={usernameFormatted}
+              username={usernameDecoded}
               sort={sort}
             />
           </Suspense>

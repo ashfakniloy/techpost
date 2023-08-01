@@ -5,6 +5,7 @@ import PostLikes from "./PostLikes";
 import PostComments from "./PostComments";
 import { getSinglePostAdmin } from "@/prisma/find/admin/getSinglePostAdmin";
 import PostInfo from "./PostInfo";
+import PostOption from "./PostOption";
 
 type PostPageProps = {
   params: {
@@ -28,25 +29,34 @@ async function AdminSinglePostPage({
   }
 
   return (
-    <div className="space-y-7">
-      <PostInfo
-        username={post.user.username}
-        userImageUrl={post.user.profile?.imageUrl}
-        likesCount={post._count.likes}
-        commentsCount={post._count.comments}
-        viewsCount={post._count.views}
-      />
-      <div className="flex gap-7">
-        <SinglePost post={post} />
-        <div className="space-y-7 flex-1">
-          <PostLikes likes={post.likes} />
+    <div className="relative">
+      <div className="absolute -top-14 right-0">
+        <PostOption
+          id={post.id}
+          title={post.title}
+          isEditorsChoice={post.editorsChoice}
+        />
+      </div>
+      <div className="space-y-7">
+        <PostInfo
+          username={post.user.username}
+          userImageUrl={post.user.profile?.imageUrl}
+          likesCount={post._count.likes}
+          commentsCount={post._count.comments}
+          viewsCount={post._count.views}
+        />
+        <div className="flex gap-7">
+          <SinglePost post={post} />
+          <div className="space-y-7 flex-1">
+            <PostLikes likes={post.likes} />
 
-          <PostComments
-            postId={post.id}
-            showLikes={showLikes}
-            showReplies={showReplies}
-          />
-          {/* <PostComments comments={post.comments} /> */}
+            <PostComments
+              postId={post.id}
+              showLikes={showLikes}
+              showReplies={showReplies}
+            />
+            {/* <PostComments comments={post.comments} /> */}
+          </div>
         </div>
       </div>
     </div>

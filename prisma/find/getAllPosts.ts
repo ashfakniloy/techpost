@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { PER_PAGE } from "@/config";
+import { Prisma } from "@prisma/client";
 
 export async function getAllPosts({
   limitNumber,
@@ -93,3 +94,5 @@ export async function getAllPosts({
     count,
   };
 }
+
+export type AllPostTypes = Prisma.PromiseReturnType<typeof getAllPosts>["data"];

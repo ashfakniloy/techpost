@@ -30,7 +30,7 @@
 
 //   const pathname = usePathname();
 //   const searchParams = useSearchParams();
-//   const params = searchParams.get("page");
+//   const params = searchParams?.get("page");
 
 //   useEffect(() => {
 //     setShowSearchbar(false);
@@ -168,7 +168,7 @@ function SearchButtonMobile() {
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const params = searchParams.get("page");
+  const params = searchParams?.get("page");
 
   useEffect(() => {
     setShowSearchbar(false);

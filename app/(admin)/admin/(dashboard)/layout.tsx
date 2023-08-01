@@ -1,4 +1,5 @@
 import PageTitle from "@/components/Admin/Layout/PageTitle";
+import Refresh from "@/components/Admin/Layout/Refresh";
 import AdminSidebar from "@/components/Admin/Layout/Sidebar";
 
 export const dynamic = "force-dynamic";
@@ -15,7 +16,11 @@ function AdminDashboardlayout({ children }: { children: React.ReactNode }) {
 
         {/* <div className="my-10 mx-2 lg:mx-16 2xl:mx-20"> */}
         <div className="my-10 mx-2 lg:mx-7">
+          {/* temporary fix router.refresh until nextjs fix caching revalidate issue */}
+          {/* <Refresh /> */}
+
           <PageTitle />
+
           <div className="my-10">{children}</div>
         </div>
       </div>
