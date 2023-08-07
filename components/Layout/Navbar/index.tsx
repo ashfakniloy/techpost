@@ -95,19 +95,17 @@ function Navbar({
         </div>
       </div>
 
-      {showSidebar && (
-        <Sidebar
-          showSidebar={showSidebar}
-          setShowSidebar={setShowSidebar}
-          sidebarNode={sidebarNode}
-          session={session}
-          imageUrl={imageUrl}
-          username={username}
-          navLinks={navLinks}
-          showSidebarSubMenu={showSidebarSubMenu}
-          setShowSidebarSubMenu={setShowSidebarSubMenu}
-        />
-      )}
+      <Sidebar
+        showSidebar={showSidebar}
+        setShowSidebar={setShowSidebar}
+        sidebarNode={sidebarNode}
+        session={session}
+        imageUrl={imageUrl}
+        username={username}
+        navLinks={navLinks}
+        showSidebarSubMenu={showSidebarSubMenu}
+        setShowSidebarSubMenu={setShowSidebarSubMenu}
+      />
     </>
   );
 }

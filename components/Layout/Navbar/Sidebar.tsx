@@ -48,6 +48,7 @@ function Sidebar({
   setShowSidebarSubMenu,
 }: SidebarProps) {
   const pathname = usePathname();
+  const pathnameDecoded = pathname && decodeURIComponent(pathname);
 
   const handleSignOut = () => {
     signOut({
@@ -65,16 +66,18 @@ function Sidebar({
       .flatMap((navLink) => navLink.subLinks?.map((subLink) => subLink.link))
       .filter((link) => link !== undefined);
 
-    pathname && !subLinks.includes(pathname) && setShowSidebarSubMenu(null);
-  }, [pathname]);
+    pathnameDecoded &&
+      !subLinks.includes(pathnameDecoded) &&
+      setShowSidebarSubMenu(null);
+  }, [pathnameDecoded]);
 
   const activeSubLinkClass = (
     subLinks: { name: string; link: string }[] | undefined,
     navName: string
   ) => {
-    const value = subLinks?.find((subLink) => subLink.link === pathname);
+    const value = subLinks?.find((subLink) => subLink.link === pathnameDecoded);
 
-    if (pathname === value?.link && showSidebarSubMenu !== navName) {
+    if (pathnameDecoded === value?.link && showSidebarSubMenu !== navName) {
       return "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100";
     } else {
       return "hover:bg-gray-200 dark:hover:bg-gray-600";
@@ -100,7 +103,7 @@ function Sidebar({
     <div
       className={
         showSidebar
-          ? "fixed  inset-0 bg-black/50 backdrop-blur-sm z-30 lg:bg-transparent"
+          ? "fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:bg-transparent"
           : ""
       }
     >
@@ -108,7 +111,6 @@ function Sidebar({
         ref={sidebarNode}
         className={`overflow-y-auto lg:hidden h-screen text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-custom-gray2 z-30 fixed inset-y-0 right-0 w-[270px] transition-all ease-out duration-300 ${
           showSidebar ? "translate-x-0" : "translate-x-full"
-          // showSidebar ? "opacity-100" : "opacity-0"
         }
     `}
       >
@@ -178,7 +180,7 @@ function Sidebar({
                     <Link href={navLink.link}>
                       <p
                         className={`py-3 pl-5 rounded-lg ${
-                          pathname === navLink.link
+                          pathnameDecoded === navLink.link
                             ? "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                             : "hover:bg-gray-200 dark:hover:bg-gray-600"
                         }`}
@@ -206,7 +208,31 @@ function Sidebar({
                         </span>
                       </p>
 
-                      {showSidebarSubMenu === navLink.name && (
+                      <div
+                        className={`mt-1 space-y-1 overflow-hidden transition-all duration-500 ease-out ${
+                          showSidebarSubMenu === navLink.name
+                            ? "max-h-screen" //css cant animate height auto. max-h is a quick solution. im guessing max-h might not be greater than screen height.
+                            : "max-h-0"
+                        }`}
+                      >
+                        {navLink.subLinks?.map((subLink, i) => (
+                          <div key={subLink.name} className="">
+                            <Link href={subLink.link}>
+                              <p
+                                className={`py-3 pl-10 rounded-lg capitalize ${
+                                  pathnameDecoded === subLink.link
+                                    ? "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                                    : "hover:bg-gray-200 dark:hover:bg-gray-600"
+                                }`}
+                              >
+                                {subLink.name}
+                              </p>
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* {showSidebarSubMenu === navLink.name && (
                         <div className="mt-1 space-y-1">
                           {navLink.subLinks?.map((subLink, i) => (
                             <div key={subLink.name} className="">
@@ -224,7 +250,7 @@ function Sidebar({
                             </div>
                           ))}
                         </div>
-                      )}
+                      )} */}
                     </div>
                   )}
                 </div>
