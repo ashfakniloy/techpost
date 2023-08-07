@@ -29,15 +29,15 @@ async function AdminSinglePostPage({
   }
 
   return (
-    <div className="relative">
-      <div className="absolute -top-14 right-0">
+    <div className=" relative">
+      <div className="absolute -top-7 lg:-top-14 right-0">
         <PostOption
           id={post.id}
           title={post.title}
           isEditorsChoice={post.editorsChoice}
         />
       </div>
-      <div className="space-y-7">
+      <div className="pt-8 lg:pt-0 space-y-7">
         <PostInfo
           username={post.user.username}
           userImageUrl={post.user.profile?.imageUrl}
@@ -45,7 +45,7 @@ async function AdminSinglePostPage({
           commentsCount={post._count.comments}
           viewsCount={post._count.views}
         />
-        <div className="flex gap-7">
+        <div className="flex flex-col lg:flex-row gap-7">
           <SinglePost post={post} />
           <div className="space-y-7 flex-1">
             <PostLikes likes={post.likes} />

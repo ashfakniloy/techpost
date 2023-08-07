@@ -51,10 +51,10 @@ function List({
     ) || "";
 
   return (
-    <div className="transition-shadow duration-300 p-2 lg:p-4 h-[96px] lg:h-[167px] bg-gray-50 rounded-md shadow-md dark:bg-custom-gray2 hover:shadow-lg">
-      <div className="flex gap-2.5 lg:gap-4 lg:min-h-[135px]">
+    <div className="border-b last:border-b-0 border-gray-300 dark:border-gray-700 py-5 lg:py-10">
+      <div className="flex items-center gap-2.5 lg:gap-4">
         <Link href={`/post/${id}`}>
-          <div className="lg:w-[210px] lg:h-[135px] w-[110px] h-[80px] relative overflow-hidden rounded-md">
+          <div className="lg:w-[230px] lg:h-[150px] w-[140px] h-[110px] relative overflow-hidden rounded-md">
             <Image
               src={imageUrl}
               alt="programming"
@@ -68,18 +68,18 @@ function List({
           </div>
         </Link>
 
-        <div className="flex flex-col justify-between flex-1 w-[10%]">
-          {/* <div className="max-w-[215px] lg:max-w-[540px]  overflow-hidden"> */}
-          <div className="overflow-hidden break-words">
-            <div className="inline-block ">
+        <div className="flex-1 min-h-[152px] flex flex-col justify-between min-w-[150px] lg:max-w-[540px]">
+          <div className="space-y-1.5">
+            {/* <div className="max-w-[540px]"> */}
+            <div className="">
               <Link href={`/post/${id}`}>
-                <h4 className="lg:text-xl font-semibold !line-clamp-1 title-color">
+                <h4 className="lg:text-xl font-semibold title-color">
                   {title}
                 </h4>
               </Link>
             </div>
 
-            <div className="flex items-center gap-2 text-xs lg:text-sm lg:mt-1 lg:gap-5 text-gray-500 dark:text-gray-400">
+            <div className="flex items-center gap-2 text-xs lg:text-sm lg:gap-5 text-gray-500 dark:text-gray-400">
               <p className="">
                 By
                 <Link href={`/user/${user.username}`} className="ml-1.5 link">
@@ -88,12 +88,13 @@ function List({
               </p>
               <p className="">{getTimeDistance(createdAt)}</p>
             </div>
-            <div className="lg:mt-2 !text-gray-700 dark:!text-gray-300 !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
+
+            <div className=" !text-gray-700 dark:!text-gray-300 !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
               {parsedArticle}
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="mt-1.5 flex items-center justify-between">
             <div className="flex items-center justify-between text-sm">
               <PostLike postId={id} />
 

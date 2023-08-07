@@ -52,9 +52,9 @@ async function UserDetails({ username }: { username: string }) {
   ];
 
   return (
-    <Section title="User Details" className="w-[800px]">
-      <div className="flex gap-7">
-        <div className="w-[150px] h-[150px] lg:w-[300px] lg:h-[300px] relative">
+    <Section title="User Details" className="lg:w-[800px]">
+      <div className="flex flex-col lg:flex-row gap-7">
+        <div className="w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] relative">
           {user.profile?.imageUrl ? (
             <Image
               src={user.profile.imageUrl}

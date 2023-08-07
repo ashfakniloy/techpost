@@ -59,7 +59,7 @@ export const repliesColumn: ColumnDef<CommentReply>[] = [
       return (
         <div className="w-[400px]">
           <div key={id} className="">
-            <div className="flex gap-3 break-words">
+            <div className="flex gap-3 ">
               <div className="">
                 {user?.profile?.imageUrl ? (
                   <Image
@@ -89,7 +89,7 @@ export const repliesColumn: ColumnDef<CommentReply>[] = [
                   </Link>
                 </p>
                 <div className="">
-                  <p className="overflow-hidden break-words">{commentReply}</p>
+                  <p className="">{commentReply}</p>
                 </div>
                 <div className="relative">
                   <div className="relative flex w-full justify-between items-center text-sm">

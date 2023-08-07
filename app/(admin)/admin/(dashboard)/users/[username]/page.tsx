@@ -56,20 +56,19 @@ async function AdminSingleUserPage({
 
   return (
     <div className="relative">
-      <div className="absolute -top-14 right-0">
+      <div className="absolute -top-7 lg:-top-14 right-0">
         <UserOption id={user.id} username={user.username} />
       </div>
-      <div className="space-y-7">
-        <div className="flex justify-between gap-7">
+      <div className="pt-8 lg:pt-0 space-y-7">
+        <div className="flex flex-col lg:flex-row justify-between gap-7">
           <UserDetails username={user.username} />
 
-          <div className="flex-1 space-y-7">
+          <div className="flex-1 space-y-7 flex flex-col">
+            <UserBio bio={user.profile?.bio} />
             <UserCounts
               postsCount={user._count.posts}
               viewsCount={totalViews}
             />
-
-            <UserBio bio={user.profile?.bio} />
           </div>
         </div>
         <Section title={`All Posts from ${usernameDecoded}`}>

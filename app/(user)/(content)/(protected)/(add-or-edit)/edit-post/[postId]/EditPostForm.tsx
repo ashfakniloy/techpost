@@ -65,7 +65,7 @@ function EditPostForm({
     });
 
     const data = await response.json();
-    const postId = data.response.id;
+    const postId = data?.response?.id;
 
     if (response.ok) {
       console.log("success", data);

@@ -51,10 +51,10 @@ function Card({
     ) || "";
 
   return (
-    <div className="transition-shadow max-h-[290px] lg:max-h-[412px] duration-300 bg-gray-50 rounded-md shadow-md group dark:bg-custom-gray2 hover:shadow-lg">
+    <div className="transition-shadow duration-300 bg-gray-50 rounded-md shadow-md group dark:bg-custom-gray2 hover:shadow-lg min-w-[290px] lg:max-w-[386px]">
       <div className="">
         <Link href={`/post/${id}`}>
-          <div className="h-[120px] lg:h-[220px] relative rounded-t-md overflow-hidden">
+          <div className="h-[180px] lg:h-[220px] relative rounded-t-md overflow-hidden">
             <Image
               src={imageUrl}
               alt="programming"
@@ -71,11 +71,13 @@ function Card({
             </div>
           </div>
         </Link>
-        <div className="p-2 lg:p-4 flex flex-col justify-between min-h-[144px] lg:min-h-[192px]">
-          <div className="overflow-hidden break-words">
-            <div className="inline-block ">
+        <div className="p-4 flex flex-col justify-between min-h-[144px] lg:min-h-[192px] ">
+          <div className="">
+            <div className="">
               <Link href={`/post/${id}`}>
-                <h4 className="text-base leading-snug lg:leading-[28px] lg:text-xl font-semibold !line-clamp-2 title-color">
+                <h4
+                  className={`text-base leading-snug lg:leading-[28px] lg:text-xl font-semibold title-color `}
+                >
                   {title}
                 </h4>
               </Link>

@@ -149,7 +149,7 @@ function PostsOverview({ postsData }: { postsData: PostsOverviewProps[] }) {
 
   return (
     <SectionChart title="Posts Overview" className="">
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={400} minWidth={600}>
         <AreaChart
           data={postsData}
           margin={{

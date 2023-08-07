@@ -57,8 +57,8 @@ async function CategoryTopSection({ categoryName }: { categoryName: string }) {
           {category.name}
         </h1>
 
-        <div className="mt-8 w-[500px]">
-          <p className="text-center italic">
+        <div className="mt-8 lg:w-[500px] px-2 lg:px-0">
+          <p className="text-center italic text-sm lg:text-base">
             {randomQuote.quote}{" "}
             <span className="font-semibold"> - {randomQuote.author}</span>
           </p>

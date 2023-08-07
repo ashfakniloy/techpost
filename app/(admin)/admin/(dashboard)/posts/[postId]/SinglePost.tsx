@@ -34,7 +34,7 @@ function SinglePost({ post }: { post: SinglePostProps }) {
   if (!post) return;
 
   return (
-    <div className="p-6 rounded-lg bg-gray-50 dark:bg-custom-gray6 w-[850px] shadow-md">
+    <div className="px-3 py-6 lg:px-6 lg:py-6 rounded-lg bg-gray-50 dark:bg-custom-gray6 lg:w-[850px] shadow-md">
       <div className="mb-4 flex justify-between">
         <div className="">
           <Link
@@ -77,7 +77,7 @@ function SinglePost({ post }: { post: SinglePostProps }) {
 
               <p className=" ">
                 By{" "}
-                <Link href={`/user/${post.user.username}`}>
+                <Link href={`/admin/users/${post.user.username}`}>
                   <span className=" hover:text-blue-800 dark:hover:text-blue-500">
                     {post.user.username}
                   </span>

@@ -1,11 +1,5 @@
 import { Column } from "@tanstack/react-table";
-import {
-  ChevronsUpDown,
-  EyeOff,
-  ListRestart,
-  SortAsc,
-  SortDesc,
-} from "lucide-react";
+import { ChevronsUpDown, ListRestart, SortAsc, SortDesc } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -13,7 +7,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -110,15 +103,12 @@ export function DataTableColumnHeader<TData, TValue>({
               <SortDesc className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
               Desc
             </DropdownMenuItem>
-            {/* <DropdownMenuItem onClick={() => column.clearSorting()}>
-            <ListRestart className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-            Default
-          </DropdownMenuItem> */}
-            <DropdownMenuSeparator />
+
+            {/* <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => column.toggleVisibility(false)}>
               <EyeOff className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
               Hide
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

@@ -81,7 +81,7 @@ async function CategoryPageAdmin({
 
   return (
     <div className="relative">
-      <div className="absolute -top-14 right-0">
+      <div className="absolute -top-7 lg:-top-14 right-0">
         <CategoryOption
           id={category.id}
           name={category.name}
@@ -90,8 +90,8 @@ async function CategoryPageAdmin({
           quotes={category.quotes}
         />
       </div>
-      <div className="space-y-7">
-        <div className="flex gap-7">
+      <div className="pt-8 lg:pt-0 space-y-7">
+        <div className="flex flex-col lg:flex-row gap-7">
           <CategoryInfo
             category_name={category.name}
             total_quotes={category._count.quotes}

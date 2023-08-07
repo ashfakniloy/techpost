@@ -6,6 +6,7 @@
 //   SelectTrigger,
 //   SelectValue,
 // } from "../ui/select";
+// import { useEffect, useState } from "react";
 
 // type SelectProps = {
 //   label: string;
@@ -24,7 +25,20 @@
 // }: SelectProps) {
 //   const {
 //     formState: { errors },
+//     watch,
+//     getValues,
 //   } = useFormContext();
+
+//   // const [selectedOption, setSelectedOption] = useState("");
+
+//   // useEffect(() => {
+//   //   const value = watch(name);
+//   //   setSelectedOption(value);
+//   // }, []);
+
+//   console.log(name, getValues(name));
+
+//   const value = watch(name);
 
 //   return (
 //     <div className="relative ">
@@ -36,12 +50,17 @@
 //         name={name}
 //         {...props}
 //         render={({ field }) => (
-//           <Select onValueChange={field.onChange} defaultValue={field.value}>
+//           <Select
+//             value={value}
+//             onValueChange={field.onChange}
+//             // {...field}
+//           >
 //             <SelectTrigger className="outline-none capitalize !ring-0 !focus-visible:border-gray-700 w-[300px] bg-transparent border border-gray-300 rounded-md  dark:border-gray-700 active:border-stone-600 active:focus:border-stone-500">
-//               {field.value && <SelectValue placeholder={placeholder} />}
-//               {!field.value && (
+//               {/* {field.value && <SelectValue />} */}
+//               <SelectValue placeholder={value} />
+//               {/* {!field.value && (
 //                 <p className="text-muted-foreground">{placeholder}</p>
-//               )}
+//               )} */}
 //             </SelectTrigger>
 
 //             <SelectContent className="bg-custom-gray2">
@@ -105,7 +124,7 @@ export function SelectField({
           <Listbox
             value={field.value}
             onChange={field.onChange}
-            defaultValue={field.value}
+            // defaultValue={field.value}
           >
             <div className="w-[300px] relative">
               <Listbox.Button

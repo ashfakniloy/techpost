@@ -3,7 +3,6 @@ import { getPostsPerMonth } from "@/prisma/find/admin/getPostsPerMonth";
 import Counts from "./Counts";
 import { getViewCountPerDay } from "@/prisma/find/getViewCountPerDay";
 import PostsOverview from "./PostsOverview";
-import { Suspense } from "react";
 import UsersOverview from "./UsersOverview";
 import { getUsersperMonth } from "@/prisma/find/admin/getUsersPerMonth";
 import ViewsOverview from "./ViewsOverview";
@@ -30,7 +29,7 @@ async function AdminDashboardPage() {
       {/* <DashBoardCards /> */}
       <Counts />
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         <UsersOverview usersData={usersPerMonth} />
 
         <PostsOverview postsData={postsPermonth} />

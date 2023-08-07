@@ -39,7 +39,6 @@ function HomePage({ searchParams: { page, limit, sort } }: SearchParams) {
   // const headersList = headers();
   // const userAgent = headersList.get("user-agent");
 
-
   // const isMobileView = userAgent!.match(
   //   /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
   // );

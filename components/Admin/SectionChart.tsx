@@ -12,7 +12,7 @@ function SectionChart({
   return (
     <div
       className={cn(
-        "bg-gray-50 dark:bg-custom-gray6 py-6 px-6 rounded-lg shadow-md",
+        "bg-gray-50 dark:bg-custom-gray6 p-4 lg:p-6 rounded-lg shadow-md",
         className
       )}
     >
@@ -20,7 +20,7 @@ function SectionChart({
         <h3 className="text-xl font-semibold capitalize">{title}</h3>
         <p className="text-xs">{`Year: ${new Date().getFullYear()}`}</p>
       </div>
-      <div className="mt-6">{children}</div>
+      <div className="mt-6 overflow-x-auto">{children}</div>
     </div>
   );
 }

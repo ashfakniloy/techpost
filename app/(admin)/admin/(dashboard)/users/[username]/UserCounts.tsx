@@ -20,7 +20,7 @@ function UserCounts({ postsCount, viewsCount }: UserCountsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-7">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
       {cardList.map((card, i) => (
         <div
           key={i}

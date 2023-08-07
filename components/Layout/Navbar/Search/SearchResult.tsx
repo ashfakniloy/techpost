@@ -11,14 +11,14 @@ type Props = Post & {
 function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
   return (
     <div className="absolute top-[59px] w-full border rounded-md border-slate-300 dark:border-slate-700  bg-gray-50 dark:bg-custom-gray2 shadow-md">
-      <p className="p-3  font-semibold text-center text-gray-900 break-words border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat">
+      <p className="p-3  font-semibold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat">
         {heading}
       </p>
 
       {posts.length > 0 ? (
         <div className="max-h-[445px] overflow-y-auto custom-scrollbar">
           <div className="px-4 ">
-            <div className="overflow-x-hidden">
+            <div className="">
               {posts.map((post) => (
                 <div
                   key={post.id}
@@ -35,7 +35,7 @@ function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
                     </div>
                   </Link>
 
-                  <div className="flex flex-col self-start flex-1">
+                  <div className="flex flex-col self-start flex-1 max-w-[252px] break-words">
                     <h4 className="font-medium line-clamp-2 title-color">
                       <Link href={`/post/${post.id}`}>{post.title}</Link>
                     </h4>

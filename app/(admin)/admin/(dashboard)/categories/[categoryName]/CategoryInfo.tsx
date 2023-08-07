@@ -44,7 +44,7 @@ function CategoryInfo({
   ];
 
   return (
-    <Section title="Category Info" className="min-w-[500px] h-[548px]">
+    <Section title="Category Info" className="lg:min-w-[500px] h-[548px]">
       <div className="relative h-[200px]">
         <Image
           src={imageUrl}

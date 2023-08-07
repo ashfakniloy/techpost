@@ -11,7 +11,7 @@ async function AdminCategoriesPage() {
       <div className="absolute -top-14 right-0">
         <AddCategory />
       </div>
-      <div className="grid grid-cols-3 gap-7">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-7">
         {categories.map((category, i) => (
           <Link
             key={i}

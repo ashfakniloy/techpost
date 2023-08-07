@@ -21,6 +21,8 @@ export async function getEditorsChoicePost() {
 
       _count: {
         select: {
+          likes: true,
+          comments: true,
           views: true,
         },
       },

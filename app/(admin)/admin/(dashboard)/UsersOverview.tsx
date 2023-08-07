@@ -53,8 +53,8 @@ function UsersOverview({ usersData }: { usersData: UsersOverviewProps[] }) {
   };
 
   return (
-    <SectionChart title="Users Overview" className="">
-      <ResponsiveContainer width="100%" height={400}>
+    <SectionChart title="Users Overview">
+      <ResponsiveContainer width="100%" height={400} minWidth={600}>
         <BarChart
           data={usersData}
           margin={{

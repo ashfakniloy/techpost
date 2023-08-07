@@ -41,6 +41,7 @@ function YoutubeVideo({
     }
 
     setShowVideoModal(false);
+    setUrl("");
   };
 
   return (
@@ -61,7 +62,7 @@ function YoutubeVideo({
       </button>
 
       {showVideoModal && (
-        <div className="absolute -left-[500%] mt-2 px-4 py-6 bg-gray-50 dark:bg-custom-gray2 z-10 border border-gray-300 dark:border-gray-600 w-[300px]">
+        <div className="absolute -left-[500%] mt-4 p-4 bg-gray-50 dark:bg-custom-gray2 z-10 border border-gray-300 dark:border-gray-600 w-[300px] rounded-lg">
           <p className="text-lg">Add youtube video link</p>
           <button
             type="button"
@@ -118,7 +119,7 @@ function YoutubeVideo({
           </button> */}
               <button
                 type="button"
-                className="bg-blue-800 !px-4 !py-4 rounded text-sm font-bold hover:!bg-blue-800"
+                className="bg-black text-white dark:bg-white dark:text-black !p-4 rounded text-sm font-bold hover:!bg-black dark:hover:!bg-white"
                 onClick={addYoutubeVideo}
               >
                 Add

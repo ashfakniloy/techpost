@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 type ModalProps = {
-  title: string;
+  title: string | JSX.Element;
   showModal: boolean;
   isPending: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,7 +33,7 @@ function Modal({
     <AlertDialog open={showModal || isPending} onOpenChange={setShowModal}>
       {/* <AlertDialogContent className="bg-gray-50 dark:bg-custom-gray6"> */}
       <AlertDialogContent className={`${color} ${colorDark}`}>
-        <AlertDialogHeader>
+        <AlertDialogHeader className="lg:max-w-[470px] break-words">
           <AlertDialogTitle>{title}</AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>

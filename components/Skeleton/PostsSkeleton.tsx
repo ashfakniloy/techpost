@@ -21,7 +21,7 @@ function PostsSkeleton() {
       )}
 
       {view === "grid" && (
-        <div className="grid grid-cols-2 gap-3 lg:gap-5">
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
           {items.map((_, i) => (
             <CardSkeleton key={i} />
           ))}

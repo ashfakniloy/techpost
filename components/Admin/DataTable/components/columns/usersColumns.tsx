@@ -64,7 +64,7 @@ export const usersColumns: ColumnDef<UserProps>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader mannualSort column={column} title="Email" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="w-[150px]">{row.getValue("email")}</div>,
     // enableSorting: true,
     // enableHiding: true,
   },
@@ -101,7 +101,7 @@ export const usersColumns: ColumnDef<UserProps>[] = [
       <DataTableColumnHeader mannualSort column={column} title="Created at" />
     ),
     cell: ({ row }) => (
-      <div className="w-[150px]">
+      <div className="w-[170px]">
         {/* {getFormatedDate(row.getValue("createdAt"))} */}
         {/* {format(new Date(row.getValue("createdAt")), "MMMM dd yyyy")} */}
         <ClientFormattedDate date={row.getValue("createdAt")} />

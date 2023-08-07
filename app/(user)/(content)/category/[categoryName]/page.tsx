@@ -101,7 +101,7 @@ async function CategoryPage({
       <CategoryTopSection categoryName={categoryNameDecoded} />
 
       <div className="lg:flex items-start justify-between gap-5 mt-10 lg:mt-20">
-        <div className="lg:flex-1 lg:max-w-[796px]">
+        <div className="lg:flex-1 lg:max-w-[796px] overflow-hidden">
           <PostsHeader postsTitle={postsTitle} />
 
           {postsTitle === "invalid" ? (

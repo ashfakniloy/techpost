@@ -1,22 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useRouter, useParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ChevronDownIcon, ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { adminLinks } from "./adminLinks";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import { Separator } from "@/components/ui/separator";
-import { MoonIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, MoonIcon } from "@heroicons/react/24/outline";
 import DarkMode from "../DarkMode";
 import { signOut } from "next-auth/react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-function AdminSidebar() {
-  const [showMenu, setShowMenu] = useState(false);
+function AdminSidebar({
+  node,
+  showSidebar,
+  setShowSidebar,
+}: {
+  node: React.RefObject<HTMLDivElement>;
+  showSidebar: boolean;
+  setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const pathname = usePathname();
-  const params = useParams();
-  const [showSubMenu, setShowSubMenu] = useState("");
 
   // console.log("params", paths);
 
@@ -73,12 +78,12 @@ function AdminSidebar() {
   const router = useRouter();
 
   useEffect(() => {
-    if (showMenu) {
+    if (showSidebar) {
       document.body.classList.add("overflow-y-hidden");
     }
 
     return () => document.body.classList.remove("overflow-y-hidden");
-  }, [showMenu]);
+  }, [showSidebar]);
 
   const handleSignOut = () => {
     signOut({
@@ -92,35 +97,35 @@ function AdminSidebar() {
 
   return (
     <div
-      className={`
+      className={` 
         ${
-          showMenu
+          showSidebar
             ? "fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:bg-transparent"
             : ""
         }
       `}
     >
       <div
-        // ref={node}
-        className={`h-screen overflow-y-auto bg-gray-50 dark:bg-custom-gray6 shadow-md z-30 top-0 bottom-0 fixed lg:sticky sidebar  lg:translate-x-0 w-[264px] lg:w-[290px] ease-out duration-300 ${
-          showMenu ? "translate-x-0" : "-translate-x-full"
+        ref={node}
+        className={`h-[100dh] lg:h-screen overflow-y-auto bg-gray-50 dark:bg-custom-gray6 shadow-md z-30 top-0 bottom-0 fixed lg:sticky sidebar  lg:translate-x-0 w-[264px] lg:w-[290px] ease-out duration-300 ${
+          showSidebar ? "translate-x-0" : "-translate-x-full"
         }
       `}
       >
         <div className="flex flex-col justify-between h-full overflow-hidden">
           <div className="">
-            <div className="pl-[40px]  py-7 font-semibold flex justify-between items-center">
-              <h1 className="text-xl lg:text-2xl">Admin Dashboard</h1>
+            <div className="pl-5 lg:pl-[40px] py-7 font-semibold flex justify-between items-center">
+              <h1 className="text-lg lg:text-2xl">Admin Dashboard</h1>
               <span
-                className="p-1 mr-5 rounded-full border-2 border-custom-blue2 text-custom-blue2 lg:hidden"
-                onClick={() => setShowMenu(!showMenu)}
+                className="p-1 mr-5 rounded-full border-2 border-gray-500  lg:hidden"
+                onClick={() => setShowSidebar(!showSidebar)}
               >
                 <ChevronLeftIcon className="h-5 w-5" />
               </span>
             </div>
 
             {/* <ScrollArea className="mt-3 my-0 h-[620px] "> */}
-            <div className="mx-[25px] space-y-2">
+            <div className="mx-2 lg:mx-[25px] space-y-2">
               {adminLinks?.map((navLink, i) => (
                 <div key={i} className="">
                   {/* temporary fix router.refresh until nextjs fix caching revalidate issue */}
@@ -161,7 +166,7 @@ function AdminSidebar() {
             {/* </ScrollArea> */}
           </div>
 
-          <div className="mb-6 p-5">
+          <div className="mb-6 p-2 lg:p-5">
             <Separator className="my-4 bg-gray-300 dark:bg-gray-600" />
 
             <div className="space-y-2">

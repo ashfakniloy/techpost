@@ -153,7 +153,7 @@ function ViewsOverview({ viewsData }: { viewsData: ViewsOverviewProps[] }) {
 
   return (
     <SectionChart title="Posts Views Overview" className="">
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={400} minWidth={600}>
         <AreaChart
           data={viewsData}
           margin={{

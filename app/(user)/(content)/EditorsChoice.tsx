@@ -88,10 +88,15 @@ import Image from "next/image";
 import Link from "next/link";
 import parser from "html-react-parser";
 
-import { CheckBadgeIcon } from "@heroicons/react/24/solid";
+import {
+  ChatBubbleLeftIcon,
+  CheckBadgeIcon,
+  EyeIcon,
+} from "@heroicons/react/24/solid";
 import { getSinglePost } from "@/prisma/find/getSinglePost";
 import { getEditorsChoicePost } from "@/prisma/find/getEditorsChoicePost";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
+import PostLike from "@/components/Post/PostLike";
 
 async function EditorsChoice() {
   // const { data: posts, count } = await getSinglePost({ limitNumber: 4 });
@@ -108,8 +113,7 @@ async function EditorsChoice() {
   );
 
   return (
-    <div className="mb-8 relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-  
+    <div className="mb-8 relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ">
       <Link href={`/post/${post.id}`}>
         <div className="absolute right-2 top-2 lg:right-5 lg:top-5 z-10">
           <EditorsChoiceBadge />
@@ -129,7 +133,9 @@ async function EditorsChoice() {
             {post.categoryName}
           </p>
 
-          <h1 className="pt-2 text-xl lg:text-4xl font-bold">{post.title}</h1>
+          <h1 className={`pt-2 text-xl lg:text-4xl font-bold `}>
+            {post.title}
+          </h1>
 
           <div className=" mt-2 lg:mt-2 flex items-center gap-3 text-xs lg:text-sm lg:gap-6">
             <div className="flex items-center gap-2">

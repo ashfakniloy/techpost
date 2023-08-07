@@ -127,7 +127,7 @@ export function DataTableToolbar<TData>({
 
   if (mannualControl) {
     return (
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 items-center justify-between">
         <div className="flex items-center flex-1 space-x-2">
           <Input
             placeholder={`Search ${searchBy}`}
@@ -137,7 +137,7 @@ export function DataTableToolbar<TData>({
           />
         </div>
 
-        <div className="flex items-center gap-3 text-sm font-medium mr-5">
+        <div className="flex flex-col lg:flex-row items-center gap-3 text-sm font-medium lg:mr-5">
           {!disableRowSelect && (
             <div className="flex items-center gap-2">
               {table.getSelectedRowModel().flatRows.length > 0 && (
@@ -147,11 +147,12 @@ export function DataTableToolbar<TData>({
                     onClick={() => setShowDeleteModal(true)}
                     className="h-8 px-3 flex items-center gap-2"
                   >
-                    <Trash2 className="w-4 h-4 " />
+                    <Trash2 className="w-4 h-4" />
                     <span className="">{`Delete ${
                       table.getFilteredSelectedRowModel().rows.length
                     } row(s)`}</span>
                   </Button>
+
                   <Modal
                     showModal={showDeleteModal}
                     setShowModal={setShowDeleteModal}
@@ -175,22 +176,25 @@ export function DataTableToolbar<TData>({
             </div>
           )}
 
-          <p className="">
-            Sort By: <span className="capitalize">{sortBy || defaultSort}</span>{" "}
-            ({orderBy || defaultOrder})
-          </p>
-          {sortBy && orderBy && (
-            <button
-              type="button"
-              className="p-1 ml-1 rounded-md hover:bg-gray-700"
-              onClick={() => pathname && router.replace(pathname)}
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
+          <div className="flex items-center">
+            <p className="">
+              Sort By:{" "}
+              <span className="capitalize">{sortBy || defaultSort}</span> (
+              {orderBy || defaultOrder})
+            </p>
+            {sortBy && orderBy && (
+              <button
+                type="button"
+                className="p-1 ml-1 rounded-md hover:bg-gray-700"
+                onClick={() => pathname && router.replace(pathname)}
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
         </div>
 
-        <DataTableViewOptions table={table} />
+        {/* <DataTableViewOptions table={table} /> */}
       </div>
     );
   } else {

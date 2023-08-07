@@ -85,7 +85,7 @@ function PostPreviewPage() {
   };
 
   return (
-    <div className=" max-w-full lg:max-w-[796px] overflow-hidden">
+    <div className=" max-w-full lg:max-w-[796px]">
       <h3 className="mb-3 text-[22px] lg:text-2xl text-center lg:text-start font-extrabold text-gray-700 font-montserrat dark:text-gray-400">
         Post Preview
       </h3>
@@ -104,7 +104,9 @@ function PostPreviewPage() {
 
       <div className="">
         <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
-          <h1 className="text-2xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 font-montserrat">
+          <h1
+            className={`text-2xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 font-montserrat `}
+          >
             {previewPost.title}
           </h1>
           <div className="flex items-center gap-3 text-xs lg:text-sm lg:gap-6 mt-2  text-gray-500 dark:text-gray-400">

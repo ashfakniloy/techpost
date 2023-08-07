@@ -62,7 +62,7 @@ async function PostInfo({
     },
   ];
   return (
-    <div className="grid grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
       {cardList.map((card, i) => (
         <div
           key={i}

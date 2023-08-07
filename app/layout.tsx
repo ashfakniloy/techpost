@@ -45,7 +45,7 @@ export default function RootLayout({
               duration: 3000,
             }}
           />
-          <div className="">
+          <div className="break-words">
             <SessionProvider>{children}</SessionProvider>
           </div>
         </ThemeWrapper>

@@ -26,7 +26,7 @@ function Paths() {
   }, []);
 
   return (
-    <div className="ml-1 mt-2 text-gray-600 dark:text-gray-300 text-sm flex">
+    <div className="lg:ml-1 mt-2 text-gray-600 dark:text-gray-300 text-xs lg:text-sm flex">
       {pathsWithLinks?.map((path, i) => (
         <div key={i} className="flex items-center">
           <Link href={path.link} className="">
@@ -35,7 +35,7 @@ function Paths() {
             </span>
           </Link>
           {i < pathsWithLinks.length - 1 && (
-            <span className="mx-2">
+            <span className="mx-1 lg:mx-2">
               <ChevronDoubleRightIcon className="h-3.5 w-3.5" />
             </span>
           )}

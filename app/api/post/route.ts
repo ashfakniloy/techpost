@@ -122,17 +122,25 @@ export async function PUT(request: NextRequest) {
 
   const { title } = body;
 
-  const postTitleExists = await prisma.post.findFirst({
+  const postResponse = await prisma.post.findFirst({
     where: {
-      title: {
-        equals: title,
-        mode: "insensitive",
-      },
+      id: postId,
     },
   });
 
-  if (postTitleExists) {
-    return NextResponse.json({ error: "Post title exists" }, { status: 400 });
+  if (postResponse?.title.toLowerCase() !== title.toLowerCase()) {
+    const postTitleExists = await prisma.post.findFirst({
+      where: {
+        title: {
+          equals: title,
+          mode: "insensitive",
+        },
+      },
+    });
+
+    if (postTitleExists) {
+      return NextResponse.json({ error: "Post title exists" }, { status: 400 });
+    }
   }
 
   try {

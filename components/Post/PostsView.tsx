@@ -33,11 +33,11 @@ async function PostsView({
   const view = cookieStore.get("view")?.value;
 
   return (
-    <div>
+    <div className="">
       {posts.length ? (
         <div className="">
           {(!view || view === "list") && (
-            <div className="space-y-3 lg:space-y-5">
+            <div className="">
               {posts.map((post) => (
                 <List
                   key={post.id}
@@ -57,7 +57,7 @@ async function PostsView({
           )}
 
           {view === "grid" && (
-            <div className="grid grid-cols-2 gap-3 lg:gap-5">
+            <div className="mt-10 grid gtid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
               {posts.map((post) => (
                 <Card
                   key={post.id}
