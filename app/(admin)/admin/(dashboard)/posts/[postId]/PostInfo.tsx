@@ -11,7 +11,7 @@ import {
   HandThumbUpIcon,
   EyeIcon,
   ChatBubbleLeftIcon,
-} from "@heroicons/react/24/solid";
+} from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 type PostInfoProps = {
@@ -48,17 +48,17 @@ async function PostInfo({
     {
       title: "Total Likes",
       value: likesCount,
-      icon: <HandThumbUpIcon className="fill-sky-400 dark:fill-blue-300" />,
+      icon: <HandThumbUpIcon className="" />,
     },
     {
       title: "Total Comments",
       value: commentsCount,
-      icon: <ChatBubbleLeftIcon className="fill-sky-400 dark:fill-blue-300" />,
+      icon: <ChatBubbleLeftIcon className="" />,
     },
     {
       title: "Total Views",
       value: viewsCount,
-      icon: <EyeIcon className="fill-sky-400 dark:fill-blue-300" />,
+      icon: <EyeIcon className="" />,
     },
   ];
   return (
@@ -69,7 +69,7 @@ async function PostInfo({
           className="h-[120px] w-full bg-gray-50 dark:bg-custom-gray6 rounded-lg shadow-md px-8 py-6 hover:shadow-lg transition-shadow duration-300 group cursor-pointer"
         >
           <div className="flex justify-between items-center h-full">
-            <div className="h-[52px] w-[52px] p-2 bg-gray-200 dark:bg-cyan-900/70 rounded-full">
+            <div className="h-[52px] w-[52px] p-2.5 bg-gray-200 dark:bg-cyan-900/70 rounded-full">
               <span className="">{card.icon}</span>
             </div>
             <div className="flex flex-col items-center gap-1.5">

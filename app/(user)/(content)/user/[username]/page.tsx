@@ -8,6 +8,9 @@ import { Suspense } from "react";
 import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
 import BackButton from "@/components/BackButton";
 import ProfileTopSkeleton from "@/components/Skeleton/ProfileTopSkeleton";
+import { Metadata } from "next";
+import { getProfileByUsername } from "@/prisma/find/getProfileByUsername";
+import { capitalizeWords } from "@/utils/capitalizeWords";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -18,6 +21,35 @@ type Props = SearchParams & {
     username: string;
   };
 };
+
+export async function generateMetadata({
+  params: { username },
+}: Props): Promise<Metadata> {
+  const usernameDecoded = decodeURIComponent(username);
+
+  const { data: profile } = await getProfileByUsername({
+    username: usernameDecoded,
+  });
+
+  if (!profile) {
+    return {
+      title: "Profile not found",
+    };
+  }
+
+  return {
+    title: capitalizeWords(profile.user.username),
+    openGraph: {
+      images: {
+        url: profile?.imageUrl || "/images/blankUser.jpg",
+        width: 1200,
+        height: 630,
+        alt: profile.user.username,
+      },
+      type: "profile",
+    },
+  };
+}
 
 async function UserPosts({
   username,

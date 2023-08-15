@@ -3,6 +3,10 @@ import { getServerSession } from "next-auth";
 import EditProfileForm from "./EditProfileForm";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
+export const metadata = {
+  title: "Edit profile",
+};
+
 async function EditProfilePage() {
   // await new Promise((resolve) => setTimeout(resolve, 5000));
 

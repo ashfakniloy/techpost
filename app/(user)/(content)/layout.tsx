@@ -6,6 +6,17 @@ import { getCategories } from "@/prisma/find/getCategories";
 import { getProfileByUserId } from "@/prisma/find/getProfileByUserId";
 import { getServerSession } from "next-auth";
 
+export const metadata = {
+  openGraph: {
+    images: {
+      url: "/images/logo.png",
+      width: 1200,
+      height: 630,
+      alt: "Techpost",
+    },
+  },
+};
+
 async function UserLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
 

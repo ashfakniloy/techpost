@@ -22,8 +22,11 @@ const montserrat = Montserrat({
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "NextJS 13 Fullstack Blog Website",
-  description: "A fullstack blog website using nextjs app directory.",
+  title: {
+    default: "Techpost",
+    template: `%s | Techpost`,
+  },
+  description: "A fullstack blog website using nextjs approuter.",
 };
 
 export default function RootLayout({

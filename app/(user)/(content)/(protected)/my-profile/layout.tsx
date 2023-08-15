@@ -3,6 +3,13 @@ import MyProfileNav from "./MyProfileNav";
 import MyProfileSideSection from "./MyProfileSideSection";
 import UserCardSkeleton from "@/components/Skeleton/UserCardSkeleton";
 
+export const metadata = {
+  title: {
+    default: "My profile",
+    template: `%s | Techpost`,
+  },
+};
+
 function MyProfileLayout({ children }: { children: React.ReactNode }) {
   return (
     // <div className="relative lg:flex items-start justify-between gap-5">

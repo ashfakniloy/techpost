@@ -63,8 +63,15 @@ function Navbar({
   return (
     <>
       <div className="sticky top-0 z-20 flex items-center justify-between py-4 border-gray-300 bg-gray-100 bg-opacity-50 dark:bg-custom-gray/30 backdrop-blur-md dark:border-zinc-700">
-        <div className="text-4xl font-bold font-montserrat">
-          <Link href="/">logo</Link>
+        <div className="text-xl lg:text-2xl font-extrabold font-montserrat uppercase group px-1.5 py-1 rounded bg-custom-gray3 select-none">
+          <Link href="/">
+            <span className="text-white group-hover:text-red-500 transition-color duration-300">
+              TECH
+            </span>
+            <span className="text-red-500 group-hover:text-white transition-color duration-300">
+              POST
+            </span>
+          </Link>
         </div>
 
         <div className="flex items-center gap-6 lg:gap-10">

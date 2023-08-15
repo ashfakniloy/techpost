@@ -1,4 +1,6 @@
-import React from "react";
+export const metadata = {
+  title: "Activity log",
+};
 
 function ActivityLogpage() {
   return (

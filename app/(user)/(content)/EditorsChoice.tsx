@@ -159,13 +159,7 @@ async function EditorsChoice() {
                 )}
               </div>
 
-              <p className=" ">
-                By {/* <Link href={`/user/${post.user.username}`}> */}
-                <span className=" hover:text-blue-800 dark:hover:text-blue-500">
-                  {post.user.username}
-                </span>
-                {/* </Link> */}
-              </p>
+              <p className="">By {post.user.username}</p>
             </div>
             <p>
               <ClientFormattedDate date={post.createdAt} />

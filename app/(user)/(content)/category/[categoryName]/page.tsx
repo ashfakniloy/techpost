@@ -11,6 +11,8 @@ import Categories from "@/components/Post/Categories";
 import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
 import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";
 import { getCategoryByName } from "@/prisma/find/getCategoryByName";
+import { Metadata } from "next";
+import { capitalizeWords } from "@/utils/capitalizeWords";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -21,6 +23,34 @@ type CategoryPageProps = SearchParams & {
     categoryName: string;
   };
 };
+
+export async function generateMetadata({
+  params: { categoryName },
+}: CategoryPageProps): Promise<Metadata> {
+  const categoryNameDecoded = decodeURIComponent(categoryName);
+
+  const { data: category } = await getCategoryByName({
+    categoryName: categoryNameDecoded,
+  });
+
+  if (!category) {
+    return {
+      title: "Category not found",
+    };
+  }
+
+  return {
+    title: capitalizeWords(category.name),
+    openGraph: {
+      images: {
+        url: category.imageUrl,
+        width: 1200,
+        height: 630,
+        alt: category.name,
+      },
+    },
+  };
+}
 
 async function CategoryPosts({
   categoryName,

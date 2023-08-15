@@ -37,3 +37,49 @@ function ViewToggle({ cookieView }: { cookieView: string | undefined }) {
 }
 
 export default ViewToggle;
+
+// import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/solid";
+// import { cookies } from "next/headers";
+
+// function ViewToggle({ cookieView }: { cookieView: string | undefined }) {
+//   const listAction = async () => {
+//     "use server";
+
+//     cookies().set("view", "list");
+//   };
+
+//   const gridAction = async () => {
+//     "use server";
+
+//     cookies().set("view", "grid");
+//   };
+
+//   return (
+//     <div className="flex items-center gap-2 ">
+//       <p className="text-xs lg:text-sm">View:</p>
+
+//       <form action={listAction}>
+//         <button
+//           className={`h-6 w-6 p-0.5 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 rounded ${
+//             (!cookieView || cookieView === "list") &&
+//             "bg-gray-300 dark:bg-gray-700"
+//           }`}
+//         >
+//           <ListBulletIcon />
+//         </button>
+//       </form>
+
+//       <form action={gridAction}>
+//         <button
+//           className={`h-6 w-6 p-0.5 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 rounded ${
+//             cookieView === "grid" && "bg-gray-300 dark:bg-gray-700"
+//           }`}
+//         >
+//           <Squares2X2Icon />
+//         </button>
+//       </form>
+//     </div>
+//   );
+// }
+
+// export default ViewToggle;

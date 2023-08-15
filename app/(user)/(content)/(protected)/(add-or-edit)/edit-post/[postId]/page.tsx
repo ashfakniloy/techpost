@@ -13,6 +13,10 @@ type Props = {
   };
 };
 
+export const metadata = {
+  title: "Edit post",
+};
+
 async function EditPostPage({ params: { postId } }: Props) {
   const { data: post } = await getSinglePost({ postId });
   const { data: categories } = await getCategories();

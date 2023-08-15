@@ -3,8 +3,8 @@ import Link from "next/link";
 function UserAuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="absolute inset-x-0 flex justify-center text-3xl font-bold top-5 lg:top-20">
-        <Link href="/">logo</Link>
+      <h2 className="absolute inset-x-0 flex justify-center text-xl lg:text-2xl font-extrabold top-5 lg:top-20 uppercase">
+        <Link href="/">TECHPOST</Link>
       </h2>
       <div className="flex items-center justify-center min-h-screen">
         {children}
@@ -33,7 +33,7 @@ export default UserAuthLayout;
 //   return (
 //     <div>
 //       <h2 className="absolute inset-x-0 flex justify-center text-3xl font-bold top-5 lg:top-20">
-//         <Link href="/">logo</Link>
+//         <Link href="/">techpost</Link>
 //       </h2>
 //       <div className="flex items-center justify-center min-h-screen">
 //         {children}

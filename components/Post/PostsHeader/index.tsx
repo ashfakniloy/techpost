@@ -14,6 +14,7 @@ function PostsHeader({ postsTitle }: { postsTitle: string }) {
 
       <div className="flex items-center gap-3 lg:gap-7">
         <SortBy />
+
         {postsTitle !== "invalid" && <ViewToggle cookieView={view} />}
       </div>
     </div>

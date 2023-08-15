@@ -20,6 +20,7 @@ import Categories from "@/components/Post/Categories";
 import "@/components/TextEditor/Tiptap/styles.css";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
+import { Metadata } from "next";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -34,6 +35,32 @@ type SinglePostPageProps = {
     showComments: string;
   };
 };
+
+export async function generateMetadata({
+  params: { postId },
+}: SinglePostPageProps): Promise<Metadata> {
+  const { data: post } = await getSinglePost({ postId });
+
+  if (!post) {
+    return {
+      title: "Post not found",
+    };
+  }
+
+  return {
+    title: post.title,
+    openGraph: {
+      images: {
+        url: post.imageUrl,
+        width: 1200,
+        height: 630,
+        alt: post.title,
+      },
+      type: "article",
+      authors: post.user.username,
+    },
+  };
+}
 
 async function SinglePostPage({
   params: { postId },

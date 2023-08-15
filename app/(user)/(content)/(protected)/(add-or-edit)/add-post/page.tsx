@@ -1,6 +1,10 @@
 import { getCategories } from "@/prisma/find/getCategories";
 import AddPostForm from "./AddPostForm";
 
+export const metadata = {
+  title: "Add new post",
+};
+
 async function AddPostPage() {
   const { data: categories } = await getCategories();
   // console.log("categories", categories);
