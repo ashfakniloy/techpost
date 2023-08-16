@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import parser from "html-react-parser";
 import type { Session } from "next-auth";
 import OptionButton from "./OptionButton";
 import PostLike from "./PostLike";
@@ -8,6 +7,7 @@ import { getTimeDistance } from "@/utils/getTimeDistance";
 import { Post } from "@prisma/client";
 import { getPluralize } from "@/utils/getPluralize";
 import { EyeIcon, ChatBubbleLeftIcon } from "@heroicons/react/24/solid";
+import { getDescription } from "@/utils/getDescription";
 
 type SessionProps = {
   session: Session | null;
@@ -43,12 +43,7 @@ function List({
   //   article.replace(/<(img|iframe) .*?>/g, "") || ""
   // );
 
-  const parsedArticle =
-    parser(
-      article
-        .replace(/<(img|iframe)\b[^>]*>/g, "")
-        .replace(/<a\b[^>]*>(.*?)<\/a>/g, "<p>$1</p>")
-    ) || "";
+  const description = getDescription(article, 200, 200);
 
   return (
     <div className="border-b last:border-b-0 border-gray-300 dark:border-gray-700 py-5 lg:py-10">
@@ -90,7 +85,7 @@ function List({
             </div>
 
             <div className=" !text-gray-700 dark:!text-gray-300 !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
-              {parsedArticle}
+              {description}
             </div>
           </div>
 

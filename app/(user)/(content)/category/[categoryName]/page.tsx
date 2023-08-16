@@ -39,8 +39,9 @@ export async function generateMetadata({
     };
   }
 
+  const categoryNameCapitalize = capitalizeWords(category.name);
   return {
-    title: capitalizeWords(category.name),
+    title: categoryNameCapitalize,
     openGraph: {
       images: {
         url: category.imageUrl,
@@ -49,6 +50,7 @@ export async function generateMetadata({
         alt: category.name,
       },
     },
+    description: `Read latest articles on ${categoryNameCapitalize} at TechPost`,
   };
 }
 

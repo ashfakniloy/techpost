@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import parser from "html-react-parser";
 import type { Session } from "next-auth";
 import OptionButton from "./OptionButton";
 import PostLike from "./PostLike";
@@ -9,6 +8,7 @@ import { getTimeDistance } from "@/utils/getTimeDistance";
 import { getPluralize } from "@/utils/getPluralize";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import { ChatBubbleLeftIcon } from "@heroicons/react/20/solid";
+import { getDescription } from "@/utils/getDescription";
 
 type SessionProps = {
   session: Session | null;
@@ -40,15 +40,11 @@ function Card({
   session,
   _count,
 }: CardProps & SessionProps) {
-  // const parsedArticle = parser(
+  // const description = parser(
   //   article.replace(/<(img|iframe)\b[^>]*>/g, "") || ""
   // );
-  const parsedArticle =
-    parser(
-      article
-        .replace(/<(img|iframe)\b[^>]*>/g, "")
-        .replace(/<a\b[^>]*>(.*?)<\/a>/g, "<p>$1</p>")
-    ) || "";
+
+  const description = getDescription(article, 200, 200);
 
   return (
     <div className="transition-shadow duration-300 bg-gray-50 rounded-md shadow-md group dark:bg-custom-gray2 hover:shadow-lg min-w-[290px] lg:max-w-[386px]">
@@ -95,7 +91,7 @@ function Card({
               <p className="">{getTimeDistance(createdAt)}</p>
             </div>
             <div className="mt-1 lg:mt-2 text-xs lg:text-sm text-gray-700 dark:text-gray-300 line-clamp-2">
-              {parsedArticle}
+              {description}
             </div>
           </div>
 

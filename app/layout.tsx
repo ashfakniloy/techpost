@@ -4,6 +4,7 @@ import { Roboto, Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import ThemeWrapper from "@/components/Theme/ThemeWrapper";
 import Log from "@/components/Log";
+import { BASE_URL } from "@/config";
 
 const roboto = Roboto({
   weight: "400",
@@ -22,6 +23,8 @@ const montserrat = Montserrat({
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
+  // metadataBase: new URL("https://techpost.vercel.app"),
+  metadataBase: new URL(BASE_URL),
   title: {
     default: "Techpost",
     template: `%s | Techpost`,

@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/api/auth/[...nextauth]"
+    "app/api/auth/[...nextauth]",
+    "next-sitemap.config.js"
   ],
   "exclude": ["node_modules"]
 }

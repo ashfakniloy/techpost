@@ -21,6 +21,8 @@ import "@/components/TextEditor/Tiptap/styles.css";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import { Metadata } from "next";
+import { capitalizeWords } from "@/utils/capitalizeWords";
+import { getDescription } from "@/utils/getDescription";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -47,8 +49,18 @@ export async function generateMetadata({
     };
   }
 
+  const usernameCapitalized = capitalizeWords(post.user.username);
+
+  // const desc = getDescription(post.article);
+
+  const description = getDescription(post.article, 100, 160);
+
   return {
     title: post.title,
+    description: description,
+    alternates: {
+      canonical: `/post/${post.id}`,
+    },
     openGraph: {
       images: {
         url: post.imageUrl,
@@ -57,7 +69,9 @@ export async function generateMetadata({
         alt: post.title,
       },
       type: "article",
-      authors: post.user.username,
+      authors: usernameCapitalized,
+      publishedTime: post.createdAt.toISOString(),
+      modifiedTime: post.updatedAt.toISOString(),
     },
   };
 }

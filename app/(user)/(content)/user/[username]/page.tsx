@@ -37,8 +37,10 @@ export async function generateMetadata({
     };
   }
 
+  const usernameCapitalized = capitalizeWords(profile.user.username);
+
   return {
-    title: capitalizeWords(profile.user.username),
+    title: usernameCapitalized,
     openGraph: {
       images: {
         url: profile?.imageUrl || "/images/blankUser.jpg",
@@ -48,6 +50,7 @@ export async function generateMetadata({
       },
       type: "profile",
     },
+    description: `Read latest articles from ${usernameCapitalized} at TechPost`,
   };
 }
 
