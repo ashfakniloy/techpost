@@ -119,17 +119,27 @@ function OptionButton({
 
       <Popover>
         <PopoverTrigger asChild>
-          <div className="rounded-full cursor-pointer lg:p-1 hover:bg-gray-300/50 dark:hover:bg-gray-700">
+          <button
+            type="button"
+            aria-label="option"
+            className="rounded-full cursor-pointer lg:p-1 hover:bg-gray-300/50 dark:hover:bg-gray-700"
+          >
             <EllipsisHorizontalIcon className="w-5 h-5" />
-          </div>
+          </button>
         </PopoverTrigger>
         <PopoverContent className="absolute -top-[65px] right-8 z-10 p-0 w-[80px] lg:w-[120px] flex flex-col rounded-md text-black dark:text-gray-50 bg-gray-50 dark:bg-custom-gray2 text-xs lg:text-sm border border-gray-300 dark:border-gray-700 shadow whitespace-nowrap">
           <Link href={`/edit-post/${postId}`}>
-            <button className="w-full px-3  py-2 border-b border-gray-300  hover:bg-gray-200 dark:hover:bg-custom-gray3 dark:border-gray-700 text-start">
+            <button
+              type="button"
+              aria-label="edit"
+              className="w-full px-3  py-2 border-b border-gray-300  hover:bg-gray-200 dark:hover:bg-custom-gray3 dark:border-gray-700 text-start"
+            >
               Edit
             </button>
           </Link>
           <button
+            type="button"
+            aria-label="delete"
             className="w-full px-3  py-2 hover:bg-gray-200 dark:hover:bg-custom-gray3 text-start"
             onClick={() => setShowDeleteModal(true)}
           >

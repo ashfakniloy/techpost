@@ -117,6 +117,8 @@ function Sidebar({
         <div className="flex flex-col px-2 py-5 mb-20 text-sm font-bold">
           <div className="flex flex-col">
             <button
+              type="button"
+              aria-label="hide sidebar"
               className="self-end p-1 mb-3 mr-1 transition duration-300 hover:rotate-90"
               onClick={() => setShowSidebar(false)}
             >
@@ -232,8 +234,15 @@ function Sidebar({
                         ))}
                       </div> */}
 
-                      {showSidebarSubMenu === navLink.name && (
-                        <div className="mt-1 space-y-1">
+                      {/* {showSidebarSubMenu === navLink.name && ( */}
+                      <div
+                        className={`mt-1 space-y-1 transition-[grid-template-rows] duration-300 ease-linear grid ${
+                          showSidebarSubMenu === navLink.name
+                            ? "grid-rows-[1fr] "
+                            : "grid-rows-[0fr]"
+                        }`}
+                      >
+                        <div className="overflow-hidden space-y-1">
                           {navLink.subLinks?.map((subLink, i) => (
                             <div key={subLink.name} className="">
                               <Link href={subLink.link}>
@@ -250,7 +259,8 @@ function Sidebar({
                             </div>
                           ))}
                         </div>
-                      )}
+                      </div>
+                      {/* )} */}
                     </div>
                   )}
                 </div>

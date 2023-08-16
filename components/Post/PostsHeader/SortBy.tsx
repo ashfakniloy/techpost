@@ -218,15 +218,18 @@ function SortBy() {
       <p className="">Sort By:</p>
 
       <Select value={selectedOption} onValueChange={handleOptionClick}>
-        <SelectTrigger className="px-2 lg:px-3 w-[110px] text-left shadow-md bg-gray-50 dark:bg-stone-800 rounded-md border border-transparent cursor-pointer focus:outline-none">
+        <SelectTrigger
+          aria-label="sort by"
+          className="px-2 lg:px-3 w-[110px] text-left shadow-md bg-gray-50 dark:bg-stone-800 rounded-md border border-transparent cursor-pointer focus:outline-none"
+        >
           <SelectValue className="" />
         </SelectTrigger>
         <SelectContent className=" w-[110px]">
           {options.map((option) => (
             <SelectItem
               key={option}
+              aria-label={option}
               value={option}
-              className=""
               // onClick={() => handleOptionClick(option)}
             >
               {option}

@@ -68,9 +68,9 @@ function List({
             {/* <div className="max-w-[540px]"> */}
             <div className="">
               <Link href={`/post/${id}`}>
-                <h4 className="lg:text-xl font-semibold title-color">
+                <h3 className="lg:text-xl font-semibold title-color">
                   {title}
-                </h4>
+                </h3>
               </Link>
             </div>
 

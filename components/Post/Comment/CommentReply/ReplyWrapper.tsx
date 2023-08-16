@@ -33,6 +33,8 @@ function ReplyWrapper({
   return (
     <div className="relative">
       <button
+        type="button"
+        aria-label="reply"
         className="absolute top-[-23px] lg:top-[-25px] ml-16 lg:left-24 text-sm hover:text-blue-500"
         onClick={handleReplyClick}
       >
@@ -57,6 +59,8 @@ function ReplyWrapper({
           {commentRepliesCount > 0 &&
             (!showReplies ? (
               <button
+                type="button"
+                aria-label="view replies"
                 className="text-sm text-gray-900 dark:text-gray-300"
                 onClick={() => setShowReplies(true)}
               >
@@ -66,6 +70,8 @@ function ReplyWrapper({
               </button>
             ) : (
               <button
+                type="button"
+                aria-label="hide replies"
                 className="text-sm text-gray-900 dark:text-gray-300"
                 onClick={() => setShowReplies(false)}
               >

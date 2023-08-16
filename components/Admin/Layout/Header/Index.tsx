@@ -1,11 +1,7 @@
 "use client";
 
 import useToggle from "@/hooks/useToggle";
-import {
-  Bars3Icon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@heroicons/react/24/solid";
+import { Bars3Icon } from "@heroicons/react/24/solid";
 import { signOut } from "next-auth/react";
 
 function AdminHeader({
@@ -28,12 +24,14 @@ function AdminHeader({
     <div className="sticky top-0 z-20 lg:hidden">
       <div className="relative z-20">
         <div className="bg-gray-50 dark:bg-custom-gray6 h-[68px] w-full flex justify-between lg:justify-end items-center shadow-md  px-5 z-30">
-          <div
+          <button
+            type="button"
+            aria-label="sidebar toggle"
             className="lg:hidden"
             onClick={() => setShowSidebar(!showSidebar)}
           >
             <Bars3Icon className="h-8 w-8" />
-          </div>
+          </button>
 
           <div className="text-xl mx-auto text-custom-blue4 font-bold lg:hidden">
             Admin Dashboard
@@ -72,6 +70,7 @@ function AdminHeader({
         <p className="py-3">Signed in as Admin</p>
         <button
           type="button"
+          aria-label="sign out"
           className="mt-2 px-5  py-3 bg-custom-blue hover:bg-opacity-80 text-sm rounded-lg active:scale-95 transition duration-200"
           onClick={handleSignout}
         >

@@ -73,6 +73,7 @@ function SearchButton() {
       >
         <button
           type="button"
+          aria-label="search"
           className={`absolute p-1 right-1.5 h-7 w-7 bg-gray-200 dark:bg-custom-gray3 rounded-full transition-transform duration-300 ${
             showSearchbar && "-rotate-90"
           }`}

@@ -16,6 +16,8 @@ function ViewToggle({ cookieView }: { cookieView: string | undefined }) {
     <div className="flex items-center gap-2 ">
       <p className="text-xs lg:text-sm">View:</p>
       <button
+        type="button"
+        aria-label="list view"
         className={`h-6 w-6 p-0.5 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 rounded ${
           (!cookieView || cookieView === "list") &&
           "bg-gray-300 dark:bg-gray-700"
@@ -25,6 +27,8 @@ function ViewToggle({ cookieView }: { cookieView: string | undefined }) {
         <ListBulletIcon />
       </button>
       <button
+        type="button"
+        aria-label="grid view"
         className={`h-6 w-6 p-0.5 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 rounded ${
           cookieView === "grid" && "bg-gray-300 dark:bg-gray-700"
         }`}

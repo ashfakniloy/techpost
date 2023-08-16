@@ -76,6 +76,7 @@ function CommentsReplyForm({
           <div className="flex justify-end gap-4">
             <button
               type="button"
+              aria-label="cancel"
               className="self-end px-6 py-2 rounded-md text-sm min-w-[100px] text-white font-bold bg-gray-600 dark:bg-gray-500 "
               onClick={() => setOpenReplyForm(false)}
             >

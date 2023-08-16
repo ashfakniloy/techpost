@@ -94,6 +94,8 @@ function CommentLikeButton({
   return (
     <div ref={node} className="flex items-center text-sm relative">
       <button
+        type="button"
+        aria-label={like ? "dislike" : "like"}
         className={`mr-2 lg:mr-3 font-bold active:scale-125 h-6 w-6 ${
           like ? "text-blue-500" : "text-emerald-400"
         } `}
@@ -105,6 +107,8 @@ function CommentLikeButton({
       {likesCount > 0 && (
         <div>
           <button
+            type="button"
+            aria-label="all likes"
             className="mr-5 text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-500"
             onClick={() => setShowLikes(!showLikes)}
           >
@@ -117,6 +121,8 @@ function CommentLikeButton({
               <div className="flex items-center justify-between px-2 py-1.5 lg:px-3 lg:py-2">
                 <p className="self-center ">Comment Likes</p>
                 <button
+                  type="button"
+                  aria-label="close"
                   className="w-6 h-6 p-1 bg-gray-200 rounded-full hover:bg-gray-300 dark:bg-gray-600/50 dark:hover:bg-gray-600"
                   onClick={() => setShowLikes(false)}
                 >

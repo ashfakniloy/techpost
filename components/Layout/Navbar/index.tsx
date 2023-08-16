@@ -65,10 +65,10 @@ function Navbar({
       <div className="sticky top-0 z-20 flex items-center justify-between py-4 border-gray-300 bg-gray-100 bg-opacity-50 dark:bg-custom-gray/30 backdrop-blur-md dark:border-zinc-700">
         <div className="text-xl lg:text-2xl font-extrabold font-montserrat uppercase group px-1.5 py-1 rounded bg-custom-gray3 select-none">
           <Link href="/">
-            <span className="text-white group-hover:text-red-500 transition-color duration-300">
+            <span className="text-white group-hover:text-red-400 transition-color duration-300">
               TECH
             </span>
-            <span className="text-red-500 group-hover:text-white transition-color duration-300">
+            <span className="text-red-400 group-hover:text-white transition-color duration-300">
               POST
             </span>
           </Link>
@@ -83,8 +83,9 @@ function Navbar({
           </div>
           <ThemeButton />
           <button
+            type="button"
+            aria-label="sidebar toggle"
             className="p-1 lg:hidden"
-            aria-label="toggle"
             onClick={() => setShowSidebar(true)}
           >
             <Bars3Icon className="w-7 h-7" />

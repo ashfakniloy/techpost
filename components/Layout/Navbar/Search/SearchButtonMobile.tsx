@@ -218,6 +218,7 @@ function SearchButtonMobile() {
       >
         <button
           type="button"
+          aria-label="search"
           className={`absolute p-1 h-7 w-7 bg-gray-200 dark:bg-custom-gray3 rounded-full ${
             showSearchbar && "-rotate-90"
           }`}

@@ -125,6 +125,7 @@ async function EditorsChoice() {
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
+            priority
           />
         </div>
         <div className="absolute bottom-0 h-[285px] w-full bg-gradient-to-b from-transparent to-black/50 " />

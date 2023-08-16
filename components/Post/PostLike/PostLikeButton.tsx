@@ -209,9 +209,8 @@ function PostLikeButton({
     <div ref={node} className="relative flex items-center text-xs lg:text-sm">
       {/* {session && ( */}
       <button
-        // formAction={handleClick}
-        id="autoClickTest"
         type="button"
+        aria-label={like ? "dislike" : "like"}
         className={`font-bold active:scale-125 h-6 w-6 ${
           like ? "text-blue-500" : "text-emerald-400"
         } ${likesCount > 0 ? "mr-2" : "mr-2 lg:mr-4"}`}
