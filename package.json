@@ -58,7 +58,6 @@
     "lucide-react": "^0.241.0",
     "next": "^13.4.12",
     "next-auth": "^4.22.3",
-    "next-sitemap": "^4.2.2",
     "next-themes": "^0.2.1",
     "postcss": "^8.4.24",
     "prisma": "^4.16.1",
