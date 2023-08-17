@@ -75,6 +75,11 @@ export async function generateMetadata({
       publishedTime: post.createdAt.toISOString(),
       modifiedTime: post.updatedAt.toISOString(),
     },
+    twitter: {
+      card: "summary_large_image",
+      creator: usernameCapitalized,
+      site: "@techpost",
+    },
   };
 }
 
@@ -93,6 +98,7 @@ async function SinglePostPage({
   }
 
   const articleUrl = `${BASE_URL}/post/${post.id}`;
+  // const articleUrl = `https://techpost.vercel.app/post/clkjlvf9h0001fo780wgaknui`; //for test
 
   return (
     <div>

@@ -97,6 +97,7 @@ import { getSinglePost } from "@/prisma/find/getSinglePost";
 import { getEditorsChoicePost } from "@/prisma/find/getEditorsChoicePost";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import PostLike from "@/components/Post/PostLike";
+import { getTimeDistance } from "@/utils/getTimeDistance";
 
 async function EditorsChoice() {
   // const { data: posts, count } = await getSinglePost({ limitNumber: 4 });
@@ -163,7 +164,8 @@ async function EditorsChoice() {
               <p className="">By {post.user.username}</p>
             </div>
             <p>
-              <ClientFormattedDate date={post.createdAt} />
+              {getTimeDistance(post.createdAt)}
+              {/* <ClientFormattedDate date={post.createdAt} /> */}
             </p>
           </div>
 
