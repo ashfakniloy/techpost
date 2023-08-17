@@ -10,7 +10,7 @@ function SocialShare({
 }: {
   articleUrl: string;
   articleTitle: string;
-  via: string;
+  via?: string;
 }) {
   // const articleUrl = `https://techpost.vercel.app/post/clkjlvf9h0001fo780wgaknui`;
 
@@ -20,7 +20,7 @@ function SocialShare({
 
   const twitterShareLink = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
     articleUrl
-  )}&text=${articleTitle}&via=${via}`;
+  )}&text=${articleTitle}`;
 
   const linkedInShareLink = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
     articleUrl

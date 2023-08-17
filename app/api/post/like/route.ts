@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { revalidatePath } from "next/cache";
 
+// export const revalidate = 0
+
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
 

@@ -64,13 +64,15 @@ export async function generateMetadata({
       canonical: `/post/${post.id}`,
     },
     openGraph: {
+      type: "article",
+      title: post.title,
+      description: description,
       images: {
         url: post.imageUrl,
         width: 1200,
         height: 630,
         alt: post.title,
       },
-      type: "article",
       authors: usernameCapitalized,
       publishedTime: post.createdAt.toISOString(),
       modifiedTime: post.updatedAt.toISOString(),
@@ -166,7 +168,7 @@ async function SinglePostPage({
                     <SocialShare
                       articleUrl={articleUrl}
                       articleTitle={post.title}
-                      via="TechPost"
+                      // via="TechPost"
                     />
 
                     {session?.user.id === post.user.id && (
