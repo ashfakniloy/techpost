@@ -83,8 +83,8 @@ export async function generateMetadata({
       description: description,
       images: {
         url: post.imageUrl,
-        width: 800,
-        height: 400,
+        width: 1200,
+        height: 630,
         alt: post.title,
       },
       creator: usernameCapitalized,
@@ -135,7 +135,7 @@ async function SinglePostPage({
                   {post.title}
                 </h1>
 
-                <div className="flex items-center gap-3 lg:gap-10 mt-2 lg:mt-5">
+                <div className="ml-2 lg:ml-0 flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-10 mt-3 lg:mt-5">
                   <div className="flex items-center gap-3 text-xs lg:text-sm lg:gap-6 text-gray-500 dark:text-gray-400">
                     <div className="flex items-center gap-2">
                       <div className="">

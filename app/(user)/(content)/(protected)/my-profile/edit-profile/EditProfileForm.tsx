@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 import { Profile } from "@prisma/client";
 import { TextAreaField } from "@/components/Form/TextAreaField";
 import { FileField } from "@/components/Form/FIleField";
+import { IconLinkedin } from "@/components/Icons/IconLinkedin";
+import { IconReddit } from "@/components/Icons/IconReddit";
 
 function EditProfileForm({
   profile,
@@ -31,14 +33,18 @@ function EditProfileForm({
     bio: profile?.bio ?? "",
     facebook: profile?.facebook ?? "",
     twitter: profile?.twitter ?? "",
+    linkedin: profile?.linkedin ?? "",
+    reddit: profile?.reddit ?? "",
   };
 
   const formSchema = z.object({
     imageUrl: z.string().optional(),
     imageId: z.string().optional(),
     bio: z.string().optional(),
-    facebook: z.string().optional(),
-    twitter: z.string().optional(),
+    facebook: z.string().url("Enter valid URL").optional().or(z.literal("")),
+    twitter: z.string().url("Enter valid URL").optional().or(z.literal("")),
+    linkedin: z.string().url("Enter valid URL").optional().or(z.literal("")),
+    reddit: z.string().url("Enter valid URL").optional().or(z.literal("")),
   });
 
   type FormValuesProps = z.infer<typeof formSchema>;
@@ -99,9 +105,9 @@ function EditProfileForm({
           <div className="">
             <label className="inline-block mb-2">Social Accounts</label>
             <span className="w-5 h-5"></span>
-            <div className="space-y-3">
+            <div className="space-y-8">
               <div className="flex items-center gap-2">
-                <IconFacebook className="fill-[#1877F2] w-[30px] h-[30px]" />
+                <IconFacebook className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100" />
                 <div className="w-[450px]">
                   <InputField
                     type="text"
@@ -110,13 +116,36 @@ function EditProfileForm({
                   />
                 </div>
               </div>
+
               <div className="flex items-center gap-2">
-                <IconTwitter className="fill-[#1DA1F2] w-[30px] h-[30px]" />
+                <IconTwitter className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100" />
                 <div className="w-[450px]">
                   <InputField
                     type="text"
                     name="twitter"
                     placeholder="Enter twitter profile"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <IconLinkedin className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100" />
+                <div className="w-[450px]">
+                  <InputField
+                    type="text"
+                    name="linkedin"
+                    placeholder="Enter linkedin profile"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <IconReddit className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100" />
+                <div className="w-[450px]">
+                  <InputField
+                    type="text"
+                    name="reddit"
+                    placeholder="Enter reddit profile"
                   />
                 </div>
               </div>

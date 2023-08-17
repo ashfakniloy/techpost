@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer className="py-10 px-5 border-t border-gray-300 dark:border-gray-700 text-start">
-      <h1 className="text-xl lg:text-2xl font-extrabold uppercase">TECHPOST</h1>
+      <p className="text-xl lg:text-2xl font-extrabold uppercase">TECHPOST</p>
       <p className="mt-2 text-sm">
         <span className="font-bold mr-2">Contact:</span>
         <a href="mailto:ashfakniloy@gmail.com" className="hover:text-blue-500">
