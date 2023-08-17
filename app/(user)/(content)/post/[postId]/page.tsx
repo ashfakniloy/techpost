@@ -79,6 +79,14 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
+      title: post.title,
+      description: description,
+      images: {
+        url: post.imageUrl,
+        width: 800,
+        height: 400,
+        alt: post.title,
+      },
       creator: usernameCapitalized,
       site: "@techpost",
     },
