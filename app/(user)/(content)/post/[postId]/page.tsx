@@ -23,6 +23,8 @@ import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import { Metadata } from "next";
 import { capitalizeWords } from "@/utils/capitalizeWords";
 import { getDescription } from "@/utils/getDescription";
+import { BASE_URL } from "@/config";
+import SocialShare from "@/components/Post/SocialShare";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -90,7 +92,7 @@ async function SinglePostPage({
     notFound();
   }
 
-  // console.log("single post", post);
+  const articleUrl = `${BASE_URL}/post/${post.id}`;
 
   return (
     <div>
@@ -111,13 +113,13 @@ async function SinglePostPage({
 
               {post.editorsChoice && <EditorsChoiceBadge />}
             </div>
-            <div className="">
+            <article className="">
               <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
                 <h1 className="text-2xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 font-montserrat">
                   {post.title}
                 </h1>
 
-                <div className="flex items-center gap-3 lg:gap-6 mt-2 lg:mt-5">
+                <div className="flex items-center gap-3 lg:gap-10 mt-2 lg:mt-5">
                   <div className="flex items-center gap-3 text-xs lg:text-sm lg:gap-6 text-gray-500 dark:text-gray-400">
                     <div className="flex items-center gap-2">
                       <div className="">
@@ -153,14 +155,23 @@ async function SinglePostPage({
                       <ClientFormattedDate date={post.createdAt} />
                     </p>
                   </div>
-                  {session?.user.id === post.user.id && (
-                    <OptionButton
-                      title={post.title}
-                      postId={post.id}
-                      imageId={post.imageId}
-                      redirectAfterDelete={"/"}
+
+                  <div className="flex items-center gap-10">
+                    <SocialShare
+                      articleUrl={articleUrl}
+                      articleTitle={post.title}
+                      via="TechPost"
                     />
-                  )}
+
+                    {session?.user.id === post.user.id && (
+                      <OptionButton
+                        title={post.title}
+                        postId={post.id}
+                        imageId={post.imageId}
+                        redirectAfterDelete={"/"}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -177,7 +188,7 @@ async function SinglePostPage({
               <div className="mt-3 lg:mt-6 ProseMirror !border-none !p-0 !max-h-full overflow-hidden">
                 {parser(post.article)}
               </div>
-            </div>
+            </article>
           </div>
 
           <div className="flex items-center mt-5 lg:mt-8 font-semibold text-gray-700 dark:text-gray-300">

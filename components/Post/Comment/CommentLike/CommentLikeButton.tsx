@@ -1,13 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { Session } from "next-auth";
 import { HandThumbUpIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import useToggle from "@/hooks/useToggle";
-import Image from "next/image";
-import { getPluralize } from "@/utils/getPluralize";
 
 function CommentLikeButton({
   commentId,
@@ -113,7 +110,6 @@ function CommentLikeButton({
             onClick={() => setShowLikes(!showLikes)}
           >
             {likesCount}
-            {/* {getPluralize(likesCount, "Like", "s")} */}
           </button>
 
           {showLikes && (

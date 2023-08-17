@@ -15,7 +15,7 @@ async function MyProfileSideSection() {
   const { data: profile } = await getProfileByUserId({ userId });
 
   return (
-    <div className="lg:w-[360px]  lg:sticky lg:top-[92px]">
+    <section className="lg:w-[360px] lg:sticky lg:top-[92px]">
       <div className="flex flex-col p-3 lg:p-5 bg-gray-50 rounded-md shadow-md dark:bg-custom-gray2">
         <div className="w-[150px] h-[150px] lg:w-full lg:h-[300px] relative">
           {profile?.imageUrl ? (
@@ -44,7 +44,7 @@ async function MyProfileSideSection() {
           <p className="mt-2 lg:mt-4 text-sm lg:text-base ">{profile?.bio}</p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

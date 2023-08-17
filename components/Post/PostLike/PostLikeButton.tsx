@@ -148,7 +148,7 @@
 //with server actions
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Session } from "next-auth";
 import { HandThumbUpIcon, XMarkIcon } from "@heroicons/react/24/solid";
@@ -174,8 +174,6 @@ function PostLikeButton({
   const [like, setLike] = useState(hasLiked);
 
   const { node, toggle: showLikes, setToggle: setShowLikes } = useToggle();
-
-  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     hasLiked && setLike(true);
@@ -214,8 +212,7 @@ function PostLikeButton({
         className={`font-bold active:scale-125 h-6 w-6 ${
           like ? "text-blue-500" : "text-emerald-400"
         } ${likesCount > 0 ? "mr-2" : "mr-2 lg:mr-4"}`}
-        // onClick={handleClick}
-        onClick={() => startTransition(handleClick)}
+        onClick={handleClick}
       >
         <HandThumbUpIcon />
       </button>

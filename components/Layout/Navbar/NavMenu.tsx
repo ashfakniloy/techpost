@@ -158,7 +158,7 @@ function NavMenu({ navLinks }: { navLinks: NavLinksProps }) {
   };
 
   return (
-    <div className="flex items-center gap-10">
+    <nav className="flex items-center gap-10">
       {navLinks.map((navLink) => (
         <div key={navLink.name} className="">
           {navLink.link ? (
@@ -217,7 +217,7 @@ function NavMenu({ navLinks }: { navLinks: NavLinksProps }) {
           )}
         </div>
       ))}
-    </div>
+    </nav>
   );
 }
 

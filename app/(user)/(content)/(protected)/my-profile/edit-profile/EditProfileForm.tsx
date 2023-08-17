@@ -101,11 +101,7 @@ function EditProfileForm({
             <span className="w-5 h-5"></span>
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <IconFacebook
-                  width={30}
-                  height={30}
-                  className="fill-[#1877F2]"
-                />
+                <IconFacebook className="fill-[#1877F2] w-[30px] h-[30px]" />
                 <div className="w-[450px]">
                   <InputField
                     type="text"
@@ -115,11 +111,7 @@ function EditProfileForm({
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <IconTwitter
-                  width={30}
-                  height={30}
-                  className="fill-[#1DA1F2]"
-                />
+                <IconTwitter className="fill-[#1DA1F2] w-[30px] h-[30px]" />
                 <div className="w-[450px]">
                   <InputField
                     type="text"

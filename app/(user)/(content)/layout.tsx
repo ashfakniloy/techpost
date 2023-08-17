@@ -41,7 +41,9 @@ async function UserLayout({ children }: { children: React.ReactNode }) {
         username={profile?.user.username}
         categories={categories}
       />
-      <div className="my-5">{children}</div>
+
+      <main className="my-5">{children}</main>
+
       <Footer />
 
       <DeviceIdSet isAdmin={session?.user.role === "ADMIN"} />

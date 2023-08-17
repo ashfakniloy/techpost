@@ -6,10 +6,10 @@ async function Categories() {
   const { data: categories } = await getCategories();
 
   return (
-    <div className="w-[360px] bg-gray-50 dark:bg-custom-gray2 shadow-md rounded-md">
-      <p className="p-3 font-semibold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat">
+    <section className="w-[360px] bg-gray-50 dark:bg-custom-gray2 shadow-md rounded-md">
+      <h4 className="p-3 font-semibold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat">
         Categories
-      </p>
+      </h4>
       <div className="py-2">
         {categories.map((category) => (
           <div
@@ -33,7 +33,7 @@ async function Categories() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 

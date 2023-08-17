@@ -41,7 +41,7 @@ async function CategoryTopSection({ categoryName }: { categoryName: string }) {
   const randomQuote = category.quotes[randomIndex];
 
   return (
-    <div className="relative bg-black">
+    <section className="relative bg-black rounded-md overflow-hidden">
       {/* {categoryName && ( */}
       <div className="-mt-5 w-full h-[250px] lg:h-[400px] relative">
         <Image
@@ -64,7 +64,7 @@ async function CategoryTopSection({ categoryName }: { categoryName: string }) {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

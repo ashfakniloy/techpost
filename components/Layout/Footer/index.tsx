@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <div className="py-10 px-5 border-t border-gray-300 dark:border-gray-700 text-start">
+    <footer className="py-10 px-5 border-t border-gray-300 dark:border-gray-700 text-start">
       <h1 className="text-xl lg:text-2xl font-extrabold uppercase">TECHPOST</h1>
       <p className="mt-2 text-sm">
         <span className="font-bold mr-2">Contact:</span>
@@ -11,7 +11,7 @@ function Footer() {
       <p className="mt-2 text-sm">
         ©2023, Ashfak Ahmed Niloy. All Rights Reserved.
       </p>
-    </div>
+    </footer>
   );
 }
 

@@ -1,21 +1,9 @@
-import React from "react";
-
-export const IconFacebook = ({
-  width,
-  height,
-  className,
-}: {
-  width: number;
-  height: number;
-  className: string;
-}) => {
+export const IconFacebook = ({ className }: { className: string }) => {
   return (
     <svg
       role="img"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      width={width}
-      height={height}
       className={className}
     >
       <title>Facebook</title>

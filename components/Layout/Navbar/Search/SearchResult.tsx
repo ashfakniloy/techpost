@@ -10,7 +10,7 @@ type Props = Post & {
 
 function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
   return (
-    <div className="absolute top-[59px] w-full border rounded-md border-slate-300 dark:border-slate-700  bg-gray-50 dark:bg-custom-gray2 shadow-md">
+    <section className="absolute top-[59px] w-full border rounded-md border-slate-300 dark:border-slate-700  bg-gray-50 dark:bg-custom-gray2 shadow-md">
       <p className="p-3  font-semibold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat">
         {heading}
       </p>
@@ -61,7 +61,7 @@ function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
       ) : (
         <p className="py-2 text-center">No posts available</p>
       )}
-    </div>
+    </section>
   );
 }
 

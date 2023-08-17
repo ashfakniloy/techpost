@@ -113,7 +113,7 @@ async function EditorsChoice() {
   );
 
   return (
-    <div className="mb-8 relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ">
+    <section className="mb-8 relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ">
       <Link href={`/post/${post.id}`}>
         <div className="absolute right-2 top-2 lg:right-5 lg:top-5 z-10">
           <EditorsChoiceBadge />
@@ -172,7 +172,7 @@ async function EditorsChoice() {
           </div>
         </div>
       </Link>
-    </div>
+    </section>
   );
 }
 

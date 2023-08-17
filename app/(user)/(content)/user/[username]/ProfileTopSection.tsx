@@ -13,7 +13,7 @@ async function ProfileTopSection({ username }: { username: string }) {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-3 lg:gap-8">
+    <section className="flex flex-col lg:flex-row gap-3 lg:gap-8">
       <div className="w-[150px] h-[150px] lg:w-[250px] lg:h-[250px] relative">
         {profile.imageUrl ? (
           <Image
@@ -44,7 +44,7 @@ async function ProfileTopSection({ username }: { username: string }) {
             No Biodata for random user
           </p> */}
       </div>
-    </div>
+    </section>
   );
 }
 
