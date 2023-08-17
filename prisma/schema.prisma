@@ -45,7 +45,6 @@ model Profile {
   facebook String?
   twitter  String?
   linkedin String?
-  reddit   String?
   imageUrl String?
   imageId  String?
 

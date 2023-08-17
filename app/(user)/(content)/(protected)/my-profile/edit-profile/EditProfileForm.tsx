@@ -12,7 +12,6 @@ import { Profile } from "@prisma/client";
 import { TextAreaField } from "@/components/Form/TextAreaField";
 import { FileField } from "@/components/Form/FIleField";
 import { IconLinkedin } from "@/components/Icons/IconLinkedin";
-import { IconReddit } from "@/components/Icons/IconReddit";
 
 function EditProfileForm({
   profile,
@@ -34,7 +33,6 @@ function EditProfileForm({
     facebook: profile?.facebook ?? "",
     twitter: profile?.twitter ?? "",
     linkedin: profile?.linkedin ?? "",
-    reddit: profile?.reddit ?? "",
   };
 
   const formSchema = z.object({
@@ -44,7 +42,6 @@ function EditProfileForm({
     facebook: z.string().url("Enter valid URL").optional().or(z.literal("")),
     twitter: z.string().url("Enter valid URL").optional().or(z.literal("")),
     linkedin: z.string().url("Enter valid URL").optional().or(z.literal("")),
-    reddit: z.string().url("Enter valid URL").optional().or(z.literal("")),
   });
 
   type FormValuesProps = z.infer<typeof formSchema>;
@@ -135,17 +132,6 @@ function EditProfileForm({
                     type="text"
                     name="linkedin"
                     placeholder="Enter linkedin profile"
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <IconReddit className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100" />
-                <div className="w-[450px]">
-                  <InputField
-                    type="text"
-                    name="reddit"
-                    placeholder="Enter reddit profile"
                   />
                 </div>
               </div>

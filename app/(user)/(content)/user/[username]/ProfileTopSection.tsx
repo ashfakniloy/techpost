@@ -1,6 +1,5 @@
 import { IconFacebook } from "@/components/Icons/IconFacebook";
 import { IconLinkedin } from "@/components/Icons/IconLinkedin";
-import { IconReddit } from "@/components/Icons/IconReddit";
 import { IconTwitter } from "@/components/Icons/IconTwitter";
 import { getProfileByUsername } from "@/prisma/find/getProfileByUsername";
 import { getTimeDistance } from "@/utils/getTimeDistance";
@@ -61,12 +60,6 @@ async function ProfileTopSection({ username }: { username: string }) {
             {profile.linkedin && (
               <Link href={profile.linkedin} target="_blank">
                 <IconLinkedin className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 hover:fill-blue-500 dark:hover:fill-blue-300 transition-colors duration-200" />
-              </Link>
-            )}
-
-            {profile.reddit && (
-              <Link href={profile.reddit} target="_blank">
-                <IconReddit className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 hover:fill-blue-500 dark:hover:fill-blue-300 transition-colors duration-200" />
               </Link>
             )}
           </div>

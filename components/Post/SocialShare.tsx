@@ -2,7 +2,6 @@ import Link from "next/link";
 import { IconFacebook } from "../Icons/IconFacebook";
 import { IconLinkedin } from "../Icons/IconLinkedin";
 import { IconTwitter } from "../Icons/IconTwitter";
-import { IconReddit } from "../Icons/IconReddit";
 
 function SocialShare({
   articleUrl,
@@ -27,10 +26,6 @@ function SocialShare({
     articleUrl
   )}&title=`;
 
-  const redditSharedLink = `http://www.reddit.com/submit?url=${encodeURIComponent(
-    articleUrl
-  )}&title=${articleTitle}`;
-
   return (
     <div className="flex items-center gap-4">
       <Link href={facebookShareUrl} target="_blank">
@@ -48,12 +43,6 @@ function SocialShare({
       <Link href={linkedInShareLink} target="_blank">
         <button className="">
           <IconLinkedin className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 hover:fill-blue-500 dark:hover:fill-blue-300 transition-colors duration-200" />
-        </button>
-      </Link>
-
-      <Link href={redditSharedLink} target="_blank">
-        <button className="">
-          <IconReddit className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 hover:fill-blue-500 dark:hover:fill-blue-300 transition-colors duration-200" />
         </button>
       </Link>
     </div>
