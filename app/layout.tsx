@@ -23,7 +23,6 @@ const montserrat = Montserrat({
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  // metadataBase: new URL("https://techpost.vercel.app"),
   metadataBase: new URL(BASE_URL),
   title: {
     default: "Techpost",
