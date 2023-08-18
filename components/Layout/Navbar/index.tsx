@@ -62,7 +62,7 @@ function Navbar({
 
   return (
     <>
-      <header className="sticky top-0 z-20 flex items-center justify-between py-4 border-gray-300 bg-gray-100 bg-opacity-50 dark:bg-custom-gray/30 backdrop-blur-md dark:border-zinc-700">
+      <header className="sticky top-0 px-0.5 lg:px-1.5 z-20 flex items-center justify-between py-4 border-gray-300 bg-gray-100 bg-opacity-50 dark:bg-custom-gray/30 backdrop-blur-md dark:border-zinc-700">
         <div className="text-xl lg:text-2xl font-extrabold font-montserrat uppercase group px-1.5 py-1 rounded bg-custom-gray3 select-none">
           <Link href="/">
             <span className="text-white lg:group-hover:text-red-400 transition-color duration-300">

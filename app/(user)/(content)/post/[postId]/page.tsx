@@ -9,7 +9,6 @@ import { getServerSession } from "next-auth";
 import OptionButton from "@/components/Post/OptionButton";
 import PostLike from "@/components/Post/PostLike";
 import ViewCount from "@/components/Post/ViewCount";
-import { getPluralize } from "@/utils/getPluralize";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Suspense } from "react";
 import RelatedPosts from "./RelatedPosts";
@@ -115,9 +114,9 @@ async function SinglePostPage({
       <ViewCount postId={postId} isAdmin={session?.user.role === "ADMIN"} />
 
       <div className="flex items-start justify-between gap-5">
-        <div className="flex-1 max-w-full lg:max-w-[796px]">
+        <div className="relative flex-1 max-w-full lg:max-w-[796px]">
           <div className="overflow-hidden">
-            <div className="mb-4 flex justify-between items-center">
+            <div className="mt-1.5 mb-4 flex justify-between items-center">
               <div className=" text-gray-700 dark:text-gray-300 ">
                 <Link
                   href={`/category/${post.categoryName}`}
@@ -127,7 +126,11 @@ async function SinglePostPage({
                 </Link>
               </div>
 
-              {post.editorsChoice && <EditorsChoiceBadge />}
+              {post.editorsChoice && (
+                <div className="absolute right-2">
+                  <EditorsChoiceBadge />
+                </div>
+              )}
             </div>
             <article className="">
               <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">

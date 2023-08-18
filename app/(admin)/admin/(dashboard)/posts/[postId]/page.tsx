@@ -29,7 +29,7 @@ async function AdminSinglePostPage({
   }
 
   return (
-    <div className=" relative">
+    <div className="relative">
       <div className="absolute -top-7 lg:-top-14 right-0">
         <PostOption
           id={post.id}

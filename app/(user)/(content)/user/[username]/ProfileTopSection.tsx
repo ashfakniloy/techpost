@@ -47,19 +47,19 @@ async function ProfileTopSection({ username }: { username: string }) {
             {/* <p className="text-xs lg:text-sm font-medium">Socials:</p> */}
             {profile.facebook && (
               <Link href={profile.facebook} target="_blank">
-                <IconFacebook className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 hover:fill-blue-500 dark:hover:fill-blue-300 transition-colors duration-200" />
+                <IconFacebook className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 lg:hover:fill-blue-500 dark:lg:hover:fill-blue-300 transition-colors duration-200" />
               </Link>
             )}
 
             {profile.twitter && (
               <Link href={profile.twitter} target="_blank">
-                <IconTwitter className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 hover:fill-blue-500 dark:hover:fill-blue-300 transition-colors duration-200" />
+                <IconTwitter className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 lg:hover:fill-blue-500 dark:lg:hover:fill-blue-300 transition-colors duration-200" />
               </Link>
             )}
 
             {profile.linkedin && (
               <Link href={profile.linkedin} target="_blank">
-                <IconLinkedin className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 hover:fill-blue-500 dark:hover:fill-blue-300 transition-colors duration-200" />
+                <IconLinkedin className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 lg:hover:fill-blue-500 dark:lg:hover:fill-blue-300 transition-colors duration-200" />
               </Link>
             )}
           </div>

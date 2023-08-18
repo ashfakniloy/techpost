@@ -3,13 +3,13 @@ import { Skeleton } from "../ui/skeleton";
 function SinglePostSkeleton() {
   return (
     <>
-      <Skeleton className="mb-5 w-[100px] h-[16px] lg:h-[18px]" />
+      <Skeleton className="mt-1.5 mb-5 w-[100px] h-[16px] lg:h-[18px]" />
 
       <div className="">
         <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
           <div className="space-y-3">
             <Skeleton className="rounded-lg h-7 lg:h-9" />
-            <Skeleton className=" rounded-lg h-7 lg:h-9" />
+            <Skeleton className="rounded-lg h-7 lg:h-9 w-full lg:w-5/6" />
             <Skeleton className="lg:hidden w-1/2 rounded-lg h-7 lg:h-9" />
           </div>
 
@@ -30,7 +30,7 @@ function SinglePostSkeleton() {
           </div>
         </div>
 
-        <Skeleton className="mt-[18px] h-[280px] lg:h-[470px] relative" />
+        <Skeleton className="mt-[18px] h-[280px] lg:h-[470px] rounded-none" />
 
         <div className="mt-6 space-y-3">
           <Skeleton className="h-5" />
