@@ -44,7 +44,6 @@ async function ProfileTopSection({ username }: { username: string }) {
             Joined {getTimeDistance(profile.createdAt)}
           </p>
           <div className="flex items-center gap-5">
-            {/* <p className="text-xs lg:text-sm font-medium">Socials:</p> */}
             {profile.facebook && (
               <Link href={profile.facebook} target="_blank">
                 <IconFacebook className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 lg:hover:fill-blue-500 dark:lg:hover:fill-blue-300 transition-colors duration-200" />
