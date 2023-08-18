@@ -1,5 +1,4 @@
 import type { Editor } from "@tiptap/react";
-import ImageUpload from "./ImageUpload";
 import { AlignLeft } from "./Icons/AlignLeft";
 import { useTheme } from "next-themes";
 import { AlignCenter } from "./Icons/AlignCenter";
@@ -18,6 +17,7 @@ import { Heading1 } from "./Icons/Heading1";
 import { Heading2 } from "./Icons/Heading2";
 import { Heading3 } from "./Icons/Heading3";
 import LinkButton from "./LinkButton";
+import ImageUpload from "./ImageUpload";
 import YoutubeVideo from "./YoutubeVideo";
 
 const Toolbar = ({ editor }: { editor: Editor | null }) => {

@@ -35,13 +35,52 @@ function EditProfileForm({
     linkedin: profile?.linkedin ?? "",
   };
 
+  const facebookRegex = /^https:\/\/(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/;
+  const twitterRegex = /^https:\/\/(www\.)?twitter.com\/[a-zA-Z0-9_]+\/?$/;
+  const linkedinRegex =
+    /^https:\/\/(www\.)?linkedin.com\/(?:in|company)\/[a-zA-Z0-9\-]+\/?$/;
+
   const formSchema = z.object({
     imageUrl: z.string().optional(),
     imageId: z.string().optional(),
     bio: z.string().optional(),
-    facebook: z.string().url("Enter valid URL").optional().or(z.literal("")),
-    twitter: z.string().url("Enter valid URL").optional().or(z.literal("")),
-    linkedin: z.string().url("Enter valid URL").optional().or(z.literal("")),
+    // facebook: z.string().url("Enter valid URL").or(z.literal("")),
+    // twitter: z.string().url("Enter valid URL").or(z.literal("")),
+    // linkedin: z.string().url("Enter valid URL").or(z.literal("")),
+    //     const facebookRegex = /^(https:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/;
+    // const twitterRegex = /^(https:\/\/)?(www\.)?twitter.com\/[a-zA-Z0-9_]+$/;
+    // const linkedinRegex = /^(https:\/\/)?(www\.)?linkedin.com\/in\/[a-zA-Z0-9_-]+/;
+
+    facebook: z
+      .string()
+      .regex(facebookRegex, "Enter a valid facebook url link")
+      .or(z.literal("")),
+    twitter: z
+      .string()
+      .regex(twitterRegex, "Enter a valid twitter url link")
+      .or(z.literal("")),
+    linkedin: z
+      .string()
+      .regex(linkedinRegex, "Enter a valid linkedin url link")
+      .or(z.literal("")),
+    // facebook: z
+    //   .string()
+    //   .refine(validateUrlWithDomain("facebook.com"), {
+    //     message: "Enter a valid Facebook URL",
+    //   })
+    //   .or(z.literal("")),
+    // twitter: z
+    //   .string()
+    //   .refine(validateUrlWithDomain("twitter.com"), {
+    //     message: "Enter a valid Twitter URL",
+    //   })
+    //   .or(z.literal("")),
+    // linkedin: z
+    //   .string()
+    //   .refine(validateUrlWithDomain("linkedin.com"), {
+    //     message: "Enter a valid Linkedin URL",
+    //   })
+    //   .or(z.literal("")),
   });
 
   type FormValuesProps = z.infer<typeof formSchema>;

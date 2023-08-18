@@ -9,22 +9,28 @@ function SinglePostSkeleton() {
         <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
           <div className="space-y-3">
             <Skeleton className="rounded-lg h-7 lg:h-9" />
-            <Skeleton className="w-full lg:w-1/4 rounded-lg h-7 lg:h-9" />
-            {/* <Skeleton className="lg:hidden w-2/5 rounded-lg h-7 lg:h-9" /> */}
+            <Skeleton className=" rounded-lg h-7 lg:h-9" />
+            <Skeleton className="lg:hidden w-1/2 rounded-lg h-7 lg:h-9" />
           </div>
 
-          <div className="flex items-center gap-3 lg:gap-6 mt-2 lg:mt-5">
-            <div className="flex items-center gap-3 lg:gap-6">
-              <div className="flex items-center gap-2">
-                <Skeleton className="h-[35px] w-[35px] rounded-full" />
-                <Skeleton className="h-3.5 lg:h-4 w-[70px] lg:w-[100px] bg-opacity-50 dark:bg-opacity-50" />
+          <div className="mt-2 lg:mt-[18px] ml-2 lg:ml-0">
+            <div className="flex items-center gap-2">
+              <Skeleton className="h-[35px] w-[35px] rounded-full" />
+              <Skeleton className="h-4 lg:h-[18px] w-[150px] bg-opacity-50 dark:bg-opacity-50" />
+            </div>
+
+            <div className="mt-[10px] lg:mt-3 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-3.5 lg:gap-0">
+              <Skeleton className=" h-4 lg:h-[18px] bg-opacity-50 dark:bg-opacity-50 w-[240px]" />
+              <div className="flex items-center gap-[15px]">
+                <Skeleton className="h-[28px] w-[28px] rounded-full" />
+                <Skeleton className="h-[28px] w-[28px] rounded-full" />
+                <Skeleton className="h-[28px] w-[28px] rounded-full" />
               </div>
-              <Skeleton className="h-3.5 lg:h-4 bg-opacity-50 dark:bg-opacity-50 w-[100px] lg:w-[185px]" />
             </div>
           </div>
         </div>
 
-        <Skeleton className="mt-3 lg:mt-5 h-[280px] lg:h-[470px] relative" />
+        <Skeleton className="mt-[18px] h-[280px] lg:h-[470px] relative" />
 
         <div className="mt-6 space-y-3">
           <Skeleton className="h-5" />

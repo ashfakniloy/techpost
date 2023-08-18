@@ -1,8 +1,12 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { IconFacebook } from "@/components/Icons/IconFacebook";
+import { IconLinkedin } from "@/components/Icons/IconLinkedin";
+import { IconTwitter } from "@/components/Icons/IconTwitter";
 import { getProfileByUserId } from "@/prisma/find/getProfileByUserId";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import Link from "next/link";
 
 async function MyProfileSideSection() {
   const session = await getServerSession(authOptions);
@@ -35,13 +39,34 @@ async function MyProfileSideSection() {
           )}
         </div>
         <div className="overflow-hidden">
-          <h4 className="mt-2 lg:mt-3 text-2xl font-bold">
+          <h4 className="mt-2 lg:mt-3 text-2xl font-bold capitalize">
             {profile?.user.username}
           </h4>
-          <p className="text-xs lg:text-sm lg:mt-1 text-gray-600 dark:text-gray-400">
+          <p className="text-xs lg:text-sm mt-1 text-gray-600 dark:text-gray-400">
             Joined {getTimeDistance(profile!.createdAt)}
           </p>
-          <p className="mt-2 lg:mt-4 text-sm lg:text-base ">{profile?.bio}</p>
+
+          <div className="mt-3 flex items-center gap-5">
+            {profile?.facebook && (
+              <Link href={profile.facebook} target="_blank">
+                <IconFacebook className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 hover:fill-blue-500 dark:hover:fill-blue-300 transition-colors duration-200" />
+              </Link>
+            )}
+
+            {profile?.twitter && (
+              <Link href={profile.twitter} target="_blank">
+                <IconTwitter className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 hover:fill-blue-500 dark:hover:fill-blue-300 transition-colors duration-200" />
+              </Link>
+            )}
+
+            {profile?.linkedin && (
+              <Link href={profile.linkedin} target="_blank">
+                <IconLinkedin className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 hover:fill-blue-500 dark:hover:fill-blue-300 transition-colors duration-200" />
+              </Link>
+            )}
+          </div>
+
+          <p className=" mt-3 lg:mt-5 text-sm lg:text-base ">{profile?.bio}</p>
         </div>
       </div>
     </section>

@@ -197,7 +197,7 @@ function NavMenu({ navLinks }: { navLinks: NavLinksProps }) {
                     {navLink.subLinks?.map((subLink) => (
                       <div
                         key={subLink.name}
-                        className={`flex flex-col w-full transition duration-200 rounded-md ${
+                        className={`transition duration-200 rounded ${
                           pathnameDecoded === subLink.link
                             ? "bg-gray-300 dark:bg-stone-600 text-red-600 dark:text-red-400"
                             : "hover:bg-gray-200 dark:hover:bg-stone-700"

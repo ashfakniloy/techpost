@@ -9,7 +9,6 @@ import { InputField } from "@/components/Form/InputField";
 import { SelectField } from "@/components/Form/SelectField";
 import { FileField } from "@/components/Form/FIleField";
 import { RichTextField } from "@/components/Form/RichTextField";
-import { revalidatePath } from "next/cache";
 
 type Props = {
   id: string;

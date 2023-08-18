@@ -91,16 +91,8 @@ function PostPreviewPage() {
       </h3>
 
       <div className="mb-4 text-gray-700 dark:text-gray-300 capitalize">
-        {/* <Link
-          href={`/category/${previewPost.category}`}
-          className="hover:text-blue-800 dark:hover:text-blue-500"
-        > */}
-        {/* {newPost.category} */}
         {previewPost.categoryName}
-        {/* </Link> */}
       </div>
-
-      {/* <div className="p-5 bg-gray-50 shadow-md dark:bg-custom-gray2"> */}
 
       <div className="">
         <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
@@ -109,38 +101,46 @@ function PostPreviewPage() {
           >
             {previewPost.title}
           </h1>
-          <div className="flex items-center gap-3 text-xs lg:text-sm lg:gap-6 mt-2  text-gray-500 dark:text-gray-400">
-            <div className="flex items-center gap-2">
-              {/* <span className="p-4 bg-gray-500 rounded-full"></span> */}
-              <div className="">
-                {session?.user.imageUrl ? (
-                  <Image
-                    src={session.user.imageUrl}
-                    alt="user image"
-                    width={35}
-                    height={35}
-                    className="rounded-full"
-                  />
-                ) : (
-                  <Image
-                    src="/images/blankUser.jpg"
-                    alt="user image"
-                    width={35}
-                    height={35}
-                    className="rounded-full"
-                  />
-                )}
+
+          <div className="ml-2 lg:ml-0 text-xs lg:text-sm text-gray-700 dark:text-gray-300">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5 lg:gap-10 mt-3 lg:mt-5">
+              <div className="flex items-center gap-3  lg:gap-6 ">
+                <div className="flex items-center gap-2">
+                  <div className="">
+                    {session?.user.imageUrl ? (
+                      <Image
+                        src={session.user.imageUrl}
+                        alt="user image"
+                        width={35}
+                        height={35}
+                        className="rounded-full"
+                      />
+                    ) : (
+                      <Image
+                        src="/images/blankUser.jpg"
+                        alt="user image"
+                        width={35}
+                        height={35}
+                        className="rounded-full"
+                      />
+                    )}
+                  </div>
+
+                  <p className=" ">
+                    By <span className="">{session?.user.username}</span>
+                  </p>
+                </div>
               </div>
-              <p className="">
-                By {/* <Link href={`/user/123`}> */}
-                <span className="">{session?.user.username}</span>
-                {/* </Link> */}
-              </p>
             </div>
 
-            <p>
-              <ClientFormattedDate date={currentDate} />
-            </p>
+            <div className="mt-2.5 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5 lg:gap-0">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-0">
+                <p>
+                  <span>Published: </span>
+                  <ClientFormattedDate date={currentDate} />
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 

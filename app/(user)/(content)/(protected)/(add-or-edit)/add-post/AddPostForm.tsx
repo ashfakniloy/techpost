@@ -42,9 +42,9 @@ function AddPostForm({ categories }: { categories: string[] }) {
     formState: { isSubmitting },
   } = form;
 
-  const shouldSaveDraft = Object.values(form.watch()).some((value) =>
-    Boolean(value)
-  );
+  // const shouldSaveDraft = Object.values(form.watch()).some((value) =>
+  //   Boolean(value)
+  // );
 
   useFormPersist("draftPost", {
     watch,
