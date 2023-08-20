@@ -1,12 +1,3 @@
-// import {
-//   NewspaperIcon,
-//   UsersIcon,
-//   Squares2X2Icon,
-//   EyeIcon,
-//   ChatBubbleLeftIcon,
-// } from "@heroicons/react/24/outline";
-
-import { getCounts } from "@/prisma/find/getCounts";
 import {
   HandThumbUpIcon,
   EyeIcon,
@@ -76,7 +67,10 @@ async function PostInfo({
               <p className="text-sm text-gray-600 dark:text-gray-300">
                 {card.title}
               </p>
-              <h3 className="text-2xl font-bold">{card.value}</h3>
+
+              <h3 className="text-2xl font-bold max-w-[240px] text-center">
+                {card.value}
+              </h3>
             </div>
           </div>
         </div>
