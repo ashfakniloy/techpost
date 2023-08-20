@@ -8,11 +8,12 @@ import SearchButton from "./Search/SearchButton";
 import ThemeButton from "@/components/Theme/ThemeButton";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar from "./Sidebar";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import SearchButtonMobile from "./Search/SearchButtonMobile";
 import NavMenu from "./NavMenu";
 import NavButtons from "./NavButtons";
 import { navLinksSigned, navLinksUnsigned } from "./navLinks";
+import { BASE_URL } from "@/config";
 
 type Category = {
   name: string;
@@ -21,18 +22,45 @@ type Category = {
   };
 };
 
+// async function fetchCategories() {
+//   // await new Promise((resolve) => setTimeout(resolve, 10000));
+
+//   const res = await fetch(`${BASE_URL}/api/nav`);
+
+//   return res.json();
+// }
+
+// const dataPromise = fetchCategories();
+
 function Navbar({
   session,
-  imageUrl,
-  username,
   categories,
 }: {
   session: Session | null;
   categories: Category[];
-  imageUrl?: string | null;
-  username?: string;
 }) {
   const pathname = usePathname();
+
+  // const categories = use(dataPromise);
+
+  // const [categories, setCategories] = useState("");
+
+  // useEffect(() => {
+  //   const getCategories = async () => {
+  //     const res = await fetch(`${BASE_URL}/api/nav`);
+  //     const data = await res.json();
+
+  //     if (res.ok) {
+  //       setCategories(data);
+  //     } else {
+  //       console.log("error", data);
+  //     }
+
+  //   getCategories()
+  //   };
+  // }, []);
+
+  // console.log("categories", categories);
 
   const {
     node: sidebarNode,
@@ -96,8 +124,8 @@ function Navbar({
 
             <NavButtons
               session={session}
-              username={username}
-              imageUrl={imageUrl}
+              username={session?.user.username}
+              imageUrl={session?.user.imageUrl}
             />
           </div>
         </div>
@@ -108,8 +136,8 @@ function Navbar({
         setShowSidebar={setShowSidebar}
         sidebarNode={sidebarNode}
         session={session}
-        imageUrl={imageUrl}
-        username={username}
+        imageUrl={session?.user.imageUrl}
+        username={session?.user.username}
         navLinks={navLinks}
         showSidebarSubMenu={showSidebarSubMenu}
         setShowSidebarSubMenu={setShowSidebarSubMenu}

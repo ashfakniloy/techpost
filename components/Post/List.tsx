@@ -39,10 +39,6 @@ function List({
   session,
   _count,
 }: ListProps & SessionProps) {
-  // const parsedArticle = parser(
-  //   article.replace(/<(img|iframe) .*?>/g, "") || ""
-  // );
-
   const description = getDescription(article, 200, 200);
 
   return (

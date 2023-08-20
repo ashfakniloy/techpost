@@ -63,7 +63,7 @@ export async function DELETE(request: NextRequest) {
     const responseImageIds = await prisma.post.findMany({
       where: {
         id: {
-          in: deleteId,
+          in: [deleteId],
         },
       },
       select: {

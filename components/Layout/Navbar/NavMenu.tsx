@@ -179,7 +179,7 @@ function NavMenu({ navLinks }: { navLinks: NavLinksProps }) {
             >
               <p className={`cursor-pointer flex items-center gap-1`}>
                 {navLink.name}
-                <span className={` ${showSubMenu && "rotate-180"}`}>
+                <span className={`${showSubMenu && "rotate-180"}`}>
                   <ChevronDownIcon className="w-4 h-4" />
                 </span>
               </p>
@@ -194,7 +194,7 @@ function NavMenu({ navLinks }: { navLinks: NavLinksProps }) {
                 <div className="">
                   <div className="h-8"></div>
                   <div className="p-1 text-sm text-gray-800 bg-white space-y-1 border rounded-md shadow-md font-montserrat dark:text-gray-300 dark:bg-stone-950">
-                    {navLink.subLinks?.map((subLink) => (
+                    {navLink.subLinks?.map((subLink, i) => (
                       <div
                         key={subLink.name}
                         className={`transition duration-200 rounded ${

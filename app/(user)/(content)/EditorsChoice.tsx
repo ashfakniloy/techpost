@@ -98,6 +98,7 @@ import { getEditorsChoicePost } from "@/prisma/find/getEditorsChoicePost";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import PostLike from "@/components/Post/PostLike";
 import { getTimeDistance } from "@/utils/getTimeDistance";
+import { getDescription } from "@/utils/getDescription";
 
 async function EditorsChoice() {
   // const { data: posts, count } = await getSinglePost({ limitNumber: 4 });
@@ -107,11 +108,7 @@ async function EditorsChoice() {
     return <></>;
   }
 
-  const parsedArticle = parser(
-    post.article
-      .replace(/<(img|iframe)\b[^>]*>/g, "")
-      .replace(/<a\b[^>]*>(.*?)<\/a>/g, "<p>$1</p>") || ""
-  );
+  const description = getDescription(post.article, 200, 200);
 
   return (
     <section className="mb-8 relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ">
@@ -170,7 +167,7 @@ async function EditorsChoice() {
           </div>
 
           <div className="mt-1 lg:mt-2 !text-white !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
-            {parsedArticle}
+            {description}
           </div>
         </div>
       </Link>

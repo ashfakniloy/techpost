@@ -210,31 +210,6 @@ function Sidebar({
                         </span>
                       </p>
 
-                      {/* <div
-                        className={`mt-1 space-y-1 overflow-hidden transition-all duration-500 ease-out ${
-                          showSidebarSubMenu === navLink.name
-                            ? "max-h-screen" //css cant animate height auto. max-h is a quick solution. im guessing max-h might not be greater than screen height.
-                            : "max-h-0"
-                        }`}
-                      >
-                        {navLink.subLinks?.map((subLink, i) => (
-                          <div key={subLink.name} className="">
-                            <Link href={subLink.link}>
-                              <p
-                                className={`py-3 pl-10 rounded-lg capitalize ${
-                                  pathnameDecoded === subLink.link
-                                    ? "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
-                                    : "hover:bg-gray-200 dark:hover:bg-gray-600"
-                                }`}
-                              >
-                                {subLink.name}
-                              </p>
-                            </Link>
-                          </div>
-                        ))}
-                      </div> */}
-
-                      {/* {showSidebarSubMenu === navLink.name && ( */}
                       <div
                         className={`mt-1 space-y-1 transition-[grid-template-rows] duration-300 ease-linear grid ${
                           showSidebarSubMenu === navLink.name
@@ -260,7 +235,6 @@ function Sidebar({
                           ))}
                         </div>
                       </div>
-                      {/* )} */}
                     </div>
                   )}
                 </div>

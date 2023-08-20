@@ -65,10 +65,6 @@ async function ProfileTopSection({ username }: { username: string }) {
         </div>
 
         <p className="mt-5">{profile?.bio}</p>
-
-        {/* <p className="mt-10 text-gray-600 dark:text-gray-400">
-            No Biodata for random user
-          </p> */}
       </div>
     </section>
   );

@@ -180,7 +180,7 @@ export const postsColumns: ColumnDef<PostAdminTypes>[] = [
           user: { username },
         },
       },
-    }) => <div className="w-[100px]">{username}</div>,
+    }) => <div className="w-[150px]">{username}</div>,
   },
   {
     accessorKey: "_count.likes",
@@ -230,7 +230,7 @@ export const postsColumns: ColumnDef<PostAdminTypes>[] = [
       // <div className="w-[100px]">
       //   {format(new Date(row.getValue("createdAt")), "MMMM dd yyyy")}
       // </div>
-      <div className="w-[150px]">
+      <div className="w-[180px]">
         {/* {getFormatedDate(row.getValue("createdAt"))} */}
         {/* {format(new Date(row.getValue("createdAt")), "MMMM dd yyyy")} */}
         <ClientFormattedDate date={row.getValue("createdAt")} />

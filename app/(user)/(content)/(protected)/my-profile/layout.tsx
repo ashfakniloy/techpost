@@ -17,7 +17,7 @@ function MyProfileLayout({ children }: { children: React.ReactNode }) {
       <div className="lg:flex-1 lg:max-w-[796px]">
         <MyProfileNav />
 
-        <div className="mt-7 overflow-hidden">{children}</div>
+        <div className="mt-7">{children}</div>
       </div>
 
       <div className="-order-1 lg:order-none flex-col gap-5 lg:flex">

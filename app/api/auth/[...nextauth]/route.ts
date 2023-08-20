@@ -181,8 +181,13 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    jwt: ({ token, user }) => {
+    jwt: ({ token, user, trigger, session }) => {
       // console.log("token", token);
+
+      if (trigger === "update") {
+        token.user = session.user;
+      }
+
       if (user) {
         token.user = user;
       }

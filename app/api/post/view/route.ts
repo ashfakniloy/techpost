@@ -1,7 +1,13 @@
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/route";
 
 export async function POST(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+
+  if (session?.user.role === "ADMIN") return;
+
   const { searchParams } = request.nextUrl;
   const postId = searchParams.get("postId");
   const deviceId = searchParams.get("deviceId");

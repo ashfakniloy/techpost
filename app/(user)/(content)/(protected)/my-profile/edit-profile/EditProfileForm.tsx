@@ -12,6 +12,7 @@ import { Profile } from "@prisma/client";
 import { TextAreaField } from "@/components/Form/TextAreaField";
 import { FileField } from "@/components/Form/FIleField";
 import { IconLinkedin } from "@/components/Icons/IconLinkedin";
+import { useSession } from "next-auth/react";
 
 function EditProfileForm({
   profile,
@@ -25,6 +26,8 @@ function EditProfileForm({
     | null;
 }) {
   const router = useRouter();
+
+  const { data: session, update } = useSession();
 
   const defaultValues = {
     imageUrl: profile?.imageUrl ?? "",
@@ -114,6 +117,15 @@ function EditProfileForm({
         id: toastProfileUpdate,
       });
 
+      // if(data.response.imageUrl !== session?.user.imageUrl)
+      await update({
+        ...session,
+        user: {
+          ...session?.user,
+          imageUrl: data.response.imageUrl,
+        },
+      });
+
       router.refresh();
     } else {
       console.log("error", data);
@@ -122,6 +134,8 @@ function EditProfileForm({
       });
     }
   };
+
+  // console.log("session", session);
 
   return (
     <div className="">

@@ -30,7 +30,7 @@ function ViewCount({ postId, isAdmin }: { postId: string; isAdmin: boolean }) {
         router.refresh();
         // await fetch(`/api/revalidate?path=/admin`);
       } else {
-        console.log("viewed error", data);
+        console.log("view error", data);
       }
     };
 
