@@ -54,8 +54,7 @@ function Card({
             src={imageUrl}
             alt="programming"
             fill
-            // sizes="(max-width: 768px) 30vw, (max-width: 1200px) 20vw, 60vw"
-            sizes="60vw"
+            sizes="400px"
             className="object-cover transition duration-700 ease-out group-hover:scale-105"
           />
 

@@ -27,6 +27,7 @@ async function MyProfileSideSection() {
               src={profile.imageUrl}
               alt="user"
               fill
+              sizes="(max-width: 768px) 150px, 320px"
               className="object-cover rounded-md"
             />
           ) : (
@@ -34,6 +35,7 @@ async function MyProfileSideSection() {
               src="/images/blankUser.jpg"
               alt="user image"
               fill
+              sizes="(max-width: 768px) 150px, 320px"
               className="object-cover rounded-md"
             />
           )}

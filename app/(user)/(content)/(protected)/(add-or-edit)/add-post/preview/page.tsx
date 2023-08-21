@@ -150,6 +150,7 @@ function PostPreviewPage() {
               src={previewPost.imageUrl}
               alt="image"
               fill
+              sizes="(max-width: 768px) 500px, 800px"
               className="object-cover"
             />
           </div>

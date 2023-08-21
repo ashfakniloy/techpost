@@ -121,7 +121,7 @@ async function EditorsChoice() {
             src={post.imageUrl}
             alt="image"
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, 800px"
             className="object-cover"
             priority
           />

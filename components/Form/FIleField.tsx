@@ -285,7 +285,7 @@ export const FileField = ({
               // blurDataURL={imagePreview}
               alt="image uploaded preview"
               fill
-              sizes="10vw"
+              sizes="170px"
               className="object-cover rounded-lg"
               onLoad={() => setImageLoaded(true)}
             />

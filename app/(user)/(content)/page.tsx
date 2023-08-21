@@ -24,6 +24,7 @@ async function Posts({
   sort: string;
 }) {
   // await new Promise((resolve) => setTimeout(resolve, 6000));
+
   const { data, count } = await getAllPosts({ limitNumber, pageNumber, sort });
 
   if (!data) {

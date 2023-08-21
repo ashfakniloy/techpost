@@ -29,7 +29,7 @@ function PostsSkeleton() {
       )}
 
       <div className="flex justify-center mt-8 mb-10">
-        <Skeleton className="w-1/2 lg:w-1/3 h-6 bg-opacity-50 dark:bg-opacity-50" />
+        <Skeleton className="w-full sm:w-[385px] h-10 rounded-full bg-opacity-50 dark:bg-opacity-50" />
       </div>
     </>
   );

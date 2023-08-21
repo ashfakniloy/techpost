@@ -50,7 +50,7 @@ function List({
               src={imageUrl}
               alt="programming"
               fill
-              sizes="(max-width: 768px) 30vw, (max-width: 1200px) 20vw, 10vw"
+              sizes="(max-width: 768px) 150px, 240px"
               className="object-cover"
             />
             <span className="absolute bottom-0 left-0 rounded-tr-md  bg-black/70 text-white text-[10px] lg:text-xs px-1 lg:px-3 py-0.5 lg:py-1.5 capitalize">

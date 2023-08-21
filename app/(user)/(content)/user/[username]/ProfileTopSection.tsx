@@ -24,6 +24,7 @@ async function ProfileTopSection({ username }: { username: string }) {
             src={profile.imageUrl}
             alt="user"
             fill
+            sizes="(max-width: 768px) 150px, 250px"
             className="object-cover rounded-md"
           />
         ) : (

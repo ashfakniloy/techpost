@@ -35,7 +35,7 @@ function PostsSideSection({
                       src={post.imageUrl}
                       alt="programming"
                       fill
-                      sizes="(max-width: 768px) 30vw, (max-width: 1200px) 20vw, 10vw"
+                      sizes="90px"
                       className="object-cover rounded"
                     />
                   </div>
