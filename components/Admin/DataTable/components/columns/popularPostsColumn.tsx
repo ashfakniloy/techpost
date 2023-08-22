@@ -24,11 +24,11 @@ export const popularPostsColumn: ColumnDef<PostProps>[] = [
     // cell: ({ row }) => <div className="w-[400px]">{row.getValue("title")}</div>,
     cell: ({
       row: {
-        original: { title, id },
+        original: { title, slug },
       },
     }) => (
       <div className="w-[400px]">
-        <Link className="hover:underline" href={`/admin/posts/${id}`}>
+        <Link className="hover:underline" href={`/admin/posts/${slug}`}>
           {title}
         </Link>
       </div>

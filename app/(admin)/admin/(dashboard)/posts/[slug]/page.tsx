@@ -10,7 +10,7 @@ import PostOption from "./PostOption";
 type PostPageProps = {
   params: {
     category: string;
-    postId: string;
+    slug: string;
   };
   searchParams: {
     showLikes: string;
@@ -19,10 +19,10 @@ type PostPageProps = {
 };
 
 async function AdminSinglePostPage({
-  params: { postId },
+  params: { slug },
   searchParams: { showLikes, showReplies },
 }: PostPageProps) {
-  const { data: post } = await getSinglePostAdmin({ postId });
+  const { data: post } = await getSinglePostAdmin({ slug });
 
   if (!post) {
     return <p className="">Post not found</p>;
@@ -34,6 +34,7 @@ async function AdminSinglePostPage({
         <PostOption
           id={post.id}
           title={post.title}
+          slug={post.slug}
           isEditorsChoice={post.editorsChoice}
         />
       </div>

@@ -42,6 +42,7 @@ async function PostsView({
                 <List
                   key={post.id}
                   id={post.id}
+                  slug={post.slug}
                   title={post.title}
                   categoryName={post.categoryName}
                   imageUrl={post.imageUrl}
@@ -62,6 +63,7 @@ async function PostsView({
                 <Card
                   key={post.id}
                   id={post.id}
+                  slug={post.slug}
                   title={post.title}
                   categoryName={post.categoryName}
                   imageUrl={post.imageUrl}

@@ -21,11 +21,13 @@ import Modal from "../Modal";
 function OptionButton({
   title,
   postId,
+  slug,
   imageId,
   redirectAfterDelete,
 }: {
   title: string;
   postId: string;
+  slug: string;
   imageId: string;
   redirectAfterDelete?: string;
 }) {
@@ -128,7 +130,7 @@ function OptionButton({
           </button>
         </PopoverTrigger>
         <PopoverContent className="absolute -top-[65px] right-8 z-10 p-0 w-[80px] lg:w-[120px] flex flex-col rounded-md text-black dark:text-gray-50 bg-gray-50 dark:bg-custom-gray2 text-xs lg:text-sm border border-gray-300 dark:border-gray-700 shadow whitespace-nowrap">
-          <Link href={`/edit-post/${postId}`}>
+          <Link href={`/edit-post/${slug}`}>
             <button
               type="button"
               aria-label="edit"

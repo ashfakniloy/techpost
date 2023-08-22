@@ -115,7 +115,7 @@ PostsActions<TData>) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
-          <Link href={`/admin/posts/${post.id}`}>
+          <Link href={`/admin/posts/${post.slug}`}>
             <DropdownMenuItem>
               <Eye className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
               View

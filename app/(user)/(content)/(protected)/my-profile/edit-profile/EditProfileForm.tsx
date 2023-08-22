@@ -46,7 +46,11 @@ function EditProfileForm({
   const formSchema = z.object({
     imageUrl: z.string().optional(),
     imageId: z.string().optional(),
-    bio: z.string().optional(),
+    bio: z
+      .string()
+      .min(5, "Bio must be at least 5 characters")
+      .max(500, "Bio must be at most 500 characters")
+      .or(z.literal("")),
     // facebook: z.string().url("Enter valid URL").or(z.literal("")),
     // twitter: z.string().url("Enter valid URL").or(z.literal("")),
     // linkedin: z.string().url("Enter valid URL").or(z.literal("")),

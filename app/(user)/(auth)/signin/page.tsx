@@ -165,11 +165,12 @@ function UserSigninPage() {
       redirect: false,
     });
 
-    // console.log("response", response);
+    console.log("response", response);
 
     if (!response?.error) {
       console.log("succcess", response);
-      toast.success("Login Successfull", {
+
+      toast.success(`Signed in successfully`, {
         id: toastSignin,
       });
 
@@ -185,7 +186,7 @@ function UserSigninPage() {
   };
 
   return (
-    <div className="bg-gray-50 relative mx-3 dark:bg-custom-gray4 rounded-md shadow-md px-7 py-9 lg:px-10 lg:py-12  w-full max-w-[420px]">
+    <div className="bg-gray-50 relative mx-3 dark:bg-custom-gray4 rounded-md shadow-md px-7 py-9 lg:px-10 lg:py-12 w-full max-w-[420px]">
       {/* {isModal && (
         <button
           type="button"
@@ -201,7 +202,7 @@ function UserSigninPage() {
         <FormProvider {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6"
+            className="space-y-[42px]"
             noValidate
           >
             <InputField label="Email" name="email" type="email" />

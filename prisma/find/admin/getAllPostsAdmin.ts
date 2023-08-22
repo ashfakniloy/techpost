@@ -241,6 +241,7 @@ export async function getAllPostsAdmin({
     select: {
       id: true,
       title: true,
+      slug: true,
       categoryName: true,
       createdAt: true,
       updatedAt: true,

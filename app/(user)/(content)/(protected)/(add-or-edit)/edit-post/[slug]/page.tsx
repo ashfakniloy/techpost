@@ -9,7 +9,7 @@ import { getCategories } from "@/prisma/find/getCategories";
 
 type Props = {
   params: {
-    postId: string;
+    slug: string;
   };
 };
 
@@ -17,8 +17,8 @@ export const metadata = {
   title: "Edit post",
 };
 
-async function EditPostPage({ params: { postId } }: Props) {
-  const { data: post } = await getSinglePost({ postId });
+async function EditPostPage({ params: { slug } }: Props) {
+  const { data: post } = await getSinglePost({ slug });
   const { data: categories } = await getCategories();
 
   const allcategories = categories.map((category) => category.name);

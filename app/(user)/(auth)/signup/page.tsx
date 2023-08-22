@@ -24,9 +24,29 @@ function UserSignUpPage() {
 
   const formSchema = z
     .object({
-      username: z.string().nonempty("Username is required"),
+      username: z
+        .string()
+        .nonempty("Username is required")
+        .min(3, "Username must be at least 3 characters")
+        .max(30, "Username must be at most 30 characters")
+        .regex(
+          /^[a-zA-Z0-9_\s]+$/,
+          "Invalid username. Letters, numbers, spaces or underscores only"
+        )
+        .regex(
+          /^[a-zA-Z][a-zA-Z0-9_\s]*$/,
+          "Username must start with a letter"
+        ),
       email: z.string().nonempty("Email is required").email("Invalid email"),
-      password: z.string().nonempty("Password is required"),
+      password: z
+        .string()
+        .nonempty("Password is required")
+        .min(6, "Password must be at least 6 characters")
+        .regex(
+          /^(?=.*[a-zA-Z])(?=.*\d).+$/,
+          // "Password must contain at least 1 letter and 1 number"
+          "Password requires atleast 1 letter and 1 number."
+        ),
       confirm_password: z.string().nonempty("Confirm Password is required"),
     })
     .refine((data) => data.password === data.confirm_password, {
@@ -96,7 +116,7 @@ function UserSignUpPage() {
         <FormProvider {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6"
+            className="space-y-[42px]"
             noValidate
           >
             <InputField label="Username" name="username" type="text" />

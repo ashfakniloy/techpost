@@ -29,6 +29,7 @@ type ListProps = Omit<
 
 function List({
   id,
+  slug,
   title,
   categoryName,
   user,
@@ -44,7 +45,7 @@ function List({
   return (
     <section className="border-b last:border-b-0 border-gray-300 dark:border-gray-700 py-5 lg:py-10">
       <div className="flex items-center gap-2.5 lg:gap-4">
-        <Link href={`/post/${id}`}>
+        <Link href={`/post/${slug}`}>
           <div className="lg:w-[230px] lg:h-[150px] w-[140px] h-[110px] relative overflow-hidden rounded-md">
             <Image
               src={imageUrl}
@@ -63,7 +64,7 @@ function List({
           <div className="space-y-1.5">
             {/* <div className="max-w-[540px]"> */}
             <div className="">
-              <Link href={`/post/${id}`}>
+              <Link href={`/post/${slug}`}>
                 <h3 className="lg:text-xl font-semibold title-color">
                   {title}
                 </h3>
@@ -116,7 +117,12 @@ function List({
             </div>
 
             {session?.user.id === user.id && (
-              <OptionButton title={title} postId={id} imageId={imageId} />
+              <OptionButton
+                title={title}
+                postId={id}
+                slug={slug}
+                imageId={imageId}
+              />
             )}
           </div>
         </div>

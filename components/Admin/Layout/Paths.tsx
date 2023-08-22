@@ -26,7 +26,7 @@ function Paths() {
   }, []);
 
   return (
-    <div className="lg:ml-1 mt-2 text-gray-600 dark:text-gray-300 text-xs lg:text-sm flex">
+    <div className="lg:ml-1 mt-2 text-gray-600 dark:text-gray-300 text-xs lg:text-sm flex flex-wrap">
       {pathsWithLinks?.map((path, i) => (
         <div key={i} className="flex items-center">
           <Link href={path.link} className="">

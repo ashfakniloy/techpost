@@ -1,10 +1,12 @@
 import { prisma } from "@/lib/prisma";
-import type { Prisma } from "@prisma/client";
+// import type { Prisma } from "@prisma/client";
 
-export async function getSinglePostAdmin({ postId }: { postId: string }) {
+export async function getSinglePostAdmin({ slug }: { slug: string }) {
+  const decodedSlug = decodeURIComponent(slug);
+
   const data = await prisma.post.findUnique({
     where: {
-      id: postId,
+      slug: decodedSlug,
     },
 
     include: {

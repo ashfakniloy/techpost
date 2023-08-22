@@ -22,7 +22,11 @@ function AddPostForm({ categories }: { categories: string[] }) {
   };
 
   const formSchema = z.object({
-    title: z.string().nonempty("Title is required"),
+    title: z
+      .string()
+      .nonempty("Title is required")
+      .min(5, "Title must be at least 5 characters")
+      .max(150, "Title must be at most 150 characters"),
     categoryName: z.string().nonempty("Category is required"),
     imageUrl: z.string().nonempty("Image is required"),
     imageId: z.string().nonempty("Image is required"),

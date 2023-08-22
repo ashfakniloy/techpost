@@ -206,12 +206,13 @@ function ImageUpload({
 
     const cloud_name = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!;
     const preset = process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME!;
+    const folder = process.env.NEXT_PUBLIC_CLOUDINARY_FOLDER_NAME!;
 
     const formData = new FormData();
     formData.append("file", image);
     formData.append("upload_preset", preset);
     formData.append("cloud_name", cloud_name);
-    formData.append("folder", "nextjs13-fullstack-blog");
+    formData.append("folder", folder);
 
     // setImageChanging(true);
 

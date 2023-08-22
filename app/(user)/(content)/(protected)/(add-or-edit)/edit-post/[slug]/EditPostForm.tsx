@@ -35,7 +35,11 @@ function EditPostForm({
   };
 
   const formSchema = z.object({
-    title: z.string().nonempty("Title is required"),
+    title: z
+      .string()
+      .nonempty("Title is required")
+      .min(5, "Title must be at least 5 characters")
+      .max(150, "Title must be at most 150 characters"),
     categoryName: z.string().nonempty("Category is required"),
     imageUrl: z.string().nonempty("Image is required"),
     imageId: z.string().nonempty("Image is required"),
@@ -64,7 +68,7 @@ function EditPostForm({
     });
 
     const data = await response.json();
-    const postId = data?.response?.id;
+    const slug = data?.response?.slug;
 
     if (response.ok) {
       console.log("success", data);
@@ -72,7 +76,7 @@ function EditPostForm({
         id: toastEditPost,
       });
       // router.refresh();
-      router.push(`/post/${postId}`);
+      router.push(`/post/${slug}`);
     } else {
       console.log("error", data);
       toast.error("Something went wrong", {

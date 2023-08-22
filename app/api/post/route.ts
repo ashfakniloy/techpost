@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { revalidatePath } from "next/cache";
 import cloudinary from "@/lib/cloudinary";
+import slugify from "slugify";
 
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -50,11 +51,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Post title exists" }, { status: 400 });
   }
 
+  const slug = slugify(title, { lower: true });
+
   try {
     const response = await prisma.post.create({
       data: {
         ...body,
         userId: session.user.id,
+        slug: slug,
       },
       // data: {
       //   ...body,
@@ -143,6 +147,8 @@ export async function PUT(request: NextRequest) {
     }
   }
 
+  const slug = slugify(title, { lower: true });
+
   try {
     const response = await prisma.post.update({
       where: {
@@ -151,7 +157,7 @@ export async function PUT(request: NextRequest) {
           userId: session.user.id,
         },
       },
-      data: body,
+      data: { ...body, slug: slug },
     });
 
     // revalidatePath("/");
@@ -161,7 +167,7 @@ export async function PUT(request: NextRequest) {
     // revalidatePath("/post/[postId]");
 
     return NextResponse.json({
-      message: "Post created successfully",
+      message: "Post updated successfully",
       response,
     });
   } catch (error) {

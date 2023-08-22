@@ -37,10 +37,11 @@ import Link from "next/link";
 type PostOptionProps = {
   id: string;
   title: string;
+  slug: string;
   isEditorsChoice: boolean;
 };
 
-function PostOption({ id, title, isEditorsChoice }: PostOptionProps) {
+function PostOption({ id, title, slug, isEditorsChoice }: PostOptionProps) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showChoiceModal, setShowChoiceModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -139,7 +140,7 @@ function PostOption({ id, title, isEditorsChoice }: PostOptionProps) {
           <Button variant="default">Option</Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[220px]">
-          <Link href={`/post/${id}`} target="_blank">
+          <Link href={`/post/${slug}`} target="_blank">
             <DropdownMenuItem>
               <Eye className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
               View in site

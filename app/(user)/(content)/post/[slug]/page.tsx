@@ -32,7 +32,7 @@ import SocialShare from "@/components/Post/SocialShare";
 type SinglePostPageProps = {
   params: {
     category: string;
-    postId: string;
+    slug: string;
   };
   searchParams: {
     showComments: string;
@@ -40,9 +40,11 @@ type SinglePostPageProps = {
 };
 
 export async function generateMetadata({
-  params: { postId },
+  params: { slug },
 }: SinglePostPageProps): Promise<Metadata> {
-  const { data: post } = await getSinglePost({ postId });
+  const { data: post } = await getSinglePost({
+    slug,
+  });
 
   if (!post) {
     return {
@@ -93,14 +95,14 @@ export async function generateMetadata({
 }
 
 async function SinglePostPage({
-  params: { postId },
+  params: { slug },
   searchParams: { showComments },
 }: SinglePostPageProps) {
   const session = await getServerSession(authOptions);
 
   // await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  const { data: post } = await getSinglePost({ postId });
+  const { data: post } = await getSinglePost({ slug });
 
   if (!post) {
     notFound();
@@ -111,7 +113,7 @@ async function SinglePostPage({
 
   return (
     <div>
-      <ViewCount postId={postId} isAdmin={session?.user.role === "ADMIN"} />
+      <ViewCount postId={post.id} isAdmin={session?.user.role === "ADMIN"} />
 
       <div className="flex items-start justify-between gap-5">
         <div className="relative flex-1 max-w-full lg:max-w-[796px]">
@@ -176,6 +178,7 @@ async function SinglePostPage({
                         <OptionButton
                           title={post.title}
                           postId={post.id}
+                          slug={post.slug}
                           imageId={post.imageId}
                           redirectAfterDelete={"/"}
                         />
@@ -240,7 +243,7 @@ async function SinglePostPage({
 
           <div className="mt-5">
             <Comment
-              postId={postId}
+              postId={post.id}
               authorId={post.userId}
               showCommentsParam={showComments}
             />

@@ -69,10 +69,10 @@ function PostPreviewPage() {
         id: toastPublish,
       });
       console.log("success", data);
-      const postId = data.response.id;
+      const slug = data.response.slug;
       // router.refresh();
-      // router.push(`/post/${postId}`);
-      router.replace(`/post/${postId}`);
+      // router.push(`/post/${slug}`);
+      router.replace(`/post/${slug}`);
 
       // setDraftPost("");
       localStorage.removeItem("draftPost");

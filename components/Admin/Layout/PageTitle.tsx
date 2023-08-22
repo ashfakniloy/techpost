@@ -68,8 +68,10 @@ function PageTitle() {
 
   return (
     <>
-      <div className="flex items-center gap-1 lg:gap-3">
-        <span className="h-6 w-6 lg:h-[30px] lg:w-[30px]">{pageIcon}</span>
+      <div className="flex  lg:items-center gap-1 lg:gap-3">
+        <span className="h-6 w-6 lg:h-[30px] lg:w-[30px] flex-shrink-0">
+          {pageIcon}
+        </span>
         <h1 className="lg:text-2xl font-bold capitalize">{pageTitle}</h1>
       </div>
 

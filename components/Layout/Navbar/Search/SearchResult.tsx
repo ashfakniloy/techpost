@@ -24,12 +24,13 @@ function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
                   key={post.id}
                   className="flex items-center gap-3 py-3 group"
                 >
-                  <Link href={`/post/${post.id}`}>
+                  <Link href={`/post/${post.slug}`}>
                     <div className="w-[85px] h-[55px]  relative">
                       <Image
                         src={post.imageUrl}
                         alt="programming"
                         fill
+                        sizes="85px"
                         className="object-cover rounded"
                       />
                     </div>
@@ -37,7 +38,7 @@ function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
 
                   <div className="flex flex-col self-start flex-1 max-w-[252px] break-words">
                     <h4 className="font-medium line-clamp-2 title-color">
-                      <Link href={`/post/${post.id}`}>{post.title}</Link>
+                      <Link href={`/post/${post.slug}`}>{post.title}</Link>
                     </h4>
 
                     <p className="text-xs text-gray-500 dark:text-gray-400">
