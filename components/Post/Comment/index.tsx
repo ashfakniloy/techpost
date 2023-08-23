@@ -13,10 +13,12 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 async function Comment({
   postId,
   authorId,
+  slug,
   showCommentsParam,
 }: {
   postId: string;
   authorId: string;
+  slug: string;
   showCommentsParam: string;
 }) {
   const session = await getServerSession(authOptions);
@@ -80,8 +82,8 @@ async function Comment({
                     />
                   )}
                 </div>
-                <div className="flex-1 w-[10%]">
-                  <p className="text-sm font-semibold">
+                <div className="flex-1 w-[10%] text-sm lg:text-base">
+                  <p className="font-semibold text-xs lg:text-sm">
                     <Link
                       href={`/user/${comment.user.username}`}
                       className="hover:text-blue-800 dark:hover:text-blue-500"
@@ -89,13 +91,13 @@ async function Comment({
                       {comment.user.username}
                     </Link>
                   </p>
-                  <div className="">
+                  <div className="mt-1">
                     <p className="overflow-hidden break-words">
                       {comment.comment}
                     </p>
                   </div>
-                  <div className="relative">
-                    <div className="relative flex w-full justify-between items-center text-sm">
+                  <div className="mt-1 relative">
+                    <div className="relative flex w-full justify-between items-center text-xs lg:text-sm">
                       <CommentLike commentId={comment.id} />
 
                       <div className="flex items-center gap-2">
@@ -132,7 +134,7 @@ async function Comment({
         {comments.length !== totalComments && (
           <div className="flex justify-center mt-3">
             <Link
-              href={`/post/${postId}?showComments=${showCommentsIncrement}`}
+              href={`/post/${slug}?showComments=${showCommentsIncrement}`}
               scroll={false}
               replace={true}
               className="px-6 py-2 rounded-full text-sm font-bold bg-gray-800 text-white dark:text-black dark:bg-gray-100"

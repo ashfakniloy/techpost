@@ -245,6 +245,7 @@ async function SinglePostPage({
             <Comment
               postId={post.id}
               authorId={post.userId}
+              slug={post.slug}
               showCommentsParam={showComments}
             />
           </div>

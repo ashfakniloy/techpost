@@ -46,10 +46,12 @@ function SingleComment({ comment }: { comment: CommentTypes }) {
 
 async function PostComments({
   postId,
+  slug,
   showLikes,
   showReplies,
 }: {
   postId: string;
+  slug: string;
   showLikes: string;
   showReplies: string;
 }) {
@@ -94,7 +96,7 @@ async function PostComments({
       {comments.length ? (
         selectedComment ? (
           <div className="text-sm">
-            <Link href={`/admin/posts/${postId}`} scroll={false} replace={true}>
+            <Link href={`/admin/posts/${slug}`} scroll={false} replace={true}>
               <button type="button">
                 <span className="flex items-center gap-1.5 group">
                   <ChevronLeftIcon className="h-4 w-4" />

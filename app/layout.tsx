@@ -28,7 +28,8 @@ export const metadata = {
     default: "Techpost",
     template: `%s | Techpost`,
   },
-  description: "A fullstack blog website using nextjs approuter.",
+  description:
+    "Unlock the world of technology with engaging and informative blog. Explore the latest trends and news",
 };
 
 export default function RootLayout({

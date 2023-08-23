@@ -114,8 +114,8 @@ function AdminSidebar({
       >
         <div className="flex flex-col justify-between h-full overflow-hidden">
           <div className="">
-            <div className="pl-5 lg:pl-[40px] py-7 font-semibold flex justify-between items-center">
-              <h1 className="text-lg lg:text-2xl">Admin Dashboard</h1>
+            <div className="pl-5 lg:pl-[30px] py-7 font-semibold flex justify-between items-center">
+              <h1 className="text-lg lg:text-2xl">TechPost Dashboard</h1>
               <span
                 className="p-1 mr-5 rounded-full border-2 border-gray-500  lg:hidden"
                 onClick={() => setShowSidebar(!showSidebar)}

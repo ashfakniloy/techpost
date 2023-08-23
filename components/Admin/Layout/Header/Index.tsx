@@ -34,7 +34,7 @@ function AdminHeader({
           </button>
 
           <div className="text-xl mx-auto text-custom-blue4 font-bold lg:hidden">
-            Admin Dashboard
+            TechPost Dashboard
           </div>
 
           {/* <div className="flex justify-between items-center gap-5 lg:gap-[80px]">

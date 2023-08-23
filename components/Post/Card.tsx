@@ -55,7 +55,7 @@ function Card({
             src={imageUrl}
             alt="programming"
             fill
-            sizes="400px"
+            sizes="(max-width: 768px) 100vw, 390px"
             className="object-cover transition duration-700 ease-out group-hover:scale-105"
           />
 
@@ -100,7 +100,7 @@ function Card({
 
             {_count.comments > 0 && (
               <Link
-                href={`/post/${id}`}
+                href={`/post/${slug}`}
                 className="mr-4 text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-500"
               >
                 <span className="flex items-center gap-1  text-xs lg:text-sm">

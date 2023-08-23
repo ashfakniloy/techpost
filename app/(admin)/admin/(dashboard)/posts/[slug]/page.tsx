@@ -53,6 +53,7 @@ async function AdminSinglePostPage({
 
             <PostComments
               postId={post.id}
+              slug={post.slug}
               showLikes={showLikes}
               showReplies={showReplies}
             />

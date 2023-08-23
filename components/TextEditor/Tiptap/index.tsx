@@ -1,6 +1,9 @@
 "use client";
 
 // import { Color } from "@tiptap/extension-color";
+import { useEffect } from "react";
+import StarterKit from "@tiptap/starter-kit";
+import { EditorContent, useEditor } from "@tiptap/react";
 import { Paragraph } from "@tiptap/extension-paragraph";
 import { Heading } from "@tiptap/extension-heading";
 import ListItem from "@tiptap/extension-list-item";
@@ -9,12 +12,9 @@ import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import Image from "@tiptap/extension-image";
 import Youtube from "@tiptap/extension-youtube";
-import { EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import { useEffect } from "react";
+import Link from "@tiptap/extension-link";
 import Toolbar from "./Toolbar";
 import "./styles.css";
-import Link from "@tiptap/extension-link";
 
 const Tiptap = ({
   article,
@@ -55,6 +55,7 @@ const Tiptap = ({
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
+
       Image.configure({
         allowBase64: true,
         inline: true,

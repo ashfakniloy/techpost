@@ -44,14 +44,14 @@ function List({
 
   return (
     <section className="border-b last:border-b-0 border-gray-300 dark:border-gray-700 py-5 lg:py-10">
-      <div className="flex items-center gap-2.5 lg:gap-4">
+      <div className="flex lg:items-center gap-2.5 lg:gap-4">
         <Link href={`/post/${slug}`}>
-          <div className="lg:w-[230px] lg:h-[150px] w-[140px] h-[110px] relative overflow-hidden rounded-md">
+          <div className="w-[100px] h-[60px] lg:w-[230px] lg:h-[150px] mt-2 lg:mt-0 relative overflow-hidden rounded-md">
             <Image
               src={imageUrl}
               alt="programming"
               fill
-              sizes="(max-width: 768px) 150px, 240px"
+              sizes="(max-width: 768px) 100px, 240px"
               className="object-cover"
             />
             <span className="absolute bottom-0 left-0 rounded-tr-md  bg-black/70 text-white text-[10px] lg:text-xs px-1 lg:px-3 py-0.5 lg:py-1.5 capitalize">
@@ -65,7 +65,7 @@ function List({
             {/* <div className="max-w-[540px]"> */}
             <div className="">
               <Link href={`/post/${slug}`}>
-                <h3 className="lg:text-xl font-semibold title-color">
+                <h3 className="text-sm lg:text-xl font-semibold title-color">
                   {title}
                 </h3>
               </Link>
@@ -92,7 +92,7 @@ function List({
 
               {_count.comments > 0 && (
                 <Link
-                  href={`/post/${id}`}
+                  href={`/post/${slug}`}
                   className="mr-4 text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-500"
                 >
                   <span className="flex items-center gap-2 text-xs lg:text-sm">
