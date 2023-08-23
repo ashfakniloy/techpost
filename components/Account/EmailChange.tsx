@@ -60,9 +60,9 @@ function EmailChange({
 
     if (response.ok) {
       console.log("succecss", data);
-      toast.success("Email changed succesfully", {
-        id: toastEmailChange,
-      });
+      // toast.success("Email changed succesfully", {
+      //   id: toastEmailChange,
+      // });
 
       signOut({
         callbackUrl: "/signin",

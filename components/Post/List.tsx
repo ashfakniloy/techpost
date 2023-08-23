@@ -72,9 +72,9 @@ function List({
             </div>
 
             <div className="flex items-center gap-2 text-xs lg:text-sm lg:gap-5 text-gray-500 dark:text-gray-400">
-              <p className="">
-                By
-                <Link href={`/user/${user.username}`} className="ml-1.5 link">
+              <p className="capitalize">
+                By{" "}
+                <Link href={`/user/${user.username}`} className="link">
                   {user.username}
                 </Link>
               </p>

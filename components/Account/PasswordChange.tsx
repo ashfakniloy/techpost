@@ -20,11 +20,24 @@ function PasswordChange({
     retypePassword: "",
   };
 
-  const formSchema = z.object({
-    currentPassword: z.string().nonempty("Current Password is required"),
-    newPassword: z.string().nonempty("New Password is required"),
-    retypePassword: z.string().nonempty("Re-enter your new password"),
-  });
+  const formSchema = z
+    .object({
+      currentPassword: z.string().nonempty("Current Password is required"),
+      newPassword: z
+        .string()
+        .nonempty("New Password is required")
+        .min(6, "Password must be at least 6 characters")
+        .regex(
+          /^(?=.*[a-zA-Z])(?=.*\d).+$/,
+          // "Password must contain at least 1 letter and 1 number"
+          "Password requires atleast 1 letter and 1 number."
+        ),
+      retypePassword: z.string().nonempty("Re-enter your new password"),
+    })
+    .refine((data) => data.newPassword === data.retypePassword, {
+      message: "Retype new password correctly",
+      path: ["retypePassword"],
+    });
 
   type FormValuesProps = z.infer<typeof formSchema>;
 
@@ -44,11 +57,11 @@ function PasswordChange({
       return;
     }
 
-    if (values.newPassword !== values.retypePassword) {
-      console.log("passwords dont match");
-      toast.error("Passwords don't match");
-      return;
-    }
+    // if (values.newPassword !== values.retypePassword) {
+    //   console.log("passwords dont match");
+    //   toast.error("Passwords don't match");
+    //   return;
+    // }
 
     const toastChangePassword = toast.loading("Loading...");
 
@@ -65,9 +78,9 @@ function PasswordChange({
 
     if (response.ok) {
       console.log("succecss", data);
-      toast.success("Password changed succesfully", {
-        id: toastChangePassword,
-      });
+      // toast.success("Password changed succesfully", {
+      //   id: toastChangePassword,
+      // });
 
       signOut({
         callbackUrl: "/signin",

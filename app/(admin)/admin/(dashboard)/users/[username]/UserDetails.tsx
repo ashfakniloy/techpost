@@ -8,6 +8,7 @@ import { getTimeDistance } from "@/utils/getTimeDistance";
 import { User } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import Link from "next/link";
 
 async function UserDetails({ username }: { username: string }) {
   const { data: user } = await getSingleUserAdmin({
@@ -30,16 +31,19 @@ async function UserDetails({ username }: { username: string }) {
       value: user.email.toLocaleLowerCase(),
     },
     {
-      name: "Password",
-      value: user.password,
-    },
-    {
       name: "Facebook",
-      value: user.profile?.facebook?.toLocaleLowerCase() || "not provided",
+      value: user.profile?.facebook?.toLocaleLowerCase(),
+      asLink: true,
     },
     {
       name: "Twitter",
-      value: user.profile?.twitter?.toLocaleLowerCase() || "not provided",
+      value: user.profile?.twitter?.toLocaleLowerCase(),
+      asLink: true,
+    },
+    {
+      name: "Linkedin",
+      value: user.profile?.linkedin?.toLocaleLowerCase(),
+      asLink: true,
     },
     {
       name: "Created At",
@@ -54,7 +58,7 @@ async function UserDetails({ username }: { username: string }) {
   return (
     <Section title="User Details" className="lg:w-[800px]">
       <div className="flex flex-col lg:flex-row gap-7">
-        <div className="w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] relative">
+        <div className="w-[200px] h-[200px] lg:w-[250px] lg:h-[250px]  relative">
           {user.profile?.imageUrl ? (
             <Image
               src={user.profile.imageUrl}
@@ -73,9 +77,27 @@ async function UserDetails({ username }: { username: string }) {
         </div>
         <div className="flex-1 space-y-7 w-full">
           {infoData.map((info, i) => (
-            <div key={i} className="w-full flex">
+            <div
+              key={i}
+              className="w-full flex items-center flex-wrap lg:flex-auto"
+            >
               <p className="w-1/3">{info.name}</p>
-              <p className="">{info.value}</p>
+              {/* <p className="max-w-[315px]">{info.value ? "" : "not provided"}</p> */}
+              <p className="lg:max-w-[315px]">
+                {!info.asLink ? (
+                  info.value
+                ) : info.value ? (
+                  <Link
+                    href={info.value}
+                    target="_blank"
+                    className="hover:underline link text-sm"
+                  >
+                    {info.value}
+                  </Link>
+                ) : (
+                  "not provided"
+                )}
+              </p>
             </div>
           ))}
         </div>

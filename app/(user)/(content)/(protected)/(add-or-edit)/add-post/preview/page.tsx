@@ -37,7 +37,7 @@ function PostPreviewPage() {
   useEffect(() => {
     const persistedPost = localStorage.getItem("draftPost");
     const parsedPost = persistedPost && JSON.parse(persistedPost || "");
-    console.log(parsedPost);
+    // console.log(parsedPost);
 
     const regex = /(<([^>]+)>)/gi;
     const hasArticle = !!parsedPost.article.replace(regex, "").length;
@@ -126,9 +126,7 @@ function PostPreviewPage() {
                     )}
                   </div>
 
-                  <p className=" ">
-                    By <span className="">{session?.user.username}</span>
-                  </p>
+                  <p className="capitalize">By {session?.user.username}</p>
                 </div>
               </div>
             </div>
@@ -156,14 +154,14 @@ function PostPreviewPage() {
           </div>
         )}
 
-        <p className="mt-6 ProseMirror !border-none !p-0 !max-h-full">
+        <div className="mt-6 ProseMirror !border-none !p-0 !max-h-full">
           {parser(previewPost.article || "")}
-        </p>
+        </div>
       </div>
 
-      <div className="flex justify-between mt-5 mb-5">
+      <div className="flex justify-end items-center gap-5 mt-5 mb-5">
         <Link href="/add-post">
-          <button className="px-6 py-2.5 text-sm font-bold text-black bg-gray-300 hover:bg-gray-900 hover:text-gray-100 rounded-md dark:bg-gray-800 dark:text-white dark:hover:bg-gray-50 dark:hover:text-gray-900 transition-colors duration-200 ease-out">
+          <button className="px-4 py-2.5 text-sm font-bold text-white bg-gray-900 rounded-md dark:text-gray-900 dark:bg-gray-50">
             Edit
           </button>
         </Link>

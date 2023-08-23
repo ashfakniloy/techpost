@@ -93,6 +93,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcrypt";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -128,9 +129,18 @@ export const authOptions: NextAuthOptions = {
             throw new Error("Incorrect Email");
           }
 
-          if (response.password !== password) {
+          const passwordMatched = await bcrypt.compare(
+            password,
+            response.password
+          );
+
+          if (!passwordMatched) {
             throw new Error("Incorrect Password");
           }
+
+          // if (response.password !== password) {
+          //   throw new Error("Incorrect Password");
+          // }
 
           console.log("auth response", response);
 

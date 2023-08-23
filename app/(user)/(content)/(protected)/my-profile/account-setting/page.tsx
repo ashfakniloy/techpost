@@ -72,11 +72,23 @@ function AccountSettingpage() {
               <div className="">
                 {accountMenu.info &&
                   (accountMenu.name !== menu ? (
-                    <span className="flex-1">{accountMenu.info}</span>
+                    <span
+                      className={`flex-1 ${
+                        accountMenu.name === "Username" && "capitalize"
+                      }`}
+                    >
+                      {accountMenu.info}
+                    </span>
                   ) : (
                     <span className="flex-1">
                       Current {accountMenu.name}:
-                      <span className="ml-1 lg:ml-4">{accountMenu.info}</span>
+                      <span
+                        className={`ml-1 lg:ml-4 ${
+                          accountMenu.name === "Username" && "capitalize"
+                        }`}
+                      >
+                        {accountMenu.info}
+                      </span>
                     </span>
                   ))}
                 {accountMenu.name === menu && (

@@ -110,6 +110,10 @@ const Tiptap = ({
   //   resetRichText && editor?.chain().clearContent(true).run();
   // }, [resetRichText]);
 
+  useEffect(() => {
+    !article && editor?.chain().clearContent(true).run();
+  }, [article]);
+
   return (
     <div className="">
       <Toolbar editor={editor} />

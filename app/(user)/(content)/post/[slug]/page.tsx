@@ -164,12 +164,10 @@ async function SinglePostPage({
                           )}
                         </div>
 
-                        <p className=" ">
+                        <p className="capitalize">
                           By{" "}
                           <Link href={`/user/${post.user.username}`}>
-                            <span className=" hover:text-blue-800 dark:hover:text-blue-500">
-                              {post.user.username}
-                            </span>
+                            <span className="link">{post.user.username}</span>
                           </Link>
                         </p>
                       </div>
@@ -222,7 +220,7 @@ async function SinglePostPage({
                 />
               </div>
 
-              <div className="mt-3 lg:mt-6 ProseMirror !border-none !p-0 !max-h-full overflow-hidden">
+              <div className="mt-6 ProseMirror !border-none !p-0 !max-h-full overflow-hidden">
                 {parser(post.article)}
               </div>
             </article>

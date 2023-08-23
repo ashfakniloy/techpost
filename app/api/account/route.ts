@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Prisma } from "@prisma/client";
+import bcrypt from "bcrypt";
 
 export async function PUT(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -50,15 +51,31 @@ export async function PUT(request: NextRequest) {
     },
   });
 
+  if (!accountResponse) {
+    return NextResponse.json({ error: "Account not found" }, { status: 400 });
+  }
+
   if (changeType === "username") {
     const { username, password } = body;
 
-    if (accountResponse?.password !== password) {
+    const passwordMatched = await bcrypt.compare(
+      password,
+      accountResponse.password
+    );
+
+    if (!passwordMatched) {
       return NextResponse.json(
         { error: "Incorrect password" },
         { status: 400 }
       );
     }
+
+    // if (accountResponse?.password !== password) {
+    //   return NextResponse.json(
+    //     { error: "Incorrect password" },
+    //     { status: 400 }
+    //   );
+    // }
 
     // const usernameExists = await prisma.user.findUnique({
     //   where: {
@@ -103,12 +120,24 @@ export async function PUT(request: NextRequest) {
   if (changeType === "email") {
     const { email, password } = body;
 
-    if (accountResponse?.password !== password) {
+    const passwordMatched = await bcrypt.compare(
+      password,
+      accountResponse.password
+    );
+
+    if (!passwordMatched) {
       return NextResponse.json(
         { error: "Incorrect password" },
         { status: 400 }
       );
     }
+
+    // if (accountResponse?.password !== password) {
+    //   return NextResponse.json(
+    //     { error: "Incorrect password" },
+    //     { status: 400 }
+    //   );
+    // }
 
     // const emailExists = await prisma.user.findUnique({
     //   where: {
@@ -153,19 +182,34 @@ export async function PUT(request: NextRequest) {
   if (changeType === "password") {
     const { currentPassword, newPassword } = body;
 
-    if (accountResponse?.password !== currentPassword) {
+    const passwordMatched = await bcrypt.compare(
+      currentPassword,
+      accountResponse.password
+    );
+
+    if (!passwordMatched) {
       return NextResponse.json(
         { error: "Incorrect password" },
         { status: 400 }
       );
     }
 
+    // if (accountResponse?.password !== currentPassword) {
+    //   return NextResponse.json(
+    //     { error: "Incorrect password" },
+    //     { status: 400 }
+    //   );
+    // }
+
+    const saltValue = await bcrypt.genSalt(10);
+    const hashedNewPassword = await bcrypt.hash(newPassword, saltValue);
+
     try {
       const response = await prisma.user.update({
         where: {
           id: session.user.id,
         },
-        data: { password: newPassword },
+        data: { password: hashedNewPassword },
       });
 
       return NextResponse.json({
@@ -224,12 +268,24 @@ export async function DELETE(request: NextRequest) {
     );
   }
 
-  if (userCheckResponse.password !== password) {
+  const passwordMatched = await bcrypt.compare(
+    password,
+    userCheckResponse.password
+  );
+
+  if (!passwordMatched) {
     return NextResponse.json(
       { error: "Unauthorized, Passwords don't match" },
       { status: 400 }
     );
   }
+
+  // if (userCheckResponse.password !== password) {
+  //   return NextResponse.json(
+  //     { error: "Unauthorized, Passwords don't match" },
+  //     { status: 400 }
+  //   );
+  // }
 
   const responseProfileImage = await prisma.profile.findUnique({
     where: {

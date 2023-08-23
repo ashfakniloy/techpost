@@ -21,17 +21,22 @@ function AddPostForm({ categories }: { categories: string[] }) {
     article: "",
   };
 
-  const formSchema = z.object({
-    title: z
-      .string()
-      .nonempty("Title is required")
-      .min(5, "Title must be at least 5 characters")
-      .max(150, "Title must be at most 150 characters"),
-    categoryName: z.string().nonempty("Category is required"),
-    imageUrl: z.string().nonempty("Image is required"),
-    imageId: z.string().nonempty("Image is required"),
-    article: z.string().nonempty("Article is required"),
-  });
+  const formSchema = z
+    .object({
+      title: z
+        .string()
+        .nonempty("Title is required")
+        .min(5, "Title must be at least 5 characters")
+        .max(150, "Title must be at most 150 characters"),
+      categoryName: z.string().nonempty("Category is required"),
+      imageUrl: z.string().nonempty("Image is required"),
+      imageId: z.string().nonempty("Image is required"),
+      article: z.string().nonempty("Article is required"),
+    })
+    .refine((value) => value.article !== "<p></p>", {
+      message: "Article is required",
+      path: ["article"],
+    });
 
   type FormValuesProps = z.infer<typeof formSchema>;
 
@@ -40,21 +45,22 @@ function AddPostForm({ categories }: { categories: string[] }) {
     resolver: zodResolver(formSchema),
   });
 
-  const {
-    watch,
-    setValue,
-    formState: { isSubmitting },
-  } = form;
+  const { watch, setValue, reset } = form;
 
-  // const shouldSaveDraft = Object.values(form.watch()).some((value) =>
-  //   Boolean(value)
-  // );
+  const hasDraft = Object.values(form.watch()).some(
+    (value) => value !== "" && value !== "<p></p>"
+  );
 
-  useFormPersist("draftPost", {
+  const { clear: clearDraft } = useFormPersist("draftPost", {
     watch,
     setValue,
     storage: typeof window !== "undefined" ? window.localStorage : undefined, // default window.sessionStorage
   });
+
+  const handleClear = () => {
+    clearDraft();
+    reset();
+  };
 
   const onSubmit = (values: FormValuesProps) => {
     console.log(values);
@@ -82,7 +88,16 @@ function AddPostForm({ categories }: { categories: string[] }) {
           />
           <FileField label="Image" name="imageUrl" />
           <RichTextField label="Article" name="article" />
-          <div className="flex justify-end pt-4">
+          <div className="flex items-center gap-5 justify-end pt-4">
+            {hasDraft && (
+              <button
+                type="button"
+                className="px-4 py-2.5 text-sm font-bold text-white bg-black rounded-md dark:text-black dark:bg-white"
+                onClick={handleClear}
+              >
+                Clear
+              </button>
+            )}
             <button
               type="submit"
               className="px-4 py-2.5 text-sm font-bold text-white bg-black rounded-md dark:text-black dark:bg-white"

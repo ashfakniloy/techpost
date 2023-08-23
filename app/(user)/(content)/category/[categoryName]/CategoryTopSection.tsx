@@ -29,17 +29,17 @@ async function CategoryTopSection({ categoryName }: { categoryName: string }) {
           alt={category.name}
           fill
           sizes="(max-width: 768px) 100vw, 1176px"
-          className="object-cover opacity-75"
+          className="object-cover opacity-50"
         />
       </div>
 
       <div className="absolute flex flex-col justify-center items-center text-white inset-0 font-montserrat select-none">
-        <h1 className="text-3xl lg:text-5xl tracking-wider font-bold capitalize">
+        <h1 className="text-3xl lg:text-5xl tracking-wider font-bold capitalize drop-shadow-lg">
           {category.name}
         </h1>
 
         <div className="mt-8 lg:w-[500px] px-2 lg:px-0">
-          <p className="text-center italic text-sm lg:text-base">
+          <p className="text-center italic text-sm lg:text-base drop-shadow-md">
             {randomQuote.quote}{" "}
             <span className="font-semibold"> - {randomQuote.author}</span>
           </p>

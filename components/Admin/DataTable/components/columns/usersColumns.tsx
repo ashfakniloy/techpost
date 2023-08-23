@@ -69,17 +69,6 @@ export const usersColumns: ColumnDef<UserProps>[] = [
     // enableHiding: true,
   },
   {
-    accessorKey: "password",
-    header: ({ column }) => (
-      <DataTableColumnHeader mannualSort column={column} title="Password" />
-    ),
-    cell: ({ row }) => (
-      <div className="w-[80px]">{row.getValue("password")}</div>
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
     accessorKey: "_count.posts",
     header: ({ column }) => (
       <DataTableColumnHeader mannualSort column={column} title="Posts" />

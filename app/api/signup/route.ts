@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcrypt";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -46,10 +47,21 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const saltValue = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, saltValue);
+
   try {
     const response = await prisma.user.create({
-      data: body,
+      data: {
+        ...body,
+        password: hashedPassword,
+      },
     });
+
+    //without hased password
+    // const response = await prisma.user.create({
+    //   data: body,
+    // });
 
     // console.log("response", response);
     if (response.id) {

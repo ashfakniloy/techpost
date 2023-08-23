@@ -23,7 +23,16 @@ function UsernameChange({
   };
 
   const formSchema = z.object({
-    username: z.string().nonempty("Username is required"),
+    username: z
+      .string()
+      .nonempty("Username is required")
+      .min(3, "Username must be at least 3 characters")
+      .max(30, "Username must be at most 30 characters")
+      .regex(
+        /^[a-zA-Z0-9_\s]+$/,
+        "Invalid username. Letters, numbers, spaces or underscores only"
+      )
+      .regex(/^[a-zA-Z][a-zA-Z0-9_\s]*$/, "Username must start with a letter"),
     password: z.string().nonempty("Password is required"),
   });
 
@@ -60,9 +69,9 @@ function UsernameChange({
 
     if (response.ok) {
       console.log("succecss", data);
-      toast.success("Username changed succesfully", {
-        id: toastUsernameChange,
-      });
+      // toast.success("Username changed succesfully", {
+      //   id: toastUsernameChange,
+      // });
 
       signOut({
         callbackUrl: "/signin",
@@ -80,7 +89,7 @@ function UsernameChange({
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-7 lg:w-[360px]"
+          className="space-y-[42px] lg:w-[360px]"
           noValidate
         >
           <InputField type="text" label="New Username" name="username" />

@@ -150,7 +150,7 @@ function Sidebar({
 
                   <div className="">
                     <p className="font-medium">Signed in as </p>
-                    <p className="font-bold">{username}</p>
+                    <p className="font-bold capitalize">{username}</p>
                     <button
                       className="mt-3 w-[120px] py-2 text-sm font-bold text-gray-100 rounded-full bg-gray-800 dark:bg-stone-600"
                       onClick={handleSignOut}

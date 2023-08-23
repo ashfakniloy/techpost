@@ -78,7 +78,7 @@ function Card({
             </Link>
           </div>
           <div className="flex items-center gap-2 mt-0.5 text-xs text-gray-500 lg:text-sm lg:mt-1 lg:gap-5 dark:text-gray-400">
-            <p className="">
+            <p className="capitalize">
               By{" "}
               <Link
                 href={`/user/${user.username}`}

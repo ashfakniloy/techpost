@@ -41,11 +41,11 @@ function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
                       <Link href={`/post/${post.slug}`}>{post.title}</Link>
                     </h4>
 
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      By
+                    <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
+                      By{" "}
                       <Link
                         href={`/user/${post.user.username}`}
-                        className="ml-1 link"
+                        className="link"
                       >
                         {post.user.username}
                       </Link>
