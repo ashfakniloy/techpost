@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getCategoryByName } from "@/prisma/find/getCategoryByName";
+import { getCategoryByName } from "@/db/queries/getCategoryByName";
 import { notFound } from "next/navigation";
 
 async function CategoryTopSection({ categoryName }: { categoryName: string }) {

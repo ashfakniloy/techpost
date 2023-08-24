@@ -1,6 +1,5 @@
 "use client";
 
-import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/Form/InputField";
@@ -10,9 +9,10 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Profile } from "@prisma/client";
 import { TextAreaField } from "@/components/Form/TextAreaField";
-import { FileField } from "@/components/Form/FIleField";
+import { ImageField } from "@/components/Form/ImageField";
 import { IconLinkedin } from "@/components/Icons/IconLinkedin";
 import { useSession } from "next-auth/react";
+import { ProfileFormProps, profileSchema } from "@/schemas/profileSchema";
 
 function EditProfileForm({
   profile,
@@ -38,66 +38,16 @@ function EditProfileForm({
     linkedin: profile?.linkedin ?? "",
   };
 
-  const facebookRegex = /^https:\/\/(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/;
-  const twitterRegex = /^https:\/\/(www\.)?twitter.com\/[a-zA-Z0-9_]+\/?$/;
-  const linkedinRegex =
-    /^https:\/\/(www\.)?linkedin.com\/(?:in|company)\/[a-zA-Z0-9\-]+\/?$/;
-
-  const formSchema = z.object({
-    imageUrl: z.string().optional(),
-    imageId: z.string().optional(),
-    bio: z
-      .string()
-      .min(5, "Bio must be at least 5 characters")
-      .max(500, "Bio must be at most 500 characters")
-      .or(z.literal("")),
-    // facebook: z.string().url("Enter valid URL").or(z.literal("")),
-    // twitter: z.string().url("Enter valid URL").or(z.literal("")),
-    // linkedin: z.string().url("Enter valid URL").or(z.literal("")),
-    //     const facebookRegex = /^(https:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/;
-    // const twitterRegex = /^(https:\/\/)?(www\.)?twitter.com\/[a-zA-Z0-9_]+$/;
-    // const linkedinRegex = /^(https:\/\/)?(www\.)?linkedin.com\/in\/[a-zA-Z0-9_-]+/;
-
-    facebook: z
-      .string()
-      .regex(facebookRegex, "Enter a valid facebook url link")
-      .or(z.literal("")),
-    twitter: z
-      .string()
-      .regex(twitterRegex, "Enter a valid twitter url link")
-      .or(z.literal("")),
-    linkedin: z
-      .string()
-      .regex(linkedinRegex, "Enter a valid linkedin url link")
-      .or(z.literal("")),
-    // facebook: z
-    //   .string()
-    //   .refine(validateUrlWithDomain("facebook.com"), {
-    //     message: "Enter a valid Facebook URL",
-    //   })
-    //   .or(z.literal("")),
-    // twitter: z
-    //   .string()
-    //   .refine(validateUrlWithDomain("twitter.com"), {
-    //     message: "Enter a valid Twitter URL",
-    //   })
-    //   .or(z.literal("")),
-    // linkedin: z
-    //   .string()
-    //   .refine(validateUrlWithDomain("linkedin.com"), {
-    //     message: "Enter a valid Linkedin URL",
-    //   })
-    //   .or(z.literal("")),
-  });
-
-  type FormValuesProps = z.infer<typeof formSchema>;
-
-  const form = useForm<FormValuesProps>({
+  const form = useForm<ProfileFormProps>({
     defaultValues,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(profileSchema),
   });
 
-  const onSubmit = async (values: FormValuesProps) => {
+  const {
+    formState: { isSubmitting },
+  } = form;
+
+  const onSubmit = async (values: ProfileFormProps) => {
     const toastProfileUpdate = toast.loading("Loading...");
 
     const url = `/api/profile?profileId=${profile?.id}`;
@@ -153,7 +103,7 @@ function EditProfileForm({
           className="space-y-5 lg:w-[450px]"
           noValidate
         >
-          <FileField label="Image" name="imageUrl" />
+          <ImageField label="Image" name="imageUrl" />
           <TextAreaField label="Bio" name="bio" />
 
           <div className="">
@@ -198,7 +148,8 @@ function EditProfileForm({
           <div className="flex justify-end">
             <button
               type="submit"
-              className="px-6 py-2.5 text-sm font-bold text-white bg-black rounded-md dark:text-black dark:bg-white"
+              className="px-6 py-2.5 text-sm font-bold text-white bg-black rounded-md dark:text-black dark:bg-white disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={isSubmitting}
             >
               Save
             </button>

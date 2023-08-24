@@ -128,7 +128,7 @@ import { DataTableColumnHeader } from "../data-table-column-header";
 import { format } from "date-fns";
 import { PostsActions } from "../actions/PostsActions";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
-import { PostAdminTypes } from "@/prisma/find/admin/getAllPostsAdmin";
+import { PostAdminTypes } from "@/db/queries/admin/getAllPostsAdmin";
 
 export const postsColumns: ColumnDef<PostAdminTypes>[] = [
   {

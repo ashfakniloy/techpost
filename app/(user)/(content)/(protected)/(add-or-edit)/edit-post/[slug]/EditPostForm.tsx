@@ -1,14 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
 import { InputField } from "@/components/Form/InputField";
 import { SelectField } from "@/components/Form/SelectField";
-import { FileField } from "@/components/Form/FIleField";
+import { ImageField } from "@/components/Form/ImageField";
 import { RichTextField } from "@/components/Form/RichTextField";
+import { PostFormProps, postSchema } from "@/schemas/postSchema";
 
 type Props = {
   id: string;
@@ -34,28 +34,18 @@ function EditPostForm({
     article: post.article,
   };
 
-  const formSchema = z.object({
-    title: z
-      .string()
-      .nonempty("Title is required")
-      .min(5, "Title must be at least 5 characters")
-      .max(150, "Title must be at most 150 characters"),
-    categoryName: z.string().nonempty("Category is required"),
-    imageUrl: z.string().nonempty("Image is required"),
-    imageId: z.string().nonempty("Image is required"),
-    article: z.string().nonempty("Article is required"),
-  });
-
   const router = useRouter();
 
-  type FormValuesProps = z.infer<typeof formSchema>;
-
-  const form = useForm<FormValuesProps>({
+  const form = useForm<PostFormProps>({
     defaultValues,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(postSchema),
   });
 
-  const onSubmit = async (values: FormValuesProps) => {
+  const {
+    formState: { isSubmitting },
+  } = form;
+
+  const onSubmit = async (values: PostFormProps) => {
     const toastEditPost = toast.loading("Loading...");
 
     const url = `/api/post?postId=${post.id}`;
@@ -104,12 +94,13 @@ function EditPostForm({
             placeholder="Select Category"
             options={categories}
           />
-          <FileField label="Image" name="imageUrl" />
+          <ImageField label="Image" name="imageUrl" />
           <RichTextField label="Article" name="article" />
           <div className="flex justify-end pt-4">
             <button
               type="submit"
-              className="px-4 py-2.5 text-sm font-bold text-white bg-black rounded-md dark:text-black dark:bg-white"
+              className="px-4 py-2.5 text-sm font-bold text-white bg-black rounded-md dark:text-black dark:bg-white disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={isSubmitting}
             >
               Submit
             </button>

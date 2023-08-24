@@ -3,7 +3,7 @@ import HomeSideSection from "./HomeSideSection";
 import PostsHeader from "@/components/Post/PostsHeader";
 import PostsSkeleton from "@/components/Skeleton/PostsSkeleton";
 import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
-import { getAllPosts } from "@/prisma/find/getAllPosts";
+import { getAllPosts } from "@/db/queries/getAllPosts";
 import PostsView from "@/components/Post/PostsView";
 import Categories from "@/components/Post/Categories";
 import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";

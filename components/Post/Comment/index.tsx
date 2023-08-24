@@ -1,4 +1,4 @@
-import { getComments } from "@/prisma/find/getComments";
+import { getComments } from "@/db/queries/getComments";
 import CommentForm from "./CommentForm";
 import Image from "next/image";
 import Link from "next/link";

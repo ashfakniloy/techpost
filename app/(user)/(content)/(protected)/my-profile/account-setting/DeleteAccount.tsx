@@ -1,14 +1,17 @@
 "use client";
 
-import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/Form/InputField";
 import { PasswordField } from "@/components/Form/PasswordField";
 import { toast } from "react-hot-toast";
 import { signOut } from "next-auth/react";
-import SubmitButton from "../Buttons/SubmitButton";
-import CancelButton from "../Buttons/CancelButton";
+import CancelButton from "@/components/Buttons/CancelButton";
+import SubmitButton from "@/components/Buttons/SubmitButton";
+import {
+  DeleteAccountFormProps,
+  deleteAccountSchema,
+} from "@/schemas/accountSchema";
 
 function DeleteAccount({
   setMenu,
@@ -20,32 +23,17 @@ function DeleteAccount({
     text: "",
   };
 
-  const formSchema = z.object({
-    password: z.string().nonempty("Password is required"),
-    text: z.string().nonempty("This field is required"),
-  });
-
-  type FormValuesProps = z.infer<typeof formSchema>;
-
-  const form = useForm<FormValuesProps>({
+  const form = useForm<DeleteAccountFormProps>({
     defaultValues,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(deleteAccountSchema),
   });
 
   const {
     formState: { isSubmitting },
   } = form;
 
-  const onSubmit = async (values: FormValuesProps) => {
+  const onSubmit = async (values: DeleteAccountFormProps) => {
     const toastDeleteAccount = toast.loading("Loading...");
-
-    if (values.text !== "delete my account") {
-      console.log("error: type the text correctly");
-      toast.error("Enter the text correctly", {
-        id: toastDeleteAccount,
-      });
-      return;
-    }
 
     const filteredValues = {
       password: values.password,

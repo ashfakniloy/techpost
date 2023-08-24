@@ -1,5 +1,5 @@
 import PostsSideSection from "@/components/Post/PostsSideSection";
-import { getPostsByCategory } from "@/prisma/find/getPostsByCategory";
+import { getPostsByCategory } from "@/db/queries/getPostsByCategory";
 
 async function CategorySideSection({
   cardTitle,

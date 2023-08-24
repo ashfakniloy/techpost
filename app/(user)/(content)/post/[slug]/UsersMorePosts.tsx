@@ -1,5 +1,5 @@
 import PostsSideSection from "@/components/Post/PostsSideSection";
-import { getMorePostsByUsername } from "@/prisma/find/getMorePostsByUsername";
+import { getMorePostsByUsername } from "@/db/queries/getMorePostsByUsername";
 
 async function UsersMorePosts({
   username,

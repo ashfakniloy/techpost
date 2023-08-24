@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CommentLikeButton from "./CommentLikeButton";
 import { getServerSession } from "next-auth";
-import { getCommentLikes } from "@/prisma/find/getCommentsLikes";
+import { getCommentLikes } from "@/db/queries/getCommentsLikes";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 async function CommentLike({ commentId }: { commentId: string }) {

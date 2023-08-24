@@ -73,6 +73,7 @@ export async function PUT(request: NextRequest) {
         },
         data: {
           editorsChoice: false,
+          updatedAt: postResponse?.updatedAt,
         },
       });
     }
@@ -83,6 +84,7 @@ export async function PUT(request: NextRequest) {
       },
       data: {
         editorsChoice: true,
+        updatedAt: postResponse?.updatedAt,
       },
     });
 

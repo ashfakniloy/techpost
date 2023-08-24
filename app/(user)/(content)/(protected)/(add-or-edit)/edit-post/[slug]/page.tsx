@@ -1,7 +1,7 @@
-import { getSinglePost } from "@/prisma/find/getSinglePost";
+import { getSinglePost } from "@/db/queries/getSinglePost";
 import { notFound } from "next/navigation";
 import EditPostForm from "./EditPostForm";
-import { getCategories } from "@/prisma/find/getCategories";
+import { getCategories } from "@/db/queries/getCategories";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";

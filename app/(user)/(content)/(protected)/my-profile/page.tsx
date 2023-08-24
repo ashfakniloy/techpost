@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import PostsView from "@/components/Post/PostsView";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getPostsByUserId } from "@/prisma/find/getrPostsByUserId";
+import { getPostsByUserId } from "@/db/queries/getrPostsByUserId";
 import { getServerSession } from "next-auth";
 import PostsHeader from "@/components/Post/PostsHeader";
 import PostsSkeleton from "@/components/Skeleton/PostsSkeleton";

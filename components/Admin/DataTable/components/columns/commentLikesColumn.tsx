@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "../data-table-column-header";
 
 // import { CommentLike } from "@/types";
-import { CommentTypes } from "@/prisma/find/getComments";
+import { CommentTypes } from "@/db/queries/getComments";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 
 type CommentLike = CommentTypes["commentsLikes"][number];

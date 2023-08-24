@@ -1,4 +1,4 @@
-import { getProfileByUserId } from "@/prisma/find/getProfileByUserId";
+import { getProfileByUserId } from "@/db/queries/getProfileByUserId";
 import { getServerSession } from "next-auth";
 import EditProfileForm from "./EditProfileForm";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";

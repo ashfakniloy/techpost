@@ -1,7 +1,7 @@
 import PostsView from "@/components/Post/PostsView";
 import ProfileTopSection from "./ProfileTopSection";
 import ProfileSideSection from "./ProfileSideSection";
-import { getPostsByUsername } from "@/prisma/find/getPostsByUsername";
+import { getPostsByUsername } from "@/db/queries/getPostsByUsername";
 import PostsHeader from "@/components/Post/PostsHeader";
 import PostsSkeleton from "@/components/Skeleton/PostsSkeleton";
 import { Suspense } from "react";
@@ -9,7 +9,7 @@ import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
 import BackButton from "@/components/BackButton";
 import ProfileTopSkeleton from "@/components/Skeleton/ProfileTopSkeleton";
 import { Metadata } from "next";
-import { getProfileByUsername } from "@/prisma/find/getProfileByUsername";
+import { getProfileByUsername } from "@/db/queries/getProfileByUsername";
 import { capitalizeWords } from "@/utils/capitalizeWords";
 
 // export const revalidate = 0;

@@ -1,16 +1,16 @@
 import PostsView from "@/components/Post/PostsView";
 import CategoryTopSection from "./CategoryTopSection";
 import CategorySideSection from "./CategorySideSection";
-import { getPostsByCategory } from "@/prisma/find/getPostsByCategory";
+import { getPostsByCategory } from "@/db/queries/getPostsByCategory";
 import { notFound } from "next/navigation";
-import { getCategories } from "@/prisma/find/getCategories";
+import { getCategories } from "@/db/queries/getCategories";
 import PostsHeader from "@/components/Post/PostsHeader";
 import { Suspense } from "react";
 import PostsSkeleton from "@/components/Skeleton/PostsSkeleton";
 import Categories from "@/components/Post/Categories";
 import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
 import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";
-import { getCategoryByName } from "@/prisma/find/getCategoryByName";
+import { getCategoryByName } from "@/db/queries/getCategoryByName";
 import { Metadata } from "next";
 import { capitalizeWords } from "@/utils/capitalizeWords";
 

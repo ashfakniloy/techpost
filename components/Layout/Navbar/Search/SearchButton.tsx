@@ -32,7 +32,7 @@ function SearchButton() {
   }, [pathname, params]);
 
   useEffect(() => {
-    title ? setLoading(true) : setLoading(false);
+    title.trim().length > 0 ? setLoading(true) : setLoading(false);
     setSearchResult(null);
   }, [title]);
 
@@ -55,7 +55,7 @@ function SearchButton() {
       }
     };
 
-    debouncedValue && getSearch();
+    debouncedValue.trim().length > 0 && getSearch();
 
     // setLoading(false);
   }, [debouncedValue]);

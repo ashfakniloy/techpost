@@ -5,7 +5,7 @@ import {
   EyeIcon,
 } from "@heroicons/react/24/outline";
 
-import { getCounts } from "@/prisma/find/getCounts";
+import { getCounts } from "@/db/queries/getCounts";
 
 async function Counts() {
   const { usersCount, postsCount, viewsCount, categoriesCount } =

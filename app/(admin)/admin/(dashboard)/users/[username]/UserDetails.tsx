@@ -1,8 +1,8 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Section from "@/components/Admin/Section";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
-import { getSingleUserAdmin } from "@/prisma/find/admin/getSingleUserAdmin";
-import { getProfileByUserId } from "@/prisma/find/getProfileByUserId";
+import { getSingleUserAdmin } from "@/db/queries/admin/getSingleUserAdmin";
+import { getProfileByUserId } from "@/db/queries/getProfileByUserId";
 import { Profile } from "@/types";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import { User } from "@prisma/client";

@@ -1,7 +1,7 @@
 import { IconFacebook } from "@/components/Icons/IconFacebook";
 import { IconLinkedin } from "@/components/Icons/IconLinkedin";
 import { IconTwitter } from "@/components/Icons/IconTwitter";
-import { getProfileByUsername } from "@/prisma/find/getProfileByUsername";
+import { getProfileByUsername } from "@/db/queries/getProfileByUsername";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import Image from "next/image";
 import Link from "next/link";

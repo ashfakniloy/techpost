@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
-import { getCommentReplies } from "@/prisma/find/getCommentReplies";
+import { getCommentReplies } from "@/db/queries/getCommentReplies";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 

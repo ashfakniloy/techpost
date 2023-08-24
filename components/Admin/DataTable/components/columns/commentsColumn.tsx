@@ -7,7 +7,7 @@ import Link from "next/link";
 
 import { CommentsAction } from "../actions/commentsAction";
 import { DataTableColumnHeader } from "../data-table-column-header";
-import type { CommentTypes } from "@/prisma/find/getComments";
+import type { CommentTypes } from "@/db/queries/getComments";
 import { getPluralize } from "@/utils/getPluralize";
 import { usePathname } from "next/navigation";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";

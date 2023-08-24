@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/prisma";
 
-export async function getPostsPerMonth() {
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth() + 1; // JavaScript months are zero-based, so add 1 to get the current month
+export async function getPostsViewsPerMonth() {
+  // const currentDate = new Date();
+  // const currentMonth = currentDate.getMonth() + 1; // JavaScript months are zero-based, so add 1 to get the current month
 
   const year = 2023; // Replace with the dynamic year
 
@@ -11,7 +11,7 @@ export async function getPostsPerMonth() {
   const endDate = new Date(0);
   endDate.setFullYear(year + 1);
 
-  const data = await prisma.post.groupBy({
+  const data = await prisma.view.groupBy({
     by: ["createdAt"],
     // where: {
     //   createdAt: {
@@ -31,7 +31,7 @@ export async function getPostsPerMonth() {
 
   // console.log("data", data);
 
-  const postsPermonth = data.reduce(
+  const postsViewsPerMonth = data.reduce(
     (acc, { createdAt, _count }) => {
       const month = createdAt.getMonth();
       acc[month].total += _count;
@@ -53,5 +53,5 @@ export async function getPostsPerMonth() {
     ]
   );
 
-  return { postsPermonth };
+  return { postsViewsPerMonth };
 }

@@ -5,16 +5,17 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import parser from "html-react-parser";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
+import { Loader2 } from "@/components/Loaders/Loader";
+import { removeHtmlTags } from "@/utils/removeHtmlTags";
+import { postSchema } from "@/schemas/postSchema";
 
 function PostPreviewPage() {
   const router = useRouter();
 
   const { data: session } = useSession();
-
-  console.log("session is", session);
 
   const currentDate = new Date();
 
@@ -26,30 +27,59 @@ function PostPreviewPage() {
     article: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [hasPost, setHasPost] = useState(false);
+
   useEffect(() => {
     // const persistedPost = JSON.parse(localStorage.getItem("newPost") || "");
 
     const persistedPost = localStorage.getItem("draftPost");
     const parsedPost = persistedPost && JSON.parse(persistedPost || "");
     setPreviewPost(parsedPost);
+    setHasPost(true);
+
+    // const parsed = formSchema.parse(previewPost);
+    // console.log("parsed", parsed);
+
+    // if (parsed.success === false) {
+    //   redirect("/add-post");
+    // }
   }, []);
 
+  // useEffect(() => {
+  //   const persistedPost = localStorage.getItem("draftPost");
+  //   const parsedPost = persistedPost && JSON.parse(persistedPost || "");
+  //   // console.log(parsedPost);
+
+  //   const regex = /(<([^>]+)>)/gi;
+  //   const hasArticle = !!parsedPost.article.replace(regex, "").length;
+
+  //   const parsed = formSchema.safeParse(previewPost);
+  //   console.log("parsed", parsed);
+
+  //   // if (
+  //   //   !parsedPost ||
+  //   //   Object.values(parsedPost).includes("") ||
+  //   //   !hasArticle ||
+  //   //   parsed.success !== true
+  //   // ) {
+  //   //   // router.replace("/add-post");
+
+  //   // }
+  // }, [previewPost]);
+
   useEffect(() => {
-    const persistedPost = localStorage.getItem("draftPost");
-    const parsedPost = persistedPost && JSON.parse(persistedPost || "");
-    // console.log(parsedPost);
+    const parsed = postSchema.safeParse(previewPost);
 
-    const regex = /(<([^>]+)>)/gi;
-    const hasArticle = !!parsedPost.article.replace(regex, "").length;
+    if (hasPost && parsed.success !== true) redirect("/add-post");
+  }, [hasPost]);
 
-    if (!parsedPost || Object.values(parsedPost).includes("") || !hasArticle)
-      router.replace("/add-post");
-  }, [previewPost]);
-
-  if (!previewPost) return;
+  console.log("article", removeHtmlTags(previewPost.article));
 
   const handlePublish = async () => {
     // console.log("previewPost", previewPost);
+    setIsSubmitting(true);
     const toastPublish = toast.loading("Loading...");
 
     const url = "/api/post";
@@ -82,10 +112,20 @@ function PostPreviewPage() {
       });
       console.log("error", data);
     }
+
+    setIsSubmitting(false);
   };
 
+  if (!hasPost) {
+    return (
+      <div className="min-h-[calc(100dvh-75px)] lg:min-h-[calc(100vh-75px)] flex justify-center items-center">
+        <Loader2 width="50" />
+      </div>
+    );
+  }
+
   return (
-    <div className=" max-w-full lg:max-w-[796px]">
+    <div className="max-w-full lg:max-w-[796px]">
       <h3 className="mb-3 text-[22px] lg:text-2xl text-center lg:text-start font-extrabold text-gray-700 font-montserrat dark:text-gray-400">
         Post Preview
       </h3>
@@ -159,15 +199,19 @@ function PostPreviewPage() {
         </div>
       </div>
 
-      <div className="flex justify-end items-center gap-5 mt-5 mb-5">
+      <div className="flex justify-end items-center gap-6 mt-5 mb-5">
         <Link href="/add-post">
-          <button className="px-4 py-2.5 text-sm font-bold text-white bg-gray-900 rounded-md dark:text-gray-900 dark:bg-gray-50">
+          <button
+            className="min-w-[120px] py-[9px] hover:text-white dark:hover:text-gray-900 border border-gray-800 dark:border-gray-200 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-200 rounded-md text-sm font-bold disabled:cursor-not-allowed disabled:opacity-50"
+            disabled={isSubmitting}
+          >
             Edit
           </button>
         </Link>
         <button
-          className="px-4 py-2.5 text-sm font-bold text-white bg-gray-900 rounded-md dark:text-gray-900 dark:bg-gray-50"
+          className="min-w-[120px] py-2.5 text-sm font-bold text-white bg-gray-900 rounded-md dark:text-gray-900 dark:bg-white disabled:cursor-not-allowed disabled:opacity-50"
           onClick={handlePublish}
+          disabled={isSubmitting}
         >
           Publish
         </button>

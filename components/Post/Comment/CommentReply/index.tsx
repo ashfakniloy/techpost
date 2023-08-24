@@ -1,4 +1,4 @@
-import { getCommentReplies } from "@/prisma/find/getCommentReplies";
+import { getCommentReplies } from "@/db/queries/getCommentReplies";
 import Link from "next/link";
 import Image from "next/image";
 import { getTimeDistance } from "@/utils/getTimeDistance";

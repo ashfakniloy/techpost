@@ -45,8 +45,11 @@ function List({
   return (
     <section className="border-b last:border-b-0 border-gray-300 dark:border-gray-700 py-5 lg:py-10">
       <div className="flex lg:items-center gap-2.5 lg:gap-4">
-        <Link href={`/post/${slug}`}>
-          <div className="w-[100px] h-[60px] lg:w-[230px] lg:h-[150px] mt-2 lg:mt-0 relative overflow-hidden rounded-md">
+        <Link
+          href={`/post/${slug}`}
+          className="w-[100px] h-[60px] lg:w-[230px] lg:h-[150px] mt-2 lg:mt-0"
+        >
+          <div className="w-full h-full relative overflow-hidden rounded-md">
             <Image
               src={imageUrl}
               alt="programming"
@@ -60,7 +63,7 @@ function List({
           </div>
         </Link>
 
-        <div className="flex-1 min-h-[152px] flex flex-col justify-between min-w-[150px] lg:max-w-[540px]">
+        <div className="flex-1 min-h-[90px] lg:min-h-[150px] flex flex-col justify-between min-w-[150px] lg:max-w-[540px]">
           <div className="space-y-1.5">
             {/* <div className="max-w-[540px]"> */}
             <div className="">

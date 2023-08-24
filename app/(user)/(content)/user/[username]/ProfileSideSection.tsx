@@ -1,5 +1,5 @@
 import PostsSideSection from "@/components/Post/PostsSideSection";
-import { getPostsByUsername } from "@/prisma/find/getPostsByUsername";
+import { getPostsByUsername } from "@/db/queries/getPostsByUsername";
 
 async function ProfileSideSection({
   cardTitle,
@@ -27,7 +27,7 @@ export default ProfileSideSection;
 
 // import PostsSideSection from "@/components/Post/PostsSideSection";
 // import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
-// import { getPostsByUsername } from "@/prisma/find/getPostsByUsename";
+// import { getPostsByUsername } from "@/db/queries/getPostsByUsename";
 // import { Suspense } from "react";
 
 // async function UserPostsCard({

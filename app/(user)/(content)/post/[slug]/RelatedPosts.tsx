@@ -1,5 +1,5 @@
 import PostsSideSection from "@/components/Post/PostsSideSection";
-import { getRelatedPosts } from "@/prisma/find/getRelatedPosts";
+import { getRelatedPosts } from "@/db/queries/getRelatedPosts";
 
 async function RelatedPosts({
   categoryName,

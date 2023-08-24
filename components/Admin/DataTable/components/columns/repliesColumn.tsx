@@ -10,7 +10,7 @@ import Link from "next/link";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 
 import { DataTableColumnHeader } from "../data-table-column-header";
-import type { CommentTypes } from "@/prisma/find/getComments";
+import type { CommentTypes } from "@/db/queries/getComments";
 import { RepliesAction } from "../actions/repliesAction";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 

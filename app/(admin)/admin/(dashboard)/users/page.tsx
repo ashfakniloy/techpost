@@ -1,7 +1,7 @@
 import { usersColumns } from "@/components/Admin/DataTable/components/columns/usersColumns";
 import { DataTable } from "@/components/Admin/DataTable/components/data-table";
 import Section from "@/components/Admin/Section";
-import { getAllUsersAdmin } from "@/prisma/find/admin/getAllUsersAdmin";
+import { getAllUsersAdmin } from "@/db/queries/admin/getAllUsersAdmin";
 
 async function AdminUsersPage({
   searchParams: { page, limit, sort, search },

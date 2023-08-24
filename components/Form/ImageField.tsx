@@ -5,7 +5,7 @@
 // import { Loader3 } from "../Loaders/Loader";
 // import Space from "@/public/images/space.jpg";
 
-// export const FileField = ({
+// export const ImageField = ({
 //   label,
 //   name,
 //   ...props
@@ -172,7 +172,7 @@ import Image from "next/image";
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Loader3 } from "../Loaders/Loader";
 
-export const FileField = ({
+export const ImageField = ({
   label,
   name,
   isAdmin,

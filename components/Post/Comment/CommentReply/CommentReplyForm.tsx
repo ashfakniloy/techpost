@@ -1,11 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
 import { TextAreaField } from "@/components/Form/TextAreaField";
+import { CommentReplyProps, commentReplySchema } from "@/schemas/commentSchema";
 
 function CommentsReplyForm({
   postId,
@@ -23,15 +23,10 @@ function CommentsReplyForm({
   const defaultValues = {
     commentReply: "",
   };
-  const formSchema = z.object({
-    commentReply: z.string().nonempty("Comment Reply is required"),
-  });
 
-  type FormValuesProps = z.infer<typeof formSchema>;
-
-  const form = useForm<FormValuesProps>({
+  const form = useForm<CommentReplyProps>({
     defaultValues,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(commentReplySchema),
   });
 
   const {
@@ -39,7 +34,7 @@ function CommentsReplyForm({
     formState: { isSubmitting },
   } = form;
 
-  const onSubmit = async (values: FormValuesProps) => {
+  const onSubmit = async (values: CommentReplyProps) => {
     // console.log("values", values.commentReply, postId);
     // return;
     const { commentReply } = values;
@@ -69,11 +64,11 @@ function CommentsReplyForm({
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-2"
+          className="space-y-5"
           noValidate
         >
           <TextAreaField name="commentReply" placeholder="Write a reply" />
-          <div className="flex justify-end gap-4">
+          <div className="flex justify-end gap-6">
             <button
               type="button"
               aria-label="cancel"

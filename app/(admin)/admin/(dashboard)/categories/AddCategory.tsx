@@ -1,7 +1,7 @@
 "use client";
 
 import { DynamicField } from "@/components/Form/DynamicField";
-import { FileField } from "@/components/Form/FIleField";
+import { ImageField } from "@/components/Form/ImageField";
 import { InputField } from "@/components/Form/InputField";
 import {
   AlertDialog,
@@ -9,20 +9,14 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { z } from "zod";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { CategoryFormProps, categorySchema } from "@/schemas/categorySchema";
 
 function AddCategory() {
   const [showModal, setShowModal] = useState(false);
@@ -36,29 +30,12 @@ function AddCategory() {
     quotes: [{ quote: "", author: "" }],
   };
 
-  const formSchema = z.object({
-    name: z.string().nonempty("Category is required"),
-    imageUrl: z.string().nonempty("Image is required"),
-    imageId: z.string().nonempty("Image is required"),
-    quotes: z
-      .array(
-        z.object({
-          quote: z.string().nonempty("Quote required"),
-          author: z.string().nonempty("Quote author required"),
-        })
-      )
-      // .nullable()
-      .optional(),
-  });
-
-  type FormValuesProps = z.infer<typeof formSchema>;
-
-  const form = useForm<FormValuesProps>({
+  const form = useForm<CategoryFormProps>({
     defaultValues,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(categorySchema),
   });
 
-  const onSubmit = async (values: FormValuesProps) => {
+  const onSubmit = async (values: CategoryFormProps) => {
     // console.log(values);
     // return;
     setIsSubmitting(true);
@@ -125,7 +102,7 @@ function AddCategory() {
                 >
                   <InputField type="text" label="Category Name" name="name" />
 
-                  <FileField label="Image" name="imageUrl" isAdmin />
+                  <ImageField label="Image" name="imageUrl" isAdmin />
 
                   {/* <DynamicField
                label="Quote"

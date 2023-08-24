@@ -1,15 +1,9 @@
-import Paths from "@/components/Admin/Layout/Paths";
-import { getCategories } from "@/prisma/find/getCategories";
-import { getCategoryByName } from "@/prisma/find/getCategoryByName";
-import { Squares2X2Icon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { getCategoryByName } from "@/db/queries/getCategoryByName";
 import { notFound } from "next/navigation";
 import CategoryInfo from "./CategoryInfo";
 import CategoryQuotes from "./CategoryQuotes";
 import { DataTable } from "@/components/Admin/DataTable/components/data-table";
-import { postsColumns } from "@/components/Admin/DataTable/components/columns/postsColumns";
-import { getPostsByCategory } from "@/prisma/find/getPostsByCategory";
-import { getAllPostsAdmin } from "@/prisma/find/admin/getAllPostsAdmin";
+import { getAllPostsAdmin } from "@/db/queries/admin/getAllPostsAdmin";
 import { categoriesPostsColumn } from "@/components/Admin/DataTable/components/columns/categoriesPostsColumn";
 import CategoryOption from "./CategoryOption";
 import Section from "@/components/Admin/Section";

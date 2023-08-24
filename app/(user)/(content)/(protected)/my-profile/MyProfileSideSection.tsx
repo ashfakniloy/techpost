@@ -2,7 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { IconFacebook } from "@/components/Icons/IconFacebook";
 import { IconLinkedin } from "@/components/Icons/IconLinkedin";
 import { IconTwitter } from "@/components/Icons/IconTwitter";
-import { getProfileByUserId } from "@/prisma/find/getProfileByUserId";
+import { getProfileByUserId } from "@/db/queries/getProfileByUserId";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import { getServerSession } from "next-auth";
 import Image from "next/image";

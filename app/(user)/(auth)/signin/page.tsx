@@ -118,12 +118,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
-import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/Form/InputField";
 import { Loader } from "@/components/Loaders/Loader";
 import { PasswordField } from "@/components/Form/PasswordField";
+import { SigninFormProps, signinSchema } from "@/schemas/signinSchema";
 // import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function UserSigninPage() {
@@ -135,23 +135,16 @@ function UserSigninPage() {
     password: "",
   };
 
-  const formSchema = z.object({
-    email: z.string().nonempty("Email is required").email("Invalid email"),
-    password: z.string().nonempty("Password is required"),
-  });
-
-  type FormValuesProps = z.infer<typeof formSchema>;
-
-  const form = useForm<FormValuesProps>({
+  const form = useForm<SigninFormProps>({
     defaultValues,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(signinSchema),
   });
 
   const {
     formState: { isSubmitting },
   } = form;
 
-  const onSubmit = async (values: FormValuesProps) => {
+  const onSubmit = async (values: SigninFormProps) => {
     // console.log("login", values);
     // return;
 

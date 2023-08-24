@@ -5,7 +5,7 @@ import {
   EyeIcon,
 } from "@heroicons/react/24/outline";
 import SingleCard from "./SingleCard";
-import { getCounts } from "@/prisma/find/getCounts";
+import { getCounts } from "@/db/queries/getCounts";
 
 async function DashBoardCards() {
   const { usersCount, postsCount, viewsCount, categoriesCount } =

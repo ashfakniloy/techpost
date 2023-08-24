@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import DeleteAccount from "@/components/Account/DeleteAccount";
-import EmailChange from "@/components/Account/EmailChange";
-import PasswordChange from "@/components/Account/PasswordChange";
-import UsernameChange from "@/components/Account/UsernameChange";
+
 import { useSession } from "next-auth/react";
+import UsernameChange from "./UsernameChange";
+import EmailChange from "./EmailChange";
+import PasswordChange from "./PasswordChange";
+import DeleteAccount from "./DeleteAccount";
 
 function AccountSettingpage() {
   const { data: session } = useSession();

@@ -37,7 +37,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Modal from "@/components/Modal";
 import Link from "next/link";
-import { PostAdminTypes } from "@/prisma/find/admin/getAllPostsAdmin";
+import { PostAdminTypes } from "@/db/queries/admin/getAllPostsAdmin";
 
 interface PostsActions<TData> {
   row: Row<TData>;

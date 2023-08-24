@@ -1,9 +1,9 @@
-import { getSinglePost } from "@/prisma/find/getSinglePost";
+import { getSinglePost } from "@/db/queries/getSinglePost";
 import React from "react";
 import SinglePost from "./SinglePost";
 import PostLikes from "./PostLikes";
 import PostComments from "./PostComments";
-import { getSinglePostAdmin } from "@/prisma/find/admin/getSinglePostAdmin";
+import { getSinglePostAdmin } from "@/db/queries/admin/getSinglePostAdmin";
 import PostInfo from "./PostInfo";
 import PostOption from "./PostOption";
 

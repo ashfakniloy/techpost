@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getUserById } from "@/prisma/find/getUserById";
+import { getUserById } from "@/db/queries/getUserById";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 

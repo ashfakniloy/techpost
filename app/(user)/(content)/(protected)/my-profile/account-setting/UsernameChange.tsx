@@ -1,14 +1,14 @@
 "use client";
 
-import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/Form/InputField";
 import { PasswordField } from "@/components/Form/PasswordField";
 import { toast } from "react-hot-toast";
 import { signOut } from "next-auth/react";
-import SubmitButton from "../Buttons/SubmitButton";
-import CancelButton from "../Buttons/CancelButton";
+import CancelButton from "@/components/Buttons/CancelButton";
+import SubmitButton from "@/components/Buttons/SubmitButton";
+import { UsernameFormProps, usernameSchema } from "@/schemas/accountSchema";
 
 function UsernameChange({
   currentUsername,
@@ -22,32 +22,16 @@ function UsernameChange({
     password: "",
   };
 
-  const formSchema = z.object({
-    username: z
-      .string()
-      .nonempty("Username is required")
-      .min(3, "Username must be at least 3 characters")
-      .max(30, "Username must be at most 30 characters")
-      .regex(
-        /^[a-zA-Z0-9_\s]+$/,
-        "Invalid username. Letters, numbers, spaces or underscores only"
-      )
-      .regex(/^[a-zA-Z][a-zA-Z0-9_\s]*$/, "Username must start with a letter"),
-    password: z.string().nonempty("Password is required"),
-  });
-
-  type FormValuesProps = z.infer<typeof formSchema>;
-
-  const form = useForm<FormValuesProps>({
+  const form = useForm<UsernameFormProps>({
     defaultValues,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(usernameSchema),
   });
 
   const {
     formState: { isSubmitting },
   } = form;
 
-  const onSubmit = async (values: FormValuesProps) => {
+  const onSubmit = async (values: UsernameFormProps) => {
     if (values.username === currentUsername) {
       console.log("Old and new username are same!");
       toast.error("Old and new username are same!");

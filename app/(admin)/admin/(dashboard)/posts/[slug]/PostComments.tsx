@@ -1,4 +1,4 @@
-import { CommentTypes, getComments } from "@/prisma/find/getComments";
+import { CommentTypes, getComments } from "@/db/queries/getComments";
 import Image from "next/image";
 import Link from "next/link";
 import { repliesColumn } from "@/components/Admin/DataTable/components/columns/repliesColumn";

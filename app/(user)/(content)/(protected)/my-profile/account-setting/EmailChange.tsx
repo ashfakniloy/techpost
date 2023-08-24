@@ -1,14 +1,14 @@
 "use client";
 
-import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/Form/InputField";
 import { PasswordField } from "@/components/Form/PasswordField";
 import { toast } from "react-hot-toast";
 import { signOut } from "next-auth/react";
-import SubmitButton from "../Buttons/SubmitButton";
-import CancelButton from "../Buttons/CancelButton";
+import CancelButton from "@/components/Buttons/CancelButton";
+import SubmitButton from "@/components/Buttons/SubmitButton";
+import { EmailFormProps, emailSchema } from "@/schemas/accountSchema";
 
 function EmailChange({
   currentEmail,
@@ -22,23 +22,16 @@ function EmailChange({
     password: "",
   };
 
-  const formSchema = z.object({
-    email: z.string().nonempty("Email is required").email("Invalid email"),
-    password: z.string().nonempty("Password is required"),
-  });
-
-  type FormValuesProps = z.infer<typeof formSchema>;
-
-  const form = useForm<FormValuesProps>({
+  const form = useForm<EmailFormProps>({
     defaultValues,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(emailSchema),
   });
 
   const {
     formState: { isSubmitting },
   } = form;
 
-  const onSubmit = async (values: FormValuesProps) => {
+  const onSubmit = async (values: EmailFormProps) => {
     if (values.email === currentEmail) {
       console.log("Old and new email are same!");
       toast.error("Old and new email are same!");

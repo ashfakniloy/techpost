@@ -5,7 +5,7 @@
 // import parser from "html-react-parser";
 // import { getServerSession } from "next-auth";
 // import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-// import { getSinglePost } from "@/prisma/find/getSinglePost";
+// import { getSinglePost } from "@/db/queries/getSinglePost";
 // import { notFound } from "next/navigation";
 
 // async function SinglePost({ postId }: { postId: string }) {
@@ -107,7 +107,7 @@
 // // import parser from "html-react-parser";
 // // import { getServerSession } from "next-auth";
 // // import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-// // import { getSinglePost } from "@/prisma/find/getSinglePost";
+// // import { getSinglePost } from "@/db/queries/getSinglePost";
 // // import { notFound } from "next/navigation";
 // // import PostLike from "@/components/Post/PostLike";
 // // import { EyeIcon } from "@heroicons/react/24/solid";

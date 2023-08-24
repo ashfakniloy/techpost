@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/prisma/find/getAllPosts";
+import { getAllPosts } from "@/db/queries/getAllPosts";
 import PostsSideSection from "@/components/Post/PostsSideSection";
 
 async function HomeSideSection({

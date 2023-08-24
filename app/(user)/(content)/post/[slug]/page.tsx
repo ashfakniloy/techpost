@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { EyeIcon } from "@heroicons/react/24/solid";
 import Comment from "@/components/Post/Comment";
-import { getSinglePost } from "@/prisma/find/getSinglePost";
+import { getSinglePost } from "@/db/queries/getSinglePost";
 import parser from "html-react-parser";
 import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";

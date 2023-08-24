@@ -34,19 +34,24 @@ function SinglePost({ post }: { post: SinglePostProps }) {
   if (!post) return;
 
   return (
-    <div className="px-3 py-6 lg:px-6 lg:py-6 rounded-lg bg-gray-50 dark:bg-custom-gray6 lg:w-[850px] shadow-md">
-      <div className="mb-4 flex justify-between">
-        <div className="">
+    <div className="relative px-3 py-6 lg:px-6 lg:py-6 rounded-lg bg-gray-50 dark:bg-custom-gray6 lg:w-[850px] shadow-md">
+      <div className="mt-1.5 mb-4 flex justify-between items-center">
+        <div className=" text-gray-700 dark:text-gray-300 ">
           <Link
-            href={`/admin/categories/${post.categoryName}`}
-            className="capitalize text-sm lg:text-base text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-500"
+            href={`/category/${post.categoryName}`}
+            className="capitalize text-sm lg:text-base hover:text-blue-800 dark:hover:text-blue-500"
           >
             {post.categoryName}
           </Link>
         </div>
 
-        {post.editorsChoice && <EditorsChoiceBadge />}
+        {post.editorsChoice && (
+          <div className="absolute right-2 lg:right-5">
+            <EditorsChoiceBadge />
+          </div>
+        )}
       </div>
+
       <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
         <h1 className="text-2xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 font-montserrat">
           {post.title}

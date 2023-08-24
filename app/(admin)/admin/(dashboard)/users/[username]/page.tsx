@@ -1,8 +1,8 @@
 import { userPostsColumn } from "@/components/Admin/DataTable/components/columns/userPostsColumn";
 import { DataTable } from "@/components/Admin/DataTable/components/data-table";
 import Section from "@/components/Admin/Section";
-import { getAllPostsAdmin } from "@/prisma/find/admin/getAllPostsAdmin";
-import { getSingleUserAdmin } from "@/prisma/find/admin/getSingleUserAdmin";
+import { getAllPostsAdmin } from "@/db/queries/admin/getAllPostsAdmin";
+import { getSingleUserAdmin } from "@/db/queries/admin/getSingleUserAdmin";
 import React from "react";
 import UserDetails from "./UserDetails";
 import { notFound } from "next/navigation";

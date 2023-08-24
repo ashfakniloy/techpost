@@ -7,12 +7,13 @@ import useFormPersist from "react-hook-form-persist";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/Form/InputField";
 import { SelectField } from "@/components/Form/SelectField";
-import { FileField } from "@/components/Form/FIleField";
+import { ImageField } from "@/components/Form/ImageField";
 import { RichTextField } from "@/components/Form/RichTextField";
+import { useState } from "react";
+import { Loader2 } from "@/components/Loaders/Loader";
+import { PostFormProps, postSchema } from "@/schemas/postSchema";
 
 function AddPostForm({ categories }: { categories: string[] }) {
-  const router = useRouter();
-
   const defaultValues = {
     title: "",
     categoryName: "",
@@ -21,48 +22,56 @@ function AddPostForm({ categories }: { categories: string[] }) {
     article: "",
   };
 
-  const formSchema = z
-    .object({
-      title: z
-        .string()
-        .nonempty("Title is required")
-        .min(5, "Title must be at least 5 characters")
-        .max(150, "Title must be at most 150 characters"),
-      categoryName: z.string().nonempty("Category is required"),
-      imageUrl: z.string().nonempty("Image is required"),
-      imageId: z.string().nonempty("Image is required"),
-      article: z.string().nonempty("Article is required"),
-    })
-    .refine((value) => value.article !== "<p></p>", {
-      message: "Article is required",
-      path: ["article"],
-    });
+  const router = useRouter();
 
-  type FormValuesProps = z.infer<typeof formSchema>;
+  const [isClearing, setIsClearing] = useState(false);
 
-  const form = useForm<FormValuesProps>({
+  const form = useForm<PostFormProps>({
     defaultValues,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(postSchema),
   });
 
-  const { watch, setValue, reset } = form;
+  const { watch, setValue, reset, getValues } = form;
 
   const hasDraft = Object.values(form.watch()).some(
     (value) => value !== "" && value !== "<p></p>"
   );
 
-  const { clear: clearDraft } = useFormPersist("draftPost", {
+  // const { clear: clearDraft } = useFormPersist("draftPost", {
+  //   watch,
+  //   setValue,
+  //   storage: typeof window !== "undefined" ? window.localStorage : undefined, // default window.sessionStorage
+  // });
+
+  useFormPersist("draftPost", {
     watch,
     setValue,
     storage: typeof window !== "undefined" ? window.localStorage : undefined, // default window.sessionStorage
   });
 
-  const handleClear = () => {
-    clearDraft();
-    reset();
+  const imageIdValue = getValues("imageId");
+
+  const deleteImage = async () => {
+    const response = await fetch(`/api/image?imageId=${imageIdValue}`, {
+      method: "DELETE",
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      console.log("success image delete", data);
+    } else {
+      console.log("error image delete", data);
+    }
   };
 
-  const onSubmit = (values: FormValuesProps) => {
+  const handleClear = async () => {
+    setIsClearing(true);
+    imageIdValue && (await deleteImage());
+    reset();
+    setIsClearing(false);
+  };
+
+  const onSubmit = (values: PostFormProps) => {
     console.log(values);
     router.push("/add-post/preview");
   };
@@ -86,21 +95,27 @@ function AddPostForm({ categories }: { categories: string[] }) {
             placeholder="Select Category"
             options={categories}
           />
-          <FileField label="Image" name="imageUrl" />
+          <ImageField label="Image" name="imageUrl" />
           <RichTextField label="Article" name="article" />
-          <div className="flex items-center gap-5 justify-end pt-4">
+          <div className="flex items-center gap-6 justify-end pt-4">
             {hasDraft && (
               <button
                 type="button"
-                className="px-4 py-2.5 text-sm font-bold text-white bg-black rounded-md dark:text-black dark:bg-white"
+                className="relative min-w-[120px] py-[9px] hover:text-white dark:hover:text-gray-900 border border-gray-800 dark:border-gray-200 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-200 rounded-md text-sm font-bold disabled:cursor-not-allowed disabled:opacity-50"
                 onClick={handleClear}
+                disabled={isClearing}
               >
-                Clear
+                {isClearing && (
+                  <span className="absolute flex left-[8px] items-center inset-y-0">
+                    <Loader2 width="25" />
+                  </span>
+                )}
+                <span>Clear</span>
               </button>
             )}
             <button
               type="submit"
-              className="px-4 py-2.5 text-sm font-bold text-white bg-black rounded-md dark:text-black dark:bg-white"
+              className="min-w-[120px] py-2.5 text-sm font-bold text-white bg-gray-900 rounded-md dark:text-gray-900 dark:bg-white"
             >
               Preview
             </button>

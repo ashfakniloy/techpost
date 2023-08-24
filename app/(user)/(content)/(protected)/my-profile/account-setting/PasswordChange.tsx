@@ -1,13 +1,13 @@
 "use client";
 
-import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PasswordField } from "@/components/Form/PasswordField";
 import { toast } from "react-hot-toast";
 import { signOut } from "next-auth/react";
-import SubmitButton from "../Buttons/SubmitButton";
-import CancelButton from "../Buttons/CancelButton";
+import CancelButton from "@/components/Buttons/CancelButton";
+import SubmitButton from "@/components/Buttons/SubmitButton";
+import { PasswordFormProps, passwordSchema } from "@/schemas/accountSchema";
 
 function PasswordChange({
   setMenu,
@@ -20,37 +20,16 @@ function PasswordChange({
     retypePassword: "",
   };
 
-  const formSchema = z
-    .object({
-      currentPassword: z.string().nonempty("Current Password is required"),
-      newPassword: z
-        .string()
-        .nonempty("New Password is required")
-        .min(6, "Password must be at least 6 characters")
-        .regex(
-          /^(?=.*[a-zA-Z])(?=.*\d).+$/,
-          // "Password must contain at least 1 letter and 1 number"
-          "Password requires atleast 1 letter and 1 number."
-        ),
-      retypePassword: z.string().nonempty("Re-enter your new password"),
-    })
-    .refine((data) => data.newPassword === data.retypePassword, {
-      message: "Retype new password correctly",
-      path: ["retypePassword"],
-    });
-
-  type FormValuesProps = z.infer<typeof formSchema>;
-
-  const form = useForm<FormValuesProps>({
+  const form = useForm<PasswordFormProps>({
     defaultValues,
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(passwordSchema),
   });
 
   const {
     formState: { isSubmitting },
   } = form;
 
-  const onSubmit = async (values: FormValuesProps) => {
+  const onSubmit = async (values: PasswordFormProps) => {
     if (values.currentPassword === values.newPassword) {
       console.log("Old and new password are same!");
       toast.error("Old and new password are same!");

@@ -1,7 +1,7 @@
 "use client";
 
 import { DynamicField } from "@/components/Form/DynamicField";
-import { FileField } from "@/components/Form/FIleField";
+import { ImageField } from "@/components/Form/ImageField";
 import { InputField } from "@/components/Form/InputField";
 import {
   AlertDialog,

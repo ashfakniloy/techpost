@@ -5,17 +5,13 @@ import { X, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { DataTableViewOptions } from "./data-table-view-options";
-
-// import { priorities, statuses } from "../data/data";
-import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+// import { DataTableViewOptions } from "./data-table-view-options";
+// import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import useFullPath from "@/hooks/useFullPath";
 import useDebounce from "@/hooks/useDebounce";
 import { toast } from "react-hot-toast";
 import Modal from "@/components/Modal";
-import { Post } from "../data/schema";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -42,9 +38,9 @@ export function DataTableToolbar<TData>({
   showCheckbox,
   setShowCheckbox,
 }: DataTableToolbarProps<TData>) {
-  const isFiltered =
-    table.getPreFilteredRowModel().rows.length >
-    table.getFilteredRowModel().rows.length;
+  // const isFiltered =
+  //   table.getPreFilteredRowModel().rows.length >
+  //   table.getFilteredRowModel().rows.length;
 
   const router = useRouter();
   const pathname = usePathname();
@@ -119,7 +115,10 @@ export function DataTableToolbar<TData>({
       ? `${pathname}?search=${debouncedValue}&limit=${limitNumber}`
       : pathname;
 
-    debouncedValue && path && router.push(path, { scroll: false });
+    debouncedValue &&
+      debouncedValue.trim().length > 0 &&
+      path &&
+      router.push(path, { scroll: false });
     debouncedValue === "" &&
       pathname &&
       router.push(pathname, { scroll: false });

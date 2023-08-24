@@ -1,4 +1,4 @@
-import { getCategories } from "@/prisma/find/getCategories";
+import { getCategories } from "@/db/queries/getCategories";
 import Link from "next/link";
 import AddCategory from "./AddCategory";
 

@@ -5,7 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "../data-table-column-header";
 import { PostsActions } from "../actions/PostsActions";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
-// import { PostAdminTypes } from "@/prisma/find/admin/getAllPostsAdmin";
+// import { PostAdminTypes } from "@/db/queries/admin/getAllPostsAdmin";
 import Link from "next/link";
 import { Post } from "@prisma/client";
 

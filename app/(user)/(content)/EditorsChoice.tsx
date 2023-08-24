@@ -1,5 +1,5 @@
 // import { ClientFormattedDate } from "@/components/ClientFormattedDate";
-// import { getAllPosts } from "@/prisma/find/getAllPosts";
+// import { getAllPosts } from "@/db/queries/getAllPosts";
 // import Image from "next/image";
 // import Link from "next/link";
 // import parser from "html-react-parser";
@@ -83,7 +83,7 @@
 // export default EditorsChoice;
 
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
-import { getAllPosts } from "@/prisma/find/getAllPosts";
+import { getAllPosts } from "@/db/queries/getAllPosts";
 import Image from "next/image";
 import Link from "next/link";
 import parser from "html-react-parser";
@@ -93,8 +93,8 @@ import {
   CheckBadgeIcon,
   EyeIcon,
 } from "@heroicons/react/24/solid";
-import { getSinglePost } from "@/prisma/find/getSinglePost";
-import { getEditorsChoicePost } from "@/prisma/find/getEditorsChoicePost";
+import { getSinglePost } from "@/db/queries/getSinglePost";
+import { getEditorsChoicePost } from "@/db/queries/getEditorsChoicePost";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import PostLike from "@/components/Post/PostLike";
 import { getTimeDistance } from "@/utils/getTimeDistance";

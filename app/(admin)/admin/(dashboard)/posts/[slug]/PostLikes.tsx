@@ -2,7 +2,7 @@ import { likesColumns } from "@/components/Admin/DataTable/components/columns/li
 import { DataTable } from "@/components/Admin/DataTable/components/data-table";
 import Section from "@/components/Admin/Section";
 import { Like } from "@/types";
-// import type { PostAdminTypes } from "@/prisma/find/admin/getSinglePostAdmin";
+// import type { PostAdminTypes } from "@/db/queries/admin/getSinglePostAdmin";
 
 // type Likes = PostAdminTypes["likes"]
 

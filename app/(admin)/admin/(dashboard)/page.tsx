@@ -1,19 +1,17 @@
 // import DashBoardCards from "@/components/Admin/Cards";
-import { getPostsPerMonth } from "@/prisma/find/admin/getPostsPerMonth";
+import { getPostsPerMonth } from "@/db/queries/admin/getPostsPerMonth";
 import Counts from "./Counts";
-import { getViewCountPerDay } from "@/prisma/find/getViewCountPerDay";
 import PostsOverview from "./PostsOverview";
 import UsersOverview from "./UsersOverview";
-import { getUsersperMonth } from "@/prisma/find/admin/getUsersPerMonth";
+import { getUsersperMonth } from "@/db/queries/admin/getUsersPerMonth";
 import ViewsOverview from "./ViewsOverview";
-import { getPostsViewsPerMonth } from "@/prisma/find/admin/getPostsViewsPerMonth";
-import { getAllPosts } from "@/prisma/find/getAllPosts";
+import { getPostsViewsPerMonth } from "@/db/queries/admin/getPostsViewsPerMonth";
+import { getAllPosts } from "@/db/queries/getAllPosts";
 import Section from "@/components/Admin/Section";
 import { DataTable } from "@/components/Admin/DataTable/components/data-table";
 import { popularPostsColumn } from "@/components/Admin/DataTable/components/columns/popularPostsColumn";
 
 async function AdminDashboardPage() {
-  // const { postsPermonth } = await getViewCountPerDay();
   const { postsPermonth } = await getPostsPerMonth();
   const { usersPerMonth } = await getUsersperMonth();
   const { postsViewsPerMonth } = await getPostsViewsPerMonth();

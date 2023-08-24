@@ -2,7 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Footer from "@/components/Layout/Footer";
 import Navbar from "@/components/Layout/Navbar";
 import DeviceIdSet from "@/components/Post/DeviceIdSet";
-import { getCategories } from "@/prisma/find/getCategories";
+import { getCategories } from "@/db/queries/getCategories";
 import { getServerSession } from "next-auth";
 
 // export const metadata = {
