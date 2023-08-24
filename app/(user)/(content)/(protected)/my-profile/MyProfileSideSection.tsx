@@ -1,15 +1,14 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import Image from "next/image";
+import Link from "next/link";
 import { IconFacebook } from "@/components/Icons/IconFacebook";
 import { IconLinkedin } from "@/components/Icons/IconLinkedin";
 import { IconTwitter } from "@/components/Icons/IconTwitter";
-import { getProfileByUserId } from "@/db/queries/getProfileByUserId";
 import { getTimeDistance } from "@/utils/getTimeDistance";
-import { getServerSession } from "next-auth";
-import Image from "next/image";
-import Link from "next/link";
+import { getAuthSession } from "@/lib/next-auth";
+import { getProfileByUserId } from "@/db/queries/getProfileByUserId";
 
 async function MyProfileSideSection() {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
   const userId = session?.user.id;
 
   // if(!userId) return

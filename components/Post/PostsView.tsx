@@ -1,11 +1,10 @@
 import { cookies } from "next/headers";
-import { getServerSession } from "next-auth";
+import { PER_PAGE } from "@/config";
+import type { Post } from "@prisma/client";
 import List from "./List";
 import Card from "./Card";
-import { Post } from "@prisma/client";
 import Pagination from "./Pagination";
-import { PER_PAGE } from "@/config";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getAuthSession } from "@/lib/next-auth";
 
 type Props = Post & {
   user: {
@@ -27,7 +26,7 @@ async function PostsView({
   postCount: number;
   limit: number;
 }) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   const cookieStore = cookies();
   const view = cookieStore.get("view")?.value;

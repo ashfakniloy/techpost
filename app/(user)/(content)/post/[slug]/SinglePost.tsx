@@ -3,13 +3,13 @@
 // import Image from "next/image";
 // import Link from "next/link";
 // import parser from "html-react-parser";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+// import { getAuthSession } from "@/lib/next-auth";
+
 // import { getSinglePost } from "@/db/queries/getSinglePost";
 // import { notFound } from "next/navigation";
 
 // async function SinglePost({ postId }: { postId: string }) {
-//   const session = await getServerSession(authOptions);
+//   const session = await getAuthSession();
 
 //   // await new Promise((resolve) => setTimeout(resolve, 5000));
 
@@ -105,8 +105,7 @@
 // // import Image from "next/image";
 // // import Link from "next/link";
 // // import parser from "html-react-parser";
-// // import { getServerSession } from "next-auth";
-// // import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+// // import { getAuthSession } from "@/lib/next-auth";
 // // import { getSinglePost } from "@/db/queries/getSinglePost";
 // // import { notFound } from "next/navigation";
 // // import PostLike from "@/components/Post/PostLike";
@@ -121,7 +120,7 @@
 // // import Categories from "@/components/Post/Categories";
 
 // // async function SinglePost({ postId }: { postId: string }) {
-// //   const session = await getServerSession(authOptions);
+// //   const session = await getAuthSession();
 
 // //   await new Promise((resolve) => setTimeout(resolve, 5000));
 

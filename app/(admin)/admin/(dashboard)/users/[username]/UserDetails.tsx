@@ -1,14 +1,8 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import Link from "next/link";
+import Image from "next/image";
 import Section from "@/components/Admin/Section";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import { getSingleUserAdmin } from "@/db/queries/admin/getSingleUserAdmin";
-import { getProfileByUserId } from "@/db/queries/getProfileByUserId";
-import { Profile } from "@/types";
-import { getTimeDistance } from "@/utils/getTimeDistance";
-import { User } from "@prisma/client";
-import { getServerSession } from "next-auth";
-import Image from "next/image";
-import Link from "next/link";
 
 async function UserDetails({ username }: { username: string }) {
   const { data: user } = await getSingleUserAdmin({

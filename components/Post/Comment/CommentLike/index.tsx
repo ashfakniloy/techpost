@@ -1,15 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import CommentLikeButton from "./CommentLikeButton";
-import { getServerSession } from "next-auth";
+import { getAuthSession } from "@/lib/next-auth";
 import { getCommentLikes } from "@/db/queries/getCommentsLikes";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 async function CommentLike({ commentId }: { commentId: string }) {
   const { data: commentsLikes, count: commentLikesCount } =
     await getCommentLikes({ commentId });
 
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   const hasLiked =
     commentsLikes?.find((like) => like.userId === session?.user.id) && true;

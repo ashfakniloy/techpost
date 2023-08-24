@@ -1,10 +1,9 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getUserById } from "@/db/queries/getUserById";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { getAuthSession } from "@/lib/next-auth";
+import { getUserById } from "@/db/queries/getUserById";
 
 async function ProtectedLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   const { user } = await getUserById({
     userId: session?.user.id,

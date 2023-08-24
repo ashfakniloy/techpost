@@ -2,13 +2,11 @@ import { getComments } from "@/db/queries/getComments";
 import CommentForm from "./CommentForm";
 import Image from "next/image";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
+import { getAuthSession } from "@/lib/next-auth";
 import CommentLike from "./CommentLike";
 import { getTimeDistance } from "@/utils/getTimeDistance";
-import CommentRepliesList from "./CommentReply";
 import CommentReply from "./CommentReply";
 import CommentOption from "./CommentOption";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 async function Comment({
   postId,
@@ -21,7 +19,7 @@ async function Comment({
   slug: string;
   showCommentsParam: string;
 }) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   const addComments = 5;
 

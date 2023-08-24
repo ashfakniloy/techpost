@@ -14,12 +14,11 @@ function UserAuthLayout({ children }: { children: React.ReactNode }) {
 export default UserAuthLayout;
 
 // import Link from "next/link";
-// import { getServerSession } from "next-auth";
+// import { getAuthSession } from "@/lib/next-auth";
 // import { redirect } from "next/navigation";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 // async function UserAuthLayout({ children }: { children: React.ReactNode }) {
-//   const session = await getServerSession(authOptions);
+//   const session = await getAuthSession();
 
 //   if (session) {
 //     redirect("/");

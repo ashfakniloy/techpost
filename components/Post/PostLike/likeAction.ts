@@ -1,7 +1,5 @@
 "use server";
 
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-// import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
 import { Session } from "next-auth";
 
@@ -17,7 +15,7 @@ export async function likeAction({
   // console.log("postId", postId);
 
   //not working.bug expected to be fixed soon from next js
-  // const session = await getServerSession(authOptions);
+  // const session = await getAuthSession();
 
   if (!session) return;
 
@@ -64,7 +62,7 @@ export async function unlikeAction({
 }) {
   console.log("postId", postId);
 
-  // const session = await getServerSession(authOptions);
+  // const session = await getAuthSession();
 
   if (!session) return;
 

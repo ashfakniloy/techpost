@@ -1,10 +1,9 @@
-import { getServerSession } from "next-auth";
+import { getAuthSession } from "@/lib/next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
 
 export async function PUT(request: NextRequest) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   const isAdmin = session?.user.role === "ADMIN";
 

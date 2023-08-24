@@ -109,11 +109,11 @@ export default AccountSettingpage;
 // import DeleteAccount from "@/components/Account/DeleteAccount";
 // import EmailChange from "@/components/Account/EmailChange";
 // import PasswordChange from "@/components/Account/PasswordChange";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-// import { getServerSession } from "next-auth";
+
+// import { getAuthSession } from "@/lib/next-auth";
 
 // async function AccountSettingpage() {
-//   const session = await getServerSession(authOptions);
+//   const session = await getAuthSession();
 
 //   return (
 //     <div className="">

@@ -1,10 +1,9 @@
 import { Suspense } from "react";
 import PostsView from "@/components/Post/PostsView";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getPostsByUserId } from "@/db/queries/getrPostsByUserId";
-import { getServerSession } from "next-auth";
 import PostsHeader from "@/components/Post/PostsHeader";
 import PostsSkeleton from "@/components/Skeleton/PostsSkeleton";
+import { getAuthSession } from "@/lib/next-auth";
+import { getPostsByUserId } from "@/db/queries/getrPostsByUserId";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -42,7 +41,7 @@ async function MyPosts({
 async function MyProfilePage({
   searchParams: { page, limit, sort },
 }: SearchParams) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   if (!session) return;
 

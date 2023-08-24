@@ -1,12 +1,11 @@
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../../auth/[...nextauth]/route";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
-import { Prisma } from "@prisma/client";
+// import { Prisma } from "@prisma/client";
+import { getAuthSession } from "@/lib/next-auth";
 
 export async function POST(request: NextRequest) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   const isAdmin = session?.user.role === "ADMIN";
 
@@ -98,7 +97,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   const isAdmin = session?.user.role === "ADMIN";
 
@@ -217,7 +216,7 @@ export async function PUT(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   const isAdmin = session?.user.role === "ADMIN";
 

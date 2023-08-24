@@ -1,9 +1,8 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import Footer from "@/components/Layout/Footer";
 import Navbar from "@/components/Layout/Navbar";
+import Footer from "@/components/Layout/Footer";
 import DeviceIdSet from "@/components/Post/DeviceIdSet";
+import { getAuthSession } from "@/lib/next-auth";
 import { getCategories } from "@/db/queries/getCategories";
-import { getServerSession } from "next-auth";
 
 // export const metadata = {
 //   openGraph: {
@@ -17,7 +16,7 @@ import { getServerSession } from "next-auth";
 // };
 
 async function UserLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   // await new Promise((resolve) => setTimeout(resolve, 5000));
 

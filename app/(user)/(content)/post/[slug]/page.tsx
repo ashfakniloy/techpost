@@ -1,29 +1,28 @@
+import { Suspense } from "react";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { EyeIcon } from "@heroicons/react/24/solid";
-import Comment from "@/components/Post/Comment";
-import { getSinglePost } from "@/db/queries/getSinglePost";
-import parser from "html-react-parser";
 import { notFound } from "next/navigation";
-import { getServerSession } from "next-auth";
+import { BASE_URL } from "@/config";
+import parser from "html-react-parser";
+import { EyeIcon } from "@heroicons/react/24/solid";
+import UsersMorePosts from "./UsersMorePosts";
+import RelatedPosts from "./RelatedPosts";
+import Comment from "@/components/Post/Comment";
 import OptionButton from "@/components/Post/OptionButton";
 import PostLike from "@/components/Post/PostLike";
 import ViewCount from "@/components/Post/ViewCount";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { Suspense } from "react";
-import RelatedPosts from "./RelatedPosts";
 import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
-import UsersMorePosts from "./UsersMorePosts";
 import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";
 import Categories from "@/components/Post/Categories";
-import "@/components/TextEditor/Tiptap/styles.css";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
-import { Metadata } from "next";
-import { capitalizeWords } from "@/utils/capitalizeWords";
-import { getDescription } from "@/utils/getDescription";
-import { BASE_URL } from "@/config";
 import SocialShare from "@/components/Post/SocialShare";
+import { getDescription } from "@/utils/getDescription";
+import { capitalizeWords } from "@/utils/capitalizeWords";
+import { getSinglePost } from "@/db/queries/getSinglePost";
+import { getAuthSession } from "@/lib/next-auth";
+import "@/components/TextEditor/Tiptap/styles.css";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -98,7 +97,7 @@ async function SinglePostPage({
   params: { slug },
   searchParams: { showComments },
 }: SinglePostPageProps) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   // await new Promise((resolve) => setTimeout(resolve, 5000));
 

@@ -1,7 +1,6 @@
-import { getProfileByUserId } from "@/db/queries/getProfileByUserId";
-import { getServerSession } from "next-auth";
 import EditProfileForm from "./EditProfileForm";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getAuthSession } from "@/lib/next-auth";
+import { getProfileByUserId } from "@/db/queries/getProfileByUserId";
 
 export const metadata = {
   title: "Edit profile",
@@ -10,7 +9,7 @@ export const metadata = {
 async function EditProfilePage() {
   // await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  const session = await getServerSession(authOptions);
+  const session = await getAuthSession();
 
   const userId = session?.user.id;
 
