@@ -53,7 +53,7 @@ function AccountSettingpage() {
         Change Account Setting
       </h4>
 
-      <div className="flex flex-col divide-y divide-gray-300/70 dark:divide-custom-gray2">
+      <div className="flex lg:min-h-[550px] flex-col divide-y divide-gray-300/70 dark:divide-custom-gray2">
         {accountMenus.map((accountMenu) => (
           <div key={accountMenu.name}>
             <div
