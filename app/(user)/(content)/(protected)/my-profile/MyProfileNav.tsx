@@ -11,10 +11,10 @@ function MyProfileNav() {
       name: "Posts",
       link: "/my-profile",
     },
-    {
-      name: "Activity Log",
-      link: "/my-profile/activity-log",
-    },
+    // {
+    //   name: "Activity Log",
+    //   link: "/my-profile/activity-log",
+    // },
     {
       name: "Edit Profile",
       link: "/my-profile/edit-profile",

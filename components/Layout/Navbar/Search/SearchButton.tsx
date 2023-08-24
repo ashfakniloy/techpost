@@ -55,7 +55,7 @@ function SearchButton() {
       }
     };
 
-    debouncedValue.trim().length > 0 && getSearch();
+    debouncedValue && debouncedValue.trim().length > 0 && getSearch();
 
     // setLoading(false);
   }, [debouncedValue]);
