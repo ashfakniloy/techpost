@@ -8,6 +8,22 @@ import { signOut } from "next-auth/react";
 import { Session } from "next-auth";
 import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
+// type NavLinksProps = (
+//   | {
+//       name: string;
+//       link: string;
+//       subLinks?: undefined;
+//     }
+//   | {
+//       name: string;
+//       subLinks: {
+//         name: string;
+//         link: string;
+//       }[];
+//       link?: undefined;
+//     }
+// )[];
+
 type NavLinksProps = (
   | {
       name: string;
@@ -21,6 +37,14 @@ type NavLinksProps = (
         link: string;
       }[];
       link?: undefined;
+    }
+  | {
+      name: string;
+      link: string;
+      subLinks: {
+        name: string;
+        link: string;
+      }[];
     }
 )[];
 
@@ -62,13 +86,19 @@ function Sidebar({
 
   // for closing the sidebarSubmenu when clicking on a link without submenu. closing the submenu with onClick on links causes the submenu to close before the sidebar closes.
   useEffect(() => {
-    const subLinks = navLinks
-      .flatMap((navLink) => navLink.subLinks?.map((subLink) => subLink.link))
-      .filter((link) => link !== undefined);
+    // const subLinks = navLinks
+    //   .flatMap((navLink) => navLink.subLinks?.map((subLink) => subLink.link))
+    //   .filter((link) => link !== undefined);
 
-    pathnameDecoded &&
-      !subLinks.includes(pathnameDecoded) &&
-      setShowSidebarSubMenu(null);
+    // const links = navLinks.map((navLink) => navLink.link);
+    // pathnameDecoded &&
+    //   (!subLinks.includes(pathnameDecoded) ||
+    //     links.includes(pathnameDecoded)) &&
+    //   setShowSidebarSubMenu(null);
+
+    const links = navLinks.map((navLink) => navLink.link);
+
+    links.includes(pathnameDecoded) && setShowSidebarSubMenu(null);
   }, [pathnameDecoded]);
 
   const activeSubLinkClass = (
@@ -79,9 +109,10 @@ function Sidebar({
 
     if (pathnameDecoded === value?.link && showSidebarSubMenu !== navName) {
       return "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100";
-    } else {
-      return "hover:bg-gray-200 dark:hover:bg-gray-600";
     }
+    // else {
+    //   return "hover:bg-gray-200 dark:hover:bg-gray-600";
+    // }
   };
 
   const menu = (navName: string | null) => {
@@ -101,11 +132,10 @@ function Sidebar({
 
   return (
     <div
-      className={
-        showSidebar
-          ? "fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:bg-transparent"
-          : ""
-      }
+      className={`${
+        showSidebar &&
+        "fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:bg-transparent"
+      }`}
     >
       <div
         ref={sidebarNode}
@@ -119,7 +149,7 @@ function Sidebar({
             <button
               type="button"
               aria-label="hide sidebar"
-              className="self-end p-1 mb-3 mr-1 transition duration-300 hover:rotate-90"
+              className="self-end p-1 mb-3 mr-1"
               onClick={() => setShowSidebar(false)}
             >
               <XMarkIcon className="h-7 w-7" />
@@ -167,7 +197,7 @@ function Sidebar({
                     </button>
                   </Link>
                   <Link href="/signin">
-                    <button className="w-[120px] py-2 text-sm font-bold bg-gray-900 border-gray-900 text-gray-200 dark:text-gray-900 border-2 dark:border-gray-200 dark:bg-gray-200  rounded-md">
+                    <button className="w-[120px] py-2 text-sm font-bold bg-gray-900 border-gray-900 text-gray-200 dark:text-gray-900 border-2 dark:border-gray-200 dark:bg-gray-200 rounded-md">
                       Sign In
                     </button>
                   </Link>
@@ -178,13 +208,12 @@ function Sidebar({
             <div className="space-y-1">
               {navLinks.map((navLink) => (
                 <div key={navLink.name} className="">
-                  {navLink.link ? (
+                  {!navLink.subLinks ? (
                     <Link href={navLink.link}>
                       <p
                         className={`py-3 pl-5 rounded-lg ${
-                          pathnameDecoded === navLink.link
-                            ? "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
-                            : "hover:bg-gray-200 dark:hover:bg-gray-600"
+                          pathnameDecoded === navLink.link &&
+                          "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                         }`}
                         // onClick={() => setShowSidebarSubMenu(null)} //it causes submenu to close before the sidebar closes. so i had to use useEffect
                       >
@@ -193,22 +222,37 @@ function Sidebar({
                     </Link>
                   ) : (
                     <div className="">
-                      <p
-                        onClick={() => menu(navLink.name)}
-                        className={`py-3 pl-5 rounded-lg cursor-pointer flex items-center gap-1 ${activeSubLinkClass(
-                          navLink.subLinks,
-                          navLink.name
-                        )}`}
-                      >
-                        {navLink.name}
-                        <span
-                          className={`${
-                            showSidebarSubMenu === navLink.name && "rotate-180"
-                          }`}
+                      {!navLink.link ? (
+                        <p
+                          onClick={() => menu(navLink.name)}
+                          className={`py-3 pl-5 rounded-lg cursor-pointer flex items-center gap-1 ${activeSubLinkClass(
+                            navLink.subLinks,
+                            navLink.name
+                          )}`}
                         >
-                          <ChevronDownIcon className="w-4 h-4" />
-                        </span>
-                      </p>
+                          {navLink.name}
+                          <span
+                            className={`${
+                              showSidebarSubMenu === navLink.name &&
+                              "rotate-180"
+                            }`}
+                          >
+                            <ChevronDownIcon className="w-4 h-4" />
+                          </span>
+                        </p>
+                      ) : (
+                        <Link href={navLink.link}>
+                          <p
+                            // onClick={() => setShowSidebarSubMenu(null)}
+                            className={`py-3 pl-5 rounded-lg cursor-pointer flex items-center gap-1 ${activeSubLinkClass(
+                              navLink.subLinks,
+                              navLink.name
+                            )}`}
+                          >
+                            {navLink.name}
+                          </p>
+                        </Link>
+                      )}
 
                       <div
                         className={`mt-1 space-y-1 transition-[grid-template-rows] duration-300 ease-linear grid ${
@@ -223,9 +267,8 @@ function Sidebar({
                               <Link href={subLink.link}>
                                 <p
                                   className={`py-3 pl-10 rounded-lg capitalize ${
-                                    pathnameDecoded === subLink.link
-                                      ? "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
-                                      : "hover:bg-gray-200 dark:hover:bg-gray-600"
+                                    pathnameDecoded === subLink.link &&
+                                    "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                                   }`}
                                 >
                                   {subLink.name}

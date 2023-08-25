@@ -65,8 +65,6 @@ async function UserPosts({
   pageNumber: number;
   sort: string;
 }) {
-  // await new Promise((resolve) => setTimeout(resolve, 7000));
-
   const { data, count } = await getPostsByUsername({
     username,
     limitNumber,
@@ -136,7 +134,7 @@ function UserPage({
           )}
         </div>
 
-        <div className="hidden lg:flex flex-col gap-5 lg:sticky top-[97px]">
+        <div className="hidden lg:block space-y-5 lg:sticky top-[90px]">
           <Suspense
             key={sort}
             fallback={<PostsCardSkeleton heading={cardTitle()} />}

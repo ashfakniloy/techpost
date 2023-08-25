@@ -39,7 +39,25 @@ export const navLinksSigned = (categories: Category[]) => {
     },
     {
       name: "My Profile",
-      link: "/my-profile",
+      link: "/my-profile/posts",
+      subLinks: [
+        {
+          name: "Posts",
+          link: "/my-profile/posts",
+        },
+        //   {
+        //   name: 'Activity Log',
+        //   link: `/category/activity-log`,
+        // },
+        {
+          name: "Edit Profile",
+          link: "/my-profile/edit-profile",
+        },
+        {
+          name: "Account Setting",
+          link: "/my-profile/account-setting",
+        },
+      ],
     },
   ];
 };

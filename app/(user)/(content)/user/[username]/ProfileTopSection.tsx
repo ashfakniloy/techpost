@@ -8,8 +8,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 async function ProfileTopSection({ username }: { username: string }) {
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const { data: profile } = await getProfileByUsername({ username });
 
   if (!profile) {

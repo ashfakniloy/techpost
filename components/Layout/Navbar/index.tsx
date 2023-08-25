@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+// import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Session } from "next-auth";
 import useToggle from "@/hooks/useToggle";
@@ -8,13 +8,13 @@ import SearchButton from "./Search/SearchButton";
 import ThemeButton from "@/components/Theme/ThemeButton";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar from "./Sidebar";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchButtonMobile from "./Search/SearchButtonMobile";
 import NavMenu from "./NavMenu";
 import NavButtons from "./NavButtons";
 import { navLinksSigned, navLinksUnsigned } from "./navLinks";
-import { BASE_URL } from "@/config";
 import TechPostLogo from "../TechPostLogo";
+// import { BASE_URL } from "@/config";
 
 type Category = {
   name: string;
@@ -22,16 +22,6 @@ type Category = {
     posts: number;
   };
 };
-
-// async function fetchCategories() {
-//   // await new Promise((resolve) => setTimeout(resolve, 10000));
-
-//   const res = await fetch(`${BASE_URL}/api/nav`);
-
-//   return res.json();
-// }
-
-// const dataPromise = fetchCategories();
 
 function Navbar({
   session,

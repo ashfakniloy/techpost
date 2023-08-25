@@ -65,8 +65,6 @@ async function CategoryPosts({
   pageNumber: number;
   sort: string;
 }) {
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const { data, count } = await getPostsByCategory({
     categoryName,
     limitNumber,
@@ -132,7 +130,7 @@ async function CategoryPage({
     <div>
       <CategoryTopSection categoryName={categoryNameDecoded} />
 
-      <div className="lg:flex items-start justify-between gap-5 mt-10 lg:mt-20">
+      <div className="lg:flex justify-between gap-5 mt-10 lg:mt-20">
         <div className="lg:flex-1 lg:max-w-[796px] overflow-hidden">
           <PostsHeader postsTitle={postsTitle} />
 
@@ -164,9 +162,11 @@ async function CategoryPage({
             />
           </Suspense>
 
-          <Suspense fallback={<CategoriesSkeleton />}>
-            <Categories />
-          </Suspense>
+          <div className="sticky top-[90px]">
+            <Suspense fallback={<CategoriesSkeleton />}>
+              <Categories />
+            </Suspense>
+          </div>
         </div>
       </div>
     </div>

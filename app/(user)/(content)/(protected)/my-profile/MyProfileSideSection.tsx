@@ -13,8 +13,6 @@ async function MyProfileSideSection() {
 
   // if(!userId) return
 
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const { data: profile } = await getProfileByUserId({ userId });
 
   return (

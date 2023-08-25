@@ -8,8 +8,6 @@ async function RelatedPosts({
   categoryName: string;
   currentPostId: string;
 }) {
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const { data: relatedPosts } = await getRelatedPosts({
     categoryName,
     limit: 5 + 1, //have to get 1 extra post because current post will be filtered out

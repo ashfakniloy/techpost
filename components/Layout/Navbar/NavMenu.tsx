@@ -115,6 +115,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
+// type NavLinksProps = (
+//   | {
+//       name: string;
+//       link: string;
+//       subLinks?: undefined;
+//     }
+//   | {
+//       name: string;
+//       subLinks: {
+//         name: string;
+//         link: string;
+//       }[];
+//       link?: undefined;
+//     }
+// )[];
+
 type NavLinksProps = (
   | {
       name: string;
@@ -128,6 +144,14 @@ type NavLinksProps = (
         link: string;
       }[];
       link?: undefined;
+    }
+  | {
+      name: string;
+      link: string;
+      subLinks: {
+        name: string;
+        link: string;
+      }[];
     }
 )[];
 
@@ -161,10 +185,10 @@ function NavMenu({ navLinks }: { navLinks: NavLinksProps }) {
     <nav className="flex items-center gap-10">
       {navLinks.map((navLink) => (
         <div key={navLink.name} className="">
-          {navLink.link ? (
+          {!navLink.subLinks ? (
             <Link href={navLink.link}>
               <p
-                className={` ${
+                className={`${
                   pathname === navLink.link && "text-red-600 dark:text-red-400"
                 }`}
               >
@@ -177,42 +201,56 @@ function NavMenu({ navLinks }: { navLinks: NavLinksProps }) {
               onMouseLeave={() => menu(null)}
               className={`relative ${activeSubLinkClass(navLink.subLinks)}`}
             >
-              <p className={`cursor-pointer flex items-center gap-1`}>
-                {navLink.name}
-                <span className={`${showSubMenu && "rotate-180"}`}>
-                  <ChevronDownIcon className="w-4 h-4" />
-                </span>
-              </p>
+              {!navLink.link ? (
+                <p className={`cursor-default flex items-center gap-1`}>
+                  {navLink.name}
+                  {/* {!navLink.link && ( */}
+                  <span
+                    className={`${
+                      showSubMenu === navLink.name && "rotate-180"
+                    }`}
+                  >
+                    <ChevronDownIcon className="w-4 h-4" />
+                  </span>
+                  {/* )} */}
+                </p>
+              ) : (
+                <Link href={navLink.link}>
+                  <p>{navLink.name}</p>
+                </Link>
+              )}
 
-              <div
-                className={`absolute -left-[80%] z-20 min-w-[250px] transition duration-200 ${
-                  showSubMenu === navLink.name
-                    ? "translate-y-0 opacity-100"
-                    : "invisible -translate-y-3 opacity-0"
-                }`}
-              >
-                <div className="">
-                  <div className="h-8"></div>
-                  <div className="p-1 text-sm text-gray-800 bg-white space-y-1 border rounded-md shadow-md font-montserrat dark:text-gray-300 dark:bg-stone-950">
-                    {navLink.subLinks?.map((subLink, i) => (
-                      <div
-                        key={subLink.name}
-                        className={`transition duration-200 rounded ${
-                          pathnameDecoded === subLink.link
-                            ? "bg-gray-300 dark:bg-stone-600 text-red-600 dark:text-red-400"
-                            : "hover:bg-gray-200 dark:hover:bg-stone-700"
-                        }`}
-                      >
-                        <Link href={subLink.link}>
-                          <p className={`py-2 pl-6 capitalize`}>
-                            {subLink.name}
-                          </p>
-                        </Link>
-                      </div>
-                    ))}
+              {!navLink.link && (
+                <div
+                  className={`absolute -left-[80%] z-20 min-w-[250px] transition duration-200 ${
+                    showSubMenu === navLink.name
+                      ? "translate-y-0 opacity-100"
+                      : "invisible -translate-y-3 opacity-0"
+                  }`}
+                >
+                  <div className="">
+                    <div className="h-8"></div>
+                    <div className="p-1 text-sm text-gray-800 bg-white space-y-1 border rounded-md shadow-md font-montserrat dark:text-gray-300 dark:bg-stone-950">
+                      {navLink.subLinks?.map((subLink, i) => (
+                        <div
+                          key={subLink.name}
+                          className={`transition duration-200 rounded ${
+                            pathnameDecoded === subLink.link
+                              ? "bg-gray-300 dark:bg-stone-600 text-red-600 dark:text-red-400"
+                              : "hover:bg-gray-200 dark:hover:bg-stone-700"
+                          }`}
+                        >
+                          <Link href={subLink.link}>
+                            <p className={`py-2 pl-6 capitalize`}>
+                              {subLink.name}
+                            </p>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           )}
         </div>

@@ -9,6 +9,10 @@ import { getPostsByUserId } from "@/db/queries/getrPostsByUserId";
 // export const dynamic = "force-dynamic";
 // export const fetchCache = "force-no-store";
 
+export const metadata = {
+  title: "My posts",
+};
+
 async function MyPosts({
   userId,
   limitNumber,
@@ -20,8 +24,6 @@ async function MyPosts({
   pageNumber: number;
   sort: string;
 }) {
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const { data, count } = await getPostsByUserId({
     userId,
     limitNumber,
@@ -38,7 +40,7 @@ async function MyPosts({
   return <PostsView posts={data} postCount={count} limit={limitNumber} />;
 }
 
-async function MyProfilePage({
+async function ProfilePostsPage({
   searchParams: { page, limit, sort },
 }: SearchParams) {
   const session = await getAuthSession();
@@ -81,4 +83,4 @@ async function MyProfilePage({
   );
 }
 
-export default MyProfilePage;
+export default ProfilePostsPage;

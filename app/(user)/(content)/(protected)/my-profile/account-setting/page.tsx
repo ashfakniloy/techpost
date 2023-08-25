@@ -105,31 +105,3 @@ function AccountSettingpage() {
 }
 
 export default AccountSettingpage;
-
-// import DeleteAccount from "@/components/Account/DeleteAccount";
-// import EmailChange from "@/components/Account/EmailChange";
-// import PasswordChange from "@/components/Account/PasswordChange";
-
-// import { getAuthSession } from "@/lib/next-auth";
-
-// async function AccountSettingpage() {
-//   const session = await getAuthSession();
-
-//   return (
-//     <div className="">
-//       <div className="ml-1 mb-5 h-[50px] flex justify-between items-center">
-//         <h4 className="text-3xl font-extrabold text-gray-700 font-montserrat dark:text-gray-400">
-//           Change Account Setting
-//         </h4>
-//       </div>
-
-//       <div className="space-y-10">
-//         <EmailChange currentEmail={session?.user.email} />
-//         <PasswordChange />
-//         <DeleteAccount />
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default AccountSettingpage;

@@ -7,8 +7,6 @@ export const metadata = {
 };
 
 async function EditProfilePage() {
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const session = await getAuthSession();
 
   const userId = session?.user.id;

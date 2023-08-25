@@ -8,6 +8,7 @@ import PostsView from "@/components/Post/PostsView";
 import Categories from "@/components/Post/Categories";
 import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";
 import EditorsChoice from "./EditorsChoice";
+import EditorsChoiceSkeleton from "@/components/Skeleton/EditorsChoiceSkeleton";
 
 // export const revalidate = 0;
 // export const fetchCache = "force-no-store";
@@ -23,8 +24,6 @@ async function Posts({
   pageNumber: number;
   sort: string;
 }) {
-  // await new Promise((resolve) => setTimeout(resolve, 6000));
-
   const { data, count } = await getAllPosts({ limitNumber, pageNumber, sort });
 
   if (!data) {
@@ -57,9 +56,13 @@ function HomePage({ searchParams: { page, limit, sort } }: SearchParams) {
   const postsTitle = getPostsTitle();
 
   return (
-    <div className="lg:flex items-start justify-between gap-5">
+    <div className="lg:flex justify-between gap-5">
       <div className="lg:flex-1 lg:max-w-[796px]">
-        {(!pageNumber || pageNumber === 1) && <EditorsChoice />}
+        {(!pageNumber || pageNumber === 1) && (
+          <Suspense fallback={<EditorsChoiceSkeleton />}>
+            <EditorsChoice />
+          </Suspense>
+        )}
 
         <PostsHeader postsTitle={postsTitle} />
 
@@ -78,7 +81,7 @@ function HomePage({ searchParams: { page, limit, sort } }: SearchParams) {
         )}
       </div>
 
-      <div className="hidden lg:flex flex-col gap-5 ">
+      <div className="hidden lg:block space-y-5">
         <Suspense
           key={sort}
           fallback={<PostsCardSkeleton heading={cardTitle} />}
@@ -86,9 +89,11 @@ function HomePage({ searchParams: { page, limit, sort } }: SearchParams) {
           <HomeSideSection sort={sort} cardTitle={cardTitle} />
         </Suspense>
 
-        <Suspense fallback={<CategoriesSkeleton />}>
-          <Categories />
-        </Suspense>
+        <div className="sticky top-[90px]">
+          <Suspense fallback={<CategoriesSkeleton />}>
+            <Categories />
+          </Suspense>
+        </div>
       </div>
     </div>
   );

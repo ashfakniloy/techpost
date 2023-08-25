@@ -9,7 +9,7 @@ function MyProfileNav() {
   const profilePages = [
     {
       name: "Posts",
-      link: "/my-profile",
+      link: "/my-profile/posts",
     },
     // {
     //   name: "Activity Log",
@@ -26,7 +26,7 @@ function MyProfileNav() {
   ];
 
   return (
-    <div className="flex border-b gap-4 lg:gap-0 sticky top-[74px] lg:top-[76px] bg-gray-100 dark:bg-custom-gray z-10 border-gray-300 dark:border-gray-700 text-center text-sm lg:text-base font-medium whitespace-nowrap">
+    <div className="flex  border-b gap-4 lg:gap-0 sticky top-[74px] bg-gray-100 dark:bg-custom-gray z-10 border-gray-300 dark:border-gray-700 text-center text-sm lg:text-base font-medium whitespace-nowrap">
       {profilePages.map((page) => (
         <div key={page.name} className="w-full relative">
           <Link href={page.link}>

@@ -1,10 +1,10 @@
+import { Roboto, Montserrat, Inter } from "next/font/google";
 import SessionProvider from "@/components/Session";
 import ToastNotification from "@/components/ToastNotification";
-import { Roboto, Montserrat, Inter } from "next/font/google";
-import "./globals.css";
 import ThemeWrapper from "@/components/Theme/ThemeWrapper";
 import Log from "@/components/Log";
 import { BASE_URL } from "@/config";
+import "./globals.css";
 
 const roboto = Roboto({
   weight: "400",

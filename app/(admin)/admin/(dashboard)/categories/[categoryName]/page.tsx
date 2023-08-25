@@ -20,24 +20,11 @@ async function CategoryPageAdmin({
   params: { categoryName },
   searchParams: { page, limit, sort, search },
 }: CategoryPageProps) {
-  // const { data: categories } = await getCategories();
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const categoryNameDecoded = decodeURIComponent(categoryName);
-
-  // console.log("categoryname", categoryName);
-  // console.log("categorynamedecoded", categoryNameDecoded);
-  // console.log("search", search);
 
   const { data: category } = await getCategoryByName({
     categoryName: categoryNameDecoded,
   });
-
-  // const allCategories = categories.map((category) => category.name);
-
-  // if (!allCategories.includes(categoryName)) {
-  //   notFound();
-  // }
 
   if (!category) {
     notFound();

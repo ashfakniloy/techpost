@@ -2,7 +2,6 @@ import { getCategories } from "@/db/queries/getCategories";
 import Link from "next/link";
 
 async function Categories() {
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
   const { data: categories } = await getCategories();
 
   return (

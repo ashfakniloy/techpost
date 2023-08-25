@@ -9,9 +9,9 @@
   html {
     -webkit-tap-highlight-color: transparent;
   }
-  body {
+  /* body {
     @apply bg-background text-foreground;
-  }
+  } */
 }
 
 @layer components {

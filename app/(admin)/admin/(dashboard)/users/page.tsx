@@ -14,8 +14,6 @@ async function AdminUsersPage({
   const sortBy = sortValues?.[0];
   const orderBy = sortValues?.[1];
 
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const { users, usersCount } = await getAllUsersAdmin({
     limitNumber: limitNumber || 10,
     pageNumber,

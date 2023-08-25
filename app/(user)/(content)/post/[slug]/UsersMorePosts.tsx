@@ -8,8 +8,6 @@ async function UsersMorePosts({
   username: string;
   currentPostId: string;
 }) {
-  // await new Promise((resolve) => setTimeout(resolve, 4000));
-
   const { data: usersMorePosts } = await getMorePostsByUsername({
     username,
     limit: 5 + 1, //have to get 1 extra post because current post might appear in here and it has to filtered out

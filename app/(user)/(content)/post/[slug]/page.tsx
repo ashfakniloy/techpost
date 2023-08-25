@@ -13,8 +13,6 @@ import OptionButton from "@/components/Post/OptionButton";
 import PostLike from "@/components/Post/PostLike";
 import ViewCount from "@/components/Post/ViewCount";
 import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
-import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";
-import Categories from "@/components/Post/Categories";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import SocialShare from "@/components/Post/SocialShare";
@@ -52,8 +50,6 @@ export async function generateMetadata({
   }
 
   const usernameCapitalized = capitalizeWords(post.user.username);
-
-  // const desc = getDescription(post.article);
 
   const description = getDescription(post.article, 100, 160);
 
@@ -99,8 +95,6 @@ async function SinglePostPage({
 }: SinglePostPageProps) {
   const session = await getAuthSession();
 
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const { data: post } = await getSinglePost({ slug });
 
   if (!post) {
@@ -108,13 +102,12 @@ async function SinglePostPage({
   }
 
   const articleUrl = `${BASE_URL}/post/${post.id}`;
-  // const articleUrl = `https://techpost.vercel.app/post/clkjlvf9h0001fo780wgaknui`; //for test
 
   return (
     <div>
       <ViewCount postId={post.id} isAdmin={session?.user.role === "ADMIN"} />
 
-      <div className="flex items-start justify-between gap-5">
+      <div className="flex justify-between gap-5">
         <div className="relative flex-1 max-w-full lg:max-w-[796px]">
           <div className="overflow-hidden">
             <div className="mt-1.5 mb-4 flex justify-between items-center">
@@ -248,7 +241,7 @@ async function SinglePostPage({
           </div>
         </div>
 
-        <div className="hidden lg:flex flex-col gap-5 ">
+        <div className="hidden lg:block space-y-5">
           <Suspense fallback={<PostsCardSkeleton heading="Related Posts" />}>
             <RelatedPosts
               categoryName={post.categoryName}
@@ -256,22 +249,24 @@ async function SinglePostPage({
             />
           </Suspense>
 
-          <Suspense
-            fallback={
-              <PostsCardSkeleton
-                heading={`More Posts from ${post.user.username}`}
+          <div className="sticky top-[90px]">
+            <Suspense
+              fallback={
+                <PostsCardSkeleton
+                  heading={`More Posts from ${post.user.username}`}
+                />
+              }
+            >
+              <UsersMorePosts
+                username={post.user.username}
+                currentPostId={post.id}
               />
-            }
-          >
-            <UsersMorePosts
-              username={post.user.username}
-              currentPostId={post.id}
-            />
-          </Suspense>
+            </Suspense>
+          </div>
 
-          <Suspense fallback={<CategoriesSkeleton />}>
+          {/* <Suspense fallback={<CategoriesSkeleton />}>
             <Categories />
-          </Suspense>
+          </Suspense> */}
         </div>
       </div>
     </div>

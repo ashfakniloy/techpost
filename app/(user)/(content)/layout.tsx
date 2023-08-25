@@ -18,8 +18,6 @@ import { getCategories } from "@/db/queries/getCategories";
 async function UserLayout({ children }: { children: React.ReactNode }) {
   const session = await getAuthSession();
 
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
-
   const { data: categories } = await getCategories();
 
   return (

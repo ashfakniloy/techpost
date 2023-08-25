@@ -10,7 +10,6 @@ async function HomeSideSection({
 }) {
   const sortReversed = sort === "popular" ? "recent" : "popular";
 
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
   const { data } = await getAllPosts({
     limitNumber: 5,
     sort: sortReversed,
