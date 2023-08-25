@@ -1,6 +1,7 @@
 {
   "name": "techpost",
   "version": "0.1.0",
+  "author": "Ashfak Ahmed Niloy <ashfakniloy@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "next dev",

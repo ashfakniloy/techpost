@@ -61,7 +61,7 @@ function ThemeButton() {
         <button
           type="button"
           aria-label="toggle light mode"
-          className="p-1 rounded-full hover:bg-gray-300 dark:hover:bg-gray-800"
+          className="p-1 rounded-full active:bg-gray-300 dark:active:bg-gray-800 lg:hover:bg-gray-300 lg:dark:hover:bg-gray-800"
           onClick={() => setTheme("light")}
         >
           <IconSun className="w-5 h-5 text-yellow-500" />
@@ -70,7 +70,7 @@ function ThemeButton() {
         <button
           type="button"
           aria-label="toggle dark mode"
-          className="p-1 rounded-full hover:bg-gray-300 dark:hover:bg-gray-800"
+          className="p-1 rounded-full active:bg-gray-300 dark:active:bg-gray-800 lg:hover:bg-gray-300 lg:dark:hover:bg-gray-800"
           onClick={() => setTheme("dark")}
         >
           <IconMoon className="w-5 h-5 text-gray-700" />
