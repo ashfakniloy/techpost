@@ -25,6 +25,7 @@ type ListProps = Omit<
     comments: number;
     views: number;
   };
+  blurDataURL: string;
 };
 
 function List({
@@ -39,6 +40,7 @@ function List({
   article,
   session,
   _count,
+  blurDataURL,
 }: ListProps & SessionProps) {
   const description = getDescription(article, 200, 200);
 
@@ -52,7 +54,9 @@ function List({
           <div className="w-full h-full relative overflow-hidden rounded-md">
             <Image
               src={imageUrl}
-              alt="programming"
+              placeholder="blur"
+              blurDataURL={blurDataURL}
+              alt="post image"
               fill
               sizes="(max-width: 768px) 100px, 240px"
               className="object-cover"
@@ -68,7 +72,7 @@ function List({
             {/* <div className="max-w-[540px]"> */}
             <div className="">
               <Link href={`/post/${slug}`}>
-                <h3 className="text-sm lg:text-xl font-semibold title-color">
+                <h3 className="text-sm lg:text-xl font-semibold link">
                   {title}
                 </h3>
               </Link>

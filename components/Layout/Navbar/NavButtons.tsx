@@ -10,6 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 
 type NavButtonsProps = {
   session: Session | null;
@@ -74,22 +75,26 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
       ) : (
         <div className="flex items-center gap-7">
           <Link href="/signup">
-            <button
+            <Button
               type="button"
+              size="sm"
               aria-label="sign up"
-              className="px-3 py-1 text-sm text-gray-700 dark:text-gray-200 font-bold bg-transparent border-2 border-gray-300 dark:border-gray-400 hover:bg-gray-300 dark:hover:bg-gray-400 dark:hover:text-gray-900 rounded-md"
+              variant="outline"
+              className="min-w-[90px] h-[32px] border-gray-600 dark:border-gray-300"
             >
               Sign Up
-            </button>
+            </Button>
           </Link>
+
           <Link href="/signin">
-            <button
+            <Button
               type="button"
               aria-label="sign in"
-              className="px-3 py-1 text-sm font-bold bg-gray-900 border-2 border-gray-900 text-gray-200 dark:text-gray-900 dark:border-gray-200 dark:bg-gray-200 rounded-md"
+              size="sm"
+              className="min-w-[90px] h-[32px]"
             >
               Sign In
-            </button>
+            </Button>
           </Link>
         </div>
       )}

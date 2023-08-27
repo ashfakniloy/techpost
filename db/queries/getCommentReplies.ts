@@ -12,6 +12,10 @@ export async function getCommentReplies({ commentId }: { commentId: string }) {
       commentId: commentId,
     },
 
+    orderBy: {
+      createdAt: "desc",
+    },
+
     include: {
       user: {
         select: {

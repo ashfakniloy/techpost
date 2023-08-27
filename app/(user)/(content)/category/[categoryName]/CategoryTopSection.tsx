@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getCategoryByName } from "@/db/queries/getCategoryByName";
 import { notFound } from "next/navigation";
+import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 
 async function CategoryTopSection({ categoryName }: { categoryName: string }) {
   const { data: category } = await getCategoryByName({
@@ -21,11 +22,17 @@ async function CategoryTopSection({ categoryName }: { categoryName: string }) {
 
   const randomQuote = category.quotes[randomIndex];
 
+  // console.log("image", category.imageUrl);
+
+  const blurDataUrl = await getImagePlaceholder(category.imageUrl);
+
   return (
     <section className="relative bg-black rounded-md overflow-hidden">
-      <div className="-mt-5 w-full h-[250px] lg:h-[400px] relative">
+      <div className="w-full h-[250px] lg:h-[400px] relative">
         <Image
           src={category.imageUrl}
+          placeholder="blur"
+          blurDataURL={blurDataUrl}
           alt={category.name}
           fill
           sizes="(max-width: 768px) 100vw, 1176px"

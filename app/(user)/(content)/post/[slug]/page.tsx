@@ -21,6 +21,7 @@ import { capitalizeWords } from "@/utils/capitalizeWords";
 import { getSinglePost } from "@/db/queries/getSinglePost";
 import { getAuthSession } from "@/lib/next-auth";
 import "@/components/TextEditor/Tiptap/styles.css";
+import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -103,6 +104,8 @@ async function SinglePostPage({
 
   const articleUrl = `${BASE_URL}/post/${post.id}`;
 
+  const blurDataUrl = await getImagePlaceholder(post.imageUrl);
+
   return (
     <div>
       <ViewCount postId={post.id} isAdmin={session?.user.role === "ADMIN"} />
@@ -114,7 +117,7 @@ async function SinglePostPage({
               <div className=" text-gray-700 dark:text-gray-300 ">
                 <Link
                   href={`/category/${post.categoryName}`}
-                  className="capitalize text-sm lg:text-base hover:text-blue-800 dark:hover:text-blue-500"
+                  className="capitalize text-sm lg:text-base link"
                 >
                   {post.categoryName}
                 </Link>
@@ -205,7 +208,9 @@ async function SinglePostPage({
               <div className="mt-5 h-[280px] lg:h-[470px] relative">
                 <Image
                   src={post.imageUrl}
-                  alt="image"
+                  placeholder="blur"
+                  blurDataURL={blurDataUrl}
+                  alt="post image"
                   fill
                   sizes="(max-width: 768px) 100vw, 800px"
                   className="object-cover"

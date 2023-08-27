@@ -1,6 +1,6 @@
-import { Post } from "@prisma/client";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import type { Post } from "@prisma/client";
 
 type Props = Post & {
   user: {
@@ -42,7 +42,7 @@ function PostsSideSection({
                 </Link>
 
                 <div className="flex flex-col self-start flex-1 max-w-[238px]">
-                  <h4 className="font-medium line-clamp-2 title-color">
+                  <h4 className="font-medium line-clamp-2 link">
                     <Link href={`/post/${post.slug}`}>{post.title}</Link>
                   </h4>
 

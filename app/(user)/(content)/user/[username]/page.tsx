@@ -1,14 +1,14 @@
-import PostsView from "@/components/Post/PostsView";
-import ProfileTopSection from "./ProfileTopSection";
-import ProfileSideSection from "./ProfileSideSection";
-import { getPostsByUsername } from "@/db/queries/getPostsByUsername";
-import PostsHeader from "@/components/Post/PostsHeader";
-import PostsSkeleton from "@/components/Skeleton/PostsSkeleton";
 import { Suspense } from "react";
-import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
-import BackButton from "@/components/BackButton";
-import ProfileTopSkeleton from "@/components/Skeleton/ProfileTopSkeleton";
 import { Metadata } from "next";
+import PostsView from "@/components/Post/PostsView";
+import UserTopSection from "./UserTopSection";
+import UserSideSection from "./UserSideSection";
+import PostsHeader from "@/components/Post/PostsHeader";
+import BackButton from "@/components/BackButton";
+import PostsSkeleton from "@/components/Skeleton/PostsSkeleton";
+import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
+import ProfileTopSkeleton from "@/components/Skeleton/ProfileTopSkeleton";
+import { getPostsByUsername } from "@/db/queries/getPostsByUsername";
 import { getProfileByUsername } from "@/db/queries/getProfileByUsername";
 import { capitalizeWords } from "@/utils/capitalizeWords";
 
@@ -111,7 +111,7 @@ function UserPage({
       </div>
 
       <Suspense fallback={<ProfileTopSkeleton />}>
-        <ProfileTopSection username={usernameDecoded} />
+        <UserTopSection username={usernameDecoded} />
       </Suspense>
 
       <div className="lg:flex items-start justify-between gap-5 mt-10 lg:mt-20">
@@ -139,7 +139,7 @@ function UserPage({
             key={sort}
             fallback={<PostsCardSkeleton heading={cardTitle()} />}
           >
-            <ProfileSideSection
+            <UserSideSection
               cardTitle={cardTitle()}
               username={usernameDecoded}
               sort={sort}

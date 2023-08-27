@@ -12,6 +12,7 @@ import { RichTextField } from "@/components/Form/RichTextField";
 import { useState } from "react";
 import { Loader2 } from "@/components/Loaders/Loader";
 import { PostFormProps, postSchema } from "@/schemas/postSchema";
+import { Button } from "@/components/ui/button";
 
 function AddPostForm({ categories }: { categories: string[] }) {
   const defaultValues = {
@@ -36,12 +37,6 @@ function AddPostForm({ categories }: { categories: string[] }) {
   const hasDraft = Object.values(form.watch()).some(
     (value) => value !== "" && value !== "<p></p>"
   );
-
-  // const { clear: clearDraft } = useFormPersist("draftPost", {
-  //   watch,
-  //   setValue,
-  //   storage: typeof window !== "undefined" ? window.localStorage : undefined, // default window.sessionStorage
-  // });
 
   useFormPersist("draftPost", {
     watch,
@@ -99,11 +94,13 @@ function AddPostForm({ categories }: { categories: string[] }) {
           <RichTextField label="Article" name="article" />
           <div className="flex items-center gap-6 justify-end pt-4">
             {hasDraft && (
-              <button
+              <Button
                 type="button"
-                className="relative min-w-[120px] py-[9px] hover:text-white dark:hover:text-gray-900 border border-gray-800 dark:border-gray-200 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-200 rounded-md text-sm font-bold disabled:cursor-not-allowed disabled:opacity-50"
+                variant="outline"
+                className="relative min-w-[120px] border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800"
                 onClick={handleClear}
                 disabled={isClearing}
+                aria-label="clear post"
               >
                 {isClearing && (
                   <span className="absolute flex left-[8px] items-center inset-y-0">
@@ -111,14 +108,16 @@ function AddPostForm({ categories }: { categories: string[] }) {
                   </span>
                 )}
                 <span>Clear</span>
-              </button>
+              </Button>
             )}
-            <button
-              type="submit"
-              className="min-w-[120px] py-2.5 text-sm font-bold text-white bg-gray-900 rounded-md dark:text-gray-900 dark:bg-white"
+
+            <Button
+              className="min-w-[120px]"
+              aria-label="preview post"
+              // disabled={isSubmitting}
             >
               Preview
-            </button>
+            </Button>
           </div>
         </form>
       </FormProvider>

@@ -274,7 +274,7 @@ export async function DELETE(request: NextRequest) {
 
   if (!passwordMatched) {
     return NextResponse.json(
-      { error: "Unauthorized, Passwords don't match" },
+      { error: "Unauthorized, Incorrect passowrd" },
       { status: 400 }
     );
   }

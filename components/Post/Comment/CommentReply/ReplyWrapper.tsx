@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import CommentsReplyForm from "./CommentReplyForm";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import CommentsReplyForm from "./CommentReplyForm";
 
 function ReplyWrapper({
   commentId,
@@ -35,50 +35,47 @@ function ReplyWrapper({
       <button
         type="button"
         aria-label="reply"
-        className="absolute top-[-24px] lg:top-[-27px] ml-16 lg:left-24 text-xs lg:text-sm hover:text-blue-500"
+        className="absolute top-[-22px] lg:top-[-25px] left-[120px] lg:left-[120px] text-xs lg:text-sm hover:text-blue-500"
         onClick={handleReplyClick}
       >
         Reply
       </button>
 
-      {openReplyForm && (
-        <div className="pt-2">
+      <div className="pt-2 pl-[38px]">
+        {openReplyForm && (
           <CommentsReplyForm
             postId={postId}
             setOpenReplyForm={setOpenReplyForm}
             setShowReplies={setShowReplies}
             commentId={commentId}
           />
-        </div>
-      )}
+        )}
+        {showReplies && children}
+      </div>
 
-      <div className="">
-        <div className="">{showReplies && children}</div>
-
-        <div className="flex flex-col justify-center pt-2">
-          {commentRepliesCount > 0 &&
-            (!showReplies ? (
-              <button
-                type="button"
-                aria-label="view replies"
-                className="text-sm text-gray-900 dark:text-gray-300"
-                onClick={() => setShowReplies(true)}
-              >
-                {commentRepliesCount > 1
-                  ? `View ${commentRepliesCount} replies`
-                  : `View ${commentRepliesCount} reply`}
-              </button>
-            ) : (
-              <button
-                type="button"
-                aria-label="hide replies"
-                className="text-sm text-gray-900 dark:text-gray-300"
-                onClick={() => setShowReplies(false)}
-              >
-                Hide {commentRepliesCount > 1 ? "replies" : "reply"}
-              </button>
-            ))}
-        </div>
+      <div className="pt-2 flex justify-center">
+        {commentRepliesCount > 0 &&
+          (!showReplies ? (
+            <button
+              type="button"
+              aria-label="view replies"
+              className="text-sm text-gray-900 dark:text-gray-300 px-5 py-1 bg-gray-50 dark:bg-custom-gray2 hover:bg-gray-200 dark:hover:bg-stone-700 rounded-full transition-colors duration-200"
+              onClick={() => setShowReplies(true)}
+            >
+              {commentRepliesCount > 1
+                ? `View ${commentRepliesCount} replies`
+                : `View ${commentRepliesCount} reply`}
+            </button>
+          ) : (
+            <button
+              type="button"
+              aria-label="hide replies"
+              className="text-sm text-gray-900 dark:text-gray-300 px-5 py-1 bg-gray-50 dark:bg-custom-gray2 hover:bg-gray-200 dark:hover:bg-stone-700 rounded-full transition-colors duration-200"
+              onClick={() => setShowReplies(false)}
+            >
+              Hide {commentRepliesCount > 1 ? "replies" : "reply"}
+            </button>
+          ))}
       </div>
     </div>
   );

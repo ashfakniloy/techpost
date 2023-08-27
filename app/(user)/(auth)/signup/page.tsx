@@ -8,8 +8,9 @@ import { toast } from "react-hot-toast";
 import { Loader } from "@/components/Loaders/Loader";
 import { InputField } from "@/components/Form/InputField";
 import { PasswordField } from "@/components/Form/PasswordField";
-import { XMarkIcon } from "@heroicons/react/24/solid";
 import { SignupFormProps, signupSchema } from "@/schemas/signupSchema";
+import { Button } from "@/components/ui/button";
+// import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function UserSignUpPage() {
   // function UserSignUpPage({ isModal }: { isModal?: boolean }) { //for showing modal with parallel route this needs to be a component and should be imported in this page
@@ -90,9 +91,10 @@ function UserSignUpPage() {
             <PasswordField label="Password" name="password" />
             <PasswordField label="Confirm Password " name="confirm_password" />
             <div className="pt-3">
-              <button
+              <Button
                 type="submit"
-                className="relative w-full py-[9px] font-medium text-white bg-black rounded-md dark:text-black dark:bg-gray-50 disabled:opacity-70 disabled:cursor-not-allowed"
+                aria-label="submit"
+                className="relative w-full h-[42px] text-base"
                 disabled={isSubmitting}
               >
                 {isSubmitting && (
@@ -101,7 +103,7 @@ function UserSignUpPage() {
                   </span>
                 )}
                 <span>Submit</span>
-              </button>
+              </Button>
             </div>
           </form>
         </FormProvider>

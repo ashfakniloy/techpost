@@ -57,7 +57,7 @@ function AccountSettingpage() {
         {accountMenus.map((accountMenu) => (
           <div key={accountMenu.name}>
             <div
-              className={`px-2 py-3 lg:py-5 lg:px-5 flex gap-4 lg:gap-0 ${
+              className={`my-3 px-2 py-4 lg:py-5 lg:px-5 flex gap-4 lg:gap-0 ${
                 accountMenu.name === menu
                   ? "bg-gray-50 dark:bg-custom-gray2 shadow-md rounded-md"
                   : "hover:bg-gray-50/50 dark:hover:bg-custom-gray2/50 cursor-pointer rounded-md"

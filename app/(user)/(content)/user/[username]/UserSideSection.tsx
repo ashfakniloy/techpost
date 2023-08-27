@@ -1,7 +1,7 @@
 import PostsSideSection from "@/components/Post/PostsSideSection";
 import { getPostsByUsername } from "@/db/queries/getPostsByUsername";
 
-async function ProfileSideSection({
+async function UserSideSection({
   cardTitle,
   username,
   sort,
@@ -21,4 +21,4 @@ async function ProfileSideSection({
   return data && <PostsSideSection heading={cardTitle} posts={data} />;
 }
 
-export default ProfileSideSection;
+export default UserSideSection;

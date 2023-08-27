@@ -9,6 +9,7 @@ import { InputField } from "@/components/Form/InputField";
 import { Loader } from "@/components/Loaders/Loader";
 import { PasswordField } from "@/components/Form/PasswordField";
 import { SigninFormProps, signinSchema } from "@/schemas/signinSchema";
+import { Button } from "@/components/ui/button";
 // import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function AdminSigninPage() {
@@ -46,7 +47,7 @@ function AdminSigninPage() {
 
     if (!response?.error) {
       console.log("succcess", response);
-      toast.success("Login Successfull", {
+      toast.success("Welcome Admin", {
         id: toastSignin,
       });
 
@@ -79,14 +80,14 @@ function AdminSigninPage() {
           <FormProvider {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-6"
+              className="space-y-10 lg:space-y-8"
               noValidate
             >
               <InputField label="Email" name="email" type="email" />
               <PasswordField label="Password" name="password" />
 
               <div className="pt-3">
-                <button
+                {/* <button
                   type="submit"
                   className="relative w-full py-[9px] font-medium text-white bg-black rounded-md dark:text-black dark:bg-gray-50 disabled:opacity-70 disabled:cursor-not-allowed"
                   disabled={isSubmitting}
@@ -97,7 +98,21 @@ function AdminSigninPage() {
                     </span>
                   )}
                   <span>Submit</span>
-                </button>
+                </button> */}
+
+                <Button
+                  type="submit"
+                  aria-label="submit"
+                  className="relative w-full h-[42px] text-base"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting && (
+                    <span className="absolute flex left-[80px] lg:left-[105px] items-center inset-y-0">
+                      <Loader width="30" />
+                    </span>
+                  )}
+                  <span>Submit</span>
+                </Button>
               </div>
             </form>
           </FormProvider>

@@ -1,13 +1,12 @@
 "use client";
 
+import { signOut } from "next-auth/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-hot-toast";
 import { InputField } from "@/components/Form/InputField";
 import { PasswordField } from "@/components/Form/PasswordField";
-import { toast } from "react-hot-toast";
-import { signOut } from "next-auth/react";
-import CancelButton from "@/components/Buttons/CancelButton";
-import SubmitButton from "@/components/Buttons/SubmitButton";
+import { Button } from "@/components/ui/button";
 import { EmailFormProps, emailSchema } from "@/schemas/accountSchema";
 
 function EmailChange({
@@ -78,9 +77,25 @@ function EmailChange({
         >
           <InputField type="email" label="New Email" name="email" />
           <PasswordField label="Enter your password" name="password" />
-          <div className="flex items-center justify-end gap-2 pt-1">
-            <CancelButton setMenu={setMenu} isSubmitting={isSubmitting} />
-            <SubmitButton name="Change Email" isSubmitting={isSubmitting} />
+          <div className="flex items-center justify-end gap-5 pt-1">
+            <Button
+              type="button"
+              aria-label="cancel"
+              variant="outline"
+              className="lg:min-w-[100px] border-gray-500"
+              onClick={() => setMenu("")}
+              disabled={isSubmitting}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              aria-label="submit"
+              className="lg:min-w-[100px]"
+              disabled={isSubmitting}
+            >
+              Submit
+            </Button>
           </div>
         </form>
       </FormProvider>

@@ -1,13 +1,12 @@
 "use client";
 
+import { signOut } from "next-auth/react";
+import { toast } from "react-hot-toast";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/Form/InputField";
 import { PasswordField } from "@/components/Form/PasswordField";
-import { toast } from "react-hot-toast";
-import { signOut } from "next-auth/react";
-import CancelButton from "@/components/Buttons/CancelButton";
-import SubmitButton from "@/components/Buttons/SubmitButton";
+import { Button } from "@/components/ui/button";
 import {
   DeleteAccountFormProps,
   deleteAccountSchema,
@@ -96,9 +95,25 @@ function DeleteAccount({
                 </p>
               }
             />
-            <div className="flex items-center justify-end gap-2 pt-1">
-              <CancelButton setMenu={setMenu} isSubmitting={isSubmitting} />
-              <SubmitButton name="Delete Account" isSubmitting={isSubmitting} />
+            <div className="flex items-center justify-end gap-5 pt-1">
+              <Button
+                type="button"
+                variant="outline"
+                className="lg:min-w-[100px] border-gray-500"
+                onClick={() => setMenu("")}
+                disabled={isSubmitting}
+                aria-label="cancel"
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                aria-label="delete account"
+                className="lg:min-w-[100px]"
+                disabled={isSubmitting}
+              >
+                Delete Account
+              </Button>
             </div>
           </form>
         </FormProvider>

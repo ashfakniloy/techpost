@@ -11,6 +11,7 @@ import { Bars3Icon, MoonIcon } from "@heroicons/react/24/outline";
 import DarkMode from "../DarkMode";
 import { signOut } from "next-auth/react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 
 function AdminSidebar({
   node,
@@ -99,15 +100,14 @@ function AdminSidebar({
     <div
       className={` 
         ${
-          showSidebar
-            ? "fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:bg-transparent"
-            : ""
+          showSidebar &&
+          "fixed inset-0 bg-black/50 backdrop-blur-sm z-30 lg:bg-transparent"
         }
       `}
     >
       <div
         ref={node}
-        className={`h-[100dh] lg:h-screen overflow-y-auto bg-gray-50 dark:bg-custom-gray6 shadow-md z-30 top-0 bottom-0 fixed lg:sticky sidebar  lg:translate-x-0 w-[264px] lg:w-[290px] ease-out duration-300 ${
+        className={`h-[100dh] lg:h-screen overflow-y-auto bg-gray-50 dark:bg-custom-gray6 shadow-md z-30 top-0 bottom-0 fixed lg:sticky lg:translate-x-0 w-[264px] lg:w-[290px] ease-out transition-transform duration-300 ${
           showSidebar ? "translate-x-0" : "-translate-x-full"
         }
       `}
@@ -147,21 +147,6 @@ function AdminSidebar({
                   </Link>
                 </div>
               ))}
-
-              {/* {[...Array(10)].map((_, i) => (
-                <div
-                  key={i}
-                  className={`px-3 py-3 flex justify-between items-center font-semibold rounded-lg`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="h-5 w-5">
-                      <MoonIcon className="stroke-blue-600 dark:stroke-blue-300" />
-                    </span>
-
-                    <p className="text-sm">Example</p>
-                  </div>
-                </div>
-              ))} */}
             </div>
             {/* </ScrollArea> */}
           </div>
@@ -187,16 +172,19 @@ function AdminSidebar({
                 </p>
 
                 <div className="flex justify-center">
-                  <button
+                  <Button
                     type="button"
-                    className="px-6 py-1.5 text-sm flex items-center gap-1 font-semibold rounded-full border border-gray-400 hover:border-black hover:text-white hover:bg-black dark:border-gray-500 dark:hover:border-white dark:hover:bg-white dark:hover:text-black transition-color duration-200"
+                    size="sm"
+                    variant="ghost"
+                    aria-label="sign out"
+                    className="flex items-center gap-1 min-w-[130px] rounded-full border border-gray-400 hover:border-black hover:text-white hover:bg-black dark:border-gray-500 dark:hover:border-white dark:hover:bg-white dark:hover:text-black"
                     onClick={handleSignOut}
                   >
                     <span className="h-5 w-5">
                       <ArrowLeftOnRectangleIcon className="stroke-red-600 dark:stroke-red-300" />
                     </span>
-                    <p>Sign out</p>
-                  </button>
+                    <p>Sign Out</p>
+                  </Button>
                 </div>
               </div>
             </div>

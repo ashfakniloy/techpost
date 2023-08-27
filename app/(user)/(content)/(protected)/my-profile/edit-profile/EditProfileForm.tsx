@@ -13,6 +13,7 @@ import { ImageField } from "@/components/Form/ImageField";
 import { IconLinkedin } from "@/components/Icons/IconLinkedin";
 import { useSession } from "next-auth/react";
 import { ProfileFormProps, profileSchema } from "@/schemas/profileSchema";
+import { Button } from "@/components/ui/button";
 
 function EditProfileForm({
   profile,
@@ -146,13 +147,14 @@ function EditProfileForm({
           </div>
 
           <div className="flex justify-end">
-            <button
+            <Button
               type="submit"
-              className="px-6 py-2.5 text-sm font-bold text-white bg-black rounded-md dark:text-black dark:bg-white disabled:cursor-not-allowed disabled:opacity-50"
+              className="min-w-[120px]"
+              aria-label="save"
               disabled={isSubmitting}
             >
               Save
-            </button>
+            </Button>
           </div>
         </form>
       </FormProvider>

@@ -5,6 +5,7 @@ import List from "./List";
 import Card from "./Card";
 import Pagination from "./Pagination";
 import { getAuthSession } from "@/lib/next-auth";
+import { getMultipleImagePlaceholder } from "@/utils/getImagePlaceholder";
 
 type Props = Post & {
   user: {
@@ -31,13 +32,17 @@ async function PostsView({
   const cookieStore = cookies();
   const view = cookieStore.get("view")?.value;
 
+  const imageUrls = posts.map((post) => post.imageUrl);
+
+  const blurDataUrls = await getMultipleImagePlaceholder(imageUrls);
+
   return (
     <div className="">
       {posts.length ? (
         <div className="">
           {(!view || view === "list") && (
             <div className="">
-              {posts.map((post) => (
+              {posts.map((post, i) => (
                 <List
                   key={post.id}
                   id={post.id}
@@ -51,6 +56,7 @@ async function PostsView({
                   createdAt={post.createdAt}
                   session={session}
                   _count={post._count}
+                  blurDataURL={blurDataUrls[i]}
                 />
               ))}
             </div>
@@ -58,7 +64,7 @@ async function PostsView({
 
           {view === "grid" && (
             <div className="mt-10 grid gtid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
-              {posts.map((post) => (
+              {posts.map((post, i) => (
                 <Card
                   key={post.id}
                   id={post.id}
@@ -72,6 +78,7 @@ async function PostsView({
                   createdAt={post.createdAt}
                   session={session}
                   _count={post._count}
+                  blurDataURL={blurDataUrls[i]}
                 />
               ))}
             </div>

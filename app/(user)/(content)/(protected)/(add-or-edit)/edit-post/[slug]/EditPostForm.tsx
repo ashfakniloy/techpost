@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { InputField } from "@/components/Form/InputField";
 import { SelectField } from "@/components/Form/SelectField";
 import { ImageField } from "@/components/Form/ImageField";
+import { Button } from "@/components/ui/button";
 import { RichTextField } from "@/components/Form/RichTextField";
 import { PostFormProps, postSchema } from "@/schemas/postSchema";
 
@@ -62,14 +63,14 @@ function EditPostForm({
 
     if (response.ok) {
       console.log("success", data);
-      toast.success("Post updated successfully", {
+      toast.success(data.success, {
         id: toastEditPost,
       });
       // router.refresh();
       router.push(`/post/${slug}`);
     } else {
       console.log("error", data);
-      toast.error("Something went wrong", {
+      toast.error(data.error, {
         id: toastEditPost,
       });
     }
@@ -97,13 +98,14 @@ function EditPostForm({
           <ImageField label="Image" name="imageUrl" />
           <RichTextField label="Article" name="article" />
           <div className="flex justify-end pt-4">
-            <button
+            <Button
               type="submit"
-              className="px-4 py-2.5 text-sm font-bold text-white bg-black rounded-md dark:text-black dark:bg-white disabled:cursor-not-allowed disabled:opacity-50"
+              className="min-w-[120px]"
+              aria-label="publish edited post"
               disabled={isSubmitting}
             >
-              Submit
-            </button>
+              Publish
+            </Button>
           </div>
         </form>
       </FormProvider>

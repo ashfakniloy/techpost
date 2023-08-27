@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
 import { TextAreaField } from "@/components/Form/TextAreaField";
 import { CommentReplyProps, commentReplySchema } from "@/schemas/commentSchema";
+import { Button } from "@/components/ui/button";
 
 function CommentsReplyForm({
   postId,
@@ -69,21 +70,26 @@ function CommentsReplyForm({
         >
           <TextAreaField name="commentReply" placeholder="Write a reply" />
           <div className="flex justify-end gap-6">
-            <button
+            <Button
               type="button"
-              aria-label="cancel"
-              className="self-end px-6 py-2 rounded-md text-sm min-w-[100px] text-white font-bold bg-gray-600 dark:bg-gray-500 "
+              size="sm"
+              variant="outline"
+              className="min-w-[100px] border-gray-500"
               onClick={() => setOpenReplyForm(false)}
+              aria-label="cancel"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+
+            <Button
               type="submit"
-              className="self-end px-6 py-2 text-sm font-bold  min-w-[100px] tracking-wider text-gray-100 bg-gray-900 rounded-md dark:bg-gray-50 dark:text-gray-900 disabled:bg-opacity-70 dark:disabled:bg-opacity-70 disabled:cursor-not-allowed"
+              size="sm"
+              className="min-w-[100px]"
+              aria-label="submit reply"
               disabled={isSubmitting}
             >
               Submit
-            </button>
+            </Button>
           </div>
         </form>
       </FormProvider>

@@ -1,18 +1,19 @@
+import { Suspense } from "react";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import PostsView from "@/components/Post/PostsView";
 import CategoryTopSection from "./CategoryTopSection";
 import CategorySideSection from "./CategorySideSection";
 import { getPostsByCategory } from "@/db/queries/getPostsByCategory";
-import { notFound } from "next/navigation";
-import { getCategories } from "@/db/queries/getCategories";
 import PostsHeader from "@/components/Post/PostsHeader";
-import { Suspense } from "react";
 import PostsSkeleton from "@/components/Skeleton/PostsSkeleton";
 import Categories from "@/components/Post/Categories";
 import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
 import CategoriesSkeleton from "@/components/Skeleton/CategoriesSkeleton";
 import { getCategoryByName } from "@/db/queries/getCategoryByName";
-import { Metadata } from "next";
 import { capitalizeWords } from "@/utils/capitalizeWords";
+import CategoryTopSkeleton from "@/components/Skeleton/CategoryTopSkeleton";
+// import { getCategories } from "@/db/queries/getCategories";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -128,7 +129,9 @@ async function CategoryPage({
 
   return (
     <div>
-      <CategoryTopSection categoryName={categoryNameDecoded} />
+      <Suspense fallback={<CategoryTopSkeleton />}>
+        <CategoryTopSection categoryName={categoryNameDecoded} />
+      </Suspense>
 
       <div className="lg:flex justify-between gap-5 mt-10 lg:mt-20">
         <div className="lg:flex-1 lg:max-w-[796px] overflow-hidden">

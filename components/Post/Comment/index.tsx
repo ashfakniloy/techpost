@@ -7,6 +7,7 @@ import CommentLike from "./CommentLike";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import CommentReply from "./CommentReply";
 import CommentOption from "./CommentOption";
+import { Button } from "@/components/ui/button";
 
 async function Comment({
   postId,
@@ -41,7 +42,7 @@ async function Comment({
       {session && session.user.role === "USER" ? (
         <CommentForm postId={postId} />
       ) : (
-        <Link href="/signin" className="text-blue-500">
+        <Link href="/signin" className="text-blue-600 dark:text-blue-400 link">
           Sign in to comment
         </Link>
       )}
@@ -54,7 +55,7 @@ async function Comment({
             : "No comments yet"}
         </p>
 
-        <div className="mt-2 space-y-5 ">
+        <div className="mt-2 space-y-5">
           {comments.map((comment) => (
             <div
               key={comment.id}
@@ -84,7 +85,7 @@ async function Comment({
                   <p className="font-semibold text-xs lg:text-sm">
                     <Link
                       href={`/user/${comment.user.username}`}
-                      className="hover:text-blue-800 dark:hover:text-blue-500"
+                      className="link"
                     >
                       {comment.user.username}
                     </Link>
@@ -94,44 +95,60 @@ async function Comment({
                       {comment.comment}
                     </p>
                   </div>
-                  <div className="mt-1 relative">
-                    <div className="relative flex w-full justify-between items-center text-xs lg:text-sm">
+
+                  <div className="mt-1 relative flex w-full justify-between items-center text-xs lg:text-sm">
+                    <div className="relative flex justify-between items-center w-full lg:max-w-[280px]">
                       <CommentLike commentId={comment.id} />
 
                       <div className="flex items-center gap-2">
-                        <p className="text-gray-600 dark:text-gray-400 ml-16">
+                        <p className="text-gray-600 dark:text-gray-400">
                           {getTimeDistance(comment.createdAt)}
                         </p>
                       </div>
-
-                      {(session?.user.id === comment.userId ||
-                        session?.user.id === authorId) && (
-                        <div className="">
-                          <CommentOption
-                            commentId={comment.id}
-                            type="Comment"
-                          />
-                        </div>
-                      )}
                     </div>
 
-                    <CommentReply
-                      commentId={comment.id}
-                      postId={postId}
-                      authorId={authorId}
-                      session={session}
-                    />
+                    {(session?.user.id === comment.userId ||
+                      session?.user.id === authorId) && (
+                      <CommentOption commentId={comment.id} type="Comment" />
+                    )}
                   </div>
                 </div>
               </div>
+
+              <CommentReply
+                commentId={comment.id}
+                postId={postId}
+                authorId={authorId}
+                session={session}
+              />
             </div>
           ))}
         </div>
 
-        {/* {totalComments >= comments.length + 1 && ( */}
         {comments.length !== totalComments && (
           <div className="flex justify-center mt-3">
             <Link
+              href={`/post/${slug}?showComments=${showCommentsIncrement}`}
+              scroll={false}
+              replace={true}
+            >
+              <Button
+                type="button"
+                size="sm"
+                className="px-6 rounded-full"
+                aria-label="more comments"
+              >
+                {`Show ${
+                  totalComments - comments.length < addComments
+                    ? totalComments - comments.length
+                    : addComments
+                } more ${
+                  totalComments - comments.length > 1 ? "comments" : "comment"
+                }`}
+              </Button>
+            </Link>
+
+            {/* <Link
               href={`/post/${slug}?showComments=${showCommentsIncrement}`}
               scroll={false}
               replace={true}
@@ -144,7 +161,7 @@ async function Comment({
               } more ${
                 totalComments - comments.length > 1 ? "comments" : "comment"
               }`}
-            </Link>
+            </Link> */}
           </div>
         )}
       </div>

@@ -74,12 +74,15 @@ export async function POST(request: NextRequest) {
     // revalidatePath("/admin");
 
     return NextResponse.json({
-      message: "Post created successfully",
+      success: "Post created successfully",
       response,
     });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ error }, { status: 400 });
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }
 
@@ -166,12 +169,15 @@ export async function PUT(request: NextRequest) {
     // revalidatePath("/post/[postId]");
 
     return NextResponse.json({
-      message: "Post updated successfully",
+      success: "Post updated successfully",
       response,
     });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json({ error }, { status: 400 });
+    // console.log(error);
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }
 
@@ -223,9 +229,12 @@ export async function DELETE(request: NextRequest) {
     // revalidatePath("/user/[username]");
     // revalidatePath("/post/[postId]");
 
-    return NextResponse.json({ message: "Deleted Successfully", response });
+    return NextResponse.json({ success: "Deleted Successfully", response });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }

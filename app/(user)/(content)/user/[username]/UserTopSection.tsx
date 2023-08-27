@@ -1,18 +1,26 @@
 import { IconFacebook } from "@/components/Icons/IconFacebook";
 import { IconLinkedin } from "@/components/Icons/IconLinkedin";
 import { IconTwitter } from "@/components/Icons/IconTwitter";
+import { BASE_URL } from "@/config";
 import { getProfileByUsername } from "@/db/queries/getProfileByUsername";
+import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-async function ProfileTopSection({ username }: { username: string }) {
+async function UserTopSection({ username }: { username: string }) {
   const { data: profile } = await getProfileByUsername({ username });
 
   if (!profile) {
     notFound();
   }
+
+  const BlankUserImage = `${BASE_URL}/images/blankUser.jpg`;
+
+  const blurDataUrl = await getImagePlaceholder(
+    profile?.imageUrl || BlankUserImage
+  );
 
   return (
     <section className="flex flex-col lg:flex-row gap-3 lg:gap-8">
@@ -20,7 +28,9 @@ async function ProfileTopSection({ username }: { username: string }) {
         {profile.imageUrl ? (
           <Image
             src={profile.imageUrl}
-            alt="user"
+            placeholder="blur"
+            blurDataURL={blurDataUrl}
+            alt={profile.user.username}
             fill
             sizes="(max-width: 768px) 150px, 250px"
             className="object-cover rounded-md"
@@ -28,8 +38,11 @@ async function ProfileTopSection({ username }: { username: string }) {
         ) : (
           <Image
             src="/images/blankUser.jpg"
-            alt="user image"
+            placeholder="blur"
+            blurDataURL={blurDataUrl}
+            alt={profile.user.username}
             fill
+            sizes="(max-width: 768px) 150px, 250px"
             className="object-cover rounded-md"
           />
         )}
@@ -69,4 +82,4 @@ async function ProfileTopSection({ username }: { username: string }) {
   );
 }
 
-export default ProfileTopSection;
+export default UserTopSection;

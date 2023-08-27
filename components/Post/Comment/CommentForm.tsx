@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
 import { TextAreaField } from "@/components/Form/TextAreaField";
 import { CommentFormProps, commentSchema } from "@/schemas/commentSchema";
+import { Button } from "@/components/ui/button";
 
 function CommentForm({ postId }: { postId: string }) {
   const router = useRouter();
@@ -63,13 +64,13 @@ function CommentForm({ postId }: { postId: string }) {
             placeholder="Write Comment"
           />
           <div className="flex justify-end">
-            <button
+            <Button
               type="submit"
-              className="px-6 py-2.5 font-bold text-sm rounded-md tracking-wider bg-gray-900 text-gray-100 dark:bg-gray-50 dark:text-gray-900 disabled:bg-opacity-70 dark:disabled:bg-opacity-70 disabled:cursor-not-allowed"
+              className="min-w-[100px]"
               disabled={isSubmitting}
             >
               Post
-            </button>
+            </Button>
           </div>
         </form>
       </FormProvider>

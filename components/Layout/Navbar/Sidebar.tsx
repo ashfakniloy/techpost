@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { Session } from "next-auth";
 import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Button } from "@/components/ui/button";
 
 // type NavLinksProps = (
 //   | {
@@ -181,25 +182,40 @@ function Sidebar({
                   <div className="">
                     <p className="font-medium">Signed in as </p>
                     <p className="font-bold capitalize">{username}</p>
-                    <button
-                      className="mt-3 w-[120px] py-2 text-sm font-bold text-gray-100 rounded-full bg-gray-800 dark:bg-stone-600"
+                    <Button
+                      type="button"
+                      aria-label="sign out"
+                      size="sm"
+                      className="mt-3 mb-1 min-w-[120px] rounded-full"
                       onClick={handleSignOut}
                     >
-                      Sign out
-                    </button>
+                      Sign Out
+                    </Button>
                   </div>
                 </div>
               ) : (
                 <div className="flex items-center justify-between">
                   <Link href="/signup">
-                    <button className="w-[120px] py-2 text-sm font-bold bg-transparent border-2 border-gray-400 dark:hover:bg-gray-400 dark:hover:text-gray-900 rounded-md">
+                    <Button
+                      type="button"
+                      size="sm"
+                      aria-label="sign up"
+                      variant="outline"
+                      className="min-w-[120px] border-gray-600 dark:border-gray-300"
+                    >
                       Sign Up
-                    </button>
+                    </Button>
                   </Link>
+
                   <Link href="/signin">
-                    <button className="w-[120px] py-2 text-sm font-bold bg-gray-900 border-gray-900 text-gray-200 dark:text-gray-900 border-2 dark:border-gray-200 dark:bg-gray-200 rounded-md">
+                    <Button
+                      type="button"
+                      aria-label="sign in"
+                      size="sm"
+                      className="min-w-[120px]"
+                    >
                       Sign In
-                    </button>
+                    </Button>
                   </Link>
                 </div>
               )}

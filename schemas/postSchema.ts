@@ -6,7 +6,12 @@ export const postSchema = z.object({
     .string()
     .nonempty("Title is required")
     .min(5, "Title must be at least 5 characters")
-    .max(150, "Title must be at most 150 characters"),
+    .max(150, "Title must be at most 150 characters")
+    .refine((value) => value.trim().length > 0, "Title can't be empty")
+    .refine(
+      (value) => value.trim().length >= 5,
+      "Title must be at least 5 characters"
+    ),
   categoryName: z.string().nonempty("Category is required"),
   imageUrl: z.string().nonempty("Image is required"),
   imageId: z.string().nonempty("Image is required"),

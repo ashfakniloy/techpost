@@ -1,13 +1,10 @@
 "use client";
 
-import { DynamicField } from "@/components/Form/DynamicField";
-import { ImageField } from "@/components/Form/ImageField";
-import { InputField } from "@/components/Form/InputField";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import { BadgeCheck, Eye, Trash } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,23 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { XCircleIcon } from "@heroicons/react/24/outline";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { z } from "zod";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { BadgeCheck, Eye, Trash } from "lucide-react";
 import Modal from "@/components/Modal";
-import Link from "next/link";
 
 type PostOptionProps = {
   id: string;

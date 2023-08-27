@@ -27,7 +27,7 @@ async function CommentReply({
       commentRepliesCount={commentRepliesCount}
     >
       {commentReplies.map((reply, i) => (
-        <div key={reply.id} className="flex gap-3 pt-2">
+        <div key={reply.id} className="flex gap-3 pt-4">
           <div className="">
             {reply.user.profile?.imageUrl ? (
               <Image
@@ -48,19 +48,16 @@ async function CommentReply({
             )}
           </div>
 
-          <div className="flex-1 w-[10%]">
-            <p className="text-sm font-semibold">
-              <Link
-                href={`/user/${reply.user.username}`}
-                className="hover:text-blue-800 dark:hover:text-blue-500"
-              >
+          <div className="flex-1 w-[10%] text-sm lg:text-base">
+            <p className="text-xs lg:text-sm font-semibold">
+              <Link href={`/user/${reply.user.username}`} className="link">
                 {reply.user.username}
               </Link>
             </p>
             <div className="overflow-hidden break-words">
               <p className="">{reply.commentReply}</p>
-              <div className="flex items-start justify-between">
-                <p className="text-sm text-gray-600 dark:text-gray-400">
+              <div className="flex items-center justify-between">
+                <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-400">
                   {getTimeDistance(reply.createdAt)}
                 </p>
                 {(session?.user.id === reply.userId ||

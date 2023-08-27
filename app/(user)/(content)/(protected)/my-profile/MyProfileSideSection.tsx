@@ -6,14 +6,25 @@ import { IconTwitter } from "@/components/Icons/IconTwitter";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import { getAuthSession } from "@/lib/next-auth";
 import { getProfileByUserId } from "@/db/queries/getProfileByUserId";
+import { BASE_URL } from "@/config";
+import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
+import { notFound } from "next/navigation";
 
 async function MyProfileSideSection() {
   const session = await getAuthSession();
   const userId = session?.user.id;
 
-  // if(!userId) return
-
   const { data: profile } = await getProfileByUserId({ userId });
+
+  if (!profile) {
+    notFound();
+  }
+
+  const BlankUserImage = `${BASE_URL}/images/blankUser.jpg`;
+
+  const blurDataUrl = await getImagePlaceholder(
+    profile?.imageUrl || BlankUserImage
+  );
 
   return (
     <section className="lg:w-[360px] lg:sticky lg:top-[92px]">
@@ -22,7 +33,9 @@ async function MyProfileSideSection() {
           {profile?.imageUrl ? (
             <Image
               src={profile.imageUrl}
-              alt="user"
+              placeholder="blur"
+              blurDataURL={blurDataUrl}
+              alt={profile.user.username}
               fill
               sizes="(max-width: 768px) 150px, 320px"
               className="object-cover rounded-md"
@@ -30,7 +43,9 @@ async function MyProfileSideSection() {
           ) : (
             <Image
               src="/images/blankUser.jpg"
-              alt="user image"
+              placeholder="blur"
+              blurDataURL={blurDataUrl}
+              alt={profile.user.username}
               fill
               sizes="(max-width: 768px) 150px, 320px"
               className="object-cover rounded-md"

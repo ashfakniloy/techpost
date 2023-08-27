@@ -9,8 +9,8 @@ import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import { Loader2 } from "@/components/Loaders/Loader";
-import { removeHtmlTags } from "@/utils/removeHtmlTags";
 import { postSchema } from "@/schemas/postSchema";
+import { Button } from "@/components/ui/button";
 
 function PostPreviewPage() {
   const router = useRouter();
@@ -34,9 +34,11 @@ function PostPreviewPage() {
   useEffect(() => {
     // const persistedPost = JSON.parse(localStorage.getItem("newPost") || "");
 
-    const persistedPost = localStorage.getItem("draftPost");
-    const parsedPost = persistedPost && JSON.parse(persistedPost || "");
-    setPreviewPost(parsedPost);
+    const draftPost = localStorage.getItem("draftPost");
+    const JsonParsed = draftPost && JSON.parse(draftPost);
+    const parsedPost = postSchema.safeParse(JsonParsed);
+    if (parsedPost.success !== true) redirect("/add-post");
+    setPreviewPost(JsonParsed);
     setHasPost(true);
 
     // const parsed = formSchema.parse(previewPost);
@@ -69,13 +71,13 @@ function PostPreviewPage() {
   //   // }
   // }, [previewPost]);
 
-  useEffect(() => {
-    const parsed = postSchema.safeParse(previewPost);
+  // useEffect(() => {
+  //   const parsed = postSchema.safeParse(previewPost);
 
-    if (hasPost && parsed.success !== true) redirect("/add-post");
-  }, [hasPost]);
+  //   if (hasPost && parsed.success !== true) redirect("/add-post");
+  // }, [hasPost]);
 
-  console.log("article", removeHtmlTags(previewPost.article));
+  // console.log("article", removeHtmlTags(previewPost.article));
 
   const handlePublish = async () => {
     // console.log("previewPost", previewPost);
@@ -182,17 +184,17 @@ function PostPreviewPage() {
           </div>
         </div>
 
-        {previewPost.imageUrl && (
-          <div className="mt-5 h-[280px] lg:h-[470px] relative">
-            <Image
-              src={previewPost.imageUrl}
-              alt="image"
-              fill
-              sizes="(max-width: 768px) 500px, 800px"
-              className="object-cover"
-            />
-          </div>
-        )}
+        <div className="mt-5 h-[280px] lg:h-[470px] relative">
+          <Image
+            src={previewPost.imageUrl}
+            placeholder="blur"
+            blurDataURL="/images/placeholder.webp"
+            alt="post image"
+            fill
+            sizes="(max-width: 768px) 500px, 800px"
+            className="object-cover"
+          />
+        </div>
 
         <div className="mt-6 ProseMirror !border-none !p-0 !max-h-full">
           {parser(previewPost.article || "")}
@@ -201,20 +203,32 @@ function PostPreviewPage() {
 
       <div className="flex justify-end items-center gap-6 mt-5 mb-5">
         <Link href="/add-post">
-          <button
+          {/* <button
             className="min-w-[120px] py-[9px] hover:text-white dark:hover:text-gray-900 border border-gray-800 dark:border-gray-200 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-200 rounded-md text-sm font-bold disabled:cursor-not-allowed disabled:opacity-50"
             disabled={isSubmitting}
           >
             Edit
-          </button>
+          </button> */}
+          <Button
+            type="button"
+            aria-label="edit post"
+            variant="outline"
+            className="relative min-w-[120px] border-gray-500 hover:bg-gray-200 dark:hover:bg-gray-800"
+            disabled={isSubmitting}
+          >
+            Edit
+          </Button>
         </Link>
-        <button
-          className="min-w-[120px] py-2.5 text-sm font-bold text-white bg-gray-900 rounded-md dark:text-gray-900 dark:bg-white disabled:cursor-not-allowed disabled:opacity-50"
+
+        <Button
+          type="button"
+          className="min-w-[120px]"
+          aria-label="publish post"
           onClick={handlePublish}
           disabled={isSubmitting}
         >
           Publish
-        </button>
+        </Button>
       </div>
     </div>
   );

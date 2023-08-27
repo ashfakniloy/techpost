@@ -26,6 +26,7 @@ type CardProps = Omit<
     comments: number;
     views: number;
   };
+  blurDataURL: string;
 };
 
 function Card({
@@ -40,6 +41,7 @@ function Card({
   article,
   session,
   _count,
+  blurDataURL,
 }: CardProps & SessionProps) {
   // const description = parser(
   //   article.replace(/<(img|iframe)\b[^>]*>/g, "") || ""
@@ -51,13 +53,17 @@ function Card({
     <section className="transition-shadow duration-300 bg-gray-50 rounded-md shadow-md group dark:bg-custom-gray2 hover:shadow-lg min-w-[290px] lg:max-w-[386px]">
       <Link href={`/post/${slug}`}>
         <div className="h-[180px] lg:h-[220px] relative rounded-t-md overflow-hidden">
-          <Image
-            src={imageUrl}
-            alt="programming"
-            fill
-            sizes="(max-width: 768px) 100vw, 390px"
-            className="object-cover transition duration-700 ease-out group-hover:scale-105"
-          />
+          {imageUrl && (
+            <Image
+              src={imageUrl}
+              placeholder="blur"
+              blurDataURL={blurDataURL}
+              alt="post image"
+              fill
+              sizes="(max-width: 768px) 100vw, 390px"
+              className="object-cover transition duration-700 ease-out group-hover:scale-105"
+            />
+          )}
 
           <div className="absolute bottom-0 right-0">
             <span className="bg-black/70 text-[10px] lg:text-xs px-1.5 lg:px-3 py-1 lg:py-1.5 text-white text-xs capitalize">
@@ -70,9 +76,7 @@ function Card({
         <div className="">
           <div className="">
             <Link href={`/post/${slug}`}>
-              <h3
-                className={`text-base leading-snug lg:leading-[28px] lg:text-xl font-semibold title-color `}
-              >
+              <h3 className="text-base leading-snug lg:leading-[28px] lg:text-xl font-semibold link">
                 {title}
               </h3>
             </Link>
@@ -80,10 +84,7 @@ function Card({
           <div className="flex items-center gap-2 mt-0.5 text-xs text-gray-500 lg:text-sm lg:mt-1 lg:gap-5 dark:text-gray-400">
             <p className="capitalize">
               By{" "}
-              <Link
-                href={`/user/${user.username}`}
-                className="hover:text-blue-800 dark:hover:text-blue-500"
-              >
+              <Link href={`/user/${user.username}`} className="link">
                 {user.username}
               </Link>{" "}
             </p>
