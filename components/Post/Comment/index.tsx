@@ -96,7 +96,7 @@ async function Comment({
                     </p>
                   </div>
 
-                  <div className="mt-1 relative flex w-full justify-between items-center text-xs lg:text-sm">
+                  <div className="mt-1 relative flex w-full justify-between items-center text-xs lg:text-sm  h-[22px] lg:h-[25px]">
                     <div className="relative flex justify-between items-center w-full lg:max-w-[280px]">
                       <CommentLike commentId={comment.id} />
 

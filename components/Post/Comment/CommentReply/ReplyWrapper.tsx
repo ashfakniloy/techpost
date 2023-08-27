@@ -35,7 +35,7 @@ function ReplyWrapper({
       <button
         type="button"
         aria-label="reply"
-        className="absolute top-[-22px] lg:top-[-25px] left-[120px] lg:left-[120px] text-xs lg:text-sm hover:text-blue-500"
+        className="absolute top-[-19px] lg:top-[-22px] left-[120px] lg:left-[120px] text-xs lg:text-sm hover:text-blue-500"
         onClick={handleReplyClick}
       >
         Reply
