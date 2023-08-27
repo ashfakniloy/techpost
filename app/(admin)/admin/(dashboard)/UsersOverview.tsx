@@ -7,9 +7,8 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-  Legend,
+  // Legend,
 } from "recharts";
-import Section from "@/components/Admin/Section";
 import { useTheme } from "next-themes";
 import SectionChart from "@/components/Admin/SectionChart";
 
@@ -21,20 +20,20 @@ type UsersOverviewProps = {
 function UsersOverview({ usersData }: { usersData: UsersOverviewProps[] }) {
   // console.log("usersData", usersData);
 
-  const mockData = [
-    { name: "Jan", total: 103 },
-    { name: "Feb", total: 254 },
-    { name: "Mar", total: 480 },
-    { name: "Apr", total: 363 },
-    { name: "May", total: 272 },
-    { name: "Jun", total: 739 },
-    { name: "Jul", total: 694 },
-    { name: "Aug", total: 581 },
-    { name: "Sep", total: 270 },
-    { name: "Oct", total: 702 },
-    { name: "Nov", total: 652 },
-    { name: "Dec", total: 589 },
-  ];
+  // const mockData = [
+  //   { name: "Jan", total: 103 },
+  //   { name: "Feb", total: 254 },
+  //   { name: "Mar", total: 480 },
+  //   { name: "Apr", total: 363 },
+  //   { name: "May", total: 272 },
+  //   { name: "Jun", total: 739 },
+  //   { name: "Jul", total: 694 },
+  //   { name: "Aug", total: 581 },
+  //   { name: "Sep", total: 270 },
+  //   { name: "Oct", total: 702 },
+  //   { name: "Nov", total: 652 },
+  //   { name: "Dec", total: 589 },
+  // ];
 
   const { systemTheme, theme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;

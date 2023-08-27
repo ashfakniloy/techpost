@@ -1,10 +1,8 @@
 import { prisma } from "@/lib/prisma";
 
-export async function getUsersperMonth() {
+export async function getUsersperMonth({ year }: { year: number }) {
   // const currentDate = new Date();
   // const currentMonth = currentDate.getMonth() + 1; // JavaScript months are zero-based, so add 1 to get the current month
-
-  const year = 2023; // Replace with the dynamic year
 
   const startDate = new Date(0);
   startDate.setFullYear(year);
@@ -53,5 +51,5 @@ export async function getUsersperMonth() {
     ]
   );
 
-  return { usersPerMonth };
+  return usersPerMonth;
 }
