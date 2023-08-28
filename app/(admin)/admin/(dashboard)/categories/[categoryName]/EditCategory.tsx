@@ -91,7 +91,7 @@ function EditCategory({
   };
 
   return (
-    <div className="">
+    <>
       <button
         type="button"
         title="Close"
@@ -103,14 +103,11 @@ function EditCategory({
       </button>
 
       <h1 className="text-2xl font-bold text-center">Edit category</h1>
-      <ScrollArea className="">
-        <div className="max-h-[650px] px-6">
-          <FormProvider {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-5 mt-10"
-              noValidate
-            >
+
+      <FormProvider {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
+          <ScrollArea>
+            <div className="max-h-[60dvh] lg:max-h-[60vh] px-6 space-y-5">
               <InputField type="text" label="Category Name" name="name" />
 
               <ImageField label="Image" name="imageUrl" isAdmin />
@@ -129,31 +126,27 @@ function EditCategory({
                 type="text"
                 maxLength={20}
               />
+            </div>
+          </ScrollArea>
 
-              <div className="flex justify-between pt-4 gap-8">
-                <Button
-                  type="button"
-                  onClick={() => setShowEditModal(false)}
-                  // className="w-full bg-emerald-700 hover:bg-emerald-600 text-white"
-                  variant="outline"
-                  className="w-full border-gray-700 dark:border-gray-400"
-                  disabled={isSubmitting}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  Submit
-                </Button>
-              </div>
-            </form>
-          </FormProvider>
-        </div>
-      </ScrollArea>
-    </div>
+          <div className="flex justify-between pt-7 gap-8 px-6">
+            <Button
+              type="button"
+              onClick={() => setShowEditModal(false)}
+              // className="w-full bg-emerald-700 hover:bg-emerald-600 text-white"
+              variant="outline"
+              className="w-full border-gray-700 dark:border-gray-400"
+              disabled={isSubmitting}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              Submit
+            </Button>
+          </div>
+        </form>
+      </FormProvider>
+    </>
   );
 }
 

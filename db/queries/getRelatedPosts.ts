@@ -7,45 +7,50 @@ export async function getRelatedPosts({
   categoryName: string;
   limit: number;
 }) {
-  const data = await prisma.post.findMany({
-    orderBy: [
-      {
-        likes: {
-          _count: "desc",
+  try {
+    const data = await prisma.post.findMany({
+      orderBy: [
+        {
+          likes: {
+            _count: "desc",
+          },
         },
-      },
-      {
-        comments: {
-          _count: "desc",
+        {
+          comments: {
+            _count: "desc",
+          },
         },
-      },
-      {
-        views: {
-          _count: "desc",
+        {
+          views: {
+            _count: "desc",
+          },
         },
-      },
-    ],
+      ],
 
-    where: {
-      categoryName: categoryName,
-    },
+      where: {
+        categoryName: categoryName,
+      },
 
-    take: limit,
-    include: {
-      user: {
-        select: {
-          username: true,
-          id: true,
+      take: limit,
+      include: {
+        user: {
+          select: {
+            username: true,
+            id: true,
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
+            views: true,
+          },
         },
       },
-      _count: {
-        select: {
-          comments: true,
-          views: true,
-        },
-      },
-    },
-  });
+    });
 
-  return { data };
+    return { data };
+  } catch (error) {
+    console.log("fetch error:", error);
+    throw new Error("Failed to fetch");
+  }
 }

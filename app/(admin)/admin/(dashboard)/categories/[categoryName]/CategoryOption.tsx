@@ -1,5 +1,10 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import { Eye, Pen, Trash } from "lucide-react";
 import { AlertDialog, AlertDialogContent } from "@/components/ui/alert-dialog";
 import {
   DropdownMenu,
@@ -9,12 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "react-hot-toast";
-import { Eye, Pen, Trash } from "lucide-react";
 import Modal from "@/components/Modal";
-import Link from "next/link";
 import EditCategory from "./EditCategory";
 
 export type CategoryOptionProps = {

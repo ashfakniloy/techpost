@@ -12,101 +12,106 @@ export async function getPostsByCategory({
   pageNumber?: number;
   sort?: string;
 }) {
-  const currentPage = Math.max(pageNumber || 1, 1);
+  try {
+    const currentPage = Math.max(pageNumber || 1, 1);
 
-  const count = await prisma.post.count({
-    where: {
-      categoryName: categoryName,
-    },
-  });
+    const count = await prisma.post.count({
+      where: {
+        categoryName: categoryName,
+      },
+    });
 
-  const getDataBySort = async () => {
-    if (!sort || sort === "recent") {
-      const data = await prisma.post.findMany({
-        orderBy: {
-          createdAt: "desc",
-        },
-
-        where: {
-          categoryName: {
-            equals: categoryName,
-            mode: "insensitive",
+    const getDataBySort = async () => {
+      if (!sort || sort === "recent") {
+        const data = await prisma.post.findMany({
+          orderBy: {
+            createdAt: "desc",
           },
-        },
 
-        take: limitNumber || PER_PAGE,
-        skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
-
-        include: {
-          user: {
-            select: {
-              username: true,
-              id: true,
+          where: {
+            categoryName: {
+              equals: categoryName,
+              mode: "insensitive",
             },
           },
-          _count: {
-            select: {
-              comments: true,
-              views: true,
+
+          take: limitNumber || PER_PAGE,
+          skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
+
+          include: {
+            user: {
+              select: {
+                username: true,
+                id: true,
+              },
+            },
+            _count: {
+              select: {
+                comments: true,
+                views: true,
+              },
             },
           },
-        },
-      });
+        });
 
-      return data;
-    }
+        return data;
+      }
 
-    if (sort === "popular") {
-      const data = await prisma.post.findMany({
-        orderBy: [
-          {
-            likes: {
-              _count: "desc",
+      if (sort === "popular") {
+        const data = await prisma.post.findMany({
+          orderBy: [
+            {
+              likes: {
+                _count: "desc",
+              },
+            },
+            {
+              comments: {
+                _count: "desc",
+              },
+            },
+            {
+              views: {
+                _count: "desc",
+              },
+            },
+          ],
+
+          where: {
+            categoryName: categoryName,
+          },
+
+          take: limitNumber || PER_PAGE,
+          skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
+
+          include: {
+            user: {
+              select: {
+                username: true,
+                id: true,
+              },
+            },
+            _count: {
+              select: {
+                comments: true,
+                views: true,
+              },
             },
           },
-          {
-            comments: {
-              _count: "desc",
-            },
-          },
-          {
-            views: {
-              _count: "desc",
-            },
-          },
-        ],
+        });
 
-        where: {
-          categoryName: categoryName,
-        },
+        return data;
+      }
+    };
 
-        take: limitNumber || PER_PAGE,
-        skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
+    const data = await getDataBySort();
 
-        include: {
-          user: {
-            select: {
-              username: true,
-              id: true,
-            },
-          },
-          _count: {
-            select: {
-              comments: true,
-              views: true,
-            },
-          },
-        },
-      });
-
-      return data;
-    }
-  };
-
-  const data = await getDataBySort();
-
-  return {
-    data,
-    count,
-  };
+    return {
+      data,
+      count,
+    };
+  } catch (error) {
+    console.log("fetch error:", error);
+    throw new Error("Failed to fetch");
+  }
 }

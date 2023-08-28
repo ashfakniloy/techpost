@@ -2,9 +2,9 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Post } from "../../data/schema";
+// import { Post } from "../../data/schema";
 import { DataTableColumnHeader } from "../data-table-column-header";
-import { format } from "date-fns";
+// import { format } from "date-fns";
 import { PostsActions } from "../actions/PostsActions";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import { PostAdminTypes } from "@/db/queries/admin/getAllPostsAdmin";
@@ -59,7 +59,7 @@ export const categoriesPostsColumn: ColumnDef<PostAdminTypes>[] = [
           user: { username },
         },
       },
-    }) => <div className="w-[150px]">{username}</div>,
+    }) => <div className="w-[150px] capitalize">{username}</div>,
   },
   {
     accessorKey: "_count.likes",

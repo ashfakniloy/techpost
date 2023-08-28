@@ -1,7 +1,7 @@
 .paginateArrowButton {
-  @apply bg-white hover:bg-blue-500/50 hover:text-white shadow-md dark:bg-custom-gray3 dark:hover:bg-blue-500/60 h-[36px] w-[36px] flex justify-center items-center rounded-full disabled:hover:bg-white disabled:dark:hover:bg-custom-gray3 disabled:hover:text-black disabled:dark:hover:text-white disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-200;
+  @apply bg-white hover:bg-blue-500/50 hover:text-white shadow-md dark:bg-custom-gray3 dark:hover:bg-blue-500/60 h-[36px] w-[36px] flex justify-center items-center rounded-full disabled:pointer-events-none disabled:opacity-50 transition-colors duration-200;
 }
 
 .paginateNumberButton {
-  @apply bg-white hover:bg-blue-500/50 hover:text-white shadow-md dark:bg-custom-gray3 dark:hover:bg-blue-500/60 h-[36px] w-[36px] flex justify-center items-center rounded-full disabled:cursor-default transition-colors duration-200;
+  @apply bg-white hover:bg-blue-500/50 hover:text-white shadow-md dark:bg-custom-gray3 dark:hover:bg-blue-500/60 h-[36px] w-[36px] flex justify-center items-center rounded-full disabled:pointer-events-none transition-colors duration-200;
 }

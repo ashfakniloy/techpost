@@ -91,7 +91,11 @@ function Navbar({
           <div className="lg:hidden">
             <SearchButtonMobile />
           </div>
-          <ThemeButton />
+
+          <div className="h-6 w-6 flex justify-center items-center">
+            <ThemeButton />
+          </div>
+
           <button
             type="button"
             aria-label="sidebar toggle"

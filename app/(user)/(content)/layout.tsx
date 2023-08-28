@@ -4,17 +4,6 @@ import DeviceIdSet from "@/components/Post/DeviceIdSet";
 import { getAuthSession } from "@/lib/next-auth";
 import { getCategories } from "@/db/queries/getCategories";
 
-// export const metadata = {
-//   openGraph: {
-//     images: {
-//       url: "/images/techpost-logo.png",
-//       width: 1200,
-//       height: 630,
-//       alt: "Techpost",
-//     },
-//   },
-// };
-
 async function UserLayout({ children }: { children: React.ReactNode }) {
   const session = await getAuthSession();
 

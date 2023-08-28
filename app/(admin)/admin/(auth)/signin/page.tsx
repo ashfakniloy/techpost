@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { FormProvider, useForm } from "react-hook-form";
@@ -14,6 +14,10 @@ import { Button } from "@/components/ui/button";
 
 function AdminSigninPage() {
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+
+  const callback_url = searchParams?.get("callback_url");
 
   const defaultValues = {
     email: "",
@@ -53,7 +57,8 @@ function AdminSigninPage() {
 
       // isModal ? router.back() : router.push("/");
       router.refresh();
-      router.push("/admin");
+      // router.push("/admin");
+      router.push(callback_url || "/admin");
     } else {
       console.log("error", response);
       toast.error(`${response?.error}`, {

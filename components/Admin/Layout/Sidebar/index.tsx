@@ -3,14 +3,14 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { ChevronDownIcon, ChevronLeftIcon } from "@heroicons/react/24/solid";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { adminLinks } from "./adminLinks";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import { Separator } from "@/components/ui/separator";
-import { Bars3Icon, MoonIcon } from "@heroicons/react/24/outline";
+import { MoonIcon } from "@heroicons/react/24/outline";
 import DarkMode from "../DarkMode";
 import { signOut } from "next-auth/react";
-import { ScrollArea } from "@/components/ui/scroll-area";
+// import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 
 function AdminSidebar({
@@ -24,24 +24,12 @@ function AdminSidebar({
 }) {
   const pathname = usePathname();
 
-  // console.log("params", paths);
-
-  // console.log("usersession", data);
-
-  // const username = data?.user?.username;
-
-  // const [active, setActive] = useState("");
-
   const activeClass = (path: string, name: string) => {
-    // router.pathname === path
     const paths = pathname?.split("/");
 
     if (pathname === path || paths?.includes(name.toLowerCase())) {
       return "bg-cyan-200 dark:bg-cyan-900";
     }
-    // if (router.pathname.includes(path)) {
-    //   return "bg-cyan-700 text-white";
-    // }
 
     return "text-custom-blue2 hover:bg-cyan-200/50 dark:hover:bg-cyan-900/50";
   };
@@ -76,7 +64,7 @@ function AdminSidebar({
   //   setShowSubMenu(index);
   // };
 
-  const router = useRouter();
+  // const router = useRouter();
 
   useEffect(() => {
     if (showSidebar) {
@@ -89,7 +77,8 @@ function AdminSidebar({
   const handleSignOut = () => {
     signOut({
       // redirect: false,
-      callbackUrl: `${window.location.origin}/admin/signin`,
+      // callbackUrl: `${window.location.origin}/admin/signin`,
+      callbackUrl: `${window.location.origin}${pathname}`,
     });
 
     // router.refresh();
@@ -115,7 +104,7 @@ function AdminSidebar({
         <div className="flex flex-col justify-between h-full overflow-hidden">
           <div className="">
             <div className="pl-5 lg:pl-[30px] py-7 font-semibold flex justify-between items-center">
-              <h1 className="text-lg lg:text-2xl">TechPost Dashboard</h1>
+              <h1 className="text-lg lg:text-2xl">TechPost Admin</h1>
               <span
                 className="p-1 mr-5 rounded-full border-2 border-gray-500  lg:hidden"
                 onClick={() => setShowSidebar(!showSidebar)}

@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    revalidatePath("/post/[postId]");
+    // revalidatePath("/post/[postId]");
 
     return NextResponse.json({ message: "Commented Successfully", response });
   } catch (error) {

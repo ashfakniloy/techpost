@@ -5,13 +5,13 @@ import { getUserById } from "@/db/queries/getUserById";
 async function ProtectedLayout({ children }: { children: React.ReactNode }) {
   const session = await getAuthSession();
 
-  const { user } = await getUserById({
+  const user = await getUserById({
     userId: session?.user.id,
   });
 
   // console.log("user", user);
 
-  if (!user) {
+  if (session && !user) {
     redirect("/invalid-user");
   }
 

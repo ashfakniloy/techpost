@@ -5,7 +5,7 @@ import {
   EyeIcon,
 } from "@heroicons/react/24/outline";
 
-import { getCounts } from "@/db/queries/getCounts";
+import { getCounts } from "@/db/queries/admin/getCounts";
 
 async function Counts() {
   const { usersCount, postsCount, viewsCount, categoriesCount } =

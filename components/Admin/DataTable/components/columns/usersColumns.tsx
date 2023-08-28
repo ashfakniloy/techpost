@@ -54,7 +54,7 @@ export const usersColumns: ColumnDef<UserProps>[] = [
       <DataTableColumnHeader mannualSort column={column} title="Username" />
     ),
     cell: ({ row }) => (
-      <div className="w-[150px]">{row.getValue("username")}</div>
+      <div className="w-[150px] capitalize">{row.getValue("username")}</div>
     ),
     // enableSorting: true,
     // enableHiding: true,

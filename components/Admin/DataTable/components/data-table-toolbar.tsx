@@ -132,7 +132,7 @@ export function DataTableToolbar<TData>({
             placeholder={`Search ${searchBy}`}
             value={searchTitle || ""}
             onChange={(e) => setSearchTitle(e.target.value)}
-            className="h-8 w-[150px] lg:w-[250px] outline-none "
+            className="h-8 w-full lg:w-[250px] outline-none"
           />
         </div>
 
@@ -144,7 +144,7 @@ export function DataTableToolbar<TData>({
                   <Button
                     variant="outline"
                     onClick={() => setShowDeleteModal(true)}
-                    className="h-8 px-3 flex items-center gap-2"
+                    className="h-8 px-3 text-xs lg:text-sm flex items-center gap-2 border-gray-500 font-normal"
                   >
                     <Trash2 className="w-4 h-4" />
                     <span className="">{`Delete ${
@@ -168,14 +168,14 @@ export function DataTableToolbar<TData>({
               <Button
                 variant="outline"
                 onClick={() => setShowCheckbox(!showCheckbox)}
-                className="h-8 px-3"
+                className="h-8 px-3 text-xs lg:text-sm border-gray-500 font-normal"
               >
                 {!showCheckbox ? "Select rows" : "Cancel row selection"}
               </Button>
             </div>
           )}
 
-          <div className="flex items-center">
+          <div className="flex items-center  text-xs lg:text-sm h-4">
             <p className="">
               Sort By:{" "}
               <span className="capitalize">{sortBy || defaultSort}</span> (
@@ -184,7 +184,7 @@ export function DataTableToolbar<TData>({
             {sortBy && orderBy && (
               <button
                 type="button"
-                className="p-1 ml-1 rounded-md hover:bg-gray-700"
+                className="p-1 ml-1 rounded-md hover:bg-gray-700 border border-gray-500"
                 onClick={() => pathname && router.replace(pathname)}
               >
                 <X className="w-4 h-4" />
@@ -208,7 +208,7 @@ export function DataTableToolbar<TData>({
             onChange={(event) =>
               table.getColumn(searchBy)?.setFilterValue(event.target.value)
             }
-            className="h-8 w-[150px] lg:w-[250px] outline-none focus:border-gray-500"
+            className="h-8 w-full lg:w-[250px] outline-none"
           />
         )}
         {/* {!disableRowSelect && (
@@ -257,9 +257,9 @@ export function DataTableToolbar<TData>({
                 <Button
                   variant="outline"
                   onClick={() => setShowDeleteModal(true)}
-                  className="h-8 px-3 flex items-center gap-2"
+                  className="h-8 px-3 text-xs lg:text-sm flex items-center gap-2 border-gray-500 font-normal"
                 >
-                  <Trash2 className="w-4 h-4 " />
+                  <Trash2 className="w-4 h-4" />
                   <span className="">{`Delete ${
                     table.getFilteredSelectedRowModel().rows.length
                   } row(s)`}</span>

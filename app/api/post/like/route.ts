@@ -41,18 +41,6 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const revalidatePaths = ["/admin/posts"];
-
-    await fetch("/api/revalidate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ paths: revalidatePaths }),
-    });
-
-    // revalidatePath("/admin/posts");
-
     return NextResponse.json({ message: "Liked Successfully", response });
   } catch (error) {
     // console.log(error);
@@ -96,18 +84,6 @@ export async function DELETE(req: NextRequest) {
     // const filteredRes = response.post.likes.filter(
     //   (like) => like.userId !== session.user.id
     // );
-
-    const revalidatePaths = "/admin/posts";
-
-    await fetch("/api/revalidate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ paths: revalidatePaths }),
-    });
-
-    // revalidatePath("/admin/posts");
 
     return NextResponse.json({
       message: "Unliked Successfully",

@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
 import slugify from "slugify";
 import { getAuthSession } from "@/lib/next-auth";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
+// import { revalidatePath } from "next/cache";
 
 export async function POST(request: NextRequest) {
   const session = await getAuthSession();
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
       // },
     });
 
-    revalidatePath("/");
+    // revalidatePath("/");
     // revalidatePath("/my-profile");
     // revalidatePath("/category/[categoryName]");
     // revalidatePath("/user/[username]");

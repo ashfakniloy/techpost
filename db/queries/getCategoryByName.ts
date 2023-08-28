@@ -5,42 +5,47 @@ export async function getCategoryByName({
 }: {
   categoryName: string;
 }) {
-  const data = await prisma.category.findFirst({
-    where: {
-      name: {
-        equals: categoryName,
-        mode: "insensitive",
-      },
-    },
-    include: {
-      posts: true,
-      quotes: {
-        select: {
-          // id: true,
-          author: true,
-          quote: true,
+  try {
+    const data = await prisma.category.findFirst({
+      where: {
+        name: {
+          equals: categoryName,
+          mode: "insensitive",
         },
       },
-      _count: true,
-    },
-    // select: {
-    //   name: true,
-    //   imageUrl: true,
-    //   imageId: true,
-    //   quotes: {
-    //     select: {
-    //       author: true,
-    //       quote: true,
-    //     },
-    //   },
-    //   posts: true,
-    //   _count: {
-    //     select: {
-    //       posts: true,
-    //     },
-    //   },
-    // },
-  });
+      include: {
+        posts: true,
+        quotes: {
+          select: {
+            // id: true,
+            author: true,
+            quote: true,
+          },
+        },
+        _count: true,
+      },
+      // select: {
+      //   name: true,
+      //   imageUrl: true,
+      //   imageId: true,
+      //   quotes: {
+      //     select: {
+      //       author: true,
+      //       quote: true,
+      //     },
+      //   },
+      //   posts: true,
+      //   _count: {
+      //     select: {
+      //       posts: true,
+      //     },
+      //   },
+      // },
+    });
 
-  return { data };
+    return { data };
+  } catch (error) {
+    console.log("fetch error:", error);
+    throw new Error("Failed to fetch");
+  }
 }

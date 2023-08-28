@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { Session } from "next-auth";
 import { HandThumbUpIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import useToggle from "@/hooks/useToggle";
@@ -20,6 +20,7 @@ function CommentLikeButton({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
 
   const [like, setLike] = useState(hasLiked);
 
@@ -84,7 +85,7 @@ function CommentLikeButton({
         router.refresh();
       }
     } else {
-      router.push("/signin");
+      router.push(`/signin?callback_url=${pathname}`);
     }
   };
 

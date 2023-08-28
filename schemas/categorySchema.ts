@@ -9,7 +9,7 @@ export const categorySchema = z.object({
       z.object({
         id: z.string().optional(), //for edit category
         quote: z.string().nonempty("Quote required"),
-        author: z.string().nonempty("Quote author required"),
+        author: z.string().nonempty("Author required"),
       })
     )
     // .nullable()

@@ -69,7 +69,12 @@ export default async function middleware(req: NextRequest) {
     //for admin
     if (pathname !== "/admin/signin") {
       if (token?.user.role !== "ADMIN") {
-        return NextResponse.redirect(`${origin}/admin/signin`);
+        const adminRedirectPath =
+          pathname === `/admin`
+            ? `${origin}/admin/signin`
+            : `${origin}/admin/signin?callback_url=${pathname}`;
+
+        return NextResponse.redirect(adminRedirectPath);
       }
     } else {
       if (token?.user.role === "ADMIN") {
@@ -80,7 +85,10 @@ export default async function middleware(req: NextRequest) {
     // for user
     if (pathname !== "/signin" && pathname !== "/signup") {
       if (token?.user.role !== "USER") {
-        return NextResponse.redirect(`${origin}/signin`);
+        const userRedirectPath = `${origin}/signin?callback_url=${pathname}`;
+
+        return NextResponse.redirect(userRedirectPath);
+        // return NextResponse.redirect(`${origin}/signin`);
       }
     } else {
       if (token?.user.role === "USER") {
@@ -95,7 +103,7 @@ export default async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/add-post/:path*",
-    "/edit-post",
+    "/edit-post/:path*",
     "/my-profile/:path*",
     "/signin",
     "/signup",

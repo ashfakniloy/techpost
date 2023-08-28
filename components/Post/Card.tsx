@@ -66,7 +66,7 @@ function Card({
           )}
 
           <div className="absolute bottom-0 right-0">
-            <span className="bg-black/70 text-[10px] lg:text-xs px-1.5 lg:px-3 py-1 lg:py-1.5 text-white text-xs capitalize">
+            <span className="bg-black/70 text-xs lg:text-xs px-1.5 lg:px-3 py-1 lg:py-1.5 text-white capitalize">
               {categoryName}
             </span>
           </div>

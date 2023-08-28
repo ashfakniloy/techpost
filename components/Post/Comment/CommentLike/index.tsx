@@ -45,7 +45,7 @@ async function CommentLike({ commentId }: { commentId: string }) {
                   className="rounded-full"
                 />
               )}
-              {like.user.username}
+              <span className="capitalize">{like.user.username}</span>
             </div>
           </Link>
         ))}

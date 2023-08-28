@@ -92,7 +92,12 @@ function UserOption({ id, username }: UserOptionProps) {
         showModal={showDeleteModal}
         setShowModal={setShowDeleteModal}
         isPending={isDeleting}
-        title={`Are you sure you want to delete user "${username}"?`}
+        title={
+          <p>
+            Are you sure you want to delete{" "}
+            <span className="capitalize">{`"${username}"`}</span>?
+          </p>
+        }
         handleAction={handleDelete}
         color="bg-gray-50"
         colorDark="dark:bg-custom-gray6"

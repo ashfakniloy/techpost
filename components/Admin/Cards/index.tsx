@@ -4,8 +4,7 @@ import {
   Squares2X2Icon,
   EyeIcon,
 } from "@heroicons/react/24/outline";
-import SingleCard from "./SingleCard";
-import { getCounts } from "@/db/queries/getCounts";
+import { getCounts } from "@/db/queries/admin/getCounts";
 
 async function DashBoardCards() {
   const { usersCount, postsCount, viewsCount, categoriesCount } =

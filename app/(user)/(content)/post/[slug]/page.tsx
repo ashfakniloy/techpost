@@ -20,8 +20,9 @@ import { getDescription } from "@/utils/getDescription";
 import { capitalizeWords } from "@/utils/capitalizeWords";
 import { getSinglePost } from "@/db/queries/getSinglePost";
 import { getAuthSession } from "@/lib/next-auth";
-import "@/components/TextEditor/Tiptap/styles.css";
 import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
+import "@/components/TextEditor/Tiptap/styles.css";
+// import { getAllSlugs } from "@/db/queries/getAllSlugs";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -90,6 +91,12 @@ export async function generateMetadata({
   };
 }
 
+// export async function generateStaticParams() {
+//   const { slugs } = await getAllSlugs();
+
+//   return slugs;
+// }
+
 async function SinglePostPage({
   params: { slug },
   searchParams: { showComments },
@@ -107,9 +114,7 @@ async function SinglePostPage({
   const blurDataUrl = await getImagePlaceholder(post.imageUrl);
 
   return (
-    <div>
-      <ViewCount postId={post.id} isAdmin={session?.user.role === "ADMIN"} />
-
+    <>
       <div className="flex justify-between gap-5">
         <div className="relative flex-1 max-w-full lg:max-w-[796px]">
           <div className="overflow-hidden">
@@ -274,7 +279,9 @@ async function SinglePostPage({
           </Suspense> */}
         </div>
       </div>
-    </div>
+
+      <ViewCount postId={post.id} isAdmin={session?.user.role === "ADMIN"} />
+    </>
   );
 }
 

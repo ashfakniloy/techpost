@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { FormProvider, useForm } from "react-hook-form";
@@ -17,6 +17,10 @@ import { useEffect } from "react";
 function UserSigninPage() {
   // function UserSigninPage({ isModal }: { isModal?: boolean }) {//for showing modal with parallel route this needs to be a component and should be imported in this page
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+
+  const callback_url = searchParams?.get("callback_url");
 
   const { data: session } = useSession();
 
@@ -64,8 +68,11 @@ function UserSigninPage() {
       //   );
 
       // isModal ? router.back() : router.push("/");
+
       router.refresh();
-      router.push("/");
+      router.push(callback_url || "/");
+
+      // router.push("/");
     } else {
       console.log("error", response);
       toast.error(

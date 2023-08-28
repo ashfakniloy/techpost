@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
-import { PER_PAGE } from "@/config";
 import type { Post } from "@prisma/client";
+import { PER_PAGE } from "@/config";
 import List from "./List";
 import Card from "./Card";
 import Pagination from "./Pagination";

@@ -1,7 +1,7 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
 import { Session } from "next-auth";
+import { prisma } from "@/lib/prisma";
 
 import { revalidatePath } from "next/cache";
 

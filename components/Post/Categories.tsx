@@ -1,5 +1,5 @@
-import { getCategories } from "@/db/queries/getCategories";
 import Link from "next/link";
+import { getCategories } from "@/db/queries/getCategories";
 
 async function Categories() {
   const { data: categories } = await getCategories();

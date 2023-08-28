@@ -7,30 +7,35 @@ export async function getMorePostsByUsername({
   username: string;
   limit?: number;
 }) {
-  const data = await prisma.post.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    where: {
-      user: {
-        username: username,
+  try {
+    const data = await prisma.post.findMany({
+      orderBy: {
+        createdAt: "desc",
       },
-    },
-    include: {
-      user: {
-        select: {
-          username: true,
-          id: true,
+      where: {
+        user: {
+          username: username,
         },
       },
-      _count: {
-        select: {
-          comments: true,
+      include: {
+        user: {
+          select: {
+            username: true,
+            id: true,
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
+          },
         },
       },
-    },
-    take: limit,
-  });
+      take: limit,
+    });
 
-  return { data };
+    return { data };
+  } catch (error) {
+    console.log("fetch error:", error);
+    throw new Error("Failed to fetch");
+  }
 }

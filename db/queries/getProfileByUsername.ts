@@ -5,21 +5,26 @@ export async function getProfileByUsername({
 }: {
   username: string | undefined;
 }) {
-  const data = await prisma.profile.findFirst({
-    where: {
-      user: {
-        username: username,
-      },
-    },
-
-    include: {
-      user: {
-        select: {
-          username: true,
+  try {
+    const data = await prisma.profile.findFirst({
+      where: {
+        user: {
+          username: username,
         },
       },
-    },
-  });
 
-  return { data };
+      include: {
+        user: {
+          select: {
+            username: true,
+          },
+        },
+      },
+    });
+
+    return { data };
+  } catch (error) {
+    console.log("fetch error:", error);
+    throw new Error("Failed to fetch");
+  }
 }

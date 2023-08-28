@@ -5,19 +5,24 @@ export async function getProfileByUserId({
 }: {
   userId: string | undefined;
 }) {
-  const data = await prisma.profile.findUnique({
-    where: {
-      userId: userId ? userId : "",
-    },
+  try {
+    const data = await prisma.profile.findUnique({
+      where: {
+        userId: userId ? userId : "",
+      },
 
-    include: {
-      user: {
-        select: {
-          username: true,
+      include: {
+        user: {
+          select: {
+            username: true,
+          },
         },
       },
-    },
-  });
+    });
 
-  return { data };
+    return { data };
+  } catch (error) {
+    console.log("fetch error:", error);
+    throw new Error("Failed to fetch");
+  }
 }

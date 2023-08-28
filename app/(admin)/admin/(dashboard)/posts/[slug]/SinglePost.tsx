@@ -38,7 +38,7 @@ function SinglePost({ post }: { post: SinglePostProps }) {
       <div className="mt-1.5 mb-4 flex justify-between items-center">
         <div className=" text-gray-700 dark:text-gray-300 ">
           <Link
-            href={`/category/${post.categoryName}`}
+            href={`/admin/categories/${post.categoryName}`}
             className="capitalize text-sm lg:text-base hover:text-blue-800 dark:hover:text-blue-500"
           >
             {post.categoryName}
@@ -83,8 +83,8 @@ function SinglePost({ post }: { post: SinglePostProps }) {
 
                 <p className=" ">
                   By{" "}
-                  <Link href={`/user/${post.user.username}`}>
-                    <span className=" hover:text-blue-800 dark:hover:text-blue-500">
+                  <Link href={`/admin/users/${post.user.username}`}>
+                    <span className="hover:text-blue-800 dark:hover:text-blue-500 capitalize">
                       {post.user.username}
                     </span>
                   </Link>

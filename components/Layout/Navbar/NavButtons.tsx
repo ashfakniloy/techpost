@@ -31,6 +31,9 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
     // router.push("/signin");
   };
 
+  const signinPath =
+    pathname === "/" ? "/signin" : `/signin?callback_url=${pathname}`;
+
   return (
     <>
       {session && session.user.role === "USER" ? (
@@ -57,7 +60,7 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
             </button>
           </PopoverTrigger>
 
-          <PopoverContent className="mt-3 p-1 w-[180px] bg-white dark:bg-stone-950 text-sm rounded-md whitespace-nowrap">
+          <PopoverContent className="mt-5 p-1 w-[180px] bg-white dark:bg-stone-950 text-sm rounded-md whitespace-nowrap">
             <div className="space-y-1 p-4 border-b border-gray-300 dark:border-gray-700">
               <p className="">Signed in as </p>
               <p className="font-semibold capitalize">{username}</p>
@@ -86,7 +89,7 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
             </Button>
           </Link>
 
-          <Link href="/signin">
+          <Link href={signinPath}>
             <Button
               type="button"
               aria-label="sign in"

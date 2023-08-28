@@ -24,7 +24,7 @@ function UserCounts({ postsCount, viewsCount }: UserCountsProps) {
       {cardList.map((card, i) => (
         <div
           key={i}
-          className="h-[120px] w-full bg-gray-50 dark:bg-custom-gray6 rounded-lg shadow-md px-8 py-6 hover:shadow-lg transition-shadow duration-300 group cursor-pointer"
+          className="h-[120px] w-full bg-gray-50 dark:bg-custom-gray6 rounded-lg shadow-md px-8 py-6 hover:shadow-lg transition-shadow duration-300 group"
         >
           <div className="flex justify-between items-center h-full">
             <div className="h-[52px] w-[52px] p-2 bg-gray-200 dark:bg-cyan-900/70 rounded-full">

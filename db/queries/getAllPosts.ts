@@ -11,88 +11,93 @@ export async function getAllPosts({
   pageNumber?: number;
   sort?: string;
 }) {
-  const currentPage = Math.max(pageNumber || 1, 1);
+  try {
+    const currentPage = Math.max(pageNumber || 1, 1);
 
-  const count = await prisma.post.count();
+    const count = await prisma.post.count();
 
-  const getDataBySort = async () => {
-    if (!sort || sort === "recent") {
-      const data = await prisma.post.findMany({
-        orderBy: {
-          createdAt: "desc",
-        },
+    const getDataBySort = async () => {
+      if (!sort || sort === "recent") {
+        const data = await prisma.post.findMany({
+          orderBy: {
+            createdAt: "desc",
+          },
 
-        take: limitNumber || PER_PAGE,
-        skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
+          take: limitNumber || PER_PAGE,
+          skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
 
-        include: {
-          user: {
-            select: {
-              username: true,
-              id: true,
+          include: {
+            user: {
+              select: {
+                username: true,
+                id: true,
+              },
+            },
+            _count: {
+              select: {
+                comments: true,
+                views: true,
+              },
             },
           },
-          _count: {
-            select: {
-              comments: true,
-              views: true,
+        });
+
+        return data;
+      }
+
+      if (sort === "popular") {
+        const data = await prisma.post.findMany({
+          orderBy: [
+            {
+              likes: {
+                _count: "desc",
+              },
+            },
+            {
+              comments: {
+                _count: "desc",
+              },
+            },
+            {
+              views: {
+                _count: "desc",
+              },
+            },
+          ],
+
+          take: limitNumber || PER_PAGE,
+          skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
+
+          include: {
+            user: {
+              select: {
+                username: true,
+                id: true,
+              },
+            },
+            _count: {
+              select: {
+                comments: true,
+                views: true,
+              },
             },
           },
-        },
-      });
+        });
 
-      return data;
-    }
+        return data;
+      }
+    };
 
-    if (sort === "popular") {
-      const data = await prisma.post.findMany({
-        orderBy: [
-          {
-            likes: {
-              _count: "desc",
-            },
-          },
-          {
-            comments: {
-              _count: "desc",
-            },
-          },
-          {
-            views: {
-              _count: "desc",
-            },
-          },
-        ],
+    const data = await getDataBySort();
 
-        take: limitNumber || PER_PAGE,
-        skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
-
-        include: {
-          user: {
-            select: {
-              username: true,
-              id: true,
-            },
-          },
-          _count: {
-            select: {
-              comments: true,
-              views: true,
-            },
-          },
-        },
-      });
-
-      return data;
-    }
-  };
-
-  const data = await getDataBySort();
-
-  return {
-    data,
-    count,
-  };
+    return {
+      data,
+      count,
+    };
+  } catch (error) {
+    console.log("fetch error:", error);
+    throw new Error("Failed to fetch");
+  }
 }
 
 export type AllPostTypes = Prisma.PromiseReturnType<typeof getAllPosts>["data"];

@@ -23,18 +23,18 @@ function AdminHeader({
   return (
     <div className="sticky top-0 z-20 lg:hidden">
       <div className="relative z-20">
-        <div className="bg-gray-50 dark:bg-custom-gray6 h-[68px] w-full flex justify-between lg:justify-end items-center shadow-md  px-5 z-30">
+        <div className="relative  bg-gray-50 dark:bg-custom-gray6 h-[68px] w-full flex justify-between lg:justify-end items-center shadow-md  px-5 z-30">
           <button
             type="button"
             aria-label="sidebar toggle"
-            className="lg:hidden"
+            className="lg:hidden z-10"
             onClick={() => setShowSidebar(!showSidebar)}
           >
             <Bars3Icon className="h-8 w-8" />
           </button>
 
-          <div className="text-xl mx-auto text-custom-blue4 font-bold lg:hidden">
-            TechPost Dashboard
+          <div className="absolute w-full flex justify-center items-center inset-x-0 text-xl mx-auto text-custom-blue4 font-bold lg:hidden">
+            TechPost Admin
           </div>
 
           {/* <div className="flex justify-between items-center gap-5 lg:gap-[80px]">

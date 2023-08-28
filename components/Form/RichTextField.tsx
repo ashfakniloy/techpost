@@ -1,5 +1,5 @@
-import Tiptap from "../TextEditor/Tiptap";
 import { Controller, useFormContext } from "react-hook-form";
+import Tiptap from "../TextEditor/Tiptap";
 
 export const RichTextField = ({
   label,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import CommentsReplyForm from "./CommentReplyForm";
 
@@ -21,12 +21,13 @@ function ReplyWrapper({
   const [showReplies, setShowReplies] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleReplyClick = () => {
     if (session && session.user.role === "USER") {
       setOpenReplyForm(!openReplyForm);
     } else {
-      router.push("/signin");
+      router.push(`/signin?callback_url=${pathname}`);
     }
   };
 

@@ -1,6 +1,6 @@
-import { getCategories } from "@/db/queries/getCategories";
 import Link from "next/link";
 import AddCategory from "./AddCategory";
+import { getCategories } from "@/db/queries/getCategories";
 
 async function AdminCategoriesPage() {
   const { data: categories } = await getCategories();

@@ -8,6 +8,7 @@ import { getTimeDistance } from "@/utils/getTimeDistance";
 import CommentReply from "./CommentReply";
 import CommentOption from "./CommentOption";
 import { Button } from "@/components/ui/button";
+import SigninToComment from "./SigninToComment";
 
 async function Comment({
   postId,
@@ -42,9 +43,7 @@ async function Comment({
       {session && session.user.role === "USER" ? (
         <CommentForm postId={postId} />
       ) : (
-        <Link href="/signin" className="text-blue-600 dark:text-blue-400 link">
-          Sign in to comment
-        </Link>
+        <SigninToComment />
       )}
       <div className="mt-3">
         <p className="">

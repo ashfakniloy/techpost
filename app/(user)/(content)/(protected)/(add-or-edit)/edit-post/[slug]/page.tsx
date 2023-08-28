@@ -1,6 +1,6 @@
-import { getSinglePost } from "@/db/queries/getSinglePost";
 import { notFound } from "next/navigation";
 import EditPostForm from "./EditPostForm";
+import { getSinglePost } from "@/db/queries/getSinglePost";
 import { getCategories } from "@/db/queries/getCategories";
 
 // export const revalidate = 0;
@@ -19,23 +19,16 @@ export const metadata = {
 
 async function EditPostPage({ params: { slug } }: Props) {
   const { data: post } = await getSinglePost({ slug });
-  const { data: categories } = await getCategories();
-
-  const allcategories = categories.map((category) => category.name);
-
-  // const postCopy = { ...post };
-
-  // delete postCopy.createdAt;
-  // delete postCopy.updatedAt;
-  // delete postCopy._count;
-
-  // console.log("postcopy", postCopy);
 
   if (!post) {
     notFound();
   }
 
-  const postCopy = {
+  const { data: categories } = await getCategories();
+
+  const allcategories = categories.map((category) => category.name);
+
+  const postFiltered = {
     id: post.id,
     title: post.title,
     categoryName: post.categoryName,
@@ -44,9 +37,7 @@ async function EditPostPage({ params: { slug } }: Props) {
     article: post.article,
   };
 
-  // console.log("postCopy", postCopy);
-
-  return <EditPostForm post={postCopy} categories={allcategories} />;
+  return <EditPostForm post={postFiltered} categories={allcategories} />;
 }
 
 export default EditPostPage;
