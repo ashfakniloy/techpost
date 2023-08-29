@@ -3,13 +3,14 @@ import fs from "node:fs/promises";
 
 export const getImagePlaceholder = async (ogImageUrl: string) => {
   try {
-    const imageUrl = ogImageUrl.replace("/upload/", "/upload/w_5/");
+    const imageUrl =
+      ogImageUrl && ogImageUrl.replace("/upload/", "/upload/w_5/");
     const res = await fetch(imageUrl);
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch image: ${res.status} ${res.statusText}`);
-      // console.log(`Failed to fetch image: ${res.status} ${res.statusText}`);
-      // return;
+    if (!res?.ok) {
+      // throw new Error(`Failed to fetch image: ${res.status} ${res.statusText}`);
+      console.log(`Failed to fetch image: ${res.status} ${res.statusText}`);
+      return;
     }
 
     const buffer = await res.arrayBuffer();
@@ -39,8 +40,8 @@ export const getMultipleImagePlaceholder = async (imageUrls: string[]) => {
 
   const base64Results = await Promise.all(base64Promises);
 
-  const photosWithBlur = imageUrls.map((imageUrl, i) => {
-    imageUrl = base64Results[i];
+  const photosWithBlur = imageUrls.map((_, i) => {
+    const imageUrl = base64Results[i];
     return imageUrl;
   });
 
