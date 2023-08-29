@@ -7,6 +7,7 @@ function Log() {
   const env = process.env.NODE_ENV;
 
   env !== "development" &&
+    typeof window !== "undefined" &&
     console.log(
       "%c const developer = {\n     name: 'Ashfak Ahmed Niloy',\n     email: 'ashfakniloy@gmail.com',\n     uploadedAt: '23/06/2023',\n };",
 
