@@ -70,7 +70,7 @@ function List({
         <div className="flex-1 min-h-[90px] lg:min-h-[150px] flex flex-col justify-between min-w-[150px] lg:max-w-[540px]">
           <div className="space-y-1.5">
             {/* <div className="max-w-[540px]"> */}
-            <div className="">
+            <div>
               <Link href={`/post/${slug}`}>
                 <h3 className="text-sm lg:text-xl font-semibold link">
                   {title}
@@ -85,7 +85,7 @@ function List({
                   {user.username}
                 </Link>
               </p>
-              <p className="">{getTimeDistance(createdAt)}</p>
+              <p>{getTimeDistance(createdAt)}</p>
             </div>
 
             <div className=" !text-gray-700 dark:!text-gray-300 !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
@@ -111,7 +111,7 @@ function List({
                 </Link>
               )}
               {_count.views > 0 && (
-                <div className="">
+                <div>
                   <div className="flex items-center gap-1 text-xs lg:text-sm">
                     <EyeIcon className="w-5 h-5 text-gray-400 dark:text-gray-600" />
                     {_count.views}

@@ -49,7 +49,7 @@ async function EditorsChoice() {
 
           <div className=" mt-2 lg:mt-2 flex items-center gap-3 text-xs lg:text-sm lg:gap-6">
             <div className="flex items-center gap-2">
-              <div className="">
+              <div>
                 {post.user.profile?.imageUrl ? (
                   <Image
                     src={post.user.profile.imageUrl}

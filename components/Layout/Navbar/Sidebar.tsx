@@ -159,7 +159,7 @@ function Sidebar({
             <div className="mt-4 mb-7">
               {session && session.user.role === "USER" ? (
                 <div className="flex gap-5 p-3 bg-gray-200 rounded-lg dark:bg-custom-gray3">
-                  <div className="">
+                  <div>
                     {imageUrl ? (
                       <Image
                         src={imageUrl}
@@ -179,7 +179,7 @@ function Sidebar({
                     )}
                   </div>
 
-                  <div className="">
+                  <div>
                     <p className="font-medium">Signed in as </p>
                     <p className="font-bold capitalize">{username}</p>
                     <Button
@@ -223,7 +223,7 @@ function Sidebar({
 
             <div className="space-y-1">
               {navLinks.map((navLink) => (
-                <div key={navLink.name} className="">
+                <div key={navLink.name}>
                   {!navLink.subLinks ? (
                     <Link href={navLink.link}>
                       <p
@@ -237,7 +237,7 @@ function Sidebar({
                       </p>
                     </Link>
                   ) : (
-                    <div className="">
+                    <div>
                       {!navLink.link ? (
                         <p
                           onClick={() => menu(navLink.name)}
@@ -279,7 +279,7 @@ function Sidebar({
                       >
                         <div className="overflow-hidden space-y-1">
                           {navLink.subLinks?.map((subLink, i) => (
-                            <div key={subLink.name} className="">
+                            <div key={subLink.name}>
                               <Link href={subLink.link}>
                                 <p
                                   className={`py-3 pl-10 rounded-lg capitalize ${

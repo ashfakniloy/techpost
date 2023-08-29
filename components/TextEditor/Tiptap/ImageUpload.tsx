@@ -124,7 +124,7 @@
 //                 onChange={handleImageChange}
 //               />
 //             ) : (
-//               <div className="">
+//               <div>
 //                 <div className="h-[170px] relative">
 //                   <Image
 //                     src={URL.createObjectURL(image)}
@@ -268,7 +268,7 @@ function ImageUpload({
       </PopoverTrigger>
 
       <PopoverContent className="mt-12 mx-5 lg:mx-0 lg:mt-4 p-4 relative bg-gray-50 dark:bg-custom-gray2 z-10 border border-gray-300 dark:border-gray-600 w-[300px] rounded-lg">
-        <div className="">
+        <div>
           <p className="text-lg">Add Image</p>
           <button
             type="button"
@@ -286,7 +286,7 @@ function ImageUpload({
                 onChange={handleImageChange}
               />
             ) : (
-              <div className="">
+              <div>
                 <div className="h-[170px] relative">
                   <Image
                     src={URL.createObjectURL(image)}

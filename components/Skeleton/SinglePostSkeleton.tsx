@@ -5,7 +5,7 @@ function SinglePostSkeleton() {
     <>
       <Skeleton className="mt-1.5 mb-5 w-[100px] h-[16px] lg:h-[18px]" />
 
-      <div className="">
+      <div>
         <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
           <div className="space-y-3">
             <Skeleton className="rounded-lg h-7 lg:h-9" />

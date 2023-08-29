@@ -134,7 +134,7 @@ async function SinglePostPage({
                 </div>
               )}
             </div>
-            <article className="">
+            <article>
               <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
                 <h1 className="text-2xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 font-montserrat">
                   {post.title}
@@ -144,7 +144,7 @@ async function SinglePostPage({
                   <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5 lg:gap-10 mt-3 lg:mt-5">
                     <div className="flex items-center gap-3  lg:gap-6 ">
                       <div className="flex items-center gap-2">
-                        <div className="">
+                        <div>
                           {post.user.profile?.imageUrl ? (
                             <Image
                               src={post.user.profile.imageUrl}
@@ -233,7 +233,7 @@ async function SinglePostPage({
             {post._count.views > 0 && (
               <div className="flex items-center gap-2 text-xs lg:text-sm">
                 <EyeIcon className="w-6 h-6 text-gray-600" />
-                <p className="">
+                <p>
                   {post._count.views}
                   {/* {getPluralize(post._count.views, "View", "s")} */}
                 </p>

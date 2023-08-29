@@ -61,7 +61,7 @@ function CommentsReplyForm({
   };
 
   return (
-    <div className="">
+    <div>
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

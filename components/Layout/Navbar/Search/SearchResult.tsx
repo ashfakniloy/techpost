@@ -18,7 +18,7 @@ function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
       {posts.length > 0 ? (
         <div className="max-h-[445px] overflow-y-auto custom-scrollbar">
           <div className="px-4 ">
-            <div className="">
+            <div>
               {posts.map((post) => (
                 <div
                   key={post.id}
@@ -50,9 +50,7 @@ function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
                         {post.user.username}
                       </Link>
                     </p>
-                    <p className="">
-                      {/* Created At: {getTimeDistance(post.createdAt)} */}
-                    </p>
+                    <p>{/* Created At: {getTimeDistance(post.createdAt)} */}</p>
                   </div>
                 </div>
               ))}

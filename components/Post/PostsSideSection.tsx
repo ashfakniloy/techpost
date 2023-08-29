@@ -22,7 +22,7 @@ function PostsSideSection({
       </h4>
 
       <div className="px-4 py-2 ">
-        <div className="">
+        <div>
           {posts.length > 0 ? (
             posts.map((post) => (
               <div
@@ -52,9 +52,7 @@ function PostsSideSection({
                       {post.user.username}
                     </Link>
                   </p>
-                  <p className="">
-                    {/* Created At: {getTimeDistance(post.createdAt)} */}
-                  </p>
+                  <p>{/* Created At: {getTimeDistance(post.createdAt)} */}</p>
                 </div>
               </div>
             ))

@@ -147,7 +147,7 @@ export function DataTableToolbar<TData>({
                     className="h-8 px-3 text-xs lg:text-sm flex items-center gap-2 border-gray-500 font-normal"
                   >
                     <Trash2 className="w-4 h-4" />
-                    <span className="">{`Delete ${
+                    <span>{`Delete ${
                       table.getFilteredSelectedRowModel().rows.length
                     } row(s)`}</span>
                   </Button>
@@ -176,7 +176,7 @@ export function DataTableToolbar<TData>({
           )}
 
           <div className="flex items-center  text-xs lg:text-sm h-4">
-            <p className="">
+            <p>
               Sort By:{" "}
               <span className="capitalize">{sortBy || defaultSort}</span> (
               {orderBy || defaultOrder})
@@ -260,7 +260,7 @@ export function DataTableToolbar<TData>({
                   className="h-8 px-3 text-xs lg:text-sm flex items-center gap-2 border-gray-500 font-normal"
                 >
                   <Trash2 className="w-4 h-4" />
-                  <span className="">{`Delete ${
+                  <span>{`Delete ${
                     table.getFilteredSelectedRowModel().rows.length
                   } row(s)`}</span>
                 </Button>

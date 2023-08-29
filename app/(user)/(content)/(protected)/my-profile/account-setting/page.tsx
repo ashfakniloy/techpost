@@ -48,7 +48,7 @@ function AccountSettingpage() {
   };
 
   return (
-    <div className="">
+    <div>
       <h4 className="mb-5 text-[22px] lg:text-2xl text-center lg:text-start font-extrabold text-gray-700 font-montserrat dark:text-gray-400">
         Change Account Setting
       </h4>
@@ -70,7 +70,7 @@ function AccountSettingpage() {
                 {accountMenu.name}
               </div>
 
-              <div className="">
+              <div>
                 {accountMenu.info &&
                   (accountMenu.name !== menu ? (
                     <span
@@ -93,7 +93,7 @@ function AccountSettingpage() {
                     </span>
                   ))}
                 {accountMenu.name === menu && (
-                  <div className="">{accountMenu.component}</div>
+                  <div>{accountMenu.component}</div>
                 )}
               </div>
             </div>

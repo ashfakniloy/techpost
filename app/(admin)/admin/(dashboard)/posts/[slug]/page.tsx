@@ -6,6 +6,7 @@ import PostComments from "./PostComments";
 import { getSinglePostAdmin } from "@/db/queries/admin/getSinglePostAdmin";
 import PostInfo from "./PostInfo";
 import PostOption from "./PostOption";
+import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 
 type PostPageProps = {
   params: {
@@ -25,8 +26,10 @@ async function AdminSinglePostPage({
   const { data: post } = await getSinglePostAdmin({ slug });
 
   if (!post) {
-    return <p className="">Post not found</p>;
+    return <p>Post not found</p>;
   }
+
+  const blurDataUrl = await getImagePlaceholder(post.imageUrl);
 
   return (
     <div className="relative">
@@ -47,7 +50,7 @@ async function AdminSinglePostPage({
           viewsCount={post._count.views}
         />
         <div className="flex flex-col lg:flex-row gap-7">
-          <SinglePost post={post} />
+          <SinglePost post={post} blurDataUrl={blurDataUrl} />
           <div className="space-y-7 flex-1">
             <PostLikes likes={post.likes} />
 

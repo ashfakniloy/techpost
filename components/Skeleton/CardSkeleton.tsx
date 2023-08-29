@@ -3,7 +3,7 @@ import { Skeleton } from "../ui/skeleton";
 function CardSkeleton() {
   return (
     <div className="bg-gray-50 rounded-md shadow-md group dark:bg-custom-gray2 hover:shadow-lg">
-      <div className="">
+      <div>
         <Skeleton className="h-[180px] lg:h-[220px] w-full rounded-b-none" />
       </div>
       <div className="p-4 flex flex-col h-[159px] lg:h-[192px]">

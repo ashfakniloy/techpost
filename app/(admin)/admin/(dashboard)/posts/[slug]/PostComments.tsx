@@ -18,7 +18,7 @@ function SingleComment({ comment }: { comment: CommentTypes }) {
 
   return (
     <div className="flex gap-3">
-      <div className="">
+      <div>
         <Image
           src={imageSrc}
           alt={comment.user.username}
@@ -37,7 +37,7 @@ function SingleComment({ comment }: { comment: CommentTypes }) {
           </Link>
         </p>
         <div className="max-w-[580px]">
-          <p className="">{comment.comment}</p>
+          <p>{comment.comment}</p>
         </div>
       </div>
     </div>

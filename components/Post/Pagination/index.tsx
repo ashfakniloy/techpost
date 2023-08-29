@@ -335,7 +335,7 @@ function Pagination({
 
   return (
     <div className="flex items-start justify-center gap-2 mb-10 text-sm">
-      <div className="">
+      <div>
         {/* <button
           className="paginateArrowButton"
           onClick={handleFirst}
@@ -371,7 +371,7 @@ function Pagination({
           ))}
         </div>
       </div>
-      <div className="">
+      <div>
         <button
           className="paginateArrowButton"
           onClick={handleNext}

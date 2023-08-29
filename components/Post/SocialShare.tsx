@@ -29,19 +29,19 @@ function SocialShare({
   return (
     <div className="flex items-center gap-4">
       <Link href={facebookShareUrl} target="_blank">
-        <button className="">
+        <button>
           <IconFacebook className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 lg:hover:fill-blue-500 dark:lg:hover:fill-blue-300 transition-colors duration-200" />
         </button>
       </Link>
 
       <Link href={twitterShareLink} target="_blank">
-        <button className="">
+        <button>
           <IconTwitter className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 lg:hover:fill-blue-500 dark:lg:hover:fill-blue-300 transition-colors duration-200" />
         </button>
       </Link>
 
       <Link href={linkedInShareLink} target="_blank">
-        <button className="">
+        <button>
           <IconLinkedin className="w-[25px] h-[25px] fill-gray-800 dark:fill-gray-100 lg:hover:fill-blue-500 dark:lg:hover:fill-blue-300 transition-colors duration-200" />
         </button>
       </Link>

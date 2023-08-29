@@ -110,8 +110,8 @@ function PostLikeButton({
             className="mr-4 text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-500"
             onClick={() => setShowLikes(!showLikes)}
           >
-            <span className="">{likesCount}</span>
-            {/* <span className="">{getPluralize(likesCount, "Like", "s")}</span> */}
+            <span>{likesCount}</span>
+            {/* <span>{getPluralize(likesCount, "Like", "s")}</span> */}
           </button>
 
           {showLikes && (
@@ -217,8 +217,8 @@ export default PostLikeButton;
 //             className="mr-4 text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-500"
 //             onClick={() => setShowLikes(!showLikes)}
 //           >
-//             <span className="">{likesCount}</span>
-//             {/* <span className="">{getPluralize(likesCount, "Like", "s")}</span> */}
+//             <span>{likesCount}</span>
+//             {/* <span>{getPluralize(likesCount, "Like", "s")}</span> */}
 //           </button>
 
 //           {showLikes && (

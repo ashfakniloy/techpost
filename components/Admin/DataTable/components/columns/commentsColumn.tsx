@@ -41,9 +41,9 @@ const CommentsCell = ({
   // console.log(row.original);
 
   return (
-    <div key={id} className="">
+    <div key={id}>
       <div className="flex gap-3 break-words">
-        <div className="">
+        <div>
           {user?.profile?.imageUrl ? (
             <Image
               src={user.profile.imageUrl}
@@ -71,7 +71,7 @@ const CommentsCell = ({
               {user.username}
             </Link>
           </p>
-          <div className="">
+          <div>
             <p className="overflow-hidden break-words">{comment}</p>
           </div>
           <div className="mt-2 flex items-center gap-8">
@@ -156,9 +156,9 @@ export const commentsColumn: ColumnDef<CommentTypes>[] = [
         <div className="w-[400px]">
           <CommentsCell id={id} comment={comment} user={user} _count={_count} />
 
-          {/* <div key={id} className="">
+          {/* <div key={id}>
             <div className="flex gap-3 break-words">
-              <div className="">
+              <div>
                 {user?.profile?.imageUrl ? (
                   <Image
                     src={user.profile.imageUrl}
@@ -186,7 +186,7 @@ export const commentsColumn: ColumnDef<CommentTypes>[] = [
                     {user.username}
                   </Link>
                 </p>
-                <div className="">
+                <div>
                   <p className="overflow-hidden break-words">{comment}</p>
                 </div>
                 <div className="mt-2 flex items-center gap-8">

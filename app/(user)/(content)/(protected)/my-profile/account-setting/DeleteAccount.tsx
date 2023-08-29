@@ -63,8 +63,8 @@ function DeleteAccount({
   };
 
   return (
-    <div className="">
-      <div className="">
+    <div>
+      <div>
         <p className="lg:text-lg">Are you sure you want to do this?</p>
         <p className="mt-5 text-sm lg:text-base">
           All your posts and activities will be deleted.

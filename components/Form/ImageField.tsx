@@ -103,9 +103,9 @@
 //       </label>
 //       <div className="w-[170px] h-[170px] relative rounded-md bg-gray-200 dark:bg-custom-gray2 flex justify-center items-center">
 //         {!imageValue && !imageId ? (
-//           <div className="">
+//           <div>
 //             {!imageChanging ? (
-//               <div className="">
+//               <div>
 //                 <input
 //                   type="file"
 //                   accept="image/*"
@@ -123,7 +123,7 @@
 //                   <span className="w-6 h-6">
 //                     <PlusIcon />
 //                   </span>
-//                   <span className="">Add Image</span>
+//                   <span>Add Image</span>
 //                 </label>
 //               </div>
 //             ) : (
@@ -137,7 +137,7 @@
 //             )}
 //           </div>
 //         ) : (
-//           <div className="">
+//           <div>
 //             <div className="relative w-[170px] h-[170px]">
 //               <Image
 //                 src={imageValue}
@@ -318,9 +318,9 @@ export const ImageField = ({
             )}
           </div>
         ) : (
-          <div className="">
+          <div>
             {!imageChanging ? (
-              <div className="">
+              <div>
                 <input
                   type="file"
                   accept="image/*"
@@ -342,7 +342,7 @@ export const ImageField = ({
                   <span className="w-5 h-5">
                     <PlusIcon />
                   </span>
-                  <span className="">Add Image</span>
+                  <span>Add Image</span>
                 </label>
               </div>
             ) : (

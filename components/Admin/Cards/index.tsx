@@ -47,7 +47,7 @@ async function DashBoardCards() {
         >
           <div className="flex justify-between items-center h-full">
             <div className=" h-[52px] w-[52px] p-2.5 bg-cyan-900/70 rounded-full">
-              <span className="">{card.icon}</span>
+              <span>{card.icon}</span>
             </div>
             <div className="flex flex-col items-center gap-1.5">
               <p className="text-sm text-gray-300">{card.title}</p>

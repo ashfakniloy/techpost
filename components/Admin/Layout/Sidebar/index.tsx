@@ -102,7 +102,7 @@ function AdminSidebar({
       `}
       >
         <div className="flex flex-col justify-between h-full overflow-hidden">
-          <div className="">
+          <div>
             <div className="pl-5 lg:pl-[30px] py-7 font-semibold flex justify-between items-center">
               <h1 className="text-lg lg:text-2xl">TechPost Admin</h1>
               <span
@@ -116,7 +116,7 @@ function AdminSidebar({
             {/* <ScrollArea className="mt-3 my-0 h-[620px] "> */}
             <div className="mx-2 lg:mx-[25px] space-y-2">
               {adminLinks?.map((navLink, i) => (
-                <div key={i} className="">
+                <div key={i}>
                   {/* temporary fix router.refresh until nextjs fix caching revalidate issue */}
                   <Link href={navLink.link}>
                     <div

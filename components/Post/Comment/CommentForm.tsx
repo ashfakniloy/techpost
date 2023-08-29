@@ -51,7 +51,7 @@ function CommentForm({ postId }: { postId: string }) {
   };
 
   return (
-    <div className="">
+    <div>
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

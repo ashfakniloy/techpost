@@ -20,7 +20,7 @@
 //   }
 
 //   return (
-//     <div className="">
+//     <div>
 //       <div className="mb-4 text-gray-700 dark:text-gray-300 ">
 //         <Link
 //           href={`/category/${post.categoryName}`}
@@ -29,7 +29,7 @@
 //           {post.categoryName}
 //         </Link>
 //       </div>
-//       <div className="">
+//       <div>
 //         <div className="flex flex-col min-h-[135px]">
 //           <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-50 font-montserrat">
 //             {post.title}
@@ -38,7 +38,7 @@
 //           <div className="flex items-center gap-6 mt-5">
 //             <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
 //               <div className="flex items-center gap-2">
-//                 <div className="">
+//                 <div>
 //                   {post.user.profile?.imageUrl ? (
 //                     <Image
 //                       src={post.user.profile.imageUrl}
@@ -58,7 +58,7 @@
 //                   )}
 //                 </div>
 
-//                 <p className="">
+//                 <p>
 //                   By{" "}
 //                   <Link href={`/user/${post.user.username}`}>
 //                     <span className="hover:text-blue-800 dark:hover:text-blue-500">
@@ -67,7 +67,7 @@
 //                   </Link>
 //                 </p>
 //               </div>
-//               <p className="">{getFormatedDate(post.createdAt)}</p>
+//               <p>{getFormatedDate(post.createdAt)}</p>
 //             </div>
 //             {session?.user.id === post.user.id && (
 //               <OptionButton
@@ -141,7 +141,7 @@
 // //             {post.categoryName}
 // //           </Link>
 // //         </div>
-// //         <div className="">
+// //         <div>
 // //           <div className="flex flex-col min-h-[135px]">
 // //             <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-50 font-montserrat">
 // //               {post.title}
@@ -150,7 +150,7 @@
 // //             <div className="flex items-center gap-6 mt-5">
 // //               <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
 // //                 <div className="flex items-center gap-2">
-// //                   <div className="">
+// //                   <div>
 // //                     {post.user.profile?.imageUrl ? (
 // //                       <Image
 // //                         src={post.user.profile.imageUrl}
@@ -170,7 +170,7 @@
 // //                     )}
 // //                   </div>
 
-// //                   <p className="">
+// //                   <p>
 // //                     By{" "}
 // //                     <Link href={`/user/${post.user.username}`}>
 // //                       <span className="hover:text-blue-800 dark:hover:text-blue-500">
@@ -179,7 +179,7 @@
 // //                     </Link>
 // //                   </p>
 // //                 </div>
-// //                 <p className="">{getFormatedDate(post.createdAt)}</p>
+// //                 <p>{getFormatedDate(post.createdAt)}</p>
 // //               </div>
 // //               {session?.user.id === post.user.id && (
 // //                 <OptionButton
@@ -212,7 +212,7 @@
 // //           {post._count.views > 0 && (
 // //             <div className="flex items-center gap-2 text-sm">
 // //               <EyeIcon className="w-6 h-6 text-gray-600" />
-// //               <p className="">{getPluralize(post._count.views, "View", "s")}</p>
+// //               <p>{getPluralize(post._count.views, "View", "s")}</p>
 // //             </div>
 // //           )}
 // //         </div>

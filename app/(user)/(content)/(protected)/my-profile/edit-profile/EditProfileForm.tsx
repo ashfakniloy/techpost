@@ -93,7 +93,7 @@ function EditProfileForm({
   // console.log("session", session);
 
   return (
-    <div className="">
+    <div>
       <h4 className="mb-5 text-[22px] lg:text-2xl text-center lg:text-start font-extrabold text-gray-700 font-montserrat dark:text-gray-400">
         Edit Your Profile
       </h4>
@@ -107,7 +107,7 @@ function EditProfileForm({
           <ImageField label="Image" name="imageUrl" />
           <TextAreaField label="Bio" name="bio" />
 
-          <div className="">
+          <div>
             <label className="inline-block mb-2">Social Accounts</label>
             <span className="w-5 h-5"></span>
             <div className="space-y-8">

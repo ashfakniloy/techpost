@@ -28,7 +28,7 @@ async function CommentReply({
     >
       {commentReplies.map((reply, i) => (
         <div key={reply.id} className="flex gap-3 pt-4">
-          <div className="">
+          <div>
             {reply.user.profile?.imageUrl ? (
               <Image
                 src={reply.user.profile.imageUrl}
@@ -55,7 +55,7 @@ async function CommentReply({
               </Link>
             </p>
             <div className="overflow-hidden break-words">
-              <p className="">{reply.commentReply}</p>
+              <p>{reply.commentReply}</p>
               <div className="flex items-center justify-between">
                 <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-400">
                   {getTimeDistance(reply.createdAt)}

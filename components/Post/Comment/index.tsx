@@ -46,7 +46,7 @@ async function Comment({
         <SigninToComment />
       )}
       <div className="mt-3">
-        <p className="">
+        <p>
           {totalComments > 0
             ? totalComments > 1
               ? `${totalComments} comments`
@@ -61,7 +61,7 @@ async function Comment({
               className="p-3 lg:p-5 bg-gray-50 rounded-md shadow-md dark:bg-custom-gray2"
             >
               <div className="flex gap-3 break-words">
-                <div className="">
+                <div>
                   {comment.user.profile?.imageUrl ? (
                     <Image
                       src={comment.user.profile.imageUrl}

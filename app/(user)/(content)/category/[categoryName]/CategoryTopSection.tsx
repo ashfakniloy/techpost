@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { getCategoryByName } from "@/db/queries/getCategoryByName";
 import { notFound } from "next/navigation";
+import { getCategoryByName } from "@/db/queries/getCategoryByName";
 import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 
 async function CategoryTopSection({ categoryName }: { categoryName: string }) {
@@ -47,7 +47,7 @@ async function CategoryTopSection({ categoryName }: { categoryName: string }) {
 
         <div className="mt-8 lg:w-[500px] px-2 lg:px-0">
           <p className="text-center italic text-sm lg:text-base drop-shadow-md">
-            {randomQuote.quote}{" "}
+            {`"${randomQuote.quote}"`}
             <span className="font-semibold"> - {randomQuote.author}</span>
           </p>
         </div>

@@ -15,8 +15,8 @@ function CategoryQuotes({ quotes }: CategoryQuotesProps) {
 
       <ScrollArea className="mt-6 h-[440px] px-3">
         {quotes.map((quote, i) => (
-          <div key={i} className="">
-            <p className="">
+          <div key={i}>
+            <p>
               {quote.quote} -
               <span className="font-semibold"> {quote.author}</span>
             </p>

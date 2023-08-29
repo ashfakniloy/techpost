@@ -58,7 +58,7 @@ function NavMenu({ navLinks }: { navLinks: NavLinksProps }) {
   return (
     <nav className="flex items-center gap-10">
       {navLinks.map((navLink) => (
-        <div key={navLink.name} className="">
+        <div key={navLink.name}>
           {!navLink.subLinks ? (
             <Link href={navLink.link}>
               <p
@@ -101,7 +101,7 @@ function NavMenu({ navLinks }: { navLinks: NavLinksProps }) {
                       : "invisible -translate-y-3 opacity-0"
                   }`}
                 >
-                  <div className="">
+                  <div>
                     <div className="h-8"></div>
                     <div className="p-1 text-sm text-gray-800 bg-white space-y-1 border rounded-md shadow-md font-montserrat dark:text-gray-300 dark:bg-stone-950">
                       {navLink.subLinks?.map((subLink, i) => (

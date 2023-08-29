@@ -37,11 +37,11 @@ async function PostsView({
   const blurDataUrls = await getMultipleImagePlaceholder(imageUrls);
 
   return (
-    <div className="">
+    <div>
       {posts.length ? (
-        <div className="">
+        <div>
           {(!view || view === "list") && (
-            <div className="">
+            <div>
               {posts.map((post, i) => (
                 <List
                   key={post.id}

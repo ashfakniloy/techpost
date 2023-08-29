@@ -8,9 +8,9 @@
 //   const { id, comment, user } = singleComment;
 
 //   return (
-//     <div key={id} className="">
+//     <div key={id}>
 //       <div className="flex gap-3">
-//         <div className="">
+//         <div>
 //           {user?.profile?.imageUrl ? (
 //             <Image
 //               src={user.profile.imageUrl}
@@ -38,8 +38,8 @@
 //               {user.username}
 //             </Link>
 //           </p>
-//           <div className="">
-//             <p className="">{comment}</p>
+//           <div>
+//             <p>{comment}</p>
 //           </div>
 //           <div className="relative">
 //             <div className="relative flex w-full justify-between items-center text-sm">

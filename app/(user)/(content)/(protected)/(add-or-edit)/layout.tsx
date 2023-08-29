@@ -1,6 +1,6 @@
 function AddPostLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="">
+    <div>
       <div className="lg:flex justify-between items-start gap-5 relative">
         <div className="lg:flex-1 lg:max-w-[796px]">{children}</div>
 

@@ -3,6 +3,8 @@ import Image from "next/image";
 import Section from "@/components/Admin/Section";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import { getSingleUserAdmin } from "@/db/queries/admin/getSingleUserAdmin";
+import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
+import { BASE_URL } from "@/config";
 
 async function UserDetails({ username }: { username: string }) {
   const { data: user } = await getSingleUserAdmin({
@@ -12,6 +14,12 @@ async function UserDetails({ username }: { username: string }) {
   if (!user) {
     return <p className="text-xl text-red-500">User not found</p>;
   }
+
+  const BlankUserImage = `${BASE_URL}/images/blankUser.jpg`;
+
+  const blurDataUrl = await getImagePlaceholder(
+    user.profile?.imageUrl || BlankUserImage
+  );
 
   // console.log("iuser", totalViews);
 
@@ -56,14 +64,18 @@ async function UserDetails({ username }: { username: string }) {
           {user.profile?.imageUrl ? (
             <Image
               src={user.profile.imageUrl}
-              alt="user"
+              placeholder="blur"
+              blurDataURL={blurDataUrl}
+              alt={username}
               fill
               className="object-cover rounded-md"
             />
           ) : (
             <Image
               src="/images/blankUser.jpg"
-              alt="user image"
+              placeholder="blur"
+              blurDataURL={blurDataUrl}
+              alt={username}
               fill
               className="object-cover rounded-md"
             />

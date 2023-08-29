@@ -62,7 +62,7 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
 
           <PopoverContent className="mt-5 p-1 w-[180px] bg-white dark:bg-stone-950 text-sm rounded-md whitespace-nowrap">
             <div className="space-y-1 p-4 border-b border-gray-300 dark:border-gray-700">
-              <p className="">Signed in as </p>
+              <p>Signed in as </p>
               <p className="font-semibold capitalize">{username}</p>
             </div>
             <button

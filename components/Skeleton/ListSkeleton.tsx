@@ -8,7 +8,7 @@ function ListSkeleton() {
 
         <div className="flex-1">
           <div className="space-y-2.5">
-            <div className="">
+            <div>
               <Skeleton className="h-4 lg:h-6 mt-1" />
               <Skeleton className="h-4 lg:h-6 w-4/5 mt-1" />
             </div>
@@ -18,7 +18,7 @@ function ListSkeleton() {
               <Skeleton className="h-2.5 lg:h-3.5 w-[80px] lg:w-[130px] bg-opacity-50 dark:bg-opacity-50" />
             </div>
 
-            <div className="">
+            <div>
               <Skeleton className="w-full h-2.5 lg:h-4 bg-opacity-90 dark:bg-opacity-90" />
               <Skeleton className="w-full h-2.5 lg:h-4 mt-1.5 bg-opacity-90 dark:bg-opacity-90" />
             </div>

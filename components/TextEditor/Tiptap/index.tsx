@@ -115,13 +115,13 @@ const Tiptap = ({
   }, [article]);
 
   return (
-    <div className="">
+    <div>
       <Toolbar editor={editor} />
-      <div className="">
+      <div>
         <EditorContent
           editor={editor}
           required={true}
-          // className=""
+          //
         />
       </div>
       {/* <button

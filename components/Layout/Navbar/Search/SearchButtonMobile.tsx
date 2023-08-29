@@ -95,7 +95,7 @@
 //           </div>
 //         </PopoverTrigger>
 //         <PopoverContent className=" border-none bg-transparent w-full mt-4 inset-x-2">
-//           <div className="">
+//           <div>
 //             <div className="relative flex items-center w-full text-gray-900 bg-gray-50 rounded-full shadow-md dark:bg-custom-gray2 dark:text-gray-50">
 //               <label className="flex">
 //                 {!loading ? (
@@ -212,7 +212,7 @@ function SearchButtonMobile() {
   };
 
   return (
-    <div className="">
+    <div>
       <div
         className={`relative overflow-hidden h-[42px] w-[42px] flex items-center justify-center rounded-full bg-gray-50 dark:bg-custom-gray2 shadow-md`}
       >

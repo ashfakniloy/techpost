@@ -72,7 +72,7 @@ export default SectionChart;
 //         <h3 className="text-xl font-semibold capitalize">{title}</h3>
 //         {/* <p className="text-sm">{`Year: ${new Date().getFullYear()}`}</p> */}
 //         <div className="text-sm flex items-center gap-1">
-//           <span className="">Year:</span>
+//           <span>Year:</span>
 //           <Select defaultValue={currentYear.toString()}>
 //             <SelectTrigger className="w-[90px]">
 //               <SelectValue placeholder={currentYear.toString()} />

@@ -30,7 +30,13 @@ type SinglePostProps =
 
 // };
 
-function SinglePost({ post }: { post: SinglePostProps }) {
+function SinglePost({
+  post,
+  blurDataUrl,
+}: {
+  post: SinglePostProps;
+  blurDataUrl: string;
+}) {
   if (!post) return;
 
   return (
@@ -61,7 +67,7 @@ function SinglePost({ post }: { post: SinglePostProps }) {
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5 lg:gap-10 mt-3 lg:mt-5">
             <div className="flex items-center gap-3  lg:gap-6 ">
               <div className="flex items-center gap-2">
-                <div className="">
+                <div>
                   {post.user.profile?.imageUrl ? (
                     <Image
                       src={post.user.profile.imageUrl}
@@ -115,7 +121,9 @@ function SinglePost({ post }: { post: SinglePostProps }) {
       <div className="mt-5 h-[280px] lg:h-[470px] relative">
         <Image
           src={post.imageUrl}
-          alt="image"
+          placeholder="blur"
+          blurDataURL={blurDataUrl}
+          alt="post image"
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover"

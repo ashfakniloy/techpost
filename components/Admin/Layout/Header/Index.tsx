@@ -39,7 +39,7 @@ function AdminHeader({
 
           {/* <div className="flex justify-between items-center gap-5 lg:gap-[80px]">
             <div className="hidden lg:flex justify-between items-center gap-12  text-base font-semibold">
-              <p className="">Signed in as Admin</p>
+              <p>Signed in as Admin</p>
             </div>
 
             <button

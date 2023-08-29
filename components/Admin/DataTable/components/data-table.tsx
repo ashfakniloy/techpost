@@ -113,7 +113,7 @@ export function DataTable<TData, TValue>({
         disableSearch={disableSearch}
       />
       <div className="border-y border-gray-300 dark:border-slate-700">
-        <Table className="">
+        <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow

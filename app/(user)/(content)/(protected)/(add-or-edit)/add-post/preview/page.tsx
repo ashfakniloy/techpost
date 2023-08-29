@@ -136,7 +136,7 @@ function PostPreviewPage() {
         {previewPost.categoryName}
       </div>
 
-      <div className="">
+      <div>
         <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
           <h1
             className={`text-2xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 font-montserrat `}
@@ -148,7 +148,7 @@ function PostPreviewPage() {
             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5 lg:gap-10 mt-3 lg:mt-5">
               <div className="flex items-center gap-3  lg:gap-6 ">
                 <div className="flex items-center gap-2">
-                  <div className="">
+                  <div>
                     {session?.user.imageUrl ? (
                       <Image
                         src={session.user.imageUrl}

@@ -58,7 +58,7 @@ function CategoryInfo({
         {infoData.map((info, i) => (
           <div key={i} className="w-full flex">
             <p className="w-2/5">{info.name}</p>
-            <p className="">{info.value}</p>
+            <p>{info.value}</p>
           </div>
         ))}
       </div>

@@ -73,8 +73,8 @@ function Card({
         </div>
       </Link>
       <div className="p-4 flex flex-col justify-between min-h-[144px] lg:min-h-[192px] ">
-        <div className="">
-          <div className="">
+        <div>
+          <div>
             <Link href={`/post/${slug}`}>
               <h3 className="text-base leading-snug lg:leading-[28px] lg:text-xl font-semibold link">
                 {title}
@@ -88,7 +88,7 @@ function Card({
                 {user.username}
               </Link>{" "}
             </p>
-            <p className="">{getTimeDistance(createdAt)}</p>
+            <p>{getTimeDistance(createdAt)}</p>
           </div>
           <div className="mt-1 lg:mt-2 text-xs lg:text-sm text-gray-700 dark:text-gray-300 line-clamp-2">
             {description}
@@ -112,7 +112,7 @@ function Card({
               </Link>
             )}
             {_count.views > 0 && (
-              <div className="">
+              <div>
                 <div className="flex items-center gap-1  text-xs lg:text-sm">
                   <EyeIcon className="w-4 h-4 lg:w-6 lg:h-6 text-gray-400 dark:text-gray-600" />
                   <p className="text-gray-700 dark:text-gray-300">

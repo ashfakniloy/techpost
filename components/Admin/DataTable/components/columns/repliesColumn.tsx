@@ -58,9 +58,9 @@ export const repliesColumn: ColumnDef<CommentReply>[] = [
 
       return (
         <div className="w-[400px]">
-          <div key={id} className="">
+          <div key={id}>
             <div className="flex gap-3 ">
-              <div className="">
+              <div>
                 {user?.profile?.imageUrl ? (
                   <Image
                     src={user.profile.imageUrl}
@@ -88,8 +88,8 @@ export const repliesColumn: ColumnDef<CommentReply>[] = [
                     {user.username}
                   </Link>
                 </p>
-                <div className="">
-                  <p className="">{commentReply}</p>
+                <div>
+                  <p>{commentReply}</p>
                 </div>
                 <div className="relative">
                   <div className="relative flex w-full justify-between items-center text-sm">
