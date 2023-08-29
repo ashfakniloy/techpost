@@ -38,7 +38,15 @@ export async function getPostsByCategory({
           take: limitNumber || PER_PAGE,
           skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
 
-          include: {
+          select: {
+            id: true,
+            slug: true,
+            title: true,
+            shortDescription: true,
+            imageUrl: true,
+            imageId: true,
+            categoryName: true,
+            createdAt: true,
             user: {
               select: {
                 username: true,
@@ -52,6 +60,21 @@ export async function getPostsByCategory({
               },
             },
           },
+
+          // include: {
+          //   user: {
+          //     select: {
+          //       username: true,
+          //       id: true,
+          //     },
+          //   },
+          //   _count: {
+          //     select: {
+          //       comments: true,
+          //       views: true,
+          //     },
+          //   },
+          // },
         });
 
         return data;
@@ -84,7 +107,15 @@ export async function getPostsByCategory({
           take: limitNumber || PER_PAGE,
           skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
 
-          include: {
+          select: {
+            id: true,
+            slug: true,
+            title: true,
+            shortDescription: true,
+            imageUrl: true,
+            imageId: true,
+            categoryName: true,
+            createdAt: true,
             user: {
               select: {
                 username: true,
@@ -98,6 +129,21 @@ export async function getPostsByCategory({
               },
             },
           },
+
+          // include: {
+          //   user: {
+          //     select: {
+          //       username: true,
+          //       id: true,
+          //     },
+          //   },
+          //   _count: {
+          //     select: {
+          //       comments: true,
+          //       views: true,
+          //     },
+          //   },
+          // },
         });
 
         return data;

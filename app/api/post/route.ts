@@ -3,6 +3,7 @@ import slugify from "slugify";
 import { getAuthSession } from "@/lib/next-auth";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
+import { getDescription } from "@/utils/getDescription";
 // import { revalidatePath } from "next/cache";
 
 export async function POST(request: NextRequest) {
@@ -35,7 +36,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { title } = body;
+  const { title, article } = body;
 
   const postTitleExists = await prisma.post.findFirst({
     where: {
@@ -52,12 +53,15 @@ export async function POST(request: NextRequest) {
 
   const slug = slugify(title, { lower: true });
 
+  const shortDescription = getDescription(article, 200, 200);
+
   try {
     const response = await prisma.post.create({
       data: {
         ...body,
         userId: session.user.id,
-        slug: slug,
+        slug,
+        shortDescription,
       },
       // data: {
       //   ...body,
@@ -126,7 +130,7 @@ export async function PUT(request: NextRequest) {
     );
   }
 
-  const { title } = body;
+  const { title, article } = body;
 
   const postResponse = await prisma.post.findFirst({
     where: {
@@ -151,6 +155,8 @@ export async function PUT(request: NextRequest) {
 
   const slug = slugify(title, { lower: true });
 
+  const shortDescription = getDescription(article, 200, 200);
+
   try {
     const response = await prisma.post.update({
       where: {
@@ -159,7 +165,7 @@ export async function PUT(request: NextRequest) {
           userId: session.user.id,
         },
       },
-      data: { ...body, slug: slug },
+      data: { ...body, slug, shortDescription },
     });
 
     // revalidatePath("/");

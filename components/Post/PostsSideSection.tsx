@@ -1,19 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Post } from "@prisma/client";
-
-type Props = Post & {
-  user: {
-    username: string;
-  };
-};
+// import type { Post } from "@prisma/client";
+import type { PostItem } from "@/types";
 
 function PostsSideSection({
   heading,
   posts,
 }: {
   heading: string;
-  posts: Props[];
+  posts: PostItem[];
 }) {
   return (
     <section className="bg-gray-50 dark:bg-custom-gray2 shadow-md rounded-md w-[360px]">

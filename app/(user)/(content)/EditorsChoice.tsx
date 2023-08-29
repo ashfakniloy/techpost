@@ -15,7 +15,7 @@ async function EditorsChoice() {
     return <></>;
   }
 
-  const description = getDescription(post.article, 200, 200);
+  // const description = getDescription(post.article, 200, 200);
 
   const blurDataUrl = await getImagePlaceholder(post.imageUrl);
 
@@ -78,7 +78,7 @@ async function EditorsChoice() {
           </div>
 
           <div className="mt-1 lg:mt-2 !text-white !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
-            {description}
+            {post.shortDescription}
           </div>
         </div>
       </Link>

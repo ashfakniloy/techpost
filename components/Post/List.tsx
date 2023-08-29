@@ -5,44 +5,35 @@ import OptionButton from "./OptionButton";
 import PostLike from "./PostLike";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import { Post } from "@prisma/client";
-import { getPluralize } from "@/utils/getPluralize";
 import { EyeIcon, ChatBubbleLeftIcon } from "@heroicons/react/24/solid";
-import { getDescription } from "@/utils/getDescription";
+import { PostItem } from "@/types";
+// import { getPluralize } from "@/utils/getPluralize";
+// import { getDescription } from "@/utils/getDescription";
 
 type SessionProps = {
   session: Session | null;
 };
 
-type ListProps = Omit<
-  Post,
-  "userId" | "views" | "updatedAt" | "editorsChoice"
-> & {
-  user: {
-    id: string;
-    username: string;
-  };
-  _count: {
-    comments: number;
-    views: number;
-  };
+type ListProps = SessionProps & {
+  post: PostItem;
   blurDataURL: string;
 };
 
-function List({
-  id,
-  slug,
-  title,
-  categoryName,
-  user,
-  createdAt,
-  imageUrl,
-  imageId,
-  article,
-  session,
-  _count,
-  blurDataURL,
-}: ListProps & SessionProps) {
-  const description = getDescription(article, 200, 200);
+function List({ post, blurDataURL, session }: ListProps) {
+  // const description = getDescription(article, 200, 200);
+
+  const {
+    id,
+    slug,
+    imageUrl,
+    imageId,
+    title,
+    shortDescription,
+    user,
+    categoryName,
+    createdAt,
+    _count,
+  } = post;
 
   return (
     <section className="border-b last:border-b-0 border-gray-300 dark:border-gray-700 py-5 lg:py-10">
@@ -89,7 +80,7 @@ function List({
             </div>
 
             <div className=" !text-gray-700 dark:!text-gray-300 !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
-              {description}
+              {shortDescription}
             </div>
           </div>
 

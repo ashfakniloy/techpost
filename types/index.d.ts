@@ -39,6 +39,20 @@ type Post = Post & {
   commentsReplies: CommentReply[];
 };
 
+type PostItem = Omit<
+  Post,
+  "userId" | "views" | "updatedAt" | "editorsChoice" | "article"
+> & {
+  user: {
+    id: string;
+    username: string;
+  };
+  _count: {
+    comments: number;
+    views: number;
+  };
+};
+
 type Category = Category & {
   quotes: Quote[];
 };

@@ -1,21 +1,22 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/checkbox";
+// import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "../data-table-column-header";
-import { PostsActions } from "../actions/PostsActions";
-import { ClientFormattedDate } from "@/components/ClientFormattedDate";
+// import { PostsActions } from "../actions/PostsActions";
+// import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 // import { PostAdminTypes } from "@/db/queries/admin/getAllPostsAdmin";
 import Link from "next/link";
-import { Post } from "@prisma/client";
+// import { Post } from "@prisma/client";
+import type { PostItem } from "@/types";
 
-type PostProps = Post & {
-  user: {
-    username: string;
-  };
-};
+// type PostProps = PostItem & {
+//   user: {
+//     username: string;
+//   };
+// };
 
-export const popularPostsColumn: ColumnDef<PostProps>[] = [
+export const popularPostsColumn: ColumnDef<PostItem>[] = [
   {
     accessorKey: "title",
     header: ({ column }) => (

@@ -59,8 +59,9 @@ model Profile {
 model Post {
   id String @id @default(cuid())
 
-  title String @unique
-  slug  String @unique
+  title            String @unique
+  slug             String @unique
+  shortDescription String
 
   imageUrl String
   imageId  String

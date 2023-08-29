@@ -17,7 +17,18 @@ export async function getMorePostsByUsername({
           username: username,
         },
       },
-      include: {
+
+      take: limit,
+
+      select: {
+        id: true,
+        slug: true,
+        title: true,
+        shortDescription: true,
+        imageUrl: true,
+        imageId: true,
+        categoryName: true,
+        createdAt: true,
         user: {
           select: {
             username: true,
@@ -27,10 +38,24 @@ export async function getMorePostsByUsername({
         _count: {
           select: {
             comments: true,
+            views: true,
           },
         },
       },
-      take: limit,
+
+      // include: {
+      //   user: {
+      //     select: {
+      //       username: true,
+      //       id: true,
+      //     },
+      //   },
+      //   _count: {
+      //     select: {
+      //       comments: true,
+      //     },
+      //   },
+      // },
     });
 
     return { data };

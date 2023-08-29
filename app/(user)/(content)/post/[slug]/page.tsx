@@ -16,7 +16,7 @@ import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import SocialShare from "@/components/Post/SocialShare";
-import { getDescription } from "@/utils/getDescription";
+// import { getDescription } from "@/utils/getDescription";
 import { capitalizeWords } from "@/utils/capitalizeWords";
 import { getSinglePost } from "@/db/queries/getSinglePost";
 import { getAuthSession } from "@/lib/next-auth";
@@ -53,18 +53,18 @@ export async function generateMetadata({
 
   const usernameCapitalized = capitalizeWords(post.user.username);
 
-  const description = getDescription(post.article, 100, 160);
+  // const description = getDescription(post.article, 100, 160);
 
   return {
     title: post.title,
-    description: description,
+    description: post.shortDescription,
     alternates: {
       canonical: `/post/${post.id}`,
     },
     openGraph: {
       type: "article",
       title: post.title,
-      description: description,
+      description: post.shortDescription,
       images: {
         url: post.imageUrl,
         width: 1200,
@@ -78,7 +78,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: description,
+      description: post.shortDescription,
       images: {
         url: post.imageUrl,
         width: 1200,
