@@ -83,7 +83,7 @@ export const getImagePlaceholder = async (ogImageUrl: string) => {
   // }
 
   const imageUrl = ogImageUrl?.replace("/upload/", "/upload/w_5/");
-  const res = await fetch(imageUrl);
+  const res = await fetch(imageUrl, { cache: "no-store" });
 
   console.log("res", res.ok);
 
