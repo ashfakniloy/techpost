@@ -1,7 +1,6 @@
+import Image from "next/image";
 import Section from "@/components/Admin/Section";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
-
-import Image from "next/image";
 
 type CategoryInfoProps = {
   category_name: string;
@@ -10,6 +9,7 @@ type CategoryInfoProps = {
   created_at: Date;
   updated_at: Date;
   imageUrl: string;
+  blurDataUrl: string;
 };
 
 function CategoryInfo({
@@ -19,6 +19,7 @@ function CategoryInfo({
   created_at,
   updated_at,
   imageUrl,
+  blurDataUrl,
 }: CategoryInfoProps) {
   const infoData = [
     {
@@ -48,7 +49,9 @@ function CategoryInfo({
       <div className="relative h-[200px]">
         <Image
           src={imageUrl}
-          alt="image"
+          placeholder="blur"
+          blurDataURL={blurDataUrl}
+          alt={category_name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover rounded-lg"

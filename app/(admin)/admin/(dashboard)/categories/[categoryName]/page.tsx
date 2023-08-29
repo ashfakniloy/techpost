@@ -7,6 +7,7 @@ import { getAllPostsAdmin } from "@/db/queries/admin/getAllPostsAdmin";
 import { categoriesPostsColumn } from "@/components/Admin/DataTable/components/columns/categoriesPostsColumn";
 import CategoryOption from "./CategoryOption";
 import Section from "@/components/Admin/Section";
+import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 
 // export const dynamic = "force-dynamic";
 
@@ -52,6 +53,8 @@ async function CategoryPageAdmin({
     categoryName: categoryNameDecoded,
   });
 
+  const blurDataUrl = await getImagePlaceholder(category.imageUrl);
+
   // console.log("data", category);
 
   const SectionTitle = (
@@ -80,6 +83,7 @@ async function CategoryPageAdmin({
             created_at={category.createdAt}
             updated_at={category.updatedAt}
             imageUrl={category.imageUrl}
+            blurDataUrl={blurDataUrl}
           />
 
           <CategoryQuotes quotes={category.quotes} />
