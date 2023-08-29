@@ -49,14 +49,8 @@
 // };
 
 import { getPlaiceholder } from "plaiceholder";
-import fs from "node:fs/promises";
-
-// const getStaticBlur = async () => {
-//   const file = await fs.readFile(`public/images/placeholder.webp`);
-//   const { base64: staticBlurImage } = await getPlaiceholder(file);
-
-//   return staticBlurImage;
-// };
+import { BASE_URL } from "@/config";
+// import fs from "node:fs/promises";
 
 export const getImagePlaceholder = async (ogImageUrl: string) => {
   // try {
@@ -83,9 +77,9 @@ export const getImagePlaceholder = async (ogImageUrl: string) => {
   // }
 
   const imageUrl = ogImageUrl?.replace("/upload/", "/upload/w_5/");
-  const res = await fetch(imageUrl, { cache: "no-store" });
+  const res = await fetch(imageUrl);
 
-  console.log("res", res.ok);
+  // console.log("res", res.ok);
 
   if (res.ok) {
     const buffer = await res.arrayBuffer();
@@ -95,12 +89,24 @@ export const getImagePlaceholder = async (ogImageUrl: string) => {
     return base64;
   } else {
     // throw new Error(`Failed to fetch image: ${res.status} ${res.statusText}`);
-    console.log(`Failed to fetch image: ${res.status} ${res.statusText}`);
+    console.log(
+      `Failed to fetch remote image: ${res.status} ${res.statusText}`
+    );
     // const staticBlurImage = await getStaticBlur();
     // return staticBlurImage;
 
-    const file = await fs.readFile(`public/images/placeholder.webp`);
-    const { base64: staticBlurImage } = await getPlaiceholder(file);
+    // const file = await fs.readFile(`public/images/placeholder.webp`);
+    // const { base64: staticBlurImage } = await getPlaiceholder(file);
+    // return staticBlurImage;
+
+    const staticImageUrl = `${BASE_URL}/images/placeholder.webp`;
+    const staticRes = await fetch(staticImageUrl);
+
+    const staticBuffer = await staticRes.arrayBuffer();
+
+    const { base64: staticBlurImage } = await getPlaiceholder(
+      Buffer.from(staticBuffer)
+    );
 
     return staticBlurImage;
   }
