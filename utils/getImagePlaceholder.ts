@@ -6,11 +6,11 @@ export const getImagePlaceholder = async (ogImageUrl: string) => {
     const imageUrl = ogImageUrl.replace("/upload/", "/upload/w_5/");
     const res = await fetch(imageUrl);
 
-    // if (!res.ok) {
-    //   throw new Error(`Failed to fetch image: ${res.status} ${res.statusText}`);
-    //   // console.log(`Failed to fetch image: ${res.status} ${res.statusText}`);
-    //   // return;
-    // }
+    if (!res.ok) {
+      throw new Error(`Failed to fetch image: ${res.status} ${res.statusText}`);
+      // console.log(`Failed to fetch image: ${res.status} ${res.statusText}`);
+      // return;
+    }
 
     const buffer = await res.arrayBuffer();
 
