@@ -30,8 +30,8 @@ function PasswordChange({
 
   const onSubmit = async (values: PasswordFormProps) => {
     if (values.currentPassword === values.newPassword) {
-      console.log("Old and new password are same!");
-      toast.error("Old and new password are same!");
+      console.log("Old and new password should not be same!");
+      toast.error("Old and new password should not be same!");
       return;
     }
 

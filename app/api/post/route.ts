@@ -4,6 +4,7 @@ import { getAuthSession } from "@/lib/next-auth";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 import { getDescription } from "@/utils/getDescription";
+import { postSchema } from "@/schemas/postSchema";
 // import { revalidatePath } from "next/cache";
 
 export async function POST(request: NextRequest) {
@@ -15,28 +16,40 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json();
 
-  if (!body) {
+  const parsedBody = postSchema.safeParse(body);
+
+  if (!parsedBody.success) {
+    const { errors } = parsedBody.error;
+
     return NextResponse.json(
-      { error: "Content can not be empty" },
+      { error: "Invalid request", data: errors },
       { status: 400 }
     );
   }
 
-  if (Object.keys(body).length === 0) {
-    return NextResponse.json(
-      { error: "Content cannot be empty" },
-      { status: 400 }
-    );
-  }
+  // if (!body) {
+  //   return NextResponse.json(
+  //     { error: "Content can not be empty" },
+  //     { status: 400 }
+  //   );
+  // }
 
-  if (Object.values(body).includes("")) {
-    return NextResponse.json(
-      { error: "All fields are required" },
-      { status: 400 }
-    );
-  }
+  // if (Object.keys(body).length === 0) {
+  //   return NextResponse.json(
+  //     { error: "Content cannot be empty" },
+  //     { status: 400 }
+  //   );
+  // }
 
-  const { title, article } = body;
+  // if (Object.values(body).includes("")) {
+  //   return NextResponse.json(
+  //     { error: "All fields are required" },
+  //     { status: 400 }
+  //   );
+  // }
+
+  const { data } = parsedBody;
+  const { title, article } = data;
 
   const postTitleExists = await prisma.post.findFirst({
     where: {
@@ -58,7 +71,7 @@ export async function POST(request: NextRequest) {
   try {
     const response = await prisma.post.create({
       data: {
-        ...body,
+        ...data,
         userId: session.user.id,
         slug,
         shortDescription,
@@ -109,28 +122,19 @@ export async function PUT(request: NextRequest) {
 
   const body = await request.json();
 
-  if (!body) {
+  const parsedBody = postSchema.safeParse(body);
+
+  if (!parsedBody.success) {
+    const { errors } = parsedBody.error;
+
     return NextResponse.json(
-      { error: "Content can not be empty" },
+      { error: "Invalid request", data: errors },
       { status: 400 }
     );
   }
 
-  if (Object.keys(body).length === 0) {
-    return NextResponse.json(
-      { error: "Content cannot be empty" },
-      { status: 400 }
-    );
-  }
-
-  if (Object.values(body).includes("")) {
-    return NextResponse.json(
-      { error: "All fields are required" },
-      { status: 400 }
-    );
-  }
-
-  const { title, article } = body;
+  const { data } = parsedBody;
+  const { title, article } = data;
 
   const postResponse = await prisma.post.findFirst({
     where: {
@@ -165,7 +169,7 @@ export async function PUT(request: NextRequest) {
           userId: session.user.id,
         },
       },
-      data: { ...body, slug, shortDescription },
+      data: { ...data, slug, shortDescription },
     });
 
     // revalidatePath("/");

@@ -4,6 +4,12 @@ import cloudinary from "@/lib/cloudinary";
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/next-auth";
 import { Prisma } from "@prisma/client";
+import {
+  deleteAccountSchema,
+  emailSchema,
+  passwordSchema,
+  usernameSchema,
+} from "@/schemas/accountSchema";
 
 export async function PUT(request: NextRequest) {
   const session = await getAuthSession();
@@ -12,31 +18,30 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
+  // const body = await request.json();
 
-  if (!body) {
-    return NextResponse.json(
-      { error: "Content can not be empty" },
-      { status: 400 }
-    );
-  }
+  // if (!body) {
+  //   return NextResponse.json(
+  //     { error: "Content can not be empty" },
+  //     { status: 400 }
+  //   );
+  // }
 
-  if (Object.keys(body).length === 0) {
-    return NextResponse.json(
-      { error: "Content cannot be empty" },
-      { status: 400 }
-    );
-  }
+  // if (Object.keys(body).length === 0) {
+  //   return NextResponse.json(
+  //     { error: "Content cannot be empty" },
+  //     { status: 400 }
+  //   );
+  // }
 
-  if (Object.values(body).includes("")) {
-    return NextResponse.json(
-      { error: "All fields are required" },
-      { status: 400 }
-    );
-  }
+  // if (Object.values(body).includes("")) {
+  //   return NextResponse.json(
+  //     { error: "All fields are required" },
+  //     { status: 400 }
+  //   );
+  // }
 
   const { searchParams } = request.nextUrl;
-
   const changeType = searchParams.get("changeType");
 
   if (typeof changeType !== "string") {
@@ -54,8 +59,22 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: "Account not found" }, { status: 400 });
   }
 
+  const body = await request.json();
+
   if (changeType === "username") {
-    const { username, password } = body;
+    const parsedBody = usernameSchema.safeParse(body);
+
+    if (!parsedBody.success) {
+      const { errors } = parsedBody.error;
+
+      return NextResponse.json(
+        { error: "Invalid request", data: errors },
+        { status: 400 }
+      );
+    }
+
+    const { data } = parsedBody;
+    const { username, password } = data;
 
     const passwordMatched = await bcrypt.compare(
       password,
@@ -68,13 +87,6 @@ export async function PUT(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    // if (accountResponse?.password !== password) {
-    //   return NextResponse.json(
-    //     { error: "Incorrect password" },
-    //     { status: 400 }
-    //   );
-    // }
 
     // const usernameExists = await prisma.user.findUnique({
     //   where: {
@@ -99,7 +111,6 @@ export async function PUT(request: NextRequest) {
 
       return NextResponse.json({
         message: "Username Changed successfully",
-        response,
       });
     } catch (error) {
       console.log("error", error);
@@ -112,12 +123,28 @@ export async function PUT(request: NextRequest) {
           );
         }
       }
-      return NextResponse.json({ error }, { status: 400 });
+
+      return NextResponse.json(
+        { error: "Something went wrong", data: error },
+        { status: 500 }
+      );
     }
   }
 
   if (changeType === "email") {
-    const { email, password } = body;
+    const parsedBody = emailSchema.safeParse(body);
+
+    if (!parsedBody.success) {
+      const { errors } = parsedBody.error;
+
+      return NextResponse.json(
+        { error: "Invalid request", data: errors },
+        { status: 400 }
+      );
+    }
+
+    const { data } = parsedBody;
+    const { email, password } = data;
 
     const passwordMatched = await bcrypt.compare(
       password,
@@ -130,13 +157,6 @@ export async function PUT(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    // if (accountResponse?.password !== password) {
-    //   return NextResponse.json(
-    //     { error: "Incorrect password" },
-    //     { status: 400 }
-    //   );
-    // }
 
     // const emailExists = await prisma.user.findUnique({
     //   where: {
@@ -161,7 +181,6 @@ export async function PUT(request: NextRequest) {
 
       return NextResponse.json({
         message: "Email Changed successfully",
-        response,
       });
     } catch (error) {
       console.log("error", error);
@@ -174,12 +193,27 @@ export async function PUT(request: NextRequest) {
           );
         }
       }
-      return NextResponse.json({ error }, { status: 400 });
+      return NextResponse.json(
+        { error: "Something went wrong", data: error },
+        { status: 500 }
+      );
     }
   }
 
   if (changeType === "password") {
-    const { currentPassword, newPassword } = body;
+    const parsedBody = passwordSchema.safeParse(body);
+
+    if (!parsedBody.success) {
+      const { errors } = parsedBody.error;
+
+      return NextResponse.json(
+        { error: "Invalid request", data: errors },
+        { status: 400 }
+      );
+    }
+
+    const { data } = parsedBody;
+    const { currentPassword, newPassword } = data;
 
     const passwordMatched = await bcrypt.compare(
       currentPassword,
@@ -192,13 +226,6 @@ export async function PUT(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    // if (accountResponse?.password !== currentPassword) {
-    //   return NextResponse.json(
-    //     { error: "Incorrect password" },
-    //     { status: 400 }
-    //   );
-    // }
 
     const saltValue = await bcrypt.genSalt(10);
     const hashedNewPassword = await bcrypt.hash(newPassword, saltValue);
@@ -213,11 +240,13 @@ export async function PUT(request: NextRequest) {
 
       return NextResponse.json({
         message: "Password Changed successfully",
-        response,
       });
     } catch (error) {
       console.log(error);
-      return NextResponse.json({ error }, { status: 400 });
+      return NextResponse.json(
+        { error: "Something went wrong", data: error },
+        { status: 500 }
+      );
     }
   }
 }
@@ -228,31 +257,6 @@ export async function DELETE(request: NextRequest) {
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-
-  const body = await request.json();
-
-  if (!body) {
-    return NextResponse.json(
-      { error: "Content can not be empty" },
-      { status: 400 }
-    );
-  }
-
-  if (Object.keys(body).length === 0) {
-    return NextResponse.json(
-      { error: "Content cannot be empty" },
-      { status: 400 }
-    );
-  }
-
-  if (Object.values(body).includes("")) {
-    return NextResponse.json(
-      { error: "All fields are required" },
-      { status: 400 }
-    );
-  }
-
-  const { password } = body;
 
   const userCheckResponse = await prisma.user.findUnique({
     where: {
@@ -267,6 +271,22 @@ export async function DELETE(request: NextRequest) {
     );
   }
 
+  const body = await request.json();
+
+  const parsedBody = deleteAccountSchema.safeParse(body);
+
+  if (!parsedBody.success) {
+    const { errors } = parsedBody.error;
+
+    return NextResponse.json(
+      { error: "Invalid request", data: errors },
+      { status: 400 }
+    );
+  }
+
+  const { data } = parsedBody;
+  const { password } = data;
+
   const passwordMatched = await bcrypt.compare(
     password,
     userCheckResponse.password
@@ -278,13 +298,6 @@ export async function DELETE(request: NextRequest) {
       { status: 400 }
     );
   }
-
-  // if (userCheckResponse.password !== password) {
-  //   return NextResponse.json(
-  //     { error: "Unauthorized, Passwords don't match" },
-  //     { status: 400 }
-  //   );
-  // }
 
   const responseProfileImage = await prisma.profile.findUnique({
     where: {
@@ -321,7 +334,13 @@ export async function DELETE(request: NextRequest) {
 
         NextResponse.json({ success: profileImageDelete }, { status: 200 });
       } catch (error) {
-        return NextResponse.json({ error }, { status: 400 });
+        NextResponse.json(
+          {
+            error: "Something went wrong when deleting profile image",
+            data: error,
+          },
+          { status: 400 }
+        );
       }
     }
 
@@ -333,18 +352,21 @@ export async function DELETE(request: NextRequest) {
 
         NextResponse.json({ success: postsImagesDelete }, { status: 200 });
       } catch (error) {
-        return NextResponse.json({ error }, { status: 400 });
+        NextResponse.json(
+          {
+            error: "Something went wrong when deleteing posts image",
+            data: error,
+          },
+          { status: 400 }
+        );
       }
     }
 
-    return NextResponse.json(
-      { success: "account deleted", response },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: "account deleted" }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: "account delete failed" },
-      { status: 400 }
+      { error: "Something went wrong", data: error },
+      { status: 500 }
     );
   }
 }

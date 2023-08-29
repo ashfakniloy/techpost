@@ -21,36 +21,6 @@ export async function PUT(request: NextRequest) {
     );
   }
 
-  // const body = await request.json();
-
-  // if (!body) {
-  //   return NextResponse.json(
-  //     { error: "Content can not be empty" },
-  //     { status: 400 }
-  //   );
-  // }
-
-  // if (Object.keys(body).length === 0) {
-  //   return NextResponse.json(
-  //     { error: "Object cannot be empty" },
-  //     { status: 400 }
-  //   );
-  // }
-
-  // if (Object.values(body).includes("")) {
-  //   return NextResponse.json(
-  //     { error: "All fields are required" },
-  //     { status: 400 }
-  //   );
-  // }
-
-  // // return NextResponse.json({
-  // //   success: "Category created successfully",
-  // //   body,
-  // // });
-
-  // const { name, imageUrl, imageId, quotes } = body;
-
   try {
     const postResponse = await prisma.post.findFirst({
       where: {

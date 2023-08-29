@@ -35,12 +35,6 @@ function UserSignUpPage() {
   const onSubmit = async (values: SignupFormProps) => {
     const toastSignup = toast.loading("Loading...");
 
-    const signupvalues = {
-      username: values.username,
-      email: values.email,
-      password: values.password,
-    };
-
     const url = "/api/signup";
 
     const response = await fetch(url, {
@@ -48,7 +42,7 @@ function UserSignUpPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(signupvalues),
+      body: JSON.stringify(values),
     });
 
     const data = await response.json();

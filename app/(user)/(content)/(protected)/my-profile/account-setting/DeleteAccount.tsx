@@ -34,17 +34,13 @@ function DeleteAccount({
   const onSubmit = async (values: DeleteAccountFormProps) => {
     const toastDeleteAccount = toast.loading("Loading...");
 
-    const filteredValues = {
-      password: values.password,
-    };
-
     const url = "/api/account";
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(filteredValues),
+      body: JSON.stringify(values),
     });
 
     const data = await response.json();

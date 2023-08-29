@@ -1,25 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
+import { prisma } from "@/lib/prisma";
+import { signupSchema } from "@/schemas/signupSchema";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
-  if (Object.keys(body).length === 0) {
+  const parsedBody = signupSchema.safeParse(body);
+
+  if (!parsedBody.success) {
+    const { errors } = parsedBody.error;
+
     return NextResponse.json(
-      { error: "Content cannot be empty" },
+      { error: "Invalid request", data: errors },
       { status: 400 }
     );
   }
 
-  if (Object.values(body).includes("")) {
-    return NextResponse.json(
-      { error: "All fields are required" },
-      { status: 400 }
-    );
-  }
-
-  const { username, email, password } = body;
+  const { data } = parsedBody;
+  const { username, email, password } = data;
 
   const emailExists = await prisma.user.findUnique({
     where: {
@@ -53,29 +52,27 @@ export async function POST(request: NextRequest) {
   try {
     const response = await prisma.user.create({
       data: {
-        ...body,
+        username,
+        email,
         password: hashedPassword,
       },
     });
 
-    //without hased password
-    // const response = await prisma.user.create({
-    //   data: body,
-    // });
-
-    // console.log("response", response);
     if (response.id) {
       const response2 = await prisma.profile.create({
         data: { userId: response.id },
       });
 
       return NextResponse.json(
-        { message: "account and profile created", response, response2 },
+        { message: "account and profile created" },
         { status: 201 }
       );
     }
   } catch (error) {
     console.log("error", error);
-    return NextResponse.json({ error }, { status: 400 });
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }

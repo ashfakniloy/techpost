@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 // import { Prisma } from "@prisma/client";
 import { getAuthSession } from "@/lib/next-auth";
+import { categorySchema } from "@/schemas/categorySchema";
 
 export async function POST(request: NextRequest) {
   const session = await getAuthSession();
@@ -15,33 +16,19 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json();
 
-  if (!body) {
+  const parsedBody = categorySchema.safeParse(body);
+
+  if (!parsedBody.success) {
+    const { errors } = parsedBody.error;
+
     return NextResponse.json(
-      { error: "Content can not be empty" },
+      { error: "Invalid request", data: errors },
       { status: 400 }
     );
   }
 
-  if (Object.keys(body).length === 0) {
-    return NextResponse.json(
-      { error: "Object cannot be empty" },
-      { status: 400 }
-    );
-  }
-
-  if (Object.values(body).includes("")) {
-    return NextResponse.json(
-      { error: "All fields are required" },
-      { status: 400 }
-    );
-  }
-
-  // return NextResponse.json({
-  //   success: "Category created successfully",
-  //   body,
-  // });
-
-  const { name, imageUrl, imageId, quotes } = body;
+  const { data } = parsedBody;
+  const { name, imageUrl, imageId, quotes } = data;
 
   const categoryExist = await prisma.category.findFirst({
     where: {
@@ -69,7 +56,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (response.id) {
-      const quotesWithId = quotes.map((quote: {}[]) => ({
+      const quotesWithId = quotes.map((quote) => ({
         ...quote,
         categoryId: response.id,
       }));
@@ -92,7 +79,10 @@ export async function POST(request: NextRequest) {
     //     );
     //   }
     // }
-    return NextResponse.json({ error }, { status: 400 });
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }
 
@@ -117,33 +107,19 @@ export async function PUT(request: NextRequest) {
 
   const body = await request.json();
 
-  if (!body) {
+  const parsedBody = categorySchema.safeParse(body);
+
+  if (!parsedBody.success) {
+    const { errors } = parsedBody.error;
+
     return NextResponse.json(
-      { error: "Content can not be empty" },
+      { error: "Invalid request", data: errors },
       { status: 400 }
     );
   }
 
-  if (Object.keys(body).length === 0) {
-    return NextResponse.json(
-      { error: "Object cannot be empty" },
-      { status: 400 }
-    );
-  }
-
-  if (Object.values(body).includes("")) {
-    return NextResponse.json(
-      { error: "All fields are required" },
-      { status: 400 }
-    );
-  }
-
-  // return NextResponse.json({
-  //   success: "Category created successfully",
-  //   body,
-  // });
-
-  const { name, imageUrl, imageId, quotes } = body;
+  const { data } = parsedBody;
+  const { name, imageUrl, imageId, quotes } = data;
 
   const categoryResponse = await prisma.category.findFirst({
     where: {
@@ -182,7 +158,7 @@ export async function PUT(request: NextRequest) {
     });
 
     if (response.id) {
-      const quoteWithCategoryId = quotes.map((quote: {}[]) => ({
+      const quoteWithCategoryId = quotes.map((quote) => ({
         ...quote,
         categoryId: response.id,
       }));
@@ -211,7 +187,10 @@ export async function PUT(request: NextRequest) {
     //     );
     //   }
     // }
-    return NextResponse.json({ error }, { status: 400 });
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }
 
@@ -322,8 +301,8 @@ export async function DELETE(request: NextRequest) {
       );
     } catch (error) {
       return NextResponse.json(
-        { error: "category delete failed" },
-        { status: 400 }
+        { error: "Something went wrong", data: error },
+        { status: 500 }
       );
     }
   }
