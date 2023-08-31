@@ -104,7 +104,9 @@ function AdminSidebar({
         <div className="flex flex-col justify-between h-full overflow-hidden">
           <div>
             <div className="pl-5 lg:pl-[30px] py-7 font-semibold flex justify-between items-center">
-              <h1 className="text-lg lg:text-2xl">TechPost Admin</h1>
+              <h1 className="font-montserrat text-lg lg:text-2xl">
+                TechPost Admin
+              </h1>
               <span
                 className="p-1 mr-5 rounded-full border-2 border-gray-500  lg:hidden"
                 onClick={() => setShowSidebar(!showSidebar)}
@@ -114,7 +116,7 @@ function AdminSidebar({
             </div>
 
             {/* <ScrollArea className="mt-3 my-0 h-[620px] "> */}
-            <div className="mx-2 lg:mx-[25px] space-y-2">
+            <div className="mx-2 lg:mx-[25px] space-y-2 font-montserrat">
               {adminLinks?.map((navLink, i) => (
                 <div key={i}>
                   {/* temporary fix router.refresh until nextjs fix caching revalidate issue */}
@@ -145,7 +147,7 @@ function AdminSidebar({
 
             <div className="space-y-2">
               <div className="px-3 py-3 flex justify-between items-center">
-                <div className="flex items-center gap-3 font-semibold rounded-lg">
+                <div className="flex items-center gap-3 font-montserrat font-semibold rounded-lg">
                   <span className="h-5 w-5">
                     <MoonIcon className="stroke-blue-600 dark:stroke-blue-300" />
                   </span>

@@ -30,8 +30,8 @@ function SingleComment({ comment }: { comment: CommentTypes }) {
       <div className="flex-1">
         <p className="text-sm font-semibold">
           <Link
-            href={`/user/${comment.user.username}`}
-            className="hover:text-blue-800 dark:hover:text-blue-500"
+            href={`/admin/users/${comment.user.username}`}
+            className="capitalize link"
           >
             {comment.user.username}
           </Link>

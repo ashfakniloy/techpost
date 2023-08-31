@@ -38,12 +38,12 @@ async function EditorsChoice() {
           />
         </div>
 
-        <div className="absolute bottom-0 w-full bg-gradient-to-b from-transparent to-black/60 px-2 lg:px-5 pt-5 pb-3 lg:pt-10 lg:pb-6 flex flex-col justify-center text-white inset-x-0  font-montserrat select-none">
+        <div className="absolute bottom-0 w-full bg-gradient-to-b from-transparent to-black/60 px-2 lg:px-5 pt-5 pb-3 lg:pt-10 lg:pb-6 flex flex-col justify-center text-white inset-x-0 select-none">
           <p className="capitalize text-sm font-semibold drop-shadow-md">
             {post.categoryName}
           </p>
 
-          <h1 className="pt-2 text-xl lg:text-4xl font-bold drop-shadow-lg">
+          <h1 className="pt-2 text-xl lg:text-4xl font-montserrat font-bold drop-shadow-lg">
             {post.title}
           </h1>
 
@@ -69,7 +69,7 @@ async function EditorsChoice() {
                 )}
               </div>
 
-              <p className="capitalize">By {post.user.username}</p>
+              <p className="capitalize">{`By ${post.user.username}`}</p>
             </div>
             <p>
               {getTimeDistance(post.createdAt)}
@@ -78,7 +78,7 @@ async function EditorsChoice() {
           </div>
 
           <div className="mt-1 lg:mt-2 !text-white !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
-            {post.shortDescription}
+            {`${post.shortDescription}`}
           </div>
         </div>
       </Link>

@@ -102,7 +102,7 @@ function OptionButton({
             <EllipsisHorizontalIcon className="w-5 h-5" />
           </button>
         </PopoverTrigger>
-        <PopoverContent className="absolute -top-[65px] right-5 lg:right-8 z-10 p-0 w-[100px] lg:w-[120px] flex flex-col rounded-md text-black dark:text-gray-50 bg-gray-50 dark:bg-custom-gray2 text-xs lg:text-sm border border-gray-300 dark:border-gray-700 shadow whitespace-nowrap">
+        <PopoverContent className="absolute -top-[65px] right-5 lg:right-8 z-10 p-0 w-[100px] lg:w-[120px] flex flex-col rounded-md font-montserrat text-black dark:text-gray-50 bg-gray-50 dark:bg-custom-gray2 text-xs lg:text-sm border border-gray-300 dark:border-gray-700 shadow whitespace-nowrap">
           <Link href={`/edit-post/${slug}`}>
             <button
               type="button"

@@ -1,14 +1,14 @@
 "use client";
 
-import { ChevronDoubleRightIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
+import { ChevronDoubleRightIcon } from "@heroicons/react/20/solid";
 
 function Paths() {
   const pathname = usePathname();
-  const params = useParams();
+  // const params = useParams();
 
-  console.log("params", params);
+  // console.log("params", params);
   const paths = pathname?.split("/");
   const pathsFiltered = paths?.filter((path) => path !== "");
 

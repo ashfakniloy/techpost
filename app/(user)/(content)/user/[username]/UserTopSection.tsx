@@ -48,7 +48,7 @@ async function UserTopSection({ username }: { username: string }) {
         )}
       </div>
       <div className="flex-1 lg:mt-3">
-        <h4 className="text-2xl lg:text-3xl font-bold capitalize">
+        <h4 className="text-2xl lg:text-3xl font-montserrat font-bold capitalize">
           {profile?.user.username}
         </h4>
         <div className="mt-2 flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-10">

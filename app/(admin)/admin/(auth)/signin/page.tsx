@@ -79,7 +79,9 @@ function AdminSigninPage() {
           <XMarkIcon className="h-6 w-6" />
         </button>
       )} */}
-        <p className="text-2xl font-bold text-center">Admin Sign In</p>
+        <p className="text-2xl font-montserrat font-bold text-center">
+          Admin Sign In
+        </p>
 
         <div className="mt-5">
           <FormProvider {...form}>

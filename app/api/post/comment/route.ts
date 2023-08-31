@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/next-auth";
+import { commentSchema } from "@/schemas/commentSchema";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
@@ -107,10 +108,24 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const parsedComment = commentSchema.safeParse({ comment });
+
+  if (!parsedComment.success) {
+    const { errors } = parsedComment.error;
+
+    return NextResponse.json(
+      { error: "Invalid request", data: errors },
+      { status: 400 }
+    );
+  }
+
+  const { data } = parsedComment;
+  const { comment: commentParsed } = data;
+
   try {
     const response = await prisma.comment.create({
       data: {
-        comment: comment,
+        comment: commentParsed,
         user: {
           connect: {
             id: session.user.id,

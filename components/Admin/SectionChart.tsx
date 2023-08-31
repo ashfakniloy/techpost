@@ -17,7 +17,9 @@ function SectionChart({
       )}
     >
       <div className="flex justify-between items-center">
-        <h3 className="text-xl font-semibold capitalize">{title}</h3>
+        <h3 className="text-xl font-montserrat font-semibold capitalize">
+          {title}
+        </h3>
         <p className="text-xs">{`Year: ${new Date().getFullYear()}`}</p>
       </div>
       <div className="mt-6 overflow-x-auto">{children}</div>

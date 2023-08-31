@@ -58,7 +58,7 @@ function Card({ post, blurDataURL, session }: CardProps) {
         <div>
           <div>
             <Link href={`/post/${slug}`}>
-              <h3 className="text-base leading-snug lg:leading-[28px] lg:text-xl font-semibold link">
+              <h3 className="text-base leading-snug lg:leading-[28px] lg:text-xl font-montserrat font-semibold link">
                 {title}
               </h3>
             </Link>

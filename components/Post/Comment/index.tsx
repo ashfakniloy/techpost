@@ -84,7 +84,7 @@ async function Comment({
                   <p className="font-semibold text-xs lg:text-sm">
                     <Link
                       href={`/user/${comment.user.username}`}
-                      className="link"
+                      className="capitalize link"
                     >
                       {comment.user.username}
                     </Link>

@@ -78,7 +78,7 @@ function CommentOption({
           <EllipsisHorizontalIcon className="w-5 h-5" />
         </div>
       </PopoverTrigger>
-      <PopoverContent className="absolute bottom-0 right-7 z-10 p-0 w-[100px] lg:w-[120px] flex flex-col rounded-md text-black dark:text-gray-50 bg-gray-50 dark:bg-custom-gray2 text-xs lg:text-sm border border-gray-300 dark:border-gray-700 shadow whitespace-nowrap">
+      <PopoverContent className="absolute bottom-0 right-7 z-10 p-0 w-[100px] lg:w-[120px] flex flex-col rounded-md font-montserrat text-black dark:text-gray-50 bg-gray-50 dark:bg-custom-gray2 text-xs lg:text-sm border border-gray-300 dark:border-gray-700 shadow whitespace-nowrap">
         <button
           className="w-full px-3 py-2 hover:bg-gray-200 dark:hover:bg-custom-gray3 text-start  disabled:cursor-not-allowed disabled:opacity-70"
           onClick={handleDelete}

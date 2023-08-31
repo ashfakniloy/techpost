@@ -53,7 +53,7 @@ async function MyProfileSideSection() {
           )}
         </div>
         <div className="overflow-hidden">
-          <h4 className="mt-2 lg:mt-3 text-2xl font-bold capitalize">
+          <h4 className="mt-2 lg:mt-3 text-2xl font-montserrat font-bold capitalize">
             {profile?.user.username}
           </h4>
           <p className="text-xs lg:text-sm mt-1 text-gray-600 dark:text-gray-400">

@@ -72,7 +72,9 @@ function PageTitle() {
         <span className="h-6 w-6 lg:h-[30px] lg:w-[30px] flex-shrink-0">
           {pageIcon}
         </span>
-        <h1 className="lg:text-2xl font-bold capitalize">{pageTitle}</h1>
+        <h1 className="lg:text-2xl font-montserrat font-bold capitalize">
+          {pageTitle}
+        </h1>
       </div>
 
       <Paths />

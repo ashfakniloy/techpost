@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/next-auth";
 import { getCommentReplies } from "@/db/queries/getCommentReplies";
+import { commentReplySchema } from "@/schemas/commentSchema";
 
 export async function POST(request: NextRequest) {
   const session = await getAuthSession();
@@ -22,10 +23,24 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  const parsedCommentReply = commentReplySchema.safeParse({ commentReply });
+
+  if (!parsedCommentReply.success) {
+    const { errors } = parsedCommentReply.error;
+
+    return NextResponse.json(
+      { error: "Invalid request", data: errors },
+      { status: 400 }
+    );
+  }
+
+  const { data } = parsedCommentReply;
+  const { commentReply: commentReplyParsed } = data;
+
   try {
     const response = await prisma.commentReply.create({
       data: {
-        commentReply: commentReply,
+        commentReply: commentReplyParsed,
 
         user: {
           connect: {

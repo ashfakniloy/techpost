@@ -82,8 +82,8 @@ export const repliesColumn: ColumnDef<CommentReply>[] = [
               <div className="flex-1 w-[10%]">
                 <p className="text-sm font-semibold">
                   <Link
-                    href={`/user/${user.username}`}
-                    className="hover:text-blue-800 dark:hover:text-blue-500"
+                    href={`/admin/users/${user.username}`}
+                    className="capitalize link"
                   >
                     {user.username}
                   </Link>

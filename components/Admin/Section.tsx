@@ -16,7 +16,9 @@ function Section({
         className
       )}
     >
-      <h3 className="text-xl font-semibold capitalize">{title}</h3>
+      <h3 className="text-xl font-montserrat font-semibold capitalize">
+        {title}
+      </h3>
       <div className="mt-6">{children}</div>
     </div>
   );

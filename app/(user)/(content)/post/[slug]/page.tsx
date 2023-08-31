@@ -223,7 +223,7 @@ async function SinglePostPage({
               </div>
 
               <div className="mt-6 ProseMirror !border-none !p-0 !max-h-full overflow-hidden">
-                {parser(post.article)}
+                <div>{parser(post.article)}</div>
               </div>
             </article>
           </div>

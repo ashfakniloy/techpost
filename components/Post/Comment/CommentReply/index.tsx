@@ -50,7 +50,10 @@ async function CommentReply({
 
           <div className="flex-1 w-[10%] text-sm lg:text-base">
             <p className="text-xs lg:text-sm font-semibold">
-              <Link href={`/user/${reply.user.username}`} className="link">
+              <Link
+                href={`/user/${reply.user.username}`}
+                className="capitalize link"
+              >
                 {reply.user.username}
               </Link>
             </p>

@@ -69,7 +69,7 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
               type="button"
               aria-label="sign out"
               onClick={handleSignOut}
-              className="w-full mt-1 px-4 py-2.5 text-left font-bold hover:bg-gray-300 dark:hover:bg-gray-800 rounded"
+              className="w-full mt-1 px-4 py-2.5 text-left font-montserrat font-bold hover:bg-gray-300 dark:hover:bg-gray-800 rounded"
             >
               Sign Out
             </button>

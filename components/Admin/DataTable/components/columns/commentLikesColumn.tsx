@@ -6,6 +6,7 @@ import { DataTableColumnHeader } from "../data-table-column-header";
 // import { CommentLike } from "@/types";
 import { CommentTypes } from "@/db/queries/getComments";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
+import Link from "next/link";
 
 type CommentLike = CommentTypes["commentsLikes"][number];
 
@@ -54,7 +55,16 @@ export const commentLikesColumn: ColumnDef<CommentLike>[] = [
       row: {
         original: { user },
       },
-    }) => <div className="w-[200px]">{user.username}</div>,
+    }) => (
+      <div className="w-[200px]">
+        <Link
+          href={`/admin/users/${user.username}`}
+          className="capitalize link"
+        >
+          {user.username}
+        </Link>
+      </div>
+    ),
   },
   {
     accessorKey: "createdAt",

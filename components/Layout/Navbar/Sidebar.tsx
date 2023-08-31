@@ -221,7 +221,7 @@ function Sidebar({
               )}
             </div>
 
-            <div className="space-y-1">
+            <div className="space-y-1 font-montserrat">
               {navLinks.map((navLink) => (
                 <div key={navLink.name}>
                   {!navLink.subLinks ? (

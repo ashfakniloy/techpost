@@ -81,7 +81,7 @@ function Navbar({
 
   return (
     <>
-      <header className="sticky top-0 px-0.5 lg:px-1.5 z-20 flex items-center justify-between py-4 border-gray-300 bg-gray-100 bg-opacity-50 dark:bg-custom-gray/30 backdrop-blur-md dark:border-zinc-700">
+      <header className="sticky top-0 px-0.5 lg:px-1.5 z-30 flex items-center justify-between py-4 border-gray-300 bg-gray-100 bg-opacity-50 dark:bg-custom-gray/30 backdrop-blur-md dark:border-zinc-700">
         <TechPostLogo />
 
         <div className="flex items-center gap-6 lg:gap-10">

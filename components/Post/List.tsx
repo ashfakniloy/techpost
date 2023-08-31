@@ -63,7 +63,7 @@ function List({ post, blurDataURL, session }: ListProps) {
             {/* <div className="max-w-[540px]"> */}
             <div>
               <Link href={`/post/${slug}`}>
-                <h3 className="text-sm lg:text-xl font-semibold link">
+                <h3 className="text-sm lg:text-xl font-montserrat font-semibold link">
                   {title}
                 </h3>
               </Link>

@@ -106,7 +106,7 @@ function UserSigninPage() {
           <XMarkIcon className="h-6 w-6" />
         </button>
       )} */}
-      <p className="text-2xl font-bold text-center">Sign In</p>
+      <p className="text-2xl font-montserrat font-bold text-center">Sign In</p>
 
       <div className="mt-5">
         <FormProvider {...form}>
@@ -126,7 +126,7 @@ function UserSigninPage() {
                 disabled={isSubmitting}
               >
                 {isSubmitting && (
-                  <span className="absolute flex left-[80px] lg:left-[105px] items-center inset-y-0">
+                  <span className="absolute flex left-[80px] lg:left-[95px] items-center inset-y-0">
                     <Loader width="30" />
                   </span>
                 )}

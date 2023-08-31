@@ -73,8 +73,8 @@ function AddPostForm({ categories }: { categories: string[] }) {
 
   return (
     <div className="relative">
-      <h4 className="mb-5 text-[22px] lg:text-2xl text-center lg:text-start font-extrabold text-gray-700 font-montserrat dark:text-gray-400">
-        Add New post
+      <h4 className="mb-5 text-[22px] lg:text-2xl text-center lg:text-start font-montserrat font-extrabold text-gray-700 dark:text-gray-400 capitalize">
+        Add New Post
       </h4>
 
       <FormProvider {...form}>

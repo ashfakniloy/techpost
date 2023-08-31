@@ -18,6 +18,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        montserrat: ["var(--font-montserrat)"],
+      },
       colors: {
         "custom-gray": "#1B1A1A",
         "custom-gray2": "#262525",

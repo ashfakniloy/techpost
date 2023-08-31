@@ -197,7 +197,7 @@ function PostPreviewPage() {
         </div>
 
         <div className="mt-6 ProseMirror !border-none !p-0 !max-h-full">
-          {parser(previewPost.article || "")}
+          <div>{parser(previewPost.article || "")}</div>
         </div>
       </div>
 
