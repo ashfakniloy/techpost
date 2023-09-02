@@ -43,14 +43,14 @@ const CommentsCell = ({
   return (
     <div key={id}>
       <div className="flex gap-3 break-words">
-        <div>
+        <div className="relative w-[35px] h-[35px] rounded-full overflow-hidden">
           {user?.profile?.imageUrl ? (
             <Image
               src={user.profile.imageUrl}
               alt={user.username}
-              width={35}
-              height={35}
-              className="rounded-full"
+              fill
+              sizes="35px"
+              className="object-cover"
             />
           ) : (
             <Image

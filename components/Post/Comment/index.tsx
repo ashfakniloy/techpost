@@ -61,14 +61,14 @@ async function Comment({
               className="p-3 lg:p-5 bg-gray-50 rounded-md shadow-md dark:bg-custom-gray2"
             >
               <div className="flex gap-3 break-words">
-                <div>
+                <div className="relative w-[35px] h-[35px] rounded-full overflow-hidden">
                   {comment.user.profile?.imageUrl ? (
                     <Image
                       src={comment.user.profile.imageUrl}
                       alt={comment.user.username}
-                      width={35}
-                      height={35}
-                      className="rounded-full"
+                      fill
+                      sizes="35px"
+                      className="object-cover"
                     />
                   ) : (
                     <Image

@@ -60,14 +60,14 @@ export const repliesColumn: ColumnDef<CommentReply>[] = [
         <div className="w-[400px]">
           <div key={id}>
             <div className="flex gap-3 ">
-              <div>
+              <div className="relative w-[35px] h-[35px] rounded-full overflow-hidden">
                 {user?.profile?.imageUrl ? (
                   <Image
                     src={user.profile.imageUrl}
                     alt={user.username}
-                    width={35}
-                    height={35}
-                    className="rounded-full"
+                    fill
+                    sizes="35px"
+                    className="object-cover"
                   />
                 ) : (
                   <Image

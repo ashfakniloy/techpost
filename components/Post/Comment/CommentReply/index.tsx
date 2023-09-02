@@ -28,14 +28,14 @@ async function CommentReply({
     >
       {commentReplies.map((reply, i) => (
         <div key={reply.id} className="flex gap-3 pt-4">
-          <div>
+          <div className="relative w-[30px] h-[30px] rounded-full overflow-hidden">
             {reply.user.profile?.imageUrl ? (
               <Image
                 src={reply.user.profile.imageUrl}
-                alt="user picture"
-                width={30}
-                height={30}
-                className="rounded-full"
+                alt={reply.user.username}
+                fill
+                sizes="30px"
+                className="object-cover"
               />
             ) : (
               <Image

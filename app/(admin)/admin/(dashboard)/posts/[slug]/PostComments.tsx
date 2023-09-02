@@ -18,13 +18,13 @@ function SingleComment({ comment }: { comment: CommentTypes }) {
 
   return (
     <div className="flex gap-3">
-      <div>
+      <div className="relative w-[35px] h-[35px] rounded-full overflow-hidden">
         <Image
           src={imageSrc}
           alt={comment.user.username}
-          width={35}
-          height={35}
-          className="rounded-full"
+          fill
+          sizes="35px"
+          className="object-cover"
         />
       </div>
       <div className="flex-1">
