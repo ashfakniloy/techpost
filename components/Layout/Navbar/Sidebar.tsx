@@ -159,14 +159,14 @@ function Sidebar({
             <div className="mt-4 mb-7">
               {session && session.user.role === "USER" ? (
                 <div className="flex gap-5 p-3 bg-gray-200 rounded-lg dark:bg-custom-gray3">
-                  <div>
+                  <div className="relative w-[50px] h-[50px] overflow-hidden rounded-full">
                     {imageUrl ? (
                       <Image
                         src={imageUrl}
                         alt="user image"
-                        width={50}
-                        height={50}
-                        className="rounded-full"
+                        fill
+                        sizes="50px"
+                        className="object-cover"
                       />
                     ) : (
                       <Image

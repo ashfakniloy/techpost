@@ -39,14 +39,16 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
       {session && session.user.role === "USER" ? (
         <Popover>
           <PopoverTrigger asChild>
-            <button className="overflow-hidden transition-transform duration-100 rounded-full active:scale-95">
+            <button className="relative overflow-hidden h-[40px] w-[40px] transition-transform duration-100 rounded-full active:scale-95">
               {imageUrl ? (
                 <Image
                   src={imageUrl}
                   alt="user image"
-                  width={40}
-                  height={40}
-                  className="rounded-full"
+                  // width={40}
+                  // height={40}
+                  sizes="40px"
+                  fill
+                  className="object-cover"
                 />
               ) : (
                 <Image

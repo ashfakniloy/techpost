@@ -20,7 +20,7 @@ export const metadata = {
     template: `%s | Techpost`,
   },
   description:
-    "Unlock the world of technology with engaging and informative blog. Explore the latest trends and news",
+    "Unlock the world of technology with engaging and informative blog. Explore the latest trends and news.",
 };
 
 export default function RootLayout({
