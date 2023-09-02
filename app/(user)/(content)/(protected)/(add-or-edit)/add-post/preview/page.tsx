@@ -148,14 +148,14 @@ function PostPreviewPage() {
             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5 lg:gap-10 mt-3 lg:mt-5">
               <div className="flex items-center gap-3  lg:gap-6 ">
                 <div className="flex items-center gap-2">
-                  <div>
+                  <div className="relative w-[35px] h-[35px] rounded-full overflow-hidden">
                     {session?.user.imageUrl ? (
                       <Image
                         src={session.user.imageUrl}
                         alt="user image"
-                        width={35}
-                        height={35}
-                        className="rounded-full"
+                        fill
+                        sizes="35px"
+                        className="object-cover"
                       />
                     ) : (
                       <Image
