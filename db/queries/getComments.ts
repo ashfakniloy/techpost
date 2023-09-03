@@ -8,86 +8,81 @@ export async function getComments({
   postId: string;
   take?: number;
 }) {
-  try {
-    const count = await prisma.comment.count({
-      where: {
-        postId: postId,
-      },
-    });
+  const count = await prisma.comment.count({
+    where: {
+      postId: postId,
+    },
+  });
 
-    const data = await prisma.comment.findMany({
-      where: {
-        postId: postId,
-      },
+  const data = await prisma.comment.findMany({
+    where: {
+      postId: postId,
+    },
 
-      orderBy: {
-        createdAt: "desc",
-      },
+    orderBy: {
+      createdAt: "desc",
+    },
 
-      take: take,
+    take: take,
 
-      include: {
-        user: {
-          select: {
-            username: true,
-            id: true,
-            profile: {
-              select: {
-                imageUrl: true,
-              },
+    include: {
+      user: {
+        select: {
+          username: true,
+          id: true,
+          profile: {
+            select: {
+              imageUrl: true,
             },
           },
         },
+      },
 
-        commentsReplies: {
-          include: {
-            user: {
-              select: {
-                username: true,
-                id: true,
-                profile: {
-                  select: {
-                    imageUrl: true,
-                  },
+      commentsReplies: {
+        include: {
+          user: {
+            select: {
+              username: true,
+              id: true,
+              profile: {
+                select: {
+                  imageUrl: true,
                 },
               },
             },
           },
         },
+      },
 
-        commentsLikes: {
-          include: {
-            user: {
-              select: {
-                username: true,
-                id: true,
-                profile: {
-                  select: {
-                    imageUrl: true,
-                  },
+      commentsLikes: {
+        include: {
+          user: {
+            select: {
+              username: true,
+              id: true,
+              profile: {
+                select: {
+                  imageUrl: true,
                 },
               },
             },
           },
         },
+      },
 
-        _count: {
-          select: {
-            commentsLikes: true,
-            commentsReplies: true,
-          },
+      _count: {
+        select: {
+          commentsLikes: true,
+          commentsReplies: true,
         },
       },
-    });
+    },
+  });
 
-    return {
-      count,
-      data,
-    };
-  } catch (error) {
-    console.log("fetch error:", error);
-    throw new Error("Failed to fetch");
-  }
+  return {
+    count,
+    data,
+  };
 }
 
 export type CommentTypes = Prisma.PromiseReturnType<

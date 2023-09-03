@@ -1,5 +1,3 @@
-import React from "react";
-
 function UserNotFoundPage() {
   return (
     <div className="flex justify-center my-[200px] ">

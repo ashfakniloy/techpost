@@ -1,7 +1,7 @@
 //with drag and drop
-import { useFormContext } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useFormContext } from "react-hook-form";
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Loader3 } from "../Loaders/Loader";
 

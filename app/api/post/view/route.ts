@@ -55,10 +55,13 @@ export async function POST(request: NextRequest) {
         },
       }));
 
-    return NextResponse.json({ message: "Post Viewed successfully" });
+    return NextResponse.json({ message: "Post view added" });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ error }, { status: 400 });
+    return NextResponse.json(
+      { error: "something went wrong", data: error },
+      { status: 400 }
+    );
   }
 
   // try {

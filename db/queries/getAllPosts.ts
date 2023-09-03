@@ -140,9 +140,9 @@ export async function getAllPosts({
       data,
       count,
     };
-  } catch (error) {
+  } catch (error: any) {
     console.log("fetch error:", error);
-    throw new Error("Failed to fetch");
+    throw new Error("Failed to fetch", error);
   }
 }
 

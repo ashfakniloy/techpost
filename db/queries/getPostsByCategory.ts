@@ -12,152 +12,147 @@ export async function getPostsByCategory({
   pageNumber?: number;
   sort?: string;
 }) {
-  try {
-    const currentPage = Math.max(pageNumber || 1, 1);
+  const currentPage = Math.max(pageNumber || 1, 1);
 
-    const count = await prisma.post.count({
-      where: {
-        categoryName: categoryName,
-      },
-    });
+  const count = await prisma.post.count({
+    where: {
+      categoryName: categoryName,
+    },
+  });
 
-    const getDataBySort = async () => {
-      if (!sort || sort === "recent") {
-        const data = await prisma.post.findMany({
-          orderBy: {
-            createdAt: "desc",
+  const getDataBySort = async () => {
+    if (!sort || sort === "recent") {
+      const data = await prisma.post.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+
+        where: {
+          categoryName: {
+            equals: categoryName,
+            mode: "insensitive",
           },
+        },
 
-          where: {
-            categoryName: {
-              equals: categoryName,
-              mode: "insensitive",
-            },
-          },
+        take: limitNumber || PER_PAGE,
+        skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
 
-          take: limitNumber || PER_PAGE,
-          skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
-
-          select: {
-            id: true,
-            slug: true,
-            title: true,
-            shortDescription: true,
-            imageUrl: true,
-            imageId: true,
-            categoryName: true,
-            createdAt: true,
-            user: {
-              select: {
-                username: true,
-                id: true,
-              },
-            },
-            _count: {
-              select: {
-                comments: true,
-                views: true,
-              },
+        select: {
+          id: true,
+          slug: true,
+          title: true,
+          shortDescription: true,
+          imageUrl: true,
+          imageId: true,
+          categoryName: true,
+          createdAt: true,
+          user: {
+            select: {
+              username: true,
+              id: true,
             },
           },
-
-          // include: {
-          //   user: {
-          //     select: {
-          //       username: true,
-          //       id: true,
-          //     },
-          //   },
-          //   _count: {
-          //     select: {
-          //       comments: true,
-          //       views: true,
-          //     },
-          //   },
-          // },
-        });
-
-        return data;
-      }
-
-      if (sort === "popular") {
-        const data = await prisma.post.findMany({
-          orderBy: [
-            {
-              likes: {
-                _count: "desc",
-              },
-            },
-            {
-              comments: {
-                _count: "desc",
-              },
-            },
-            {
-              views: {
-                _count: "desc",
-              },
-            },
-          ],
-
-          where: {
-            categoryName: categoryName,
-          },
-
-          take: limitNumber || PER_PAGE,
-          skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
-
-          select: {
-            id: true,
-            slug: true,
-            title: true,
-            shortDescription: true,
-            imageUrl: true,
-            imageId: true,
-            categoryName: true,
-            createdAt: true,
-            user: {
-              select: {
-                username: true,
-                id: true,
-              },
-            },
-            _count: {
-              select: {
-                comments: true,
-                views: true,
-              },
+          _count: {
+            select: {
+              comments: true,
+              views: true,
             },
           },
+        },
 
-          // include: {
-          //   user: {
-          //     select: {
-          //       username: true,
-          //       id: true,
-          //     },
-          //   },
-          //   _count: {
-          //     select: {
-          //       comments: true,
-          //       views: true,
-          //     },
-          //   },
-          // },
-        });
+        // include: {
+        //   user: {
+        //     select: {
+        //       username: true,
+        //       id: true,
+        //     },
+        //   },
+        //   _count: {
+        //     select: {
+        //       comments: true,
+        //       views: true,
+        //     },
+        //   },
+        // },
+      });
 
-        return data;
-      }
-    };
+      return data;
+    }
 
-    const data = await getDataBySort();
+    if (sort === "popular") {
+      const data = await prisma.post.findMany({
+        orderBy: [
+          {
+            likes: {
+              _count: "desc",
+            },
+          },
+          {
+            comments: {
+              _count: "desc",
+            },
+          },
+          {
+            views: {
+              _count: "desc",
+            },
+          },
+        ],
 
-    return {
-      data,
-      count,
-    };
-  } catch (error) {
-    console.log("fetch error:", error);
-    throw new Error("Failed to fetch");
-  }
+        where: {
+          categoryName: categoryName,
+        },
+
+        take: limitNumber || PER_PAGE,
+        skip: (currentPage - 1) * (limitNumber || PER_PAGE) || 0,
+
+        select: {
+          id: true,
+          slug: true,
+          title: true,
+          shortDescription: true,
+          imageUrl: true,
+          imageId: true,
+          categoryName: true,
+          createdAt: true,
+          user: {
+            select: {
+              username: true,
+              id: true,
+            },
+          },
+          _count: {
+            select: {
+              comments: true,
+              views: true,
+            },
+          },
+        },
+
+        // include: {
+        //   user: {
+        //     select: {
+        //       username: true,
+        //       id: true,
+        //     },
+        //   },
+        //   _count: {
+        //     select: {
+        //       comments: true,
+        //       views: true,
+        //     },
+        //   },
+        // },
+      });
+
+      return data;
+    }
+  };
+
+  const data = await getDataBySort();
+
+  return {
+    data,
+    count,
+  };
 }
