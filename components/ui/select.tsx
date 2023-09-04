@@ -38,9 +38,18 @@ const SelectContent = React.forwardRef<
 >(({ className, children, position = "popper", ...props }, ref) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
-      ref={ref}
+      // ref={ref}
+      ref={(ref) => {
+        if (!ref) return;
+        ref.ontouchstart = (e) => {
+          e.preventDefault();
+        };
+      }} // fix for tap causing element underneath click in mobile
+      // ref={(ref) =>
+      //   ref?.addEventListener("touchend", (e) => e.preventDefault())
+      // } // alternative fix for tap causing element underneath click in mobile
       className={cn(
-        "relative z-50  overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-80",
+        "relative z-50 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-80",
         position === "popper" && "translate-y-1",
         className
       )}
