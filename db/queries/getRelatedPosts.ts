@@ -26,8 +26,14 @@ export async function getRelatedPosts({
       },
     ],
 
+    // where: {
+    //   categoryName: categoryName,
+    // },
     where: {
-      categoryName: categoryName,
+      categoryName: {
+        equals: categoryName,
+        mode: "insensitive",
+      },
     },
 
     take: limit,
