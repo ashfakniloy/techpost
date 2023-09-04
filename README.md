@@ -27,7 +27,7 @@ A full-stack multi-author tech blog project built with Next.js 13 (app router). 
 ### For Users
 
 - User Registration: Users can register with email account (no email verification required, for demonstration purpose only).
-- Blog Post Management: Authors can create, edit, and delete blog posts using the Tiptap rich text editor.
+- Blog Post Management: Authors can create blog posts using rich text editor and perform editing and deletion actions.
 - Media Upload: Authors can upload images to enhance their blog posts.
 - User Profiles: Users can create and manage their bios.
 - Interaction: Users can like blog posts, leave comments, and like comments and replies.
