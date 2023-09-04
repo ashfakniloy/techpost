@@ -1,8 +1,8 @@
 "use client";
 
-import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/solid";
 
 function ViewToggle({ cookieView }: { cookieView: string | undefined }) {
   const router = useRouter();

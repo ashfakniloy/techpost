@@ -1,38 +1,133 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Techpost | Multi-Author Tech Blog
+
+![Project Screenshot](/public/images/techpost-banner.webp)
+
+A full-stack multi-author tech blog project built with Next.js 13 (app router). This project allows multiple authors to publish tech-related blog posts, manage their profiles, and engage with the community.
+
+## Live Demo
+
+[Explore the Live Demo](https://techpost.vercel.app)
+
+## Tech Stack
+
+- Next.js (app router)
+- TypeScript
+- Tailwind CSS
+- Prisma
+- PostgreSQL
+- Cloudinary
+- NextAuth
+- Tiptap
+- React Hook Form
+- Zod
+
+## Key Features
+
+### For Users
+
+- User Registration: Users can register with any email account without requiring email verification (for demonstration purpose only).
+- Blog Post Management: Authors can create, edit, and delete blog posts using the Tiptap rich text editor.
+- Media Upload: Authors can upload images to enhance their blog posts.
+- User Profiles: Users can create and manage their bios.
+- Interaction: Users can like blog posts, leave comments, and like comments and replies.
+- Social Media Sharing: Users can easily share blog articles on popular social media platforms.
+- Unique View Counts: Each blog post keeps track of its unique view counts.
+- Search Functionality: Users can search for blog posts by title.
+- Sorting Options: Users can view posts by recent or popularity and switch between list and grid views.
+- Custom Pagination: Custom pagination allows easy navigation through posts.
+- Dynamic Image Placeholders: Placeholder images are used for a better user experience while images load.
+- Dynamic Meta Tags: SEO-friendly meta tags for improved search engine visibility.
+- Sitemap: A dynamically generated sitemap for search engine indexing.
+- OpenGraph Images: Dynamic OpenGraph images for enhanced social sharing.
+
+### For Admin
+
+- Admin Dashboard: The admin dashboard provides charts and information about the site.
+- Category Management: Admin can create new categories for users to post under.
+- Editor's Choice: Admin can feature selected posts at the top of the website.
+- User and Post Management: Admin can search, view and delete users and posts as needed.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Node.js and npm installed.
+- PostgreSQL database configured.
+- Cloudinary account set up.
+- Other dependencies installed (specified in package.json).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+   ```bash
+   git clone https://github.com/ashfakniloy/techpost.git
+   cd techpost
+   ```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+2. Install dependencies using npm:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   ```bash
+   npm install
+   ```
 
-## Learn More
+### Configuration
 
-To learn more about Next.js, take a look at the following resources:
+1.  Create a `.env.local` file in the project root and set the required environment variables:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+    NEXT_PUBLIC_CLOUDINARY_PRESET_NAME=
+    NEXT_PUBLIC_CLOUDINARY_FOLDER_NAME=
+    NEXTAUTH_SECRET=
+    CLOUDINARY_API_KEY=
+    CLOUDINARY_API_SECRET=
+    CLOUDINARY_CLOUD_NAME=
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2.  Create a `.env` file in the project root and set the required environment variable for prisma :
 
-## Deploy on Vercel
+    ```bash
+    DATABASE_URL=
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Setting Up the Database
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1.  To initialize your database schema, run the following command:
+
+    `npx prisma db push`
+
+    This command will create the necessary tables and schema in your PostgreSQL database based on your Prisma schema definition.
+
+2.  After successfully pushing the database schema, you can apply any pending migrations (if applicable) using:
+
+    `npx prisma migrate dev`
+
+    This command will apply any pending migrations to the database.
+
+### Running the Development Server
+
+1.  Start the development server:
+
+    `npm run dev`
+
+2.  Open your web browser and navigate to [http://localhost:3000](http://localhost:3000/) to access the project locally.
+
+### Building for Production
+
+1.  To build the project for production, use the following command:
+
+    `npm run build`
+
+2.  Start the production server:
+
+    `npm start`
+
+Now, your project is up and running locally with the database set up and ready for use.
+
+### Author
+
+- Ashfak Ahmed Niloy
+  - Email: ashfakniloy@gmail.com
+  - Portfolio: https://niloy.vercel.app
+  - GitHub: https://github.com/ashfakniloy
