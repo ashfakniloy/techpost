@@ -125,9 +125,10 @@ A full-stack multi-author tech blog project built with Next.js 13 (app router). 
 
 Now, your project is up and running locally with the database set up and ready for use.
 
-### Author
+## Author
 
-- Ashfak Ahmed Niloy
-  - Email: ashfakniloy@gmail.com
-  - Portfolio: https://niloy.vercel.app
-  - GitHub: https://github.com/ashfakniloy
+### Ashfak Ahmed Niloy
+
+- Email: ashfakniloy@gmail.com
+- Portfolio: https://niloy.vercel.app
+- GitHub: https://github.com/ashfakniloy
