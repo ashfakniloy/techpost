@@ -13,6 +13,7 @@ A full-stack multi-author tech blog project built with Next.js 13 (app router). 
 - Next.js (app router)
 - TypeScript
 - Tailwind CSS
+- Shadcn UI
 - Prisma
 - PostgreSQL
 - Cloudinary
