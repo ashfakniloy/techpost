@@ -1,4 +1,5 @@
 import { Open_Sans, Montserrat } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import SessionProvider from "@/components/Session";
 import ToastNotification from "@/components/ToastNotification";
 import ThemeWrapper from "@/components/Theme/ThemeWrapper";
@@ -44,6 +45,7 @@ export default function RootLayout({
           </div>
         </ThemeWrapper>
         <Log />
+        <Analytics />
       </body>
     </html>
   );
