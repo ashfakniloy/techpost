@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
 
   const slug = slugify(title, { lower: true });
 
-  const shortDescription = getDescription(article, 200, 200);
+  const shortDescription = getDescription(article, 250, 250);
 
   try {
     const response = await prisma.post.create({
@@ -159,7 +159,7 @@ export async function PUT(request: NextRequest) {
 
   const slug = slugify(title, { lower: true });
 
-  const shortDescription = getDescription(article, 200, 200);
+  const shortDescription = getDescription(article, 250, 250);
 
   try {
     const response = await prisma.post.update({
