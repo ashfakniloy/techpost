@@ -11,7 +11,7 @@ type Props = Post & {
 function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
   return (
     <section className="absolute top-[59px] w-full border rounded-md border-slate-300 dark:border-slate-700  bg-gray-50 dark:bg-custom-gray2 shadow-md">
-      <p className="p-3  font-semibold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat">
+      <p className="p-3 font-bold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat">
         {heading}
       </p>
 
@@ -25,7 +25,7 @@ function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
                   className="flex items-center gap-3 py-3 group"
                 >
                   <Link href={`/post/${post.slug}`}>
-                    <div className="w-[85px] h-[55px]  relative">
+                    <div className="w-[85px] h-[55px] relative">
                       <Image
                         src={post.imageUrl}
                         alt="programming"
@@ -37,7 +37,7 @@ function SearchResult({ heading, posts }: { heading: string; posts: Props[] }) {
                   </Link>
 
                   <div className="flex flex-col self-start flex-1 max-w-[252px] break-words">
-                    <h4 className="font-medium line-clamp-2 title-color">
+                    <h4 className="font-medium line-clamp-2 link">
                       <Link href={`/post/${post.slug}`}>{post.title}</Link>
                     </h4>
 

@@ -90,9 +90,9 @@ function UserPage({
   const limitNumber = Number(limit);
 
   const cardTitle = () => {
-    if (!sort || sort === "recent") return `Popular from ${username}`;
-    if (sort === "popular") return `Recent from ${username}`;
-    return `Popular from ${username}`;
+    if (!sort || sort === "recent") return `Popular from ${usernameDecoded}`;
+    if (sort === "popular") return `Recent from ${usernameDecoded}`;
+    return `Popular from ${usernameDecoded}`;
   };
 
   const getPostsTitle = () => {

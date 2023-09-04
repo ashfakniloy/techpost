@@ -6,7 +6,7 @@ async function Categories() {
 
   return (
     <section className="w-[360px] bg-gray-50 dark:bg-custom-gray2 shadow-md rounded-md">
-      <h4 className="p-3 font-semibold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat">
+      <h4 className="p-3 font-bold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat">
         Categories
       </h4>
       <div className="py-2">

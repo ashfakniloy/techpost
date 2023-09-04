@@ -12,7 +12,7 @@ function PostsSideSection({
 }) {
   return (
     <section className="bg-gray-50 dark:bg-custom-gray2 shadow-md rounded-md w-[360px]">
-      <h4 className="p-3 font-semibold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat capitalize">
+      <h4 className="p-3 font-bold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat capitalize">
         {heading}
       </h4>
 
