@@ -3,7 +3,6 @@ import Link from "next/link";
 import { getEditorsChoicePost } from "@/db/queries/getEditorsChoicePost";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import { getTimeDistance } from "@/utils/getTimeDistance";
-import { getDescription } from "@/utils/getDescription";
 import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 
 async function EditorsChoice() {
@@ -15,17 +14,15 @@ async function EditorsChoice() {
     return <></>;
   }
 
-  // const description = getDescription(post.article, 200, 200);
-
   const blurDataUrl = await getImagePlaceholder(post.imageUrl);
 
   return (
-    <section className="mb-8 relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ">
+    <section className="mb-8 relative h-[280px] lg:h-[470px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ">
       <Link href={`/post/${post.slug}`}>
         <div className="absolute right-2 top-2 lg:right-5 lg:top-5 z-10">
           <EditorsChoiceBadge />
         </div>
-        <div className="h-[280px] lg:h-[470px] relative">
+        <div className="h-full w-full relative">
           <Image
             src={post.imageUrl}
             placeholder="blur"
@@ -47,21 +44,21 @@ async function EditorsChoice() {
             {post.title}
           </h1>
 
-          <div className=" mt-2 lg:mt-2 flex items-center gap-3 text-xs lg:text-sm lg:gap-6">
+          <div className="mt-2 flex items-center gap-3 text-xs lg:text-sm lg:gap-6">
             <div className="flex items-center gap-2">
-              <div>
+              <div className="relative w-[35px] h-[35px] rounded-full overflow-hidden">
                 {post.user.profile?.imageUrl ? (
                   <Image
                     src={post.user.profile.imageUrl}
-                    alt="user image"
-                    width={35}
-                    height={35}
-                    className="rounded-full"
+                    alt={post.user.username}
+                    fill
+                    sizes="35px"
+                    className="object-cover"
                   />
                 ) : (
                   <Image
                     src="/images/blankUser.jpg"
-                    alt="user image"
+                    alt={post.user.username}
                     width={35}
                     height={35}
                     className="rounded-full"
@@ -71,10 +68,7 @@ async function EditorsChoice() {
 
               <p className="capitalize">{`By ${post.user.username}`}</p>
             </div>
-            <p>
-              {getTimeDistance(post.createdAt)}
-              {/* <ClientFormattedDate date={post.createdAt} /> */}
-            </p>
+            <p>{getTimeDistance(post.createdAt)}</p>
           </div>
 
           <div className="mt-1 lg:mt-2 !text-white !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
