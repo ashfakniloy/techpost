@@ -73,9 +73,16 @@ function AddPostForm({ categories }: { categories: string[] }) {
 
   return (
     <div className="relative">
-      <h4 className="mb-5 text-[22px] lg:text-2xl text-center lg:text-start font-montserrat font-extrabold text-gray-700 dark:text-gray-400 capitalize">
-        Add New Post
-      </h4>
+      <div className="mb-5 flex flex-col lg:flex-row gap-2 lg:gap-0 justify-between items-center">
+        <h4 className="flex-1 text-[22px] lg:text-2xl text-center lg:text-start font-montserrat font-extrabold text-gray-700 dark:text-gray-400 capitalize">
+          Add New Post
+        </h4>
+        <p className="text-[12px] flex-1">
+          * Your post is auto-saved when typing. Feel free to take your time,
+          write at your own pace, and your work will be safe for later
+          publishing
+        </p>
+      </div>
 
       <FormProvider {...form}>
         <form
