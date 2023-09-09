@@ -3,9 +3,10 @@ import { Skeleton } from "../ui/skeleton";
 function PostsCardSkeleton({ heading }: { heading: string }) {
   return (
     <div className="w-[360px] h-[515px] bg-gray-50 dark:bg-custom-gray2 shadow-md rounded-md">
-      <p className="p-3 font-semibold text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat">
+      <p className="p-3 text-center text-gray-900 border-b border-slate-300 dark:border-slate-700 dark:text-gray-50 font-montserrat font-bold capitalize">
         {heading}
       </p>
+      {/* <Skeleton className="w-2/3 h-[18px]" /> */}
 
       <div className="py-3">
         {[...Array(5)].map((_, i) => (

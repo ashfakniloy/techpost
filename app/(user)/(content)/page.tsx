@@ -81,7 +81,7 @@ function HomePage({ searchParams: { page, limit, sort } }: SearchParams) {
         )}
       </div>
 
-      <div className="hidden lg:block space-y-5">
+      <div className="hidden lg:flex flex-col gap-5">
         <Suspense
           key={sort}
           fallback={<PostsCardSkeleton heading={cardTitle} />}

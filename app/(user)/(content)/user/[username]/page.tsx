@@ -134,7 +134,7 @@ function UserPage({
           )}
         </div>
 
-        <div className="hidden lg:block space-y-5 lg:sticky top-[90px]">
+        <div className="hidden lg:flex flex-col gap-5 lg:sticky top-[90px]">
           <Suspense
             key={sort}
             fallback={<PostsCardSkeleton heading={cardTitle()} />}

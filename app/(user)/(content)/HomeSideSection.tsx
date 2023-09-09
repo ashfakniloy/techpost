@@ -8,6 +8,8 @@ async function HomeSideSection({
   sort: string;
   cardTitle: string;
 }) {
+  // await new Promise((resolve) => setTimeout(resolve, 5000));
+
   const sortReversed = sort === "popular" ? "recent" : "popular";
 
   const { data } = await getAllPosts({

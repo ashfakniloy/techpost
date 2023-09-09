@@ -251,7 +251,7 @@ async function SinglePostPage({
           </div>
         </div>
 
-        <div className="hidden lg:block space-y-5">
+        <div className="hidden lg:flex flex-col gap-5">
           <Suspense fallback={<PostsCardSkeleton heading="Related Posts" />}>
             <RelatedPosts
               categoryName={post.categoryName}
