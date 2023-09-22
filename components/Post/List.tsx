@@ -4,7 +4,6 @@ import type { Session } from "next-auth";
 import OptionButton from "./OptionButton";
 import PostLike from "./PostLike";
 import { getTimeDistance } from "@/utils/getTimeDistance";
-import { Post } from "@prisma/client";
 import { EyeIcon, ChatBubbleLeftIcon } from "@heroicons/react/24/solid";
 import { PostItem } from "@/types";
 // import { getPluralize } from "@/utils/getPluralize";

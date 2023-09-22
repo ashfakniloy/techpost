@@ -59,7 +59,7 @@ export async function generateMetadata({
     title: post.title,
     description: post.shortDescription,
     alternates: {
-      canonical: `/post/${post.id}`,
+      canonical: `/post/${slug}`,
     },
     openGraph: {
       type: "article",
@@ -109,7 +109,8 @@ async function SinglePostPage({
     notFound();
   }
 
-  const articleUrl = `${BASE_URL}/post/${post.id}`;
+  const articleUrl = `${BASE_URL}/post/${slug}`;
+  // const articleUrl = `https://techpost.vercel.app/post/${slug}`;
 
   const blurDataUrl = await getImagePlaceholder(post.imageUrl);
 
