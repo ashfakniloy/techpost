@@ -1,12 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { revalidateAll } from "@/actions/revalidateAll";
 
 function ViewCount({ postId, isAdmin }: { postId: string; isAdmin: boolean }) {
-  const router = useRouter();
-
   useEffect(() => {
     if (isAdmin) return;
 
@@ -26,8 +24,12 @@ function ViewCount({ postId, isAdmin }: { postId: string; isAdmin: boolean }) {
       const data = await response.json();
 
       if (response.ok) {
+        if (data.viewAdded) {
+          revalidateAll();
+        }
+
+        // router.refresh();
         // console.log("viewed success", data);
-        router.refresh();
         // await fetch(`/api/revalidate?path=/admin`);
       } else {
         console.log("view error", data);

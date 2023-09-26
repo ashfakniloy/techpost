@@ -37,25 +37,34 @@ export async function POST(request: NextRequest) {
     },
   });
 
-  // if (isViewed) {
-  //   return NextResponse.json({ error: "Post already viewed" }, { status: 400 });
-  // }
+  if (isViewed) {
+    return NextResponse.json({});
+  }
 
   try {
-    const respone =
-      !isViewed &&
-      (await prisma.view.create({
-        data: {
-          post: {
-            connect: {
-              id: postId,
-            },
+    await prisma.view.create({
+      data: {
+        post: {
+          connect: {
+            id: postId,
           },
-          deviceId: deviceId,
         },
-      }));
+        deviceId: deviceId,
+      },
+    });
 
-    return NextResponse.json({ message: "Post view added" });
+    // revalidatePath("/", "page");
+    // revalidatePath("/my-profile", "page");
+    // revalidatePath("/category/[categoryName]", "page");
+    // revalidatePath("/user/[username]", "page");
+    // revalidatePath("/post/[postId]", "page");
+
+    // revalidatePath("/admin");
+
+    return NextResponse.json(
+      { message: "Post view added", viewAdded: true },
+      { status: 200 }
+    );
   } catch (error) {
     console.log(error);
     return NextResponse.json(
