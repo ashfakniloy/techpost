@@ -5,11 +5,13 @@ import { getUserById } from "@/db/queries/getUserById";
 async function ProtectedLayout({ children }: { children: React.ReactNode }) {
   const session = await getAuthSession();
 
-  if (!session) return;
+  // if (!session) return;
 
-  const user = await getUserById({
-    userId: session.user.id,
-  });
+  const user =
+    session &&
+    (await getUserById({
+      userId: session.user.id,
+    }));
 
   // console.log("user", user);
 
