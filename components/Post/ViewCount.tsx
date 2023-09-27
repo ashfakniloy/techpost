@@ -2,9 +2,12 @@
 
 import { useEffect } from "react";
 import Cookies from "js-cookie";
-import { revalidateAll } from "@/actions/revalidateAll";
+import { useRouter } from "next/navigation";
+// import { revalidateAll } from "@/actions/revalidateAll";
 
 function ViewCount({ postId, isAdmin }: { postId: string; isAdmin: boolean }) {
+  const router = useRouter();
+
   useEffect(() => {
     if (isAdmin) return;
 
@@ -25,7 +28,8 @@ function ViewCount({ postId, isAdmin }: { postId: string; isAdmin: boolean }) {
 
       if (response.ok) {
         if (data.viewAdded) {
-          revalidateAll();
+          // revalidateAll();
+          router.refresh();
         }
 
         // router.refresh();

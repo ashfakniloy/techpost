@@ -44,7 +44,7 @@ export async function likeAction({
       },
     });
 
-    revalidatePath("/");
+    // revalidatePath("/");
 
     return { response };
   } catch (error) {
@@ -91,7 +91,7 @@ export async function unlikeAction({
     //   (like) => like.userId !== session.user.id
     // );
 
-    revalidatePath("/");
+    // revalidatePath("/");
 
     return { response };
   } catch (error) {
