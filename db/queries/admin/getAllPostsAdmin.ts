@@ -22,10 +22,22 @@ export async function getAllPostsAdmin({
 
   const count = await prisma.post.count({
     where: {
-      title: {
-        startsWith: title,
-        mode: "insensitive",
-      },
+      AND: [
+        {
+          title: {
+            startsWith: title,
+            mode: "insensitive",
+          },
+        },
+        {
+          user: {
+            username: {
+              equals: username,
+              mode: "insensitive",
+            },
+          },
+        },
+      ],
     },
   });
 
