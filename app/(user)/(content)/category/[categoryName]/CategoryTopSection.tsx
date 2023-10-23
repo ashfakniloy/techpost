@@ -1,12 +1,15 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getCategoryByName } from "@/db/queries/getCategoryByName";
-import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
+import { fetchSingleCategory } from "@/db/fetch/fetchSingleCategory";
+// import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
+// import { getCategoryByName } from "@/db/queries/getCategoryByName";
 
 async function CategoryTopSection({ categoryName }: { categoryName: string }) {
-  const { data: category } = await getCategoryByName({
-    categoryName: categoryName,
-  });
+  // const { data: category } = await getCategoryByName({
+  //   categoryName: categoryName,
+  // });
+
+  const category = await fetchSingleCategory({ categoryName });
 
   if (!category) {
     notFound();
@@ -24,15 +27,15 @@ async function CategoryTopSection({ categoryName }: { categoryName: string }) {
 
   // console.log("image", category.imageUrl);
 
-  const blurDataUrl = await getImagePlaceholder(category.imageUrl);
+  // const blurDataUrl = await getImagePlaceholder(category.imageUrl);
 
   return (
     <section className="relative bg-black rounded-md overflow-hidden">
       <div className="w-full h-[250px] lg:h-[400px] relative">
         <Image
           src={category.imageUrl}
-          placeholder="blur"
-          blurDataURL={blurDataUrl}
+          // placeholder="blur"
+          // blurDataURL={blurDataUrl}
           alt={category.name}
           fill
           sizes="(max-width: 768px) 100vw, 1176px"

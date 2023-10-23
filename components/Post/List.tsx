@@ -2,12 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Session } from "next-auth";
 import OptionButton from "./OptionButton";
-import PostLike from "./PostLike";
 import { getTimeDistance } from "@/utils/getTimeDistance";
-import { EyeIcon, ChatBubbleLeftIcon } from "@heroicons/react/24/solid";
 import { PostItem } from "@/types";
-// import { getPluralize } from "@/utils/getPluralize";
-// import { getDescription } from "@/utils/getDescription";
+import CountsSection from "./CountsSection";
+// import { Suspense } from "react";
+// import CountsFetch from "./CountsFetch";
+// import CountsFetchSkeleton from "../Skeleton/CountsFetchSkeleton";
 
 type SessionProps = {
   session: Session | null;
@@ -19,8 +19,6 @@ type ListProps = SessionProps & {
 };
 
 function List({ post, blurDataURL, session }: ListProps) {
-  // const description = getDescription(article, 200, 200);
-
   const {
     id,
     slug,
@@ -60,13 +58,11 @@ function List({ post, blurDataURL, session }: ListProps) {
         <div className="flex-1 min-h-[90px] lg:min-h-[150px] flex flex-col justify-between min-w-[150px] lg:max-w-[540px]">
           <div className="space-y-1.5">
             {/* <div className="max-w-[540px]"> */}
-            <div>
-              <Link href={`/post/${slug}`}>
-                <h3 className="text-sm lg:text-xl font-montserrat font-semibold link">
-                  {title}
-                </h3>
-              </Link>
-            </div>
+            <Link href={`/post/${slug}`}>
+              <h3 className="link text-sm lg:text-xl font-montserrat font-semibold ">
+                {title}
+              </h3>
+            </Link>
 
             <div className="flex items-center gap-2 text-xs lg:text-sm lg:gap-5 text-gray-500 dark:text-gray-400">
               <p className="capitalize">
@@ -78,40 +74,20 @@ function List({ post, blurDataURL, session }: ListProps) {
               <p>{getTimeDistance(createdAt)}</p>
             </div>
 
-            <div className=" !text-gray-700 dark:!text-gray-300 !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
+            <div className=" !text-gray-700 dark:!text-gray-300 line-clamp-2 text-xs lg:text-sm">
               {shortDescription}
             </div>
           </div>
 
           <div className="mt-1.5 flex items-center justify-between">
-            <div className="flex items-center justify-between text-sm">
-              <PostLike postId={id} />
-
-              {_count.comments > 0 && (
-                <Link
-                  href={`/post/${slug}`}
-                  className="mr-4 text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-500"
-                >
-                  <span className="flex items-center gap-2 text-xs lg:text-sm">
-                    <ChatBubbleLeftIcon className="w-5 h-5 fill-gray-500 dark:fill-gray-300" />
-                    {_count.comments}
-                  </span>
-
-                  {/* {getPluralize(_count.comments, "Comment", "s")} */}
-                </Link>
-              )}
-              {_count.views > 0 && (
-                <div>
-                  <div className="flex items-center gap-1 text-xs lg:text-sm">
-                    <EyeIcon className="w-5 h-5 text-gray-400 dark:text-gray-600" />
-                    {_count.views}
-                    {/* <p className="text-gray-700 dark:text-gray-300">
-                      {getPluralize(_count.views, "View", "s")}
-                    </p> */}
-                  </div>
-                </div>
-              )}
-            </div>
+            <CountsSection
+              likes={_count.likes}
+              comments={_count.comments}
+              views={_count.views}
+            />
+            {/* <Suspense fallback={<CountsFetchSkeleton />}>
+              <CountsFetch postId={id} />
+            </Suspense> */}
 
             {session?.user.id === user.id && (
               <OptionButton

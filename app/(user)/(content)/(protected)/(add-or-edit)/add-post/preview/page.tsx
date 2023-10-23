@@ -11,6 +11,8 @@ import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import { Loader2 } from "@/components/Loaders/Loader";
 import { postSchema } from "@/schemas/postSchema";
 import { Button } from "@/components/ui/button";
+import { revalidatePosts } from "@/actions/revalidatePosts";
+import { revalidateAllRoutes } from "@/actions/revalidateAllRoutes";
 
 function PostPreviewPage() {
   const router = useRouter();
@@ -103,7 +105,7 @@ function PostPreviewPage() {
       console.log("success", data);
       const slug = data.response.slug;
       // router.refresh();
-      // router.push(`/post/${slug}`);
+      revalidateAllRoutes();
       router.replace(`/post/${slug}`);
 
       // setDraftPost("");

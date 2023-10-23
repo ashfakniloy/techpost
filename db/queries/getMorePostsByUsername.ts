@@ -36,6 +36,7 @@ export async function getMorePostsByUsername({
       },
       _count: {
         select: {
+          likes: true,
           comments: true,
           views: true,
         },

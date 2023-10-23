@@ -1,10 +1,9 @@
 "use client";
 
-import useToggle from "@/hooks/useToggle";
+import React, { useEffect, useState } from "react";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 // import {
 //   AlertDialog,
@@ -17,6 +16,8 @@ import { toast } from "react-hot-toast";
 // } from "../ui/alert-dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import Modal from "../Modal";
+import { revalidatePosts } from "@/actions/revalidatePosts";
+import { revalidateAllRoutes } from "@/actions/revalidateAllRoutes";
 
 function OptionButton({
   title,
@@ -31,10 +32,8 @@ function OptionButton({
   imageId: string;
   redirectAfterDelete?: string;
 }) {
-  // const { node, toggle: showOptions, setToggle: setShowOptions } = useToggle();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  // const [postDeleted, setPostDeleted] = useState(false);
 
   const router = useRouter();
 
@@ -55,7 +54,8 @@ function OptionButton({
       toast.success("Post Deleted", {
         id: toastDeletePost,
       });
-      router.refresh();
+      // router.refresh();
+      revalidateAllRoutes();
       redirectAfterDelete && router.replace(redirectAfterDelete);
       console.log("success", data);
     } else {

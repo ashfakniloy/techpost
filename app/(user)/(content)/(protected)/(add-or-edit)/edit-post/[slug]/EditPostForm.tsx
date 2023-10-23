@@ -10,6 +10,7 @@ import { ImageField } from "@/components/Form/ImageField";
 import { Button } from "@/components/ui/button";
 import { RichTextField } from "@/components/Form/RichTextField";
 import { PostFormProps, postSchema } from "@/schemas/postSchema";
+import { revalidateAllRoutes } from "@/actions/revalidateAllRoutes";
 
 type Props = {
   id: string;
@@ -66,6 +67,7 @@ function EditPostForm({
       toast.success(data.success, {
         id: toastEditPost,
       });
+      revalidateAllRoutes();
       // router.refresh();
       router.push(`/post/${slug}`);
     } else {

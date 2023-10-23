@@ -48,6 +48,7 @@ type PostItem = Omit<
     username: string;
   };
   _count: {
+    likes: number;
     comments: number;
     views: number;
   };

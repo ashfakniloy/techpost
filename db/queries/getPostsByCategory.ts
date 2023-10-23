@@ -54,6 +54,7 @@ export async function getPostsByCategory({
           },
           _count: {
             select: {
+              likes: true,
               comments: true,
               views: true,
             },
@@ -129,6 +130,7 @@ export async function getPostsByCategory({
           },
           _count: {
             select: {
+              likes: true,
               comments: true,
               views: true,
             },

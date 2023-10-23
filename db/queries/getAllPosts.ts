@@ -43,6 +43,7 @@ export async function getAllPosts({
             },
             _count: {
               select: {
+                likes: true,
                 comments: true,
                 views: true,
               },
@@ -108,6 +109,7 @@ export async function getAllPosts({
             },
             _count: {
               select: {
+                likes: true,
                 comments: true,
                 views: true,
               },

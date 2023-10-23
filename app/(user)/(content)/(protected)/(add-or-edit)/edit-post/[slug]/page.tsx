@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import EditPostForm from "./EditPostForm";
 import { getSinglePost } from "@/db/queries/getSinglePost";
-import { getCategories } from "@/db/queries/getCategories";
+// import { getCategories } from "@/db/queries/getCategories";
+import { fetchCategories } from "@/db/fetch/fetchCategories";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -24,7 +25,9 @@ async function EditPostPage({ params: { slug } }: Props) {
     notFound();
   }
 
-  const { data: categories } = await getCategories();
+  // const { data: categories } = await getCategories();
+
+  const categories: CategoryProps[] = await fetchCategories();
 
   const allcategories = categories.map((category) => category.name);
 

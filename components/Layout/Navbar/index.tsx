@@ -16,19 +16,12 @@ import { navLinksSigned, navLinksUnsigned } from "./navLinks";
 import TechPostLogo from "../TechPostLogo";
 // import { BASE_URL } from "@/config";
 
-type Category = {
-  name: string;
-  _count: {
-    posts: number;
-  };
-};
-
 function Navbar({
   session,
   categories,
 }: {
   session: Session | null;
-  categories: Category[];
+  categories: CategoryProps[];
 }) {
   const pathname = usePathname();
 

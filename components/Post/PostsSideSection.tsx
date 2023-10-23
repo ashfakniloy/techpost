@@ -37,9 +37,11 @@ function PostsSideSection({
                 </Link>
 
                 <div className="flex flex-col self-start flex-1 max-w-[238px]">
-                  <h4 className="font-medium line-clamp-2 link">
-                    <Link href={`/post/${post.slug}`}>{post.title}</Link>
-                  </h4>
+                  <Link href={`/post/${post.slug}`}>
+                    <h4 className="font-medium line-clamp-2 link">
+                      {post.title}
+                    </h4>
+                  </Link>
 
                   <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">
                     By{" "}
@@ -47,7 +49,6 @@ function PostsSideSection({
                       {post.user.username}
                     </Link>
                   </p>
-                  <p>{/* Created At: {getTimeDistance(post.createdAt)} */}</p>
                 </div>
               </div>
             ))

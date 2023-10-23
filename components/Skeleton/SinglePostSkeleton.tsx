@@ -2,7 +2,7 @@ import { Skeleton } from "../ui/skeleton";
 
 function SinglePostSkeleton() {
   return (
-    <>
+    <div className="w-full">
       <Skeleton className="mt-1.5 mb-5 w-[100px] h-[16px] lg:h-[18px]" />
 
       <div>
@@ -49,7 +49,7 @@ function SinglePostSkeleton() {
           <Comment postId={postId} authorId={post.userId} />
         </div> */}
       </div>
-    </>
+    </div>
   );
 }
 

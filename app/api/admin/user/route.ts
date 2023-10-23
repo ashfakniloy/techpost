@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getAuthSession } from "@/lib/next-auth";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
+import { revalidateTag } from "next/cache";
 
 export async function DELETE(request: NextRequest) {
   const session = await getAuthSession();
@@ -103,6 +104,8 @@ export async function DELETE(request: NextRequest) {
         );
       }
 
+      revalidateTag("editorsChoice");
+
       return NextResponse.json(
         { success: "account deleted", response },
         { status: 200 }
@@ -165,6 +168,8 @@ export async function DELETE(request: NextRequest) {
           imageIds
         );
       }
+
+      revalidateTag("editorsChoice");
 
       return NextResponse.json(
         { success: "account deleted", response },

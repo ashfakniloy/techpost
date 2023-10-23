@@ -2,15 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import PostLikeButton from "./PostLikeButton";
 import { getAuthSession } from "@/lib/next-auth";
-import { getPostLikes } from "@/db/queries/getPostLikes";
 
-async function PostLike({ postId }: { postId: string }) {
-  const { data: likes, count: likesCount } = await getPostLikes({ postId });
-
+async function PostLike({
+  postId,
+  likesCount,
+  likesData,
+}: {
+  postId: string;
+  likesCount: number;
+  likesData: any;
+}) {
   const session = await getAuthSession();
 
   const hasLiked =
-    likes?.find((like) => like.userId === session?.user.id) && true;
+    likesData?.find((like: any) => like.userId === session?.user.id) && true;
 
   return (
     <PostLikeButton
@@ -20,7 +25,7 @@ async function PostLike({ postId }: { postId: string }) {
       likesCount={likesCount}
     >
       <div className="border-t border-gray-300 dark:border-gray-600 overflow-hidden max-h-[240px] overflow-y-auto scrollbar-thin scrollbar-track-gray-600/50 scrollbar-thumb-gray-500/50 ">
-        {likes?.map((like) => (
+        {likesData?.map((like: any) => (
           <Link key={like.id} href={`/user/${like.user.username}`}>
             <div
               className={`w-full flex items-center gap-2 px-2 py-1.5 lg:p-2 text-xs hover:bg-gray-200 dark:hover:bg-gray-600 ${

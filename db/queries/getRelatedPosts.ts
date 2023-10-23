@@ -46,6 +46,7 @@ export async function getRelatedPosts({
       },
       _count: {
         select: {
+          likes: true,
           comments: true,
           views: true,
         },

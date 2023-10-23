@@ -23,7 +23,7 @@ function ListSkeleton() {
               <Skeleton className="w-full h-2.5 lg:h-4 mt-1.5 bg-opacity-90 dark:bg-opacity-90" />
             </div>
 
-            <Skeleton className="hidden lg:block w-1/2 h-4" />
+            <Skeleton className="hidden lg:block w-[170px] h-4" />
           </div>
         </div>
       </div>
