@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import parser from "html-react-parser";
 import { BASE_URL } from "@/config";
+import Counts from "./Counts";
 import Comment from "@/components/Post/Comment";
 import OptionButton from "@/components/Post/OptionButton";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
@@ -13,12 +14,11 @@ import SocialShare from "@/components/Post/SocialShare";
 import { capitalizeWords } from "@/utils/capitalizeWords";
 import { getSinglePost } from "@/db/queries/getSinglePost";
 import { getAuthSession } from "@/lib/next-auth";
-import Counts from "./Counts";
-import "@/components/TextEditor/Tiptap/styles.css";
 import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
-import { getAllSlugs } from "@/db/queries/getAllSlugs";
-import { revalidateTagAction } from "@/actions/revalidateTagAction";
 import CountsSkeleton from "@/components/Skeleton/CountsSkeleton";
+import "@/components/TextEditor/Tiptap/styles.css";
+// import { getAllSlugs } from "@/db/queries/getAllSlugs";
+// import { revalidateTagAction } from "@/actions/revalidateTagAction";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
@@ -107,7 +107,7 @@ async function SinglePostPage({
 
   const articleUrl = `${BASE_URL}/post/${slug}`;
 
-  // const blurDataUrl = await getImagePlaceholder(post.imageUrl);
+  const blurDataUrl = await getImagePlaceholder(post.imageUrl);
 
   return (
     <div className="relative flex-1 max-w-full lg:max-w-[796px]">
@@ -207,8 +207,8 @@ async function SinglePostPage({
           <div className="mt-5 h-[280px] lg:h-[470px] relative">
             <Image
               src={post.imageUrl}
-              // placeholder="blur"
-              // blurDataURL={blurDataUrl}
+              placeholder="blur"
+              blurDataURL={blurDataUrl}
               alt="post image"
               fill
               sizes="(max-width: 768px) 100vw, 800px"
