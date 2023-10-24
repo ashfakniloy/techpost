@@ -99,7 +99,7 @@ export function RepliesAction<TData>({ row }: PostsActions<TData>) {
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
