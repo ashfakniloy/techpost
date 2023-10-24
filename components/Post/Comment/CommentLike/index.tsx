@@ -28,23 +28,25 @@ async function CommentLike({ commentId }: { commentId: string }) {
                 like.userId === session?.user.id ? "text-blue-400" : ""
               }`}
             >
-              {like.user.profile?.imageUrl ? (
-                <Image
-                  src={like.user.profile.imageUrl}
-                  alt="user image"
-                  width={30}
-                  height={30}
-                  className="rounded-full"
-                />
-              ) : (
-                <Image
-                  src="/images/blankUser.jpg"
-                  alt="user image"
-                  width={30}
-                  height={30}
-                  className="rounded-full"
-                />
-              )}
+              <div className="relative w-[30px] h-[30px] rounded-full overflow-hidden">
+                {like.user.profile?.imageUrl ? (
+                  <Image
+                    src={like.user.profile.imageUrl}
+                    alt="user image"
+                    fill
+                    sizes="30px"
+                    className="object-cover"
+                  />
+                ) : (
+                  <Image
+                    src="/images/blankUser.jpg"
+                    alt="user image"
+                    width={30}
+                    height={30}
+                    className="rounded-full"
+                  />
+                )}
+              </div>
               <span className="capitalize">{like.user.username}</span>
             </div>
           </Link>

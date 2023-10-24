@@ -32,6 +32,10 @@ async function AdminSingleUserPage({
 
   const limitNumber = Number(limit);
   const pageNumber = Number(page);
+  // const { data, count } = await getAllPosts({
+  //   limitNumber: limitNumber || 10,
+  //   pageNumber,
+  // });
 
   const sortValues = sort?.split(".");
   const sortBy = sortValues?.[0];

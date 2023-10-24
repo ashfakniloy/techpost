@@ -4,17 +4,20 @@ import { getEditorsChoicePost } from "@/db/queries/getEditorsChoicePost";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
+import { fetchEditorsChoice } from "@/db/fetch/fetchEditorsChoice";
 
 async function EditorsChoice() {
   // await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  const { data: post } = await getEditorsChoicePost();
+  // const { data: post } = await getEditorsChoicePost();
+
+  const post = await fetchEditorsChoice();
 
   if (!post) {
     return <></>;
   }
 
-  const blurDataUrl = await getImagePlaceholder(post.imageUrl);
+  // const blurDataUrl = await getImagePlaceholder(post.imageUrl);
 
   return (
     <section className="mb-8 relative h-[280px] lg:h-[470px] rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ">
@@ -25,8 +28,8 @@ async function EditorsChoice() {
         <div className="h-full w-full relative">
           <Image
             src={post.imageUrl}
-            placeholder="blur"
-            blurDataURL={blurDataUrl}
+            // placeholder="blur"
+            // blurDataURL={blurDataUrl}
             alt="editors choice post image"
             fill
             sizes="(max-width: 768px) 100vw, 800px"

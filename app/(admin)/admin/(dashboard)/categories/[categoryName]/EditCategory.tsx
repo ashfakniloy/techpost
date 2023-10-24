@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import type { CategoryOptionProps } from "./CategoryOption";
 import { CategoryFormProps, categorySchema } from "@/schemas/categorySchema";
+import { editCategory } from "@/actions/editCategory";
 
 type EditCategoryProps = CategoryOptionProps & {
   setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -64,13 +65,9 @@ function EditCategory({
 
     if (response.ok) {
       form.reset();
+
       router.refresh();
-      // await fetch(
-      //   `/api/revalidate?path=${`/admin/categories/${data.response.name
-      //     .split(" ")
-      //     .join("_")
-      //     .toLowerCase()}`}`
-      // );
+
       toast.success("Category updated successfully", {
         id: toastCategoryAdd,
       });
@@ -89,6 +86,37 @@ function EditCategory({
 
     // router.push("/add-post/preview");
   };
+
+  // const onSubmit = async (values: CategoryFormProps) => {
+  //   // console.log(values);
+  //   // return;
+  //   setIsSubmitting(true);
+  //   const toastCategoryAdd = toast.loading("Loading...");
+
+  //   const response = await editCategory({ categoryId: id, values: values });
+
+  //   if (response.success) {
+  //     form.reset();
+  //     router.refresh();
+
+  //     toast.success("Category updated successfully", {
+  //       id: toastCategoryAdd,
+  //     });
+  //     console.log("success", response.success);
+
+  //     router.replace(`/admin/categories/${response.data.name.toLowerCase()}`);
+  //     setShowEditModal(false);
+  //   } else {
+  //     toast.error(`${response.error}`, {
+  //       id: toastCategoryAdd,
+  //     });
+  //     console.log("error", response.data);
+  //   }
+
+  //   setIsSubmitting(false);
+
+  //   // router.push("/add-post/preview");
+  // };
 
   return (
     <>

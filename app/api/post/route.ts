@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 import { getDescription } from "@/utils/getDescription";
 import { postSchema } from "@/schemas/postSchema";
-// import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 export async function POST(request: NextRequest) {
   const session = await getAuthSession();
@@ -178,6 +178,10 @@ export async function PUT(request: NextRequest) {
     // revalidatePath("/user/[username]");
     // revalidatePath("/post/[postId]");
 
+    if (response.editorsChoice) {
+      revalidateTag("editorsChoice");
+    }
+
     return NextResponse.json({
       success: "Post updated successfully",
       response,
@@ -228,6 +232,10 @@ export async function DELETE(request: NextRequest) {
             },
           },
         });
+
+    if (response.editorsChoice) {
+      revalidateTag("editorsChoice");
+    }
 
     if (response) {
       const imageDeleteResponse = await cloudinary.v2.uploader.destroy(imageId);

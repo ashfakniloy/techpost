@@ -1,9 +1,4 @@
-type Category = {
-  name: string;
-  _count: {
-    posts: number;
-  };
-};
+
 
 // export const navLinksSigned = [
 //   {
@@ -20,7 +15,7 @@ type Category = {
 //   },
 // ];
 
-export const navLinksSigned = (categories: Category[]) => {
+export const navLinksSigned = (categories: CategoryProps[]) => {
   return [
     {
       name: "Home",
@@ -62,7 +57,7 @@ export const navLinksSigned = (categories: Category[]) => {
   ];
 };
 
-export const navLinksUnsigned = (categories: Category[]) => {
+export const navLinksUnsigned = (categories: CategoryProps[]) => {
   return [
     {
       name: "Home",

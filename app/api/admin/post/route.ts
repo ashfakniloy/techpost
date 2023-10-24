@@ -2,6 +2,7 @@ import { getAuthSession } from "@/lib/next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
+import { revalidateTag } from "next/cache";
 
 export async function DELETE(request: NextRequest) {
   const session = await getAuthSession();
@@ -89,6 +90,8 @@ export async function DELETE(request: NextRequest) {
         );
       }
 
+      revalidateTag("editorsChoice");
+
       return NextResponse.json({ message: "Deleted Successfully", response });
     } catch (error) {
       console.log(error);
@@ -127,6 +130,8 @@ export async function DELETE(request: NextRequest) {
             ? await cloudinary.v2.api.delete_resources(imageIds)
             : await cloudinary.v2.uploader.destroy(imageIds[0]);
       }
+
+      revalidateTag("editorsChoice");
 
       return NextResponse.json({ message: "Deleted Successfully", response });
     } catch (error) {

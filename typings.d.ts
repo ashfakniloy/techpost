@@ -12,6 +12,14 @@
 //   date: string;
 // };
 
+type CategoryProps = {
+  id: string;
+  name: string;
+  _count: {
+    posts: number;
+  };
+};
+
 type SearchParams = {
   searchParams: {
     page: string;
@@ -60,8 +68,9 @@ type PostProps = {
   user: UserProps;
   // likes: LikeProps[];
   _count?: {
-    // comments?: number;
+    comments?: number;
     likes?: number;
+    views?: number;
   };
 };
 

@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
-// import { Prisma } from "@prisma/client";
 import { getAuthSession } from "@/lib/next-auth";
 import { categorySchema } from "@/schemas/categorySchema";
+import { revalidateTag } from "next/cache";
+// import { Prisma } from "@prisma/client";
 
 export async function POST(request: NextRequest) {
   const session = await getAuthSession();
@@ -65,6 +66,10 @@ export async function POST(request: NextRequest) {
         data: quotesWithId,
       });
     }
+
+    revalidateTag("categories");
+    revalidateTag(`category-${name.toLowerCase()}`);
+    revalidateTag("editorsChoice");
 
     return NextResponse.json({
       message: "Category created successfully",
@@ -173,6 +178,10 @@ export async function PUT(request: NextRequest) {
         data: quoteWithCategoryId,
       });
     }
+
+    revalidateTag("categories");
+    revalidateTag(`category-${name.toLowerCase()}`);
+    revalidateTag("editorsChoice");
 
     return NextResponse.json({
       message: "Category updated successfully",
@@ -294,6 +303,10 @@ export async function DELETE(request: NextRequest) {
           imageIds
         );
       }
+
+      revalidateTag("categories");
+      revalidateTag(`category-${responseCategory?.name.toLowerCase()}`);
+      revalidateTag("editorsChoice");
 
       return NextResponse.json(
         { success: "Category deleted", response },

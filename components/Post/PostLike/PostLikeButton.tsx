@@ -6,6 +6,8 @@ import { usePathname, useRouter } from "next/navigation";
 import type { Session } from "next-auth";
 import { HandThumbUpIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import useToggle from "@/hooks/useToggle";
+import { revalidateTagAction } from "@/actions/revalidateTagAction";
+import { getPluralize } from "@/utils/getPluralize";
 
 function PostLikeButton({
   postId,
@@ -81,24 +83,25 @@ function PostLikeButton({
     if (session) {
       if (hasLiked) {
         await handleUnlike();
-        router.refresh();
+        // router.refresh();
+        revalidateTagAction("counts");
       } else {
         await handleLike();
-        router.refresh();
+        revalidateTagAction("counts");
+
+        // router.refresh();
       }
     } else {
-      // router.push("/signin");
-
       router.push(`/signin?callback_url=${pathname}`);
     }
   };
 
   return (
-    <div ref={node} className="relative flex items-center text-xs lg:text-sm">
+    <div ref={node} className="relative flex items-center text-sm lg:text-base">
       <button
         className={`font-bold active:scale-125 h-6 w-6 ${
           like ? "text-blue-500" : "text-emerald-400"
-        } ${likesCount > 0 ? "mr-2" : "mr-2 lg:mr-4"}`}
+        }`}
         onClick={handleClick}
       >
         <HandThumbUpIcon />
@@ -107,17 +110,22 @@ function PostLikeButton({
       {likesCount > 0 && (
         <div>
           <button
-            className="mr-4 text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-500"
+            className="ml-2 font-bold text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-500"
             onClick={() => setShowLikes(!showLikes)}
           >
-            <span>{likesCount}</span>
-            {/* <span>{getPluralize(likesCount, "Like", "s")}</span> */}
+            <span>
+              {getPluralize({
+                count: likesCount,
+                name: "Like",
+                plural: "Likes",
+              })}
+            </span>
           </button>
 
           {showLikes && (
             <div className="absolute rounded-md left-0 bg-gray-50 dark:bg-custom-gray3 top-[30px] w-[160px] lg:min-w-[250px] border border-gray-300 dark:border-gray-600 shadow-md z-10">
               <div className="flex items-center justify-between px-2 py-1.5 lg:px-3 lg:py-2">
-                <p className="self-center ">All Likes</p>
+                <p className="self-center">All Likes</p>
                 <button
                   className="w-6 h-6 p-1 bg-gray-200 rounded-full hover:bg-gray-300 dark:bg-gray-600/50 dark:hover:bg-gray-600"
                   onClick={() => setShowLikes(false)}

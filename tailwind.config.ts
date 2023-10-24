@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -10,7 +11,7 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: 12,
+      padding: "12px",
       screens: {
         lg: "1200px",
         xl: "1200px",
@@ -69,12 +70,12 @@ module.exports = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: 0 },
+          from: { height: "0px" },
           to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: 0 },
+          to: { height: "0px" },
         },
       },
       animation: {
@@ -89,3 +90,5 @@ module.exports = {
     require("@tailwindcss/typography"),
   ],
 };
+
+export default config;

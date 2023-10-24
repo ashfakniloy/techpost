@@ -79,7 +79,7 @@ function CategoryOption({
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button variant="default">Option</Button>
         </DropdownMenuTrigger>

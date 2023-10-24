@@ -1,13 +1,16 @@
-import { getCategories } from "@/db/queries/getCategories";
+// import { getCategories } from "@/db/queries/getCategories";
 import AddPostForm from "./AddPostForm";
+import { fetchCategories } from "@/db/fetch/fetchCategories";
 
 export const metadata = {
   title: "Add new post",
 };
 
 async function AddPostPage() {
-  const { data: categories } = await getCategories();
+  // const { data: categories } = await getCategories();
   // console.log("categories", categories);
+
+  const categories: CategoryProps[] = await fetchCategories();
 
   const allcategories = categories.map((category) => category.name);
 

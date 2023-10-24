@@ -1,6 +1,7 @@
 import { getAuthSession } from "@/lib/next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { revalidateTag } from "next/cache";
 
 export async function PUT(request: NextRequest) {
   const session = await getAuthSession();
@@ -56,6 +57,8 @@ export async function PUT(request: NextRequest) {
         updatedAt: postResponse?.updatedAt,
       },
     });
+
+    revalidateTag("editorsChoice");
 
     return NextResponse.json({
       message: "Post marked as editor's choice",

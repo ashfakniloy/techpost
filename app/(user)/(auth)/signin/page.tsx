@@ -19,7 +19,6 @@ function UserSigninPage() {
   const router = useRouter();
 
   const searchParams = useSearchParams();
-
   const callback_url = searchParams?.get("callback_url");
 
   const { data: session } = useSession();

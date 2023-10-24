@@ -1,71 +1,36 @@
-"use client";
+// "use client";
 
-import { useEffect } from "react";
-import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-// import { revalidateAll } from "@/actions/revalidateAll";
+// import { useEffect } from "react";
+// import Cookies from "js-cookie";
+// import { revalidateTagAction } from "@/actions/revalidateTagAction";
 
-function ViewCount({ postId, isAdmin }: { postId: string; isAdmin: boolean }) {
-  const router = useRouter();
+// function ViewCount({ postId, isAdmin }: { postId: string; isAdmin: boolean }) {
+//   useEffect(() => {
+//     if (isAdmin) return;
 
-  useEffect(() => {
-    if (isAdmin) return;
+//     const deviceId = Cookies.get("deviceId");
 
-    const deviceId = Cookies.get("deviceId");
+//     const countView = async () => {
+//       const url = `/api/post/view?postId=${postId}&deviceId=${deviceId}`;
+//       const response = await fetch(url, {
+//         method: "POST",
+//       });
 
-    // if (!deviceId) {
-    //   const newDeviceId = uuidv4();
-    //   Cookies.set("deviceId", newDeviceId);
-    // }
+//       const data = await response.json();
 
-    const countView = async () => {
-      const url = `/api/post/view?postId=${postId}&deviceId=${deviceId}`;
-      const response = await fetch(url, {
-        method: "POST",
-      });
+//       if (response.ok) {
+//         if (data.viewAdded) {
+//           revalidateTagAction("counts");
+//         }
+//       } else {
+//         console.log("view error", data);
+//       }
+//     };
 
-      const data = await response.json();
+//     deviceId && countView();
+//   }, [postId]);
 
-      if (response.ok) {
-        if (data.viewAdded) {
-          // revalidateAll();
-          router.refresh();
-        }
+//   return <></>;
+// }
 
-        // router.refresh();
-        // console.log("viewed success", data);
-        // await fetch(`/api/revalidate?path=/admin`);
-      } else {
-        console.log("view error", data);
-      }
-    };
-
-    deviceId && countView();
-  }, []);
-
-  // useEffect(() => {
-  //   const countView = async () => {
-  //     const url = `/api/post/view?postId=${postId}`;
-  //     const response = await fetch(url, {
-  //       method: "POST",
-  //     });
-
-  //     const data = await response.json();
-
-  //     if (response.ok) {
-  //       console.log("viewed success", data);
-  //       const setViewID = localStorage.setItem("viewID", postId);
-  //       router.refresh();
-  //     } else {
-  //       console.log("viewed error", data);
-  //     }
-  //   };
-
-  //   const getViewID = localStorage.getItem("viewID");
-
-  //   getViewID !== postId && countView();
-  // }, [postId]);
-  return <></>;
-}
-
-export default ViewCount;
+// export default ViewCount;

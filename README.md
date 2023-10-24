@@ -74,22 +74,18 @@ A full-stack multi-author tech blog project built with Next.js 13 (app router). 
 
 ### Configuration
 
-1.  Create a `.env.local` file in the project root and set the required environment variables:
-
-    ```bash
-    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
-    NEXT_PUBLIC_CLOUDINARY_PRESET_NAME=
-    NEXT_PUBLIC_CLOUDINARY_FOLDER_NAME=
-    NEXTAUTH_SECRET=
-    CLOUDINARY_API_KEY=
-    CLOUDINARY_API_SECRET=
-    CLOUDINARY_CLOUD_NAME=
-    ```
-
-2.  Create a `.env` file in the project root and set the required environment variable for prisma :
+1.  Create a `.env` file in the project root and set the required environment variables from .env.example:
 
     ```bash
     DATABASE_URL=
+    NEXT_PUBLIC_BASE_URL=
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+    NEXT_PUBLIC_CLOUDINARY_PRESET_NAME=
+    NEXT_PUBLIC_CLOUDINARY_FOLDER_NAME=
+    CLOUDINARY_API_KEY=
+    CLOUDINARY_API_SECRET=
+    CLOUDINARY_CLOUD_NAME=
+    NEXTAUTH_SECRET=
     ```
 
 ### Setting Up the Database

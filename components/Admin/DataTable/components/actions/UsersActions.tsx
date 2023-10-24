@@ -69,7 +69,7 @@ export function UsersActions<TData>({ row }: UsersActions<TData>) {
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
