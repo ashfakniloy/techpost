@@ -14,7 +14,6 @@ async function countView({
   postId: string;
   deviceId: string;
 }) {
-  // const url = `http://localhost:3000/api/post/view?postId=${postId}&deviceId=${deviceId}`;
   const url = `${BASE_URL}/api/post/view?postId=${postId}&deviceId=${deviceId}`;
 
   const response = await fetch(url, {

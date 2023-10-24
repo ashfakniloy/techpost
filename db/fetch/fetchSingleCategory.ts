@@ -7,7 +7,6 @@ export async function fetchSingleCategory({
 }) {
   const categoryNameEncoded = encodeURIComponent(categoryName);
   const url = `${BASE_URL}/api/category?categoryName=${categoryNameEncoded}`;
-  // const url = `http://localhost:3000/api/category?categoryName=${categoryNameEncoded}`;
 
   const response = await fetch(url, {
     cache: "force-cache",

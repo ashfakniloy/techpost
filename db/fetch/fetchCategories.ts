@@ -2,7 +2,6 @@ import { BASE_URL } from "@/config";
 
 export async function fetchCategories() {
   const url = `${BASE_URL}/api/categories`;
-  // const url = `http://localhost:3000/api/categories`;
 
   const response = await fetch(url, {
     cache: "force-cache",
