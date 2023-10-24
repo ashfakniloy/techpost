@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { usePathname, useSearchParams } from "next/navigation";
+import { Search, X } from "lucide-react";
+import { Post } from "@prisma/client";
 import { Loader2 } from "@/components/Loaders/Loader";
 import useDebounce from "@/hooks/useDebounce";
-import { Post } from "@prisma/client";
-import { usePathname, useSearchParams } from "next/navigation";
 import SearchResult from "./SearchResult";
 
 type Props = Post & {
@@ -74,31 +74,38 @@ function SearchButton() {
         <button
           type="button"
           aria-label="search"
-          className={`absolute p-1 right-1.5 h-7 w-7 bg-gray-200 dark:bg-custom-gray3 rounded-full transition-transform duration-300 ${
-            showSearchbar && "-rotate-90"
-          }`}
+          className="absolute inset-y-0 right-0 h-[42px] w-[42px] flex justify-center items-center rounded-full bg-gray-50 dark:bg-custom-gray2 hover:border hover:border-gray-300 dark:hover:border-zinc-600 hover:transition-colors hover:duration-300"
           onClick={() => {
             setShowSearchbar(!showSearchbar);
             setTitle("");
           }}
         >
-          {!showSearchbar ? <MagnifyingGlassIcon /> : <XMarkIcon />}
+          <span
+            className={`bg-gray-200 dark:bg-custom-gray3 rounded-full transition-transform duration-300 ${
+              showSearchbar && "-rotate-90"
+            }`}
+          >
+            {!showSearchbar ? (
+              <Search className="p-1 h-7 w-7 " />
+            ) : (
+              <X className="p-1 h-7 w-7 " />
+            )}
+          </span>
         </button>
 
         {showSearchbar && (
-          <div className="flex items-center flex-1">
-            <label className="flex max-w-[34px]">
+          <div className="flex items-center w-full">
+            <label
+              htmlFor="search"
+              aria-label="search"
+              className="flex w-[35px] ml-2"
+            >
               {!loading ? (
-                <label
-                  htmlFor="search"
-                  aria-label="search"
-                  className="w-6 h-6 mt-1 ml-3 text-gray-400"
-                >
-                  <MagnifyingGlassIcon />
-                </label>
+                <span className="bg-gray-200 dark:bg-custom-gray3 rounded-full opacity-60">
+                  <Search className="p-1 h-7 w-7" />
+                </span>
               ) : (
-                <span className="ml-3">
-                  {/* <Loader width="23" strokeColor="white" /> */}
+                <span className="">
                   <Loader2 width="23" />
                 </span>
               )}
@@ -112,82 +119,18 @@ function SearchButton() {
               autoComplete="off"
               value={title}
               onChange={handleChange}
-              className={`px-3 rounded-full bg-gray-50 dark:bg-custom-gray2  text-gray-900 dark:text-gray-50  outline-none w-full `}
+              className={`px-1.5  bg-gray-50 dark:bg-custom-gray2  text-gray-900 dark:text-gray-50  outline-none w-full `}
             />
           </div>
         )}
       </div>
       {showSearchbar && searchResult && (
-        // <div className="absolute shadow-md top-[59px] w-full border border-slate-300 dark:border-slate-700  overflow-hidden">
-        //   <PostsSideSection
-        //     heading={`Search results for "${debouncedValue}"`}
-        //     posts={searchResult}
-        //   />
-        // </div>
         <SearchResult
           heading={`Search results for "${debouncedValue}"`}
           posts={searchResult}
         />
-
-        // <div className="bg-custom-gray2 absolute top-[60px] w-full p-3">
-        //   <p className="text-lg">Search results for "{debouncedValue}"</p>
-        //   {searchResult.length > 0 ? (
-        //     <div className="max-h-[265px] overflow-y-auto scrollbar-thin scrollbar-track-gray-600/50 scrollbar-thumb-gray-500/50">
-        //       {searchResult.map((result) => (
-        //         <Link key={result.id} href={`/post/${result.id}`}>
-        //           <p className="p-3 hover:bg-gray-700">
-        //             {result.title}
-        //           </p>
-        //         </Link>
-        //       ))}
-        //     </div>
-        //   ) : (
-        //     <p className="p-3 text-center">No results found</p>
-        //   )}
-        // </div>
       )}
     </div>
-
-    // <div
-    //   className={`relative  h-[42px] flex items-center rounded-full bg-gray-400 dark:bg-custom-gray2 shadow-md   transition-[width] duration-300 ease-out  ${
-    //     showSearchbar ? "w-[380px]" : "w-[42px]"
-    //   }`}
-    // >
-    //   <button
-    //     type="button"
-    //     className="absolute right-0 bg-gray-600 dark:bg-custom-gray3 inset-y-0 flex justify-center items-center rounded-full overflow-hidden p-1.5 m-1"
-    //     onClick={() => setShowSearchbar(!showSearchbar)}
-    //   >
-    //     <span
-    //       className={`h-6 w-6 rounded-full transition-transform duration-300 ${
-    //         showSearchbar && "-rotate-90"
-    //       }`}
-    //     >
-    //       {!showSearchbar ? <MagnifyingGlassIcon /> : <XMarkIcon />}
-    //     </span>
-    //   </button>
-
-    //   {showSearchbar && (
-    //     <div className="flex items-center">
-    //       {/* <label
-    //   htmlFor="search"
-    //   aria-label="search"
-    //   className="w-6 h-6 mt-1 ml-3 text-gray-400"
-    // >
-    //   <MagnifyingGlassIcon />
-    // </label> */}
-    //       <span className="ml-3">
-    //         <Loader width="25" />
-    //       </span>
-    //       <input
-    //         autoFocus={showSearchbar && true}
-    //         type="text"
-    //         placeholder="Seach post title"
-    //         className={`px-3 rounded-full bg-gray-50 dark:bg-custom-gray2  text-gray-900 dark:text-gray-50  outline-none w-full `}
-    //       />
-    //     </div>
-    //   )}
-    // </div>
   );
 }
 
