@@ -1,10 +1,10 @@
-import { cookies } from "next/headers";
 import SortBy from "./SortBy";
-import ViewToggle from "./ViewToggle";
+// import { cookies } from "next/headers";
+// import ViewToggle from "./ViewToggle";
 
 function PostsHeader({ postsTitle }: { postsTitle: string }) {
-  const cookieStore = cookies();
-  const view = cookieStore.get("view")?.value;
+  // const cookieStore = cookies();
+  // const view = cookieStore.get("view")?.value;
 
   return (
     <div className="gap-2.5 lg:gap-0 flex flex-col leading-none lg:flex-row justify-between items-center">
@@ -15,7 +15,7 @@ function PostsHeader({ postsTitle }: { postsTitle: string }) {
       <div className="flex items-center gap-3 lg:gap-7">
         <SortBy />
 
-        {postsTitle !== "invalid" && <ViewToggle cookieView={view} />}
+        {/* {postsTitle !== "invalid" && <ViewToggle cookieView={view} />} */}
       </div>
     </div>
   );

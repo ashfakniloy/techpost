@@ -270,16 +270,13 @@ function Pagination({
     pages.push(numberOfPages);
   }
 
+  const newParam = new URLSearchParams(searchParams.toString());
+
   const handlePaginate = (page: number) => {
     if (currentPage === page) return;
 
-    const path = searchParams?.has("sort")
-      ? `${pathname}?sort=${searchParams.get(
-          "sort"
-        )}&page=${page}&limit=${limit}`
-      : `${pathname}?page=${page}&limit=${limit}`;
-
-    router.push(path);
+    newParam.set("page", page.toString());
+    router.push(`${pathname}?${newParam}`);
     setCurrentPage(page);
   };
 
@@ -288,13 +285,8 @@ function Pagination({
 
     const nextPage = currentPage + 1;
 
-    const path = searchParams?.has("sort")
-      ? `${pathname}?sort=${searchParams.get(
-          "sort"
-        )}&page=${nextPage}&limit=${limit}`
-      : `${pathname}?page=${nextPage}&limit=${limit}`;
-
-    router.push(path);
+    newParam.set("page", nextPage.toString());
+    router.push(`${pathname}?${newParam}`);
     setCurrentPage(nextPage);
   };
 
@@ -303,13 +295,8 @@ function Pagination({
 
     const prevPage = currentPage - 1;
 
-    const path = searchParams?.has("sort")
-      ? `${pathname}?sort=${searchParams.get(
-          "sort"
-        )}&page=${prevPage}&limit=${limit}`
-      : `${pathname}?page=${prevPage}&limit=${limit}`;
-
-    router.push(path);
+    newParam.set("page", prevPage.toString());
+    router.push(`${pathname}?${newParam}`);
     setCurrentPage(prevPage);
   };
 

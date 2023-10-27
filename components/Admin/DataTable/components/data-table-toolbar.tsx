@@ -1,17 +1,18 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 import { Table } from "@tanstack/react-table";
 import { X, Trash2 } from "lucide-react";
+import { toast } from "react-hot-toast";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import useDebounce from "@/hooks/useDebounce";
+import Modal from "@/components/Modal";
 // import { DataTableViewOptions } from "./data-table-view-options";
 // import { DataTableFacetedFilter } from "./data-table-faceted-filter";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import useDebounce from "@/hooks/useDebounce";
-import { toast } from "react-hot-toast";
-import Modal from "@/components/Modal";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -92,12 +93,8 @@ export function DataTableToolbar<TData>({
   const [searchTitle, setSearchTitle] = useState<string | null>(null);
   const debouncedValue = useDebounce(searchTitle, 500);
 
-  const hasSort = searchParams?.has("sort");
   const sortParam = searchParams?.get("sort");
-  const limit = searchParams?.get("limit");
   const search = searchParams?.get("search");
-
-  const limitNumber = Number(limit) || 10;
 
   const sortValues = sortParam?.split(".");
   const sortBy = sortValues?.[0];
@@ -108,21 +105,25 @@ export function DataTableToolbar<TData>({
     !search && setSearchTitle(null);
   }, [search]);
 
-  useEffect(() => {
-    const path = hasSort
-      ? `${pathname}?sort=${sortParam}&&search=${debouncedValue}&limit=${limitNumber}`
-      : debouncedValue
-      ? `${pathname}?search=${debouncedValue}&limit=${limitNumber}`
-      : pathname;
+  const newParam = new URLSearchParams(searchParams.toString());
 
-    debouncedValue &&
-      debouncedValue.trim().length > 0 &&
-      path &&
-      router.push(path, { scroll: false });
-    debouncedValue === "" &&
-      pathname &&
-      router.push(pathname, { scroll: false });
+  useEffect(() => {
+    newParam.delete("page");
+
+    if (debouncedValue) {
+      newParam.set("search", debouncedValue.toString());
+    } else {
+      newParam.delete("search");
+    }
+
+    router.replace(`${pathname}?${newParam}`, { scroll: false });
   }, [debouncedValue]);
+
+  const handleClearSort = () => {
+    newParam.delete("sort");
+    newParam.delete("page");
+    router.replace(`${pathname}?${newParam}`, { scroll: false });
+  };
 
   if (mannualControl) {
     return (
@@ -185,7 +186,8 @@ export function DataTableToolbar<TData>({
               <button
                 type="button"
                 className="p-1 ml-1 rounded-md hover:bg-gray-700 border border-gray-500"
-                onClick={() => pathname && router.replace(pathname)}
+                // onClick={() => pathname && router.replace(pathname)}
+                onClick={handleClearSort}
               >
                 <X className="w-4 h-4" />
               </button>

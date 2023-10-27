@@ -74,7 +74,7 @@ async function EditorsChoice() {
             <p>{getTimeDistance(post.createdAt)}</p>
           </div>
 
-          <div className="mt-1 lg:mt-2 !text-white !line-clamp-1 lg:!line-clamp-2 text-xs lg:text-sm">
+          <div className="mt-1 lg:mt-2 !text-white line-clamp-2 text-sm">
             {`${post.shortDescription}`}
           </div>
         </div>

@@ -37,6 +37,12 @@ export async function getAllPostsAdmin({
             },
           },
         },
+        {
+          categoryName: {
+            equals: categoryName,
+            mode: "insensitive",
+          },
+        },
       ],
     },
   });
@@ -62,6 +68,13 @@ export async function getAllPostsAdmin({
         return {
           user: {
             username: order,
+          },
+        };
+
+      case "likes":
+        return {
+          likes: {
+            _count: order,
           },
         };
 

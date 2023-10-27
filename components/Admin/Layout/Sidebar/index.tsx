@@ -119,7 +119,6 @@ function AdminSidebar({
             <div className="mx-2 lg:mx-[25px] space-y-2 font-montserrat">
               {adminLinks?.map((navLink, i) => (
                 <div key={i}>
-                  {/* temporary fix router.refresh until nextjs fix caching revalidate issue */}
                   <Link href={navLink.link}>
                     <div
                       // key={i}

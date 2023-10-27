@@ -33,14 +33,7 @@ export function DataTableColumnHeader<TData, TValue>({
   const searchParams = useSearchParams();
 
   if (mannualSort) {
-    const hasSearch = searchParams?.has("search");
-    const searchParam = searchParams?.get("search");
-
     const sortParam = searchParams?.get("sort");
-    const limitParam = searchParams?.get("limit");
-
-    const limitNumber = Number(limitParam) || 10;
-
     const sortValues = sortParam?.split(".");
     const sortBy = sortValues?.[0];
     const orderBy = sortValues?.[1];
@@ -49,12 +42,14 @@ export function DataTableColumnHeader<TData, TValue>({
     //   return <div className={cn(className)}>{title}</div>;
     // }
 
-    const handleSort = (sortValue: string) => {
-      const path = hasSearch
-        ? `${pathname}?search=${searchParam}&sort=${title.toLowerCase()}.${sortValue}&limit=${limitNumber}`
-        : `${pathname}?sort=${title.toLowerCase()}.${sortValue}&limit=${limitNumber}`;
+    const newParam = new URLSearchParams(searchParams.toString());
 
-      router.replace(path, { scroll: false });
+    const handleSort = (sortValue: string) => {
+      const sortParamValue = `${title}.${sortValue}`;
+      newParam.set("sort", sortParamValue.toLowerCase());
+      newParam.delete("page");
+
+      router.replace(`${pathname}?${newParam}`, { scroll: false });
     };
 
     return (

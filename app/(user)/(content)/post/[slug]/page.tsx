@@ -231,12 +231,12 @@ async function SinglePostPage({
       </div>
 
       <div className="mt-5">
-        <Comment
-          postId={post.id}
-          authorId={post.userId}
-          slug={post.slug}
-          showCommentsParam={showComments}
-        />
+          <Comment
+            postId={post.id}
+            authorId={post.userId}
+            slug={post.slug}
+            showCommentsParam={showComments}
+          />
       </div>
     </div>
   );

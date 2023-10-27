@@ -7,7 +7,7 @@ function AdminDashboardlayout({ children }: { children: React.ReactNode }) {
   return (
     <AdminLayout>
       {/* temporary fix router.refresh until nextjs fix caching revalidate issue */}
-      <Refresh />
+      {/* <Refresh /> */}
 
       {children}
     </AdminLayout>

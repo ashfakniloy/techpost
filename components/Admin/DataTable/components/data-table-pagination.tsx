@@ -43,11 +43,6 @@ export function DataTablePagination<TData>({
     //   );
     // }
 
-    const hasSort = searchParams?.has("sort");
-    const hasSearch = searchParams?.has("search");
-
-    const sortParam = searchParams?.get("sort");
-    const searchParam = searchParams?.get("search");
     const limitParam = searchParams?.get("limit");
     const pageParam = searchParams?.get("page");
 
@@ -57,60 +52,20 @@ export function DataTablePagination<TData>({
     const numberOfPages =
       count && count > 1 ? Math.ceil(count / limitNumber) : 1;
 
+    const newParam = new URLSearchParams(searchParams.toString());
+
     const handleNext = () => {
       if (pageNumber >= numberOfPages) return;
 
       const nextPage = pageNumber === 0 ? 2 : pageNumber + 1;
 
-      // const path = hasSort
-      //   ? `${pathname}?sort=${searchParams?.get(
-      //       "sort"
-      //     )}&page=${nextPage}&limit=${limit}`
-      //   : `${pathname}?page=${nextPage}&limit=${limit}`;
-
-      const path =
-        hasSort && hasSearch
-          ? `${pathname}?search=${searchParam}&sort=${sortParam}&page=${nextPage}&limit=${limitNumber}`
-          : hasSort
-          ? `${pathname}?sort=${sortParam}&page=${nextPage}&limit=${limitNumber}`
-          : hasSearch
-          ? `${pathname}?search=${searchParam}&page=${nextPage}&limit=${limitNumber}`
-          : `${pathname}?page=${nextPage}&limit=${limitNumber}`;
-
-      router.push(path);
-
-      // router.push(`${pathname}?page=${nextPage}&limit=${limitNumber}`);
-
-      // const path = route
-      //   ? `/${route}?page=${nextPage}&limit=${limitNumber}`
-      //   : `/${pathname}?page=${nextPage}&limit=${limitNumber}`;
-
-      // router.push(path);
+      newParam.set("page", nextPage.toString());
+      router.push(`${pathname}?${newParam}`);
     };
 
     const handleLast = () => {
-      // if (pageNumber >= numberOfPages) return;
-
-      // const nextPage = pageNumber === 0 ? 2 : pageNumber + 1;
-
-      const path =
-        hasSort && hasSearch
-          ? `${pathname}?sort=${sortParam}&search=${searchParam}&page=${numberOfPages}&limit=${limitNumber}`
-          : hasSort
-          ? `${pathname}?sort=${sortParam}&page=${numberOfPages}&limit=${limitNumber}`
-          : hasSearch
-          ? `${pathname}?search=${searchParam}&page=${numberOfPages}&limit=${limitNumber}`
-          : `${pathname}?page=${numberOfPages}&limit=${limitNumber}`;
-
-      router.push(path);
-
-      // router.push(`${pathname}?page=${numberOfPages}&limit=${limitNumber}`);
-
-      // const path = route
-      //   ? `/${route}?page=${numberOfPages}&limit=${limitNumber}`
-      //   : `/${pathname}?page=${numberOfPages}&limit=${limitNumber}`;
-
-      // router.push(path);
+      newParam.set("page", numberOfPages.toString());
+      router.push(`${pathname}?${newParam}`);
     };
 
     const handlePrev = () => {
@@ -118,72 +73,18 @@ export function DataTablePagination<TData>({
 
       const prevPage = pageNumber - 1;
 
-      // const path = hasSort
-      //   ? `${pathname}?sort=${searchParams?.get(
-      //       "sort"
-      //     )}&page=${prevPage}&limit=${limitNumber}`
-      //   : `${pathname}?page=${prevPage}&limit=${limitNumber}`;
-
-      const path =
-        hasSort && hasSearch
-          ? `${pathname}?sort=${sortParam}&search=${searchParam}&page=${prevPage}&limit=${limitNumber}`
-          : hasSort
-          ? `${pathname}?sort=${sortParam}&page=${prevPage}&limit=${limitNumber}`
-          : hasSearch
-          ? `${pathname}?search=${searchParam}&page=${prevPage}&limit=${limitNumber}`
-          : `${pathname}?page=${prevPage}&limit=${limitNumber}`;
-
-      router.push(path);
-
-      // router.push(`${pathname}?page=${prevPage}&limit=${limitNumber}`);
-
-      // const path = route
-      //   ? `/${route}?page=${prevPage}&limit=${limitNumber}`
-      //   : `/${pathname}?page=${prevPage}&limit=${limitNumber}`;
-
-      // router.push(path);
-
-      // prevPage === 1
-      //   ? router.push(`/${pathname}`)
-      //   : router.push(`/${pathname}?page=${prevPage}&limit=${limitNumber}`);
+      newParam.set("page", prevPage.toString());
+      router.push(`${pathname}?${newParam}`);
     };
 
     const handleFirst = () => {
-      // router.push(`/${pathname}`);
-
-      const path =
-        hasSort && hasSearch
-          ? `${pathname}?sort=${sortParam}&search=${searchParam}&page=1&limit=${limitNumber}`
-          : hasSort
-          ? `${pathname}?sort=${sortParam}&page=1&limit=${limitNumber}`
-          : hasSearch
-          ? `${pathname}?search=${searchParam}&page=1&limit=${limitNumber}`
-          : `${pathname}?page=1&limit=${limitNumber}`;
-
-      router.push(path);
-
-      // router.push(`${pathname}?page=1&limit=${limitNumber}`);
-
-      // const path = route
-      //   ? `/${route}?page=1&limit=${limitNumber}`
-      //   : `/${pathname}?page=1&limit=${limitNumber}`;
-
-      // router.push(path);
+      newParam.set("page", "1");
+      router.push(`${pathname}?${newParam}`);
     };
 
     const handleRowsChange = (value: string) => {
-      const path =
-        hasSort && hasSearch
-          ? `${pathname}?sort=${sortParam}&search=${searchParam}&limit=${value}`
-          : hasSort
-          ? `${pathname}?sort=${searchParams?.get("sort")}&limit=${value}`
-          : hasSearch
-          ? `${pathname}?search=${searchParam}&limit=${value}`
-          : `${pathname}?limit=${value}`;
-
-      router.push(path, { scroll: false });
-
-      // router.push(`${pathname}?limit=${value}`, { scroll: false });
+      newParam.set("limit", value.toString());
+      router.push(`${pathname}?${newParam}`, { scroll: false });
     };
 
     return (

@@ -15,10 +15,10 @@ type SessionProps = {
 
 type ListProps = SessionProps & {
   post: PostItem;
-  blurDataURL: string;
+  // blurDataURL: string;
 };
 
-function List({ post, blurDataURL, session }: ListProps) {
+function List({ post, session }: ListProps) {
   const {
     id,
     slug,
@@ -42,8 +42,8 @@ function List({ post, blurDataURL, session }: ListProps) {
           <div className="w-full h-full relative overflow-hidden rounded-md">
             <Image
               src={imageUrl}
-              placeholder="blur"
-              blurDataURL={blurDataURL}
+              // placeholder="blur"
+              // blurDataURL={blurDataURL}
               alt="post image"
               fill
               sizes="(max-width: 768px) 100px, 240px"
@@ -59,7 +59,7 @@ function List({ post, blurDataURL, session }: ListProps) {
           <div className="space-y-1.5">
             {/* <div className="max-w-[540px]"> */}
             <Link href={`/post/${slug}`}>
-              <h3 className="link text-sm lg:text-xl font-montserrat font-semibold ">
+              <h3 className="link lg:text-xl font-montserrat font-semibold ">
                 {title}
               </h3>
             </Link>
@@ -74,7 +74,7 @@ function List({ post, blurDataURL, session }: ListProps) {
               <p>{getTimeDistance(createdAt)}</p>
             </div>
 
-            <div className=" !text-gray-700 dark:!text-gray-300 line-clamp-2 text-xs lg:text-sm">
+            <div className=" !text-gray-700 dark:!text-gray-300 line-clamp-2 text-sm">
               {shortDescription}
             </div>
           </div>
