@@ -11,7 +11,7 @@ declare module "next-auth" {
       username: string;
       email: string;
       imageUrl: string;
-      role: "ADMIN" | "USER";
+      role: "ADMIN" | "USER" | "GUEST_ADMIN";
     };
   }
 }

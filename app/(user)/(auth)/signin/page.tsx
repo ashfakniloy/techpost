@@ -11,7 +11,7 @@ import { Loader } from "@/components/Loaders/Loader";
 import { PasswordField } from "@/components/Form/PasswordField";
 import { SigninFormProps, signinSchema } from "@/schemas/signinSchema";
 import { Button } from "@/components/ui/button";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function UserSigninPage() {
@@ -20,6 +20,8 @@ function UserSigninPage() {
 
   const searchParams = useSearchParams();
   const callback_url = searchParams?.get("callback_url");
+
+  const [guestIsSubmitting, setGuestIsSubmitting] = useState(false);
 
   const { data: session } = useSession();
 
@@ -51,7 +53,7 @@ function UserSigninPage() {
       redirect: false,
     });
 
-    console.log("response", response);
+    // console.log("response", response);
 
     if (!response?.error) {
       console.log("succcess", response);
@@ -81,6 +83,39 @@ function UserSigninPage() {
         // }
       );
     }
+  };
+
+  const handleGuestSignin = async () => {
+    setGuestIsSubmitting(true);
+
+    const response = await signIn("credentials", {
+      email: "guestuser@email.com",
+      password: "guest-user123",
+      role: "USER",
+      // callbackUrl: `${window.location.origin}`,
+      redirect: false,
+    });
+
+    // console.log("response", response);
+
+    if (!response?.error) {
+      console.log("succcess", response);
+
+      router.refresh();
+      router.push(callback_url || "/");
+
+      // router.push("/");
+    } else {
+      console.log("error", response);
+      toast.error(
+        `${response?.error}`
+        // {
+        //   id: toastSignin,
+        // }
+      );
+    }
+
+    setGuestIsSubmitting(false);
   };
 
   useEffect(() => {
@@ -122,7 +157,7 @@ function UserSigninPage() {
                 type="submit"
                 aria-label="submit"
                 className="relative w-full h-[42px] text-base"
-                disabled={isSubmitting}
+                disabled={isSubmitting || guestIsSubmitting}
               >
                 {isSubmitting && (
                   <span className="absolute flex left-[80px] lg:left-[95px] items-center inset-y-0">
@@ -134,6 +169,26 @@ function UserSigninPage() {
             </div>
           </form>
         </FormProvider>
+
+        <div className="border-b-2 border-gray-300 dark:border-gray-600 my-6" />
+
+        <div className="">
+          <Button
+            type="button"
+            aria-label="guest user signin"
+            variant="outline"
+            className="relative w-full h-[42px] text-base border-gray-600 dark:border-gray-300"
+            onClick={handleGuestSignin}
+            disabled={isSubmitting || guestIsSubmitting}
+          >
+            {guestIsSubmitting && (
+              <span className="absolute flex left-[15%] items-center inset-y-0">
+                <Loader width="30" />
+              </span>
+            )}
+            <span>Sign in as guest</span>
+          </Button>
+        </div>
       </div>
 
       <div className="mt-6">

@@ -23,7 +23,7 @@ function AdminHeader({
           </button>
 
           <div className="absolute w-full flex justify-center items-center inset-x-0 text-xl mx-auto font-montserrat font-bold lg:hidden">
-            TechPost Admin
+            Techpost Admin
           </div>
         </div>
       </div>

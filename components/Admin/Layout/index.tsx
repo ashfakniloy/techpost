@@ -7,7 +7,13 @@ import AdminHeader from "./Header/Index";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-function AdminLayout({ children }: { children: React.ReactNode }) {
+function AdminLayout({
+  role,
+  children,
+}: {
+  role: string | undefined;
+  children: React.ReactNode;
+}) {
   const { toggle: showSidebar, setToggle: setShowSidebar, node } = useToggle();
   const pathname = usePathname();
 
@@ -21,6 +27,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
         node={node}
         showSidebar={showSidebar}
         setShowSidebar={setShowSidebar}
+        role={role}
       />
 
       <div className="lg:flex-1 relative">

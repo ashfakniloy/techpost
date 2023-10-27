@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,14 +10,19 @@ import { Loader } from "@/components/Loaders/Loader";
 import { PasswordField } from "@/components/Form/PasswordField";
 import { SigninFormProps, signinSchema } from "@/schemas/signinSchema";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 // import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function AdminSigninPage() {
   const router = useRouter();
 
+  const { data: session } = useSession();
+
   const searchParams = useSearchParams();
 
   const callback_url = searchParams?.get("callback_url");
+
+  const [guestIsSubmitting, setGuestIsSubmitting] = useState(false);
 
   const defaultValues = {
     email: "",
@@ -37,7 +42,7 @@ function AdminSigninPage() {
     // console.log("login", values);
     // return;
 
-    const toastSignin = toast.loading("Loading...");
+    // const toastSignin = toast.loading("Loading...");
 
     const response = await signIn("credentials", {
       email: values.email,
@@ -51,9 +56,9 @@ function AdminSigninPage() {
 
     if (!response?.error) {
       console.log("succcess", response);
-      toast.success("Welcome Admin", {
-        id: toastSignin,
-      });
+      // toast.success("Welcome Admin", {
+      //   id: toastSignin,
+      // });
 
       // isModal ? router.back() : router.push("/");
       router.refresh();
@@ -61,11 +66,66 @@ function AdminSigninPage() {
       router.push(callback_url || "/admin");
     } else {
       console.log("error", response);
-      toast.error(`${response?.error}`, {
-        id: toastSignin,
-      });
+      toast.error(
+        `${response?.error}`
+        // {
+        //   id: toastSignin,
+        // }
+      );
     }
   };
+
+  const handleGuestSignin = async () => {
+    setGuestIsSubmitting(true);
+    // const toastSignin = toast.loading("Loading...");
+
+    const response = await signIn("credentials", {
+      email: "guestadmin@email.com",
+      password: "guest-admin123",
+      role: "GUEST_ADMIN",
+      // callbackUrl: `${window.location.origin}`,
+      redirect: false,
+    });
+
+    // console.log("response", response);
+
+    if (!response?.error) {
+      console.log("succcess", response);
+      // toast.success("Welcome Admin", {
+      //   id: toastSignin,
+      // });
+
+      // isModal ? router.back() : router.push("/");
+      router.refresh();
+      // router.push("/admin");
+      router.push(callback_url || "/admin");
+    } else {
+      console.log("error", response);
+      toast.error(
+        `${response?.error}`
+        // {
+        //   id: toastSignin,
+        // }
+      );
+    }
+
+    setGuestIsSubmitting(false);
+  };
+
+  useEffect(() => {
+    const role = session?.user.role;
+
+    const messages = {
+      ADMIN: "Welcome Admin",
+      GUEST_ADMIN: "Welcome Guest Admin",
+    };
+
+    if (role === "ADMIN" || role === "GUEST_ADMIN") {
+      const message = messages[role];
+
+      toast.success(<span className="capitalize">{message}</span>);
+    }
+  }, [session]);
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -123,6 +183,26 @@ function AdminSigninPage() {
               </div>
             </form>
           </FormProvider>
+
+          <div className="border-b-2 border-gray-300 dark:border-gray-600 my-6" />
+
+          <div className="">
+            <Button
+              type="button"
+              aria-label="guest user signin"
+              variant="outline"
+              className="relative w-full h-[42px] text-base border-gray-600 dark:border-gray-300"
+              onClick={handleGuestSignin}
+              disabled={isSubmitting || guestIsSubmitting}
+            >
+              {guestIsSubmitting && (
+                <span className="absolute flex left-[15%] items-center inset-y-0">
+                  <Loader width="30" />
+                </span>
+              )}
+              <span>Sign in as guest</span>
+            </Button>
+          </div>
         </div>
 
         {/* <div className="mt-6">

@@ -79,7 +79,7 @@ export function DataTableToolbar<TData>({
       });
       router.refresh();
     } else {
-      toast.error("Something went wrong", {
+      toast.error(data.error, {
         id: toastDeletePost,
       });
       console.log("error", data);
@@ -108,9 +108,8 @@ export function DataTableToolbar<TData>({
   const newParam = new URLSearchParams(searchParams.toString());
 
   useEffect(() => {
-    newParam.delete("page");
-
     if (debouncedValue) {
+      newParam.delete("page");
       newParam.set("search", debouncedValue.toString());
     } else {
       newParam.delete("search");

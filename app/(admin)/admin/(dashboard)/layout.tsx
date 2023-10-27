@@ -1,11 +1,19 @@
 import AdminLayout from "@/components/Admin/Layout";
-import Refresh from "@/components/Admin/Layout/Refresh";
+import { getAuthSession } from "@/lib/next-auth";
+// import Refresh from "@/components/Admin/Layout/Refresh";
 
 export const dynamic = "force-dynamic";
 
-function AdminDashboardlayout({ children }: { children: React.ReactNode }) {
+async function AdminDashboardlayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await getAuthSession();
+  const role = session?.user.role;
+
   return (
-    <AdminLayout>
+    <AdminLayout role={role}>
       {/* temporary fix router.refresh until nextjs fix caching revalidate issue */}
       {/* <Refresh /> */}
 

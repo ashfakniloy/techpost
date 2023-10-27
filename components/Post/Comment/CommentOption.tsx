@@ -49,14 +49,14 @@ function CommentOption({
     const data = await response.json();
 
     if (response.ok) {
-      toast.success("Comment Deleted", {
+      toast.success(`${type} deleted`, {
         id: toastDeletePost,
       });
       router.refresh();
 
       console.log("success", data);
     } else {
-      toast.error("Something went wrong", {
+      toast.error(data.error, {
         id: toastDeletePost,
       });
       console.log("error", data);

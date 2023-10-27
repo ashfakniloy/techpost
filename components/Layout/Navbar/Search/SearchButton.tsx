@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Search, X } from "lucide-react";
 import { Post } from "@prisma/client";
-import { Loader2 } from "@/components/Loaders/Loader";
+import { Loader } from "@/components/Loaders/Loader";
 import useDebounce from "@/hooks/useDebounce";
 import SearchResult from "./SearchResult";
 
@@ -106,7 +106,7 @@ function SearchButton() {
                 </span>
               ) : (
                 <span className="">
-                  <Loader2 width="23" />
+                  <Loader width="23" />
                 </span>
               )}
             </label>

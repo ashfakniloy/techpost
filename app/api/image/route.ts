@@ -1,9 +1,19 @@
 import cloudinary from "@/lib/cloudinary";
+import { getAuthSession } from "@/lib/next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const imageId = searchParams.get("imageId");
+
+  const session = await getAuthSession();
+
+  const canDeleteImage =
+    session?.user.role === "USER" || session?.user.role === "ADMIN";
+
+  if (!canDeleteImage) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
   if (typeof imageId !== "string") {
     return NextResponse.json({ error: "Invalid Searchparam" }, { status: 400 });
@@ -37,6 +47,9 @@ export async function DELETE(request: NextRequest) {
     //   return NextResponse.json({ result }, { status: 400 });
     // }
   } catch (error) {
-    return NextResponse.json({ error }, { status: 400 });
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }

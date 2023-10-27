@@ -61,7 +61,7 @@ function PostOption({ id, title, slug, isEditorsChoice }: PostOptionProps) {
       router.replace("/admin/posts");
       console.log("success", data);
     } else {
-      toast.error("Something went wrong", {
+      toast.error(data.error, {
         id: toastDeletePost,
       });
       console.log("error", data);
@@ -116,7 +116,7 @@ function PostOption({ id, title, slug, isEditorsChoice }: PostOptionProps) {
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button variant="default">Option</Button>
         </DropdownMenuTrigger>

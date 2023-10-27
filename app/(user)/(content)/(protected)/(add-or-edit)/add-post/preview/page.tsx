@@ -8,10 +8,9 @@ import { toast } from "react-hot-toast";
 import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
-import { Loader2 } from "@/components/Loaders/Loader";
+import { Loader } from "@/components/Loaders/Loader";
 import { postSchema } from "@/schemas/postSchema";
 import { Button } from "@/components/ui/button";
-import { revalidatePosts } from "@/actions/revalidatePosts";
 import { revalidateAllRoutes } from "@/actions/revalidateAllRoutes";
 
 function PostPreviewPage() {
@@ -123,7 +122,9 @@ function PostPreviewPage() {
   if (!hasPost) {
     return (
       <div className="min-h-[calc(100dvh-75px)] lg:min-h-[calc(100vh-75px)] flex justify-center items-center">
-        <Loader2 width="50" />
+        <div className="opacity-60">
+        <Loader width="50" />
+      </div>
       </div>
     );
   }

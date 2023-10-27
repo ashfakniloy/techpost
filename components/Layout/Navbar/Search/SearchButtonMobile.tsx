@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Search, X } from "lucide-react";
-import useDebounce from "@/hooks/useDebounce";
-import { Loader2 } from "@/components/Loaders/Loader";
-
-import { Post } from "@prisma/client";
 import { usePathname, useSearchParams } from "next/navigation";
+import { Search, X } from "lucide-react";
+import { Post } from "@prisma/client";
+import useDebounce from "@/hooks/useDebounce";
+import { Loader } from "@/components/Loaders/Loader";
 import SearchResult from "./SearchResult";
 
 type Props = Post & {
@@ -103,7 +102,7 @@ function SearchButtonMobile() {
                 </span>
               ) : (
                 <span className="">
-                  <Loader2 width="23" />
+                  <Loader width="23" />
                 </span>
               )}
             </label>

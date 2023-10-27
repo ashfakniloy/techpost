@@ -9,7 +9,7 @@ import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import { Separator } from "@/components/ui/separator";
 import { MoonIcon } from "@heroicons/react/24/outline";
 import DarkMode from "../DarkMode";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 // import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 
@@ -17,12 +17,18 @@ function AdminSidebar({
   node,
   showSidebar,
   setShowSidebar,
+  role,
 }: {
   node: React.RefObject<HTMLDivElement>;
   showSidebar: boolean;
   setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+  role: string | undefined;
 }) {
   const pathname = usePathname();
+
+  const adminType =
+    role &&
+    (role === "ADMIN" ? "Admin" : role === "GUEST_ADMIN" ? "Guest Admin" : "");
 
   const activeClass = (path: string, name: string) => {
     const paths = pathname?.split("/");
@@ -105,7 +111,7 @@ function AdminSidebar({
           <div>
             <div className="pl-5 lg:pl-[30px] py-7 font-semibold flex justify-between items-center">
               <h1 className="font-montserrat text-lg lg:text-2xl">
-                TechPost Admin
+                Techpost Admin
               </h1>
               <span
                 className="p-1 mr-5 rounded-full border-2 border-gray-500  lg:hidden"
@@ -158,8 +164,11 @@ function AdminSidebar({
 
               <div className="flex flex-col items-center gap-3 p-3 bg-gray-600/10 dark:bg-gray-400/10 rounded-lg">
                 <p className="font-medium text-sm text-gray-600 dark:text-gray-300">
-                  Signed in as Admin
+                  {`Signed in as ${adminType}`}
                 </p>
+                {role === "GUEST_ADMIN" && (
+                  <p className="text-center font-medium text-sm text-gray-500 dark:text-gray-400 mb-2">{`Limited access for guest admin (view only)`}</p>
+                )}
 
                 <div className="flex justify-center">
                   <Button

@@ -76,7 +76,7 @@ export const authOptions: NextAuthOptions = {
           return user;
         }
 
-        if (role === "ADMIN") {
+        if (role === "ADMIN" || role === "GUEST_ADMIN") {
           const response = await prisma.admin.findUnique({
             where: {
               email: email,

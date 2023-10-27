@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Loader3 } from "../Loaders/Loader";
+import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 
 export const ImageField = ({
   label,
@@ -29,10 +31,21 @@ export const ImageField = ({
   const [imagePreview, setImagePreview] = useState("");
   const [dragging, setDragging] = useState(false);
 
+  const { data: session } = useSession();
+
+  const isAuthorzed =
+    session?.user.role === "USER" ||
+    (isAdmin && session?.user.role === "ADMIN");
+
   const imageValue = watch("imageUrl");
   const imageId = watch("imageId");
 
   const handleImageUpload = async () => {
+    if (!isAuthorzed) {
+      toast.error("Unauthorized");
+      return;
+    }
+
     if (!image) return;
     setImagePreview(URL.createObjectURL(image));
 
@@ -90,6 +103,11 @@ export const ImageField = ({
   };
 
   const handleImageRemove = async () => {
+    if (!isAuthorzed) {
+      toast.error("Unauthorized");
+      return;
+    }
+
     setImageChanging(true);
     setImage(null);
 

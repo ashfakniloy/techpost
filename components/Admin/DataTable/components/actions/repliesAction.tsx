@@ -87,7 +87,7 @@ export function RepliesAction<TData>({ row }: PostsActions<TData>) {
       router.refresh();
       console.log("success", data);
     } else {
-      toast.error("Something went wrong", {
+      toast.error(data.error, {
         id: toastDeleteCommentReply,
       });
       console.log("error", data);

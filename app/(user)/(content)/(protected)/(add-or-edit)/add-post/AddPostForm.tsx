@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,7 +9,7 @@ import { SelectField } from "@/components/Form/SelectField";
 import { ImageField } from "@/components/Form/ImageField";
 import { RichTextField } from "@/components/Form/RichTextField";
 import { useState } from "react";
-import { Loader2 } from "@/components/Loaders/Loader";
+import { Loader } from "@/components/Loaders/Loader";
 import { PostFormProps, postSchema } from "@/schemas/postSchema";
 import { Button } from "@/components/ui/button";
 
@@ -111,7 +110,7 @@ function AddPostForm({ categories }: { categories: string[] }) {
               >
                 {isClearing && (
                   <span className="absolute flex left-[8px] items-center inset-y-0">
-                    <Loader2 width="25" />
+                    <Loader width="25" />
                   </span>
                 )}
                 <span>Clear</span>

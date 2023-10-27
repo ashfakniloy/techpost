@@ -67,7 +67,7 @@ function CategoryOption({
       router.replace("/admin/categories");
       console.log("success", data);
     } else {
-      toast.error("Something went wrong", {
+      toast.error(data.error, {
         id: toastDeleteCategory,
       });
       console.log("error", data);

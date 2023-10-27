@@ -95,7 +95,10 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ message: "Deleted Successfully", response });
     } catch (error) {
       console.log(error);
-      return NextResponse.json({ error }, { status: 500 });
+      return NextResponse.json(
+        { error: "Something went wrong", data: error },
+        { status: 500 }
+      );
     }
   }
 
@@ -136,7 +139,10 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ message: "Deleted Successfully", response });
     } catch (error) {
       console.log(error);
-      return NextResponse.json({ error }, { status: 500 });
+      return NextResponse.json(
+        { error: "Something went wrong", data: error },
+        { status: 500 }
+      );
     }
   }
 }

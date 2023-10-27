@@ -65,10 +65,18 @@ export default async function middleware(req: NextRequest) {
   const token = (await getToken({ req, secret })) as Session | null;
   // console.log("token from middleware", token);
 
+  const isAdmin =
+    token?.user.role === "ADMIN" || token?.user.role === "GUEST_ADMIN";
+
+  // const isAdmin =
+  // (token && token.user && (token.user.role === "ADMIN" || token.user.role === "GUEST_ADMIN")) || false;
+
+  const isUser = token?.user.role === "USER";
+
   if (pathname.includes("/admin")) {
     //for admin
     if (pathname !== "/admin/signin") {
-      if (token?.user.role !== "ADMIN") {
+      if (!isAdmin) {
         const adminRedirectPath =
           pathname === `/admin`
             ? `${origin}/admin/signin`
@@ -77,21 +85,21 @@ export default async function middleware(req: NextRequest) {
         return NextResponse.redirect(adminRedirectPath);
       }
     } else {
-      if (token?.user.role === "ADMIN") {
+      if (isAdmin) {
         return NextResponse.redirect(`${origin}/admin`);
       }
     }
   } else {
     // for user
     if (pathname !== "/signin" && pathname !== "/signup") {
-      if (token?.user.role !== "USER") {
+      if (!isUser) {
         const userRedirectPath = `${origin}/signin?callback_url=${pathname}`;
 
         return NextResponse.redirect(userRedirectPath);
         // return NextResponse.redirect(`${origin}/signin`);
       }
     } else {
-      if (token?.user.role === "USER") {
+      if (isUser) {
         return NextResponse.redirect(`${origin}`);
       }
     }

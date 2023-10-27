@@ -51,7 +51,7 @@ function CommentsReplyForm({
 
     if (response.ok) {
       setShowReplies(true);
-      toast.success("CommentReply Submitted");
+      toast.success("Reply Submitted");
       reset();
       router.refresh();
     } else {

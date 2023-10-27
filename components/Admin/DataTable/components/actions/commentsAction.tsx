@@ -63,7 +63,7 @@ export function CommentsAction<TData>({ row }: PostsActions<TData>) {
       router.refresh();
       console.log("success", data);
     } else {
-      toast.error("Something went wrong", {
+      toast.error(data.error, {
         id: toastDeleteComment,
       });
       console.log("error", data);

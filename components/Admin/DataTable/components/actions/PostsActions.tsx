@@ -92,7 +92,7 @@ PostsActions<TData>) {
       router.refresh();
       console.log("success", data);
     } else {
-      toast.error("Something went wrong", {
+      toast.error(data.error, {
         id: toastDeletePost,
       });
       console.log("error", data);

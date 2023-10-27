@@ -84,7 +84,7 @@ function EditProfileForm({
       router.refresh();
     } else {
       console.log("error", data);
-      toast.error("Something went wrong", {
+      toast.error(data.error, {
         id: toastProfileUpdate,
       });
     }

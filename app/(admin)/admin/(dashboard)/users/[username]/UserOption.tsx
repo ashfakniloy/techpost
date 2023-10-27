@@ -57,7 +57,7 @@ function UserOption({ id, username }: UserOptionProps) {
       router.replace("/admin/users");
       console.log("success", data);
     } else {
-      toast.error("Something went wrong", {
+      toast.error(data.error, {
         id: toastDeleteUser,
       });
       console.log("error", data);
@@ -69,7 +69,7 @@ function UserOption({ id, username }: UserOptionProps) {
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button variant="default">Option</Button>
         </DropdownMenuTrigger>

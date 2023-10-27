@@ -41,7 +41,10 @@ export async function GET(req: NextRequest) {
       count,
     });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }
 
@@ -108,7 +111,10 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     // console.log(error);
-    return NextResponse.json({ error }, { status: 500 });
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }
 
@@ -155,6 +161,9 @@ export async function DELETE(req: NextRequest) {
     });
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ error });
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }

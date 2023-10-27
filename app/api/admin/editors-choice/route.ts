@@ -65,6 +65,9 @@ export async function PUT(request: NextRequest) {
       addEditorsChoiceResponse,
     });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 400 });
+    return NextResponse.json(
+      { error: "Something went wrong", data: error },
+      { status: 500 }
+    );
   }
 }
