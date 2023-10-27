@@ -15,10 +15,10 @@ type SessionProps = {
 
 type ListProps = SessionProps & {
   post: PostItem;
-  // blurDataURL: string;
+  blurDataURL: string;
 };
 
-function List({ post, session }: ListProps) {
+function List({ post, session, blurDataURL }: ListProps) {
   const {
     id,
     slug,
@@ -42,8 +42,8 @@ function List({ post, session }: ListProps) {
           <div className="w-full h-full relative overflow-hidden rounded-md">
             <Image
               src={imageUrl}
-              // placeholder="blur"
-              // blurDataURL={blurDataURL}
+              placeholder="blur"
+              blurDataURL={blurDataURL}
               alt="post image"
               fill
               sizes="(max-width: 768px) 100px, 240px"

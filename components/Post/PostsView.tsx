@@ -17,9 +17,9 @@ async function PostsView({
 }) {
   const session = await getAuthSession();
 
-  // const imageUrls = posts.map((post) => post.imageUrl);
+  const imageUrls = posts.map((post) => post.imageUrl);
 
-  // const blurDataUrls = await getMultipleImagePlaceholder(imageUrls);
+  const blurDataUrls = await getMultipleImagePlaceholder(imageUrls);
 
   return (
     <>
@@ -30,7 +30,7 @@ async function PostsView({
               key={post.id}
               session={session}
               post={post}
-              // blurDataURL={blurDataUrls[i]}
+              blurDataURL={blurDataUrls[i]}
             />
           ))}
 
