@@ -33,7 +33,7 @@ function List({ post, session, blurDataURL }: ListProps) {
   } = post;
 
   return (
-    <section className="border-b last:border-b-0 border-gray-300 dark:border-gray-700 py-5 lg:py-10">
+    <div className="border-b last:border-b-0 border-gray-300 dark:border-gray-700 py-5 lg:py-10">
       <div className="flex lg:items-center gap-2.5 lg:gap-4">
         <Link
           href={`/post/${slug}`}
@@ -100,7 +100,7 @@ function List({ post, session, blurDataURL }: ListProps) {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

@@ -134,7 +134,7 @@ async function CategoryPage({
       </Suspense>
 
       <div className="lg:flex justify-between gap-5 mt-10 lg:mt-20">
-        <div className="lg:flex-1 lg:max-w-[796px] overflow-hidden">
+        <section className="lg:flex-1 lg:max-w-[796px] overflow-hidden">
           <PostsHeader postsTitle={postsTitle} />
 
           {postsTitle === "invalid" ? (
@@ -151,7 +151,7 @@ async function CategoryPage({
               />
             </Suspense>
           )}
-        </div>
+        </section>
 
         <div className="hidden lg:flex flex-col gap-5 lg:sticky top-[97px]">
           <Suspense

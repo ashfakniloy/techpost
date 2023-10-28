@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-function TechPostLogo() {
+function TechpostLogo() {
   return (
     <div className="text-xl lg:text-2xl font-extrabold font-montserrat uppercase group px-1.5 py-1 rounded bg-custom-gray3 select-none">
       <Link href="/">
@@ -15,4 +15,4 @@ function TechPostLogo() {
   );
 }
 
-export default TechPostLogo;
+export default TechpostLogo;

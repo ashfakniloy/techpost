@@ -11,7 +11,7 @@ import { PasswordField } from "@/components/Form/PasswordField";
 import { SigninFormProps, signinSchema } from "@/schemas/signinSchema";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import TechPostLogo from "@/components/Layout/TechPostLogo";
+import TechpostLogo from "@/components/Layout/TechpostLogo";
 // import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function AdminSigninPage() {
@@ -131,7 +131,7 @@ function AdminSigninPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="mt-10 flex justify-center">
-        <TechPostLogo />
+        <TechpostLogo />
       </div>
 
       <div className="my-10 bg-gray-50 relative mx-3 dark:bg-custom-gray6 rounded-md shadow-md px-7 py-9 lg:px-10 lg:py-12  w-full max-w-[420px]">

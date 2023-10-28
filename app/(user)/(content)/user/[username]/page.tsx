@@ -115,7 +115,7 @@ function UserPage({
       </Suspense>
 
       <div className="lg:flex items-start justify-between gap-5 mt-10 lg:mt-20">
-        <div className="lg:flex-1 lg:max-w-[796px]">
+        <section className="lg:flex-1 lg:max-w-[796px]">
           <PostsHeader postsTitle={postsTitle} />
 
           {postsTitle === "invalid" ? (
@@ -132,7 +132,7 @@ function UserPage({
               />
             </Suspense>
           )}
-        </div>
+        </section>
 
         <div className="hidden lg:flex flex-col gap-5 lg:sticky top-[90px]">
           <Suspense

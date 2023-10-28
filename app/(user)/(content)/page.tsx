@@ -64,21 +64,23 @@ function HomePage({ searchParams: { page, limit, sort } }: SearchParams) {
           </Suspense>
         )}
 
-        <PostsHeader postsTitle={postsTitle} />
+        <section>
+          <PostsHeader postsTitle={postsTitle} />
 
-        {postsTitle === "invalid" ? (
-          <p className="mt-20 text-xl text-center text-red-500">
-            Invalid sort parameter
-          </p>
-        ) : (
-          <Suspense key={page || sort} fallback={<PostsSkeleton />}>
-            <Posts
-              limitNumber={limitNumber}
-              pageNumber={pageNumber}
-              sort={sort}
-            />
-          </Suspense>
-        )}
+          {postsTitle === "invalid" ? (
+            <p className="mt-20 text-xl text-center text-red-500">
+              Invalid sort parameter
+            </p>
+          ) : (
+            <Suspense key={page || sort} fallback={<PostsSkeleton />}>
+              <Posts
+                limitNumber={limitNumber}
+                pageNumber={pageNumber}
+                sort={sort}
+              />
+            </Suspense>
+          )}
+        </section>
       </div>
 
       <div className="hidden lg:flex flex-col gap-5">

@@ -33,7 +33,7 @@ function Card({ post, blurDataURL, session }: CardProps) {
   } = post;
 
   return (
-    <section className="transition-shadow duration-300 bg-gray-50 rounded-md shadow-md group dark:bg-custom-gray2 hover:shadow-lg min-w-[290px] lg:max-w-[386px]">
+    <div className="transition-shadow duration-300 bg-gray-50 rounded-md shadow-md group dark:bg-custom-gray2 hover:shadow-lg min-w-[290px] lg:max-w-[386px]">
       <Link href={`/post/${slug}`}>
         <div className="h-[180px] lg:h-[220px] relative rounded-t-md overflow-hidden">
           {imageUrl && (
@@ -97,7 +97,7 @@ function Card({ post, blurDataURL, session }: CardProps) {
           )}
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 

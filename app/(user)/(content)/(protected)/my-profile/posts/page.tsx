@@ -62,7 +62,7 @@ async function ProfilePostsPage({
   const postsTitle = getPostsTitle();
 
   return (
-    <div>
+    <section>
       <PostsHeader postsTitle={postsTitle} />
 
       {postsTitle === "invalid" ? (
@@ -79,7 +79,7 @@ async function ProfilePostsPage({
           />
         </Suspense>
       )}
-    </div>
+    </section>
   );
 }
 
