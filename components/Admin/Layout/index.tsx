@@ -30,7 +30,7 @@ function AdminLayout({
         role={role}
       />
 
-      <div className="lg:flex-1 relative">
+      <div className="lg:flex-1 relative overflow-x-auto">
         <AdminHeader
           showSidebar={showSidebar}
           setShowSidebar={setShowSidebar}

@@ -11,6 +11,7 @@ import { PasswordField } from "@/components/Form/PasswordField";
 import { SigninFormProps, signinSchema } from "@/schemas/signinSchema";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import TechPostLogo from "@/components/Layout/TechPostLogo";
 // import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function AdminSigninPage() {
@@ -92,7 +93,7 @@ function AdminSigninPage() {
     if (!response?.error) {
       console.log("succcess", response);
       // toast.success("Welcome Admin", {
-      //   id: toastSignin,
+      //   id: toastSigninGuest,
       // });
 
       // isModal ? router.back() : router.push("/");
@@ -104,7 +105,7 @@ function AdminSigninPage() {
       toast.error(
         `${response?.error}`
         // {
-        //   id: toastSignin,
+        //   id: toastSigninGuest,
         // }
       );
     }
@@ -128,8 +129,12 @@ function AdminSigninPage() {
   }, [session]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-gray-50 relative mx-3 dark:bg-custom-gray6 rounded-md shadow-md px-7 py-9 lg:px-10 lg:py-12  w-full max-w-[420px]">
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="mt-10 flex justify-center">
+        <TechPostLogo />
+      </div>
+
+      <div className="my-10 bg-gray-50 relative mx-3 dark:bg-custom-gray6 rounded-md shadow-md px-7 py-9 lg:px-10 lg:py-12  w-full max-w-[420px]">
         {/* {isModal && (
         <button
           type="button"
@@ -154,24 +159,11 @@ function AdminSigninPage() {
               <PasswordField label="Password" name="password" />
 
               <div className="pt-3">
-                {/* <button
-                  type="submit"
-                  className="relative w-full py-[9px] font-medium text-white bg-black rounded-md dark:text-black dark:bg-gray-50 disabled:opacity-70 disabled:cursor-not-allowed"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting && (
-                    <span className="absolute flex left-[80px] lg:left-[105px] items-center inset-y-0">
-                      <Loader width="30" />
-                    </span>
-                  )}
-                  <span>Submit</span>
-                </button> */}
-
                 <Button
                   type="submit"
                   aria-label="submit"
                   className="relative w-full h-[42px] text-base"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || guestIsSubmitting}
                 >
                   {isSubmitting && (
                     <span className="absolute flex left-[80px] lg:left-[105px] items-center inset-y-0">
@@ -204,15 +196,6 @@ function AdminSigninPage() {
             </Button>
           </div>
         </div>
-
-        {/* <div className="mt-6">
-          <p className="text-sm text-gray-600 dark:text-gray-300">
-            Don&apos;t have an account?{" "}
-            <Link href="/signup" className="text-blue-500 dark:text-blue-400">
-              Sign Up
-            </Link>
-          </p>
-        </div> */}
       </div>
     </div>
   );

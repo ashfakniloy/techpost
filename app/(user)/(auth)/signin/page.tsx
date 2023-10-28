@@ -199,6 +199,15 @@ function UserSigninPage() {
           </Link>
         </p>
       </div>
+
+      <div className="mt-3">
+        <Link
+          href="/admin/signin"
+          className="font-medium text-blue-500 dark:text-blue-400"
+        >
+          Sign in as admin
+        </Link>
+      </div>
     </div>
   );
 }
