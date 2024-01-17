@@ -2,13 +2,8 @@ import { likesColumns } from "@/components/Admin/DataTable/components/columns/li
 import { DataTable } from "@/components/Admin/DataTable/components/data-table";
 import Section from "@/components/Admin/Section";
 import { Like } from "@/types";
-// import type { PostAdminTypes } from "@/db/queries/admin/getSinglePostAdmin";
-
-// type Likes = PostAdminTypes["likes"]
 
 function PostLikes({ likes }: { likes: Like[] }) {
-  // console.log("likes", likes);
-
   return (
     <Section title="Post Likes" className="min-h-[240px] space-y-5">
       {likes.length ? (

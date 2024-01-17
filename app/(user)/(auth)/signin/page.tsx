@@ -12,18 +12,16 @@ import { PasswordField } from "@/components/Form/PasswordField";
 import { SigninFormProps, signinSchema } from "@/schemas/signinSchema";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-// import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function UserSigninPage() {
-  // function UserSigninPage({ isModal }: { isModal?: boolean }) {//for showing modal with parallel route this needs to be a component and should be imported in this page
-  const router = useRouter();
+  // const router = useRouter();
 
   const searchParams = useSearchParams();
-  const callback_url = searchParams?.get("callback_url");
+  const callback_url = searchParams?.get("callback_url") || "/";
 
   const [guestIsSubmitting, setGuestIsSubmitting] = useState(false);
 
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   const defaultValues = {
     email: "",
@@ -43,13 +41,11 @@ function UserSigninPage() {
     // console.log("login", values);
     // return;
 
-    // const toastSignin = toast.loading("Loading...");
-
     const response = await signIn("credentials", {
       email: values.email,
       password: values.password,
       role: "USER",
-      // callbackUrl: `${window.location.origin}`,
+      // callbackUrl: callback_url,
       redirect: false,
     });
 
@@ -58,30 +54,12 @@ function UserSigninPage() {
     if (!response?.error) {
       console.log("succcess", response);
 
-      // const username = session?.user.username;
-
-      // username &&
-      //   toast.success(
-      //     `Welcome ${username}`
-      //     // {
-      //     //   id: toastSignin,
-      //     // }
-      //   );
-
-      // isModal ? router.back() : router.push("/");
-
-      router.refresh();
-      router.push(callback_url || "/");
-
-      // router.push("/");
+      // router.refresh();
+      // router.push(callback_url);
+      window.location.assign(callback_url);
     } else {
       console.log("error", response);
-      toast.error(
-        `${response?.error}`
-        // {
-        //   id: toastSignin,
-        // }
-      );
+      toast.error(response.error);
     }
   };
 
@@ -92,7 +70,7 @@ function UserSigninPage() {
       email: "guestuser@email.com",
       password: "guest-user123",
       role: "USER",
-      // callbackUrl: `${window.location.origin}`,
+      // callbackUrl: callback_url,
       redirect: false,
     });
 
@@ -101,45 +79,30 @@ function UserSigninPage() {
     if (!response?.error) {
       console.log("succcess", response);
 
-      router.refresh();
-      router.push(callback_url || "/");
-
-      // router.push("/");
+      // router.refresh();
+      // router.push(callback_url);
+      window.location.assign(callback_url);
     } else {
       console.log("error", response);
-      toast.error(
-        `${response?.error}`
-        // {
-        //   id: toastSignin,
-        // }
-      );
+      toast.error(response.error);
     }
 
     setGuestIsSubmitting(false);
   };
 
-  useEffect(() => {
-    const username = session?.user.username;
-    const role = session?.user.role;
+  // useEffect(() => {
+  //   const username = session?.user.username;
+  //   const role = session?.user.role;
 
-    if (username && role === "USER") {
-      toast.success(() => (
-        <span className="capitalize">{`Welcome ${username}`}</span>
-      ));
-    }
-  }, [session]);
+  //   if (username && role === "USER") {
+  //     toast.success(() => (
+  //       <span className="capitalize">{`Welcome ${username}`}</span>
+  //     ));
+  //   }
+  // }, [session]);
 
   return (
     <div className="bg-gray-50 relative mx-3 dark:bg-custom-gray4 rounded-md shadow-md px-7 py-9 lg:px-10 lg:py-12 w-full max-w-[420px]">
-      {/* {isModal && (
-        <button
-          type="button"
-          className="absolute right-5 top-5 p-1 rounded-full hover:bg-gray-700"
-          onClick={() => router.back()}
-        >
-          <XMarkIcon className="h-6 w-6" />
-        </button>
-      )} */}
       <p className="text-2xl font-montserrat font-bold text-center">Sign In</p>
 
       <div className="mt-5">

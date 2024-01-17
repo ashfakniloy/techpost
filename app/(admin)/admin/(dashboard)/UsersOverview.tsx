@@ -11,13 +11,20 @@ import {
 } from "recharts";
 import { useTheme } from "next-themes";
 import SectionChart from "@/components/Admin/SectionChart";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type UsersOverviewProps = {
   name: string;
   total: number;
 };
 
-function UsersOverview({ usersData }: { usersData: UsersOverviewProps[] }) {
+function UsersOverview({
+  firstYear,
+  usersData,
+}: {
+  firstYear: number;
+  usersData: UsersOverviewProps[];
+}) {
   // console.log("usersData", usersData);
 
   // const mockData = [
@@ -39,6 +46,23 @@ function UsersOverview({ usersData }: { usersData: UsersOverviewProps[] }) {
   const currentTheme = theme === "system" ? systemTheme : theme;
   const strokeColor = currentTheme === "dark" ? "#ffffff" : "#000000";
 
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const newParam = new URLSearchParams(searchParams.toString());
+
+  const handleYear = (value: string) => {
+    // console.log("year selected");
+    newParam.set("users", value.toString());
+    router.replace(`${pathname}?${newParam}`, { scroll: false });
+  };
+
+  const users = searchParams?.get("users");
+  const currentYear = new Date().getFullYear();
+
+  const selectedYear = users ? Number(users) : currentYear;
+
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -52,7 +76,12 @@ function UsersOverview({ usersData }: { usersData: UsersOverviewProps[] }) {
   };
 
   return (
-    <SectionChart title="Users Overview">
+    <SectionChart
+      title="Users Overview"
+      selectedYear={selectedYear}
+      handleYear={handleYear}
+      firstYear={firstYear}
+    >
       <ResponsiveContainer width="100%" height={400} minWidth={600}>
         <BarChart
           data={usersData}

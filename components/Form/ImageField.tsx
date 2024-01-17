@@ -6,6 +6,7 @@ import { XMarkIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Loader3 } from "../Loaders/Loader";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import { deleteImage } from "@/db/mutations/deleteImage";
 
 export const ImageField = ({
   label,
@@ -102,6 +103,7 @@ export const ImageField = ({
     setImage(image);
   };
 
+  // // with server action
   const handleImageRemove = async () => {
     if (!isAuthorzed) {
       toast.error("Unauthorized");
@@ -114,24 +116,49 @@ export const ImageField = ({
     setValue("imageUrl", "");
     setValue("imageId", "");
 
-    try {
-      const response = await fetch(`/api/image?imageId=${imageId}`, {
-        method: "DELETE",
-      });
+    const result = await deleteImage({ imageId });
 
-      const data = await response.json();
-      if (response.ok) {
-        console.log("success", data);
-      } else {
-        console.log("error", data);
-      }
-    } catch (error) {
-      console.log("error", error);
+    console.log("result", result);
+
+    if (result.error) {
+      toast.error(result.error);
     }
 
     setImageChanging(false);
     setImageLoaded(false);
   };
+
+  // // with route handler
+  // const handleImageRemove = async () => {
+  //   if (!isAuthorzed) {
+  //     toast.error("Unauthorized");
+  //     return;
+  //   }
+
+  //   setImageChanging(true);
+  //   setImage(null);
+
+  //   setValue("imageUrl", "");
+  //   setValue("imageId", "");
+
+  //   try {
+  //     const response = await fetch(`/api/image?imageId=${imageId}`, {
+  //       method: "DELETE",
+  //     });
+
+  //     const data = await response.json();
+  //     if (response.ok) {
+  //       console.log("success", data);
+  //     } else {
+  //       console.log("error", data);
+  //     }
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+
+  //   setImageChanging(false);
+  //   setImageLoaded(false);
+  // };
 
   const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -257,7 +284,7 @@ export const ImageField = ({
   );
 };
 
-//without drag and drop
+// // without drag and drop
 // import { useFormContext } from "react-hook-form";
 // import { useState } from "react";
 // import Image from "next/image";

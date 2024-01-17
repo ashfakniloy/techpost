@@ -10,8 +10,9 @@ async function CommentLike({ commentId }: { commentId: string }) {
 
   const session = await getAuthSession();
 
-  const hasLiked =
-    commentsLikes?.find((like) => like.userId === session?.user.id) && true;
+  const hasLiked = commentsLikes.some(
+    (like: any) => like.userId === session?.user.id
+  );
 
   return (
     <CommentLikeButton

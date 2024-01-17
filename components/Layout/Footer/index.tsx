@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="py-10 border-t border-gray-300 dark:border-gray-700 text-start">
       <p className="text-xl lg:text-2xl font-montserrat font-extrabold uppercase">
@@ -17,7 +19,7 @@ function Footer() {
         </Link>
       </p>
       <p className="mt-2 text-sm">
-        ©2023, Ashfak Ahmed Niloy. All rights reserved.
+        ©{currentYear}, Ashfak Ahmed Niloy. All rights reserved.
       </p>
     </footer>
   );

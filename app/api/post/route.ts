@@ -27,27 +27,6 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // if (!body) {
-  //   return NextResponse.json(
-  //     { error: "Content can not be empty" },
-  //     { status: 400 }
-  //   );
-  // }
-
-  // if (Object.keys(body).length === 0) {
-  //   return NextResponse.json(
-  //     { error: "Content cannot be empty" },
-  //     { status: 400 }
-  //   );
-  // }
-
-  // if (Object.values(body).includes("")) {
-  //   return NextResponse.json(
-  //     { error: "All fields are required" },
-  //     { status: 400 }
-  //   );
-  // }
-
   const { data } = parsedBody;
   const { title, article } = data;
 
@@ -76,19 +55,7 @@ export async function POST(request: NextRequest) {
         slug,
         shortDescription,
       },
-      // data: {
-      //   ...body,
-      //   userId: session.user.id,
-      // },
     });
-
-    // revalidatePath("/");
-    // revalidatePath("/my-profile");
-    // revalidatePath("/category/[categoryName]");
-    // revalidatePath("/user/[username]");
-    // revalidatePath("/post/[postId]");
-    // revalidatePath("/");
-    // revalidatePath("/admin");
 
     return NextResponse.json({
       success: "Post created successfully",
@@ -240,12 +207,6 @@ export async function DELETE(request: NextRequest) {
     if (response) {
       const imageDeleteResponse = await cloudinary.v2.uploader.destroy(imageId);
     }
-
-    // revalidatePath("/");
-    // revalidatePath("/my-profile");
-    // revalidatePath("/category/[categoryName]");
-    // revalidatePath("/user/[username]");
-    // revalidatePath("/post/[postId]");
 
     return NextResponse.json({ success: "Deleted Successfully", response });
   } catch (error) {

@@ -12,13 +12,20 @@ import {
 
 import { useTheme } from "next-themes";
 import SectionChart from "@/components/Admin/SectionChart";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type ViewsOverviewProps = {
   name: string;
   total: number;
 };
 
-function ViewsOverview({ viewsData }: { viewsData: ViewsOverviewProps[] }) {
+function ViewsOverview({
+  firstYear,
+  viewsData,
+}: {
+  firstYear: number;
+  viewsData: ViewsOverviewProps[];
+}) {
   // console.log("viewsData", viewsData);
 
   // const mockData = [
@@ -40,6 +47,23 @@ function ViewsOverview({ viewsData }: { viewsData: ViewsOverviewProps[] }) {
   const currentTheme = theme === "system" ? systemTheme : theme;
   const strokeColor = currentTheme === "dark" ? "#ffffff" : "#000000";
 
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const newParam = new URLSearchParams(searchParams.toString());
+
+  const handleYear = (value: string) => {
+    // console.log("year selected");
+    newParam.set("views", value.toString());
+    router.replace(`${pathname}?${newParam}`, { scroll: false });
+  };
+
+  const views = searchParams?.get("views");
+  const currentYear = new Date().getFullYear();
+
+  const selectedYear = views ? Number(views) : currentYear;
+
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -53,7 +77,12 @@ function ViewsOverview({ viewsData }: { viewsData: ViewsOverviewProps[] }) {
   };
 
   return (
-    <SectionChart title="Posts Views Overview">
+    <SectionChart
+      title="Posts Views Overview"
+      selectedYear={selectedYear}
+      handleYear={handleYear}
+      firstYear={firstYear}
+    >
       <ResponsiveContainer width="100%" height={400} minWidth={600}>
         <AreaChart
           data={viewsData}

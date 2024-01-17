@@ -1,5 +1,3 @@
-import { getSinglePost } from "@/db/queries/getSinglePost";
-import React from "react";
 import SinglePost from "./SinglePost";
 import PostLikes from "./PostLikes";
 import PostComments from "./PostComments";
@@ -60,7 +58,6 @@ async function AdminSinglePostPage({
               showLikes={showLikes}
               showReplies={showReplies}
             />
-            {/* <PostComments comments={post.comments} /> */}
           </div>
         </div>
       </div>

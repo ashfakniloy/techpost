@@ -1,20 +1,3 @@
-
-
-// export const navLinksSigned = [
-//   {
-//     name: "Home",
-//     link: "/",
-//   },
-//   {
-//     name: "Add Post",
-//     link: "/add-post",
-//   },
-//   {
-//     name: "My Profile",
-//     link: "/my-profile",
-//   },
-// ];
-
 export const navLinksSigned = (categories: CategoryProps[]) => {
   return [
     {

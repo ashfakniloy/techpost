@@ -2,16 +2,16 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { adminLinks } from "./adminLinks";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/solid";
 import { Separator } from "@/components/ui/separator";
 import { MoonIcon } from "@heroicons/react/24/outline";
 import DarkMode from "../DarkMode";
-import { signOut, useSession } from "next-auth/react";
-// import { ScrollArea } from "@/components/ui/scroll-area";
+import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+// import { ScrollArea } from "@/components/ui/scroll-area";
 
 function AdminSidebar({
   node,
@@ -40,38 +40,6 @@ function AdminSidebar({
     return "text-custom-blue2 hover:bg-cyan-200/50 dark:hover:bg-cyan-900/50";
   };
 
-  // const activeSubLinkClass = (navLink: string, i: number) => {
-  //   const value = navLink.subLinks.find(
-  //     (subLink) => subLink.link === router.pathname
-  //   );
-
-  //   if (pathname === value?.link && showSubMenu !== i) {
-  //     return "bg-custom-blue5 text-white";
-  //   }
-
-  //   return "text-custom-blue2 hover:text-white hover:bg-custom-blue5/50";
-  // };
-
-  // useEffect(() => {
-  //   const value = navLinks.map(
-  //     (navLink) =>
-  //       navLink.subLinks &&
-  //       navLink?.subLinks.find((subLink) => subLink.link === router.pathname)
-  //   );
-
-  //   // if (router.pathname === value?.link) {
-  //   if (router.pathname === value?.link) setShowSubMenu(true);
-  // }, []);
-
-  // const menu = (index: number) => {
-  //   if (showSubMenu === index) {
-  //     return setShowSubMenu(null);
-  //   }
-  //   setShowSubMenu(index);
-  // };
-
-  // const router = useRouter();
-
   useEffect(() => {
     if (showSidebar) {
       document.body.classList.add("overflow-y-hidden");
@@ -86,9 +54,6 @@ function AdminSidebar({
       // callbackUrl: `${window.location.origin}/admin/signin`,
       callbackUrl: `${window.location.origin}${pathname}`,
     });
-
-    // router.refresh();
-    // router.push("/signin");
   };
 
   return (
@@ -127,12 +92,10 @@ function AdminSidebar({
                 <div key={i}>
                   <Link href={navLink.link}>
                     <div
-                      // key={i}
                       className={`px-3 py-3 flex justify-between items-center font-semibold  rounded-lg ${activeClass(
                         navLink.link,
                         navLink.name
                       )}`}
-                      // onClick={() => setShowSubMenu("")}
                     >
                       <div className="flex items-center gap-3">
                         <span className="h-5 w-5">{navLink.icon}</span>

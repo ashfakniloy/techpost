@@ -77,14 +77,6 @@ export function PasswordField({
             className="w-full p-2 bg-transparent border border-gray-300 rounded-md outline-none dark:border-gray-700 focus:border-stone-600 dark:focus:border-stone-500"
           />
 
-          {/* <button
-            type="button"
-            className="absolute right-0 inset-y-0 my-[1px] mr-[1px] flex items-center bg-gray-800 px-3 rounded-r-md cursor-pointer"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? <IconSlashEye /> : <IconEye />}
-          </button> */}
-
           <div className="absolute right-0 inset-y-0 my-[1px] mr-[1px] flex items-center bg-gray-50 dark:bg-custom-gray4 px-2 rounded-r-md cursor-default">
             <span
               title={showPassword ? "Hide password" : "Show password"}

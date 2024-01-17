@@ -117,11 +117,7 @@ function AddPostForm({ categories }: { categories: string[] }) {
               </Button>
             )}
 
-            <Button
-              className="min-w-[120px]"
-              aria-label="preview post"
-              // disabled={isSubmitting}
-            >
+            <Button className="min-w-[120px]" aria-label="preview post">
               Preview
             </Button>
           </div>

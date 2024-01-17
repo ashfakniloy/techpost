@@ -10,6 +10,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { commentLikesColumn } from "@/components/Admin/DataTable/components/columns/commentLikesColumn";
 import Section from "@/components/Admin/Section";
+import { deleteReplyAdmin } from "@/db/mutations/admin/deleteReplyAdmin";
+import { deleteCommentAdmin } from "@/db/mutations/admin/deleteCommentAdmin";
 
 function SingleComment({ comment }: { comment: CommentTypes }) {
   const imageSrc = comment.user.profile?.imageUrl
@@ -65,18 +67,6 @@ async function PostComments({
     (comment) => comment.id === showReplies || comment.id === showLikes
   );
 
-  // const selectedComment =  comments.find(
-  //   (comment) => showReplies && comment.id === showReplies || showLikes && comment.id === showLikes
-  // );
-
-  // const selectedComment = showReplies && comments.find(
-  //   (comment) => comment.id === showReplies
-  // ) || showLikes && comments.find(
-  //   (comment) =>  comment.id === showLikes
-  // );
-
-  console.log("selectedComment", selectedComment?.commentsLikes);
-
   const cardTitle = showLikes ? (
     <span className="flex items-center gap-2">
       Post Comments
@@ -115,7 +105,7 @@ async function PostComments({
                     data={selectedComment.commentsReplies}
                     searchBy="username"
                     disableSearch
-                    deleteUrl="/api/admin/post/comment/reply"
+                    deleteAction={deleteReplyAdmin}
                   />
                 )}
                 {showLikes && (
@@ -136,7 +126,7 @@ async function PostComments({
             data={comments}
             searchBy="username"
             disableSearch
-            deleteUrl="/api/admin/post/comment"
+            deleteAction={deleteCommentAdmin}
           />
         )
       ) : (

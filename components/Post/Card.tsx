@@ -5,9 +5,6 @@ import OptionButton from "./OptionButton";
 import { getTimeDistance } from "@/utils/getTimeDistance";
 import CountsSection from "./CountsSection";
 import type { PostItem } from "@/types";
-// import { Suspense } from "react";
-// import CountsFetch from "./CountsFetch";
-// import CountsFetchSkeleton from "../Skeleton/CountsFetchSkeleton";
 
 type SessionProps = {
   session: Session | null;
@@ -83,17 +80,9 @@ function Card({ post, blurDataURL, session }: CardProps) {
             comments={_count.comments}
             views={_count.views}
           />
-          {/* <Suspense fallback={<CountsFetchSkeleton />}>
-            <CountsFetch postId={id} />
-          </Suspense> */}
 
           {session?.user.id === user.id && (
-            <OptionButton
-              title={title}
-              postId={id}
-              slug={slug}
-              imageId={imageId}
-            />
+            <OptionButton title={title} postId={id} slug={slug} />
           )}
         </div>
       </div>

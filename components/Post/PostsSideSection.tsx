@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-// import type { Post } from "@prisma/client";
 import type { PostItem } from "@/types";
 
 function PostsSideSection({

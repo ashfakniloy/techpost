@@ -23,7 +23,6 @@ function List({ post, session, blurDataURL }: ListProps) {
     id,
     slug,
     imageUrl,
-    imageId,
     title,
     shortDescription,
     user,
@@ -85,17 +84,9 @@ function List({ post, session, blurDataURL }: ListProps) {
               comments={_count.comments}
               views={_count.views}
             />
-            {/* <Suspense fallback={<CountsFetchSkeleton />}>
-              <CountsFetch postId={id} />
-            </Suspense> */}
 
             {session?.user.id === user.id && (
-              <OptionButton
-                title={title}
-                postId={id}
-                slug={slug}
-                imageId={imageId}
-              />
+              <OptionButton title={title} postId={id} slug={slug} />
             )}
           </div>
         </div>

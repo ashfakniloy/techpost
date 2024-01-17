@@ -44,7 +44,7 @@ function SearchButtonMobile() {
     const getSearch = async () => {
       setSearchResult(null);
 
-      const res = await fetch(`/api/post/search?title=${debouncedValue}`, {
+      const res = await fetch(`/api/search?title=${debouncedValue}`, {
         cache: "no-store",
       });
       const data = await res.json();

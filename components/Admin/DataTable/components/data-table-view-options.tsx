@@ -1,3 +1,4 @@
+// not using
 "use client";
 
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
@@ -23,12 +24,7 @@ export function DataTableViewOptions<TData>({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="ml-auto h-8 flex"
-          // className="ml-auto hidden h-8 lg:flex"
-        >
+        <Button variant="outline" size="sm" className="ml-auto h-8 flex">
           <SlidersHorizontal className="mr-2 h-4 w-4" />
           View
         </Button>

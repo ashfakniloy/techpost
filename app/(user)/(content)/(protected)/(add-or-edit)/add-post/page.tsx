@@ -1,6 +1,6 @@
-// import { getCategories } from "@/db/queries/getCategories";
 import AddPostForm from "./AddPostForm";
 import { fetchCategories } from "@/db/fetch/fetchCategories";
+// import { getCategories } from "@/db/queries/getCategories";
 
 export const metadata = {
   title: "Add new post",

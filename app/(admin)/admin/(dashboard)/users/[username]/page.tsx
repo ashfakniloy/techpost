@@ -9,6 +9,7 @@ import { notFound } from "next/navigation";
 import UserCounts from "./UserCounts";
 import UserBio from "./UserBio";
 import UserOption from "./UserOption";
+import { deletePostAdmin } from "@/db/mutations/admin/deletePostAdmin";
 
 type UserPageProps = SearchParams & {
   params: { username: string };
@@ -78,7 +79,7 @@ async function AdminSingleUserPage({
               data={posts}
               count={count}
               searchBy="title"
-              deleteUrl={`/api/admin/post`}
+              deleteAction={deletePostAdmin}
               mannualControl
             />
           )}

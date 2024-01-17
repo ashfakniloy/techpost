@@ -1,4 +1,4 @@
-import { Post, Profile, User } from "@prisma/client";
+import { Post } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import parser from "html-react-parser";
@@ -20,15 +20,6 @@ type SinglePostProps =
       };
     })
   | null;
-// & GetResult<{
-// id: string;
-// title: string;
-// imageUrl: string;
-// ... 5 more ...;
-// userId: string;
-// }, unknown> & {}) | null;
-
-// };
 
 function SinglePost({
   post,

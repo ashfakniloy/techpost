@@ -35,12 +35,6 @@ async function DashBoardCards() {
   return (
     <div className="grid grid-cols-4 gap-6">
       {cardList.map((card) => (
-        // <SingleCard
-        //   key={i}
-        //   title={card.title}
-        //   count={card.count}
-        //   icon={card.icon}
-        // />
         <div
           key={card.title}
           className="h-[120px] w-full bg-custom-gray6 rounded-lg shadow-md px-8 py-6 hover:shadow-lg transition-shadow duration-300 group cursor-pointer"

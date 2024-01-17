@@ -29,8 +29,6 @@ function PageTitle() {
 
   const pathSegments = pathname?.split("/").filter((path) => path !== "");
 
-  // console.log("pathSegments", pathSegments);
-
   const getIcon = () => {
     if (pathname === "/admin") {
       return <ChartPieIcon />;
@@ -43,28 +41,6 @@ function PageTitle() {
   };
 
   const pageIcon = getIcon();
-
-  // const pageIcon = () => {
-  //   const isPath = (title: string) => pathNames.includes(title);
-
-  //   if (pathname === "/admin") {
-  //     return <ChartPieIcon />;
-  //   } else {
-  //     switch (true) {
-  //       case isPath("users"):
-  //         return <UsersIcon />;
-
-  //       case isPath("posts"):
-  //         return <NewspaperIcon />;
-
-  //       case isPath("categories"):
-  //         return <Squares2X2Icon />;
-
-  //       default:
-  //         break;
-  //     }
-  //   }
-  // };
 
   return (
     <>

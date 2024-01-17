@@ -25,10 +25,9 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
     signOut({
       // redirect: false,
       callbackUrl: `${window.location.origin}${pathname}`,
+    }).then(() => {
+      localStorage.removeItem("draftPost");
     });
-
-    // router.refresh();
-    // router.push("/signin");
   };
 
   const signinPath =
@@ -44,8 +43,6 @@ function NavButtons({ session, username, imageUrl }: NavButtonsProps) {
                 <Image
                   src={imageUrl}
                   alt="user image"
-                  // width={40}
-                  // height={40}
                   sizes="40px"
                   fill
                   className="object-cover"

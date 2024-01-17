@@ -149,7 +149,6 @@ const Toolbar = ({ editor }: { editor: Editor | null }) => {
         className={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}
         title="Heading 1"
       >
-        {/* H<span className="self-center text-xs">1</span> */}
         <span
           className={currentTheme === "dark" ? "fill-gray-50" : "fill-gray-700"}
         >
@@ -162,7 +161,6 @@ const Toolbar = ({ editor }: { editor: Editor | null }) => {
         className={editor.isActive("heading", { level: 2 }) ? "is-active" : ""}
         title="Heading 2"
       >
-        {/* H<span className="text-xs">2</span> */}
         <span
           className={currentTheme === "dark" ? "fill-gray-50" : "fill-gray-700"}
         >
@@ -175,7 +173,6 @@ const Toolbar = ({ editor }: { editor: Editor | null }) => {
         className={editor.isActive("heading", { level: 3 }) ? "is-active" : ""}
         title="Heading 3"
       >
-        {/* H<span className="text-xs">3</span> */}
         <span
           className={currentTheme === "dark" ? "fill-gray-50" : "fill-gray-700"}
         >
@@ -234,18 +231,6 @@ const Toolbar = ({ editor }: { editor: Editor | null }) => {
       >
         code block
       </button> */}
-      {/* <button
-        type="button"
-        onClick={() => editor.commands.setLink()}
-        // className={editor.isActive("blockquote") ? "is-active" : ""}
-        title="Blockquote"
-      >
-        <span
-          className={currentTheme === "dark" ? "fill-white" : "fill-gray-700"}
-        >
-          <LinkIcon />
-        </span>
-      </button> */}
 
       <LinkButton editor={editor} currentTheme={currentTheme} />
 
@@ -301,7 +286,6 @@ const Toolbar = ({ editor }: { editor: Editor | null }) => {
       <button
         type="button"
         onClick={() => editor.chain().focus().undo().run()}
-        // onClick={() => editor.chain().focus().setImage({src: '', alt: '', title: ''}).run()}
         disabled={!editor.can().chain().focus().undo().run()}
         title="Undo"
       >
@@ -326,7 +310,6 @@ const Toolbar = ({ editor }: { editor: Editor | null }) => {
 
       <button
         type="button"
-        // onClick={() => editor?.commands.clearContent(true)}
         onClick={() => editor.chain().focus().clearContent(true).run()}
         disabled={!editor.can().chain().focus().clearContent().run()}
         title="Reset"

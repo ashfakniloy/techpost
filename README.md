@@ -2,7 +2,7 @@
 
 ![Project Screenshot](/public/images/techpost-banner.webp)
 
-A full-stack multi-author tech blog project built with Next.js 13 (app router). This project allows multiple authors to publish tech-related blog posts, manage their profiles, and engage with the community.
+A full-stack multi-author tech blog project built with Next.js 14 (app router). This project allows multiple authors to publish tech-related blog posts, manage their profiles, and engage with the community.
 
 ## Live Demo
 

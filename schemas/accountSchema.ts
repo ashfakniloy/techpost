@@ -3,7 +3,7 @@ import { z } from "zod";
 export const usernameSchema = z.object({
   username: z
     .string()
-    .nonempty("Username is required")
+    .min(1, "Username is required")
     .min(3, "Username must be at least 3 characters")
     .max(30, "Username must be at most 30 characters")
     .regex(
@@ -16,17 +16,17 @@ export const usernameSchema = z.object({
 
 export const passwordSchema = z
   .object({
-    currentPassword: z.string().nonempty("Current Password is required"),
+    currentPassword: z.string().min(1, "Current Password is required"),
     newPassword: z
       .string()
-      .nonempty("New Password is required")
+      .min(1, "New Password is required")
       .min(6, "Password must be at least 6 characters")
       .regex(
         /^(?=.*[a-zA-Z])(?=.*\d).+$/,
         // "Password must contain at least 1 letter and 1 number"
         "Password requires atleast 1 letter and 1 number."
       ),
-    retypePassword: z.string().nonempty("Re-enter your new password"),
+    retypePassword: z.string().min(1, "Re-enter your new password"),
   })
   .refine((data) => data.newPassword === data.retypePassword, {
     message: "Retype new password correctly",
@@ -34,15 +34,15 @@ export const passwordSchema = z
   });
 
 export const emailSchema = z.object({
-  email: z.string().nonempty("Email is required").email("Invalid email"),
-  password: z.string().nonempty("Password is required"),
+  email: z.string().min(1, "Email is required").email("Invalid email"),
+  password: z.string().min(1, "Password is required"),
 });
 
 export const deleteAccountSchema = z.object({
-  password: z.string().nonempty("Password is required"),
+  password: z.string().min(1, "Password is required"),
   text: z
     .string()
-    .nonempty("This field is required")
+    .min(1, "This field is required")
     .refine(
       (value) => value === "delete my account",
       "Enter the text correctly"

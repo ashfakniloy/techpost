@@ -2,9 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Post } from "../../data/schema";
 import { DataTableColumnHeader } from "../data-table-column-header";
-import { format } from "date-fns";
 import { PostsActions } from "../actions/PostsActions";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import { PostAdminTypes } from "@/db/queries/admin/getAllPostsAdmin";
@@ -48,19 +46,7 @@ export const userPostsColumn: ColumnDef<PostAdminTypes>[] = [
       <div className="w-[100px]">{row.getValue("categoryName")}</div>
     ),
   },
-  // {
-  //   accessorKey: "user.username",
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader mannualSort column={column} title="Username" />
-  //   ),
-  //   cell: ({
-  //     row: {
-  //       original: {
-  //         user: { username },
-  //       },
-  //     },
-  //   }) => <div className="w-[100px]">{username}</div>,
-  // },
+
   {
     accessorKey: "_count.likes",
     header: ({ column }) => (
@@ -106,12 +92,7 @@ export const userPostsColumn: ColumnDef<PostAdminTypes>[] = [
       <DataTableColumnHeader mannualSort column={column} title="Created at" />
     ),
     cell: ({ row }) => (
-      // <div className="w-[100px]">
-      //   {format(new Date(row.getValue("createdAt")), "MMMM dd yyyy")}
-      // </div>
       <div className="w-[150px]">
-        {/* {getFormatedDate(row.getValue("createdAt"))} */}
-        {/* {format(new Date(row.getValue("createdAt")), "MMMM dd yyyy")} */}
         <ClientFormattedDate date={row.getValue("createdAt")} />
       </div>
     ),

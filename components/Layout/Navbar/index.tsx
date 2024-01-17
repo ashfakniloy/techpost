@@ -1,6 +1,5 @@
 "use client";
 
-// import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Session } from "next-auth";
 import useToggle from "@/hooks/useToggle";
@@ -14,7 +13,6 @@ import NavMenu from "./NavMenu";
 import NavButtons from "./NavButtons";
 import { navLinksSigned, navLinksUnsigned } from "./navLinks";
 import TechpostLogo from "../TechpostLogo";
-// import { BASE_URL } from "@/config";
 
 function Navbar({
   session,
@@ -25,27 +23,6 @@ function Navbar({
 }) {
   const pathname = usePathname();
 
-  // const categories = use(dataPromise);
-
-  // const [categories, setCategories] = useState("");
-
-  // useEffect(() => {
-  //   const getCategories = async () => {
-  //     const res = await fetch(`${BASE_URL}/api/nav`);
-  //     const data = await res.json();
-
-  //     if (res.ok) {
-  //       setCategories(data);
-  //     } else {
-  //       console.log("error", data);
-  //     }
-
-  //   getCategories()
-  //   };
-  // }, []);
-
-  // console.log("categories", categories);
-
   const {
     node: sidebarNode,
     toggle: showSidebar,
@@ -55,8 +32,6 @@ function Navbar({
   const [showSidebarSubMenu, setShowSidebarSubMenu] = useState<string | null>(
     null
   );
-
-  // console.log("session from server", session);
 
   useEffect(() => {
     setShowSidebar(false);

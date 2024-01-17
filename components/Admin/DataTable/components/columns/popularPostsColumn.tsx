@@ -1,20 +1,9 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-// import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "../data-table-column-header";
-// import { PostsActions } from "../actions/PostsActions";
-// import { ClientFormattedDate } from "@/components/ClientFormattedDate";
-// import { PostAdminTypes } from "@/db/queries/admin/getAllPostsAdmin";
 import Link from "next/link";
-// import { Post } from "@prisma/client";
 import type { PostItem } from "@/types";
-
-// type PostProps = PostItem & {
-//   user: {
-//     username: string;
-//   };
-// };
 
 export const popularPostsColumn: ColumnDef<PostItem>[] = [
   {
@@ -63,13 +52,4 @@ export const popularPostsColumn: ColumnDef<PostItem>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-
-  // {
-  //   id: "actions",
-  //   cell: ({ row }) => (
-  //     <div className="w-[0px]">
-  //       <PostsActions row={row} />
-  //     </div>
-  //   ),
-  // },
 ];

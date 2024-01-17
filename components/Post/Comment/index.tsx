@@ -146,21 +146,6 @@ async function Comment({
                 }`}
               </Button>
             </Link>
-
-            {/* <Link
-              href={`/post/${slug}?showComments=${showCommentsIncrement}`}
-              scroll={false}
-              replace={true}
-              className="px-6 py-2 rounded-full text-sm font-bold bg-gray-800 text-white dark:text-black dark:bg-gray-100"
-            >
-              {`Show ${
-                totalComments - comments.length < addComments
-                  ? totalComments - comments.length
-                  : addComments
-              } more ${
-                totalComments - comments.length > 1 ? "comments" : "comment"
-              }`}
-            </Link> */}
           </div>
         )}
       </div>

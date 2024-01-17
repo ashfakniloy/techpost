@@ -36,7 +36,7 @@ export function SelectField({
     setValue(fieldValue);
   }, [fieldValue]);
 
-  console.log("value", value);
+  // console.log("value", value);
 
   return (
     <div className="relative ">

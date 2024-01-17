@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { getAuthSession } from "@/lib/next-auth";
 import { prisma } from "@/lib/prisma";
 import { CategoryFormProps, categorySchema } from "@/schemas/categorySchema";
@@ -20,19 +20,19 @@ export async function editCategory({
     return { error: "Unauthorized" };
   }
 
-  // if (typeof categoryId !== "string") {
-  //   return { error: "Invalid categoryId" };
-  // }
-
-  const parsedValues = categorySchema.safeParse(values);
-
-  if (!parsedValues.success) {
-    const { errors } = parsedValues.error;
-
-    return { error: "Invalid request" };
+  if (!categoryId) {
+    return { error: "Need to pass category Id" };
   }
 
-  const { data } = parsedValues;
+  const parsedBody = categorySchema.safeParse(values);
+
+  if (!parsedBody.success) {
+    const { errors } = parsedBody.error;
+
+    return { error: "Invalid request", data: errors };
+  }
+
+  const { data } = parsedBody;
   const { name, imageUrl, imageId, quotes } = data;
 
   const categoryResponse = await prisma.category.findFirst({
@@ -85,10 +85,15 @@ export async function editCategory({
       });
     }
 
+    revalidatePath("/", "layout");
     revalidateTag("categories");
-    // revalidateTag(`category-${categoryName}`);
+    revalidateTag(`category-${name.toLowerCase()}`);
+    revalidateTag("editorsChoice");
 
-    return { success: "Category updated successfully", data: response };
+    return {
+      success: "Category updated successfully",
+      data: response,
+    };
   } catch (error) {
     // if (error instanceof Prisma.PrismaClientKnownRequestError) {
     //   if (error.code === "P2002") {
@@ -98,7 +103,6 @@ export async function editCategory({
     //     );
     //   }
     // }
-
     return { error: "Something went wrong", data: error };
   }
 }

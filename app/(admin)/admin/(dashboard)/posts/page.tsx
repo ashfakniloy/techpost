@@ -1,6 +1,7 @@
 import { postsColumns } from "@/components/Admin/DataTable/components/columns/postsColumns";
 import { DataTable } from "@/components/Admin/DataTable/components/data-table";
 import Section from "@/components/Admin/Section";
+import { deletePostAdmin } from "@/db/mutations/admin/deletePostAdmin";
 import { getAllPostsAdmin } from "@/db/queries/admin/getAllPostsAdmin";
 
 async function AdminPostsPage({
@@ -30,7 +31,7 @@ async function AdminPostsPage({
           data={posts}
           count={count}
           searchBy="title"
-          deleteUrl={`/api/admin/post`}
+          deleteAction={deletePostAdmin}
           mannualControl
         />
       )}

@@ -8,6 +8,8 @@ function InvalidUserPage() {
     signOut({
       // redirect: false,
       callbackUrl: `${window.location.origin}/signin`,
+    }).then(() => {
+      localStorage.removeItem("draftPost");
     });
   }, []);
 

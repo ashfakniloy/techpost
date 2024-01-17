@@ -14,17 +14,18 @@ import SocialShare from "@/components/Post/SocialShare";
 import { capitalizeWords } from "@/utils/capitalizeWords";
 import { getSinglePost } from "@/db/queries/getSinglePost";
 import { getAuthSession } from "@/lib/next-auth";
-import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 import CountsSkeleton from "@/components/Skeleton/CountsSkeleton";
 import "@/components/TextEditor/Tiptap/styles.css";
-// import { getAllSlugs } from "@/db/queries/getAllSlugs";
-// import { revalidateTagAction } from "@/actions/revalidateTagAction";
+import { getAllSlugs } from "@/db/queries/getAllSlugs";
+// import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 
 // export const revalidate = 0;
 // export const dynamic = "force-dynamic";
 // export const fetchCache = "force-no-store";
 
 // export const dynamicParams = false;
+
+// export const dynamic = "force-static";
 
 type SinglePostPageProps = {
   params: {
@@ -36,11 +37,11 @@ type SinglePostPageProps = {
   };
 };
 
-// export async function generateStaticParams() {
-//   const { slugs } = await getAllSlugs();
+export async function generateStaticParams() {
+  const { slugs } = await getAllSlugs();
 
-//   return slugs;
-// }
+  return slugs;
+}
 
 export async function generateMetadata({
   params: { slug },
@@ -107,7 +108,7 @@ async function SinglePostPage({
 
   const articleUrl = `${BASE_URL}/post/${slug}`;
 
-  const blurDataUrl = await getImagePlaceholder(post.imageUrl);
+  // const blurDataUrl = await getImagePlaceholder(post.imageUrl);
 
   return (
     <div className="relative flex-1 max-w-full lg:max-w-[796px]">
@@ -171,7 +172,6 @@ async function SinglePostPage({
                       title={post.title}
                       postId={post.id}
                       slug={post.slug}
-                      imageId={post.imageId}
                       redirectAfterDelete={"/"}
                     />
                   )}
@@ -207,8 +207,8 @@ async function SinglePostPage({
           <div className="mt-5 h-[280px] lg:h-[470px] relative">
             <Image
               src={post.imageUrl}
-              placeholder="blur"
-              blurDataURL={blurDataUrl}
+              // placeholder="blur"
+              // blurDataURL={blurDataUrl}
               alt="post image"
               fill
               sizes="(max-width: 768px) 100vw, 800px"
@@ -231,12 +231,14 @@ async function SinglePostPage({
       </div>
 
       <div className="mt-5">
+        <Suspense fallback={<p>Loading...</p>}>
           <Comment
             postId={post.id}
             authorId={post.userId}
             slug={post.slug}
             showCommentsParam={showComments}
           />
+        </Suspense>
       </div>
     </div>
   );

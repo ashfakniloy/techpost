@@ -8,6 +8,7 @@ import { categoriesPostsColumn } from "@/components/Admin/DataTable/components/c
 import CategoryOption from "./CategoryOption";
 import Section from "@/components/Admin/Section";
 import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
+import { deletePostAdmin } from "@/db/mutations/admin/deletePostAdmin";
 
 // export const dynamic = "force-dynamic";
 
@@ -33,10 +34,6 @@ async function CategoryPageAdmin({
 
   const limitNumber = Number(limit);
   const pageNumber = Number(page);
-  // const { data, count } = await getAllPosts({
-  //   limitNumber: limitNumber || 10,
-  //   pageNumber,
-  // });
 
   const sortValues = sort?.split(".");
   const sortBy = sortValues?.[0];
@@ -96,7 +93,7 @@ async function CategoryPageAdmin({
               data={categoryPosts}
               count={count}
               searchBy="title"
-              deleteUrl={`/api/admin/post`}
+              deleteAction={deletePostAdmin}
               mannualControl
             />
           )}

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getEditorsChoicePost } from "@/db/queries/getEditorsChoicePost";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import { getTimeDistance } from "@/utils/getTimeDistance";
-import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 import { fetchEditorsChoice } from "@/db/fetch/fetchEditorsChoice";
+// import { getEditorsChoicePost } from "@/db/queries/getEditorsChoicePost";
+// import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 
 async function EditorsChoice() {
   // await new Promise((resolve) => setTimeout(resolve, 5000));

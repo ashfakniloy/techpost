@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import UsernameChange from "./UsernameChange";
 import EmailChange from "./EmailChange";
 import PasswordChange from "./PasswordChange";
-import DeleteAccount from "./DeleteAccount";
+import AccountDelete from "./AccountDelete";
 
 function AccountSettingpage() {
   const { data: session } = useSession();
@@ -35,7 +35,7 @@ function AccountSettingpage() {
     },
     {
       name: "Delete Account",
-      component: <DeleteAccount setMenu={setMenu} />,
+      component: <AccountDelete setMenu={setMenu} />,
     },
   ];
 

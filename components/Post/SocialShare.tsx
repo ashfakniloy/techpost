@@ -12,8 +12,6 @@ function SocialShare({
   articleTitle: string;
   via?: string;
 }) {
-  // const articleUrl = `https://techpost.vercel.app/post/clkjlvf9h0001fo780wgaknui`;
-
   const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
     articleUrl
   )}`;

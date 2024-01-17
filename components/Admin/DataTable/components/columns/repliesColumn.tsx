@@ -2,13 +2,8 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Post } from "../../data/schema";
-import { format } from "date-fns";
-import { PostsActions } from "../actions/PostsActions";
 import Image from "next/image";
 import Link from "next/link";
-import { getTimeDistance } from "@/utils/getTimeDistance";
-
 import { DataTableColumnHeader } from "../data-table-column-header";
 import type { CommentTypes } from "@/db/queries/getComments";
 import { RepliesAction } from "../actions/repliesAction";
@@ -45,14 +40,7 @@ export const repliesColumn: ColumnDef<CommentReply>[] = [
       <DataTableColumnHeader column={column} title="Replies" />
     ),
     cell: ({ row: { original } }) => {
-      const {
-        id,
-        postId,
-
-        user,
-        userId,
-        commentReply,
-      } = original;
+      const { id, user, commentReply } = original;
 
       // console.log(row.original);
 
@@ -92,16 +80,7 @@ export const repliesColumn: ColumnDef<CommentReply>[] = [
                   <p>{commentReply}</p>
                 </div>
                 <div className="relative">
-                  <div className="relative flex w-full justify-between items-center text-sm">
-                    {/* <div className="flex items-center gap-2">
-                      <p className="text-gray-600 dark:text-gray-400 ml-16">
-                        {getTimeDistance(comment.createdAt)}
-                      </p>
-                    </div> */}
-                  </div>
-                  {/* <PostCommentsReplies
-                    commentReplies={comment.commentsReplies}
-                  /> */}
+                  <div className="relative flex w-full justify-between items-center text-sm"></div>
                 </div>
               </div>
             </div>

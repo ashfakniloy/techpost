@@ -1,6 +1,6 @@
+// not using
 "use client";
 
-// import { useEditor, EditorContent } from "@tiptap/react";
 import {
   BubbleMenu,
   EditorContent,

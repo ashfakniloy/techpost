@@ -1,27 +1,26 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import { toast } from "react-hot-toast";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputField } from "@/components/Form/InputField";
 import { Loader } from "@/components/Loaders/Loader";
 import { PasswordField } from "@/components/Form/PasswordField";
 import { SigninFormProps, signinSchema } from "@/schemas/signinSchema";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
 import TechpostLogo from "@/components/Layout/TechpostLogo";
-// import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function AdminSigninPage() {
-  const router = useRouter();
+  // const router = useRouter();
 
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   const searchParams = useSearchParams();
 
-  const callback_url = searchParams?.get("callback_url");
+  const callback_url = searchParams.get("callback_url") || "/admin";
 
   const [guestIsSubmitting, setGuestIsSubmitting] = useState(false);
 
@@ -57,14 +56,10 @@ function AdminSigninPage() {
 
     if (!response?.error) {
       console.log("succcess", response);
-      // toast.success("Welcome Admin", {
-      //   id: toastSignin,
-      // });
 
-      // isModal ? router.back() : router.push("/");
-      router.refresh();
-      // router.push("/admin");
-      router.push(callback_url || "/admin");
+      // router.refresh();
+      // router.push(callback_url || "/admin");
+      window.location.assign(callback_url);
     } else {
       console.log("error", response);
       toast.error(
@@ -78,7 +73,6 @@ function AdminSigninPage() {
 
   const handleGuestSignin = async () => {
     setGuestIsSubmitting(true);
-    // const toastSignin = toast.loading("Loading...");
 
     const response = await signIn("credentials", {
       email: "guestadmin@email.com",
@@ -92,41 +86,32 @@ function AdminSigninPage() {
 
     if (!response?.error) {
       console.log("succcess", response);
-      // toast.success("Welcome Admin", {
-      //   id: toastSigninGuest,
-      // });
 
-      // isModal ? router.back() : router.push("/");
-      router.refresh();
-      // router.push("/admin");
-      router.push(callback_url || "/admin");
+      // router.refresh();
+      // router.push(callback_url);
+      window.location.assign(callback_url);
     } else {
       console.log("error", response);
-      toast.error(
-        `${response?.error}`
-        // {
-        //   id: toastSigninGuest,
-        // }
-      );
+      toast.error(`${response?.error}`);
     }
 
     setGuestIsSubmitting(false);
   };
 
-  useEffect(() => {
-    const role = session?.user.role;
+  // useEffect(() => {
+  //   const role = session?.user.role;
 
-    const messages = {
-      ADMIN: "Welcome Admin",
-      GUEST_ADMIN: "Welcome Guest Admin",
-    };
+  //   const messages = {
+  //     ADMIN: "Welcome Admin",
+  //     GUEST_ADMIN: "Welcome Guest Admin",
+  //   };
 
-    if (role === "ADMIN" || role === "GUEST_ADMIN") {
-      const message = messages[role];
+  //   if (role === "ADMIN" || role === "GUEST_ADMIN") {
+  //     const message = messages[role];
 
-      toast.success(<span className="capitalize">{message}</span>);
-    }
-  }, [session]);
+  //     toast.success(<span className="capitalize">{message}</span>);
+  //   }
+  // }, [session]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -135,15 +120,6 @@ function AdminSigninPage() {
       </div>
 
       <div className="my-10 bg-gray-50 relative mx-3 dark:bg-custom-gray6 rounded-md shadow-md px-7 py-9 lg:px-10 lg:py-12  w-full max-w-[420px]">
-        {/* {isModal && (
-        <button
-          type="button"
-          className="absolute right-5 top-5 p-1 rounded-full hover:bg-gray-700"
-          onClick={() => router.back()}
-        >
-          <XMarkIcon className="h-6 w-6" />
-        </button>
-      )} */}
         <p className="text-2xl font-montserrat font-bold text-center">
           Admin Sign In
         </p>

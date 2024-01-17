@@ -1,17 +1,17 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import parser from "html-react-parser";
-import { toast } from "react-hot-toast";
+import Link from "next/link";
+import Image from "next/image";
 import { redirect, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
+import parser from "html-react-parser";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import { Loader } from "@/components/Loaders/Loader";
-import { postSchema } from "@/schemas/postSchema";
 import { Button } from "@/components/ui/button";
-import { revalidateAllRoutes } from "@/actions/revalidateAllRoutes";
+import { addPost } from "@/db/mutations/user/post/addPost";
+import { postSchema } from "@/schemas/postSchema";
 
 function PostPreviewPage() {
   const router = useRouter();
@@ -33,98 +33,93 @@ function PostPreviewPage() {
   const [hasPost, setHasPost] = useState(false);
 
   useEffect(() => {
-    // const persistedPost = JSON.parse(localStorage.getItem("newPost") || "");
-
     const draftPost = localStorage.getItem("draftPost");
     const JsonParsed = draftPost && JSON.parse(draftPost);
     const parsedPost = postSchema.safeParse(JsonParsed);
     if (parsedPost.success !== true) redirect("/add-post");
     setPreviewPost(JsonParsed);
     setHasPost(true);
-
-    // const parsed = formSchema.parse(previewPost);
-    // console.log("parsed", parsed);
-
-    // if (parsed.success === false) {
-    //   redirect("/add-post");
-    // }
   }, []);
 
-  // useEffect(() => {
-  //   const persistedPost = localStorage.getItem("draftPost");
-  //   const parsedPost = persistedPost && JSON.parse(persistedPost || "");
-  //   // console.log(parsedPost);
-
-  //   const regex = /(<([^>]+)>)/gi;
-  //   const hasArticle = !!parsedPost.article.replace(regex, "").length;
-
-  //   const parsed = formSchema.safeParse(previewPost);
-  //   console.log("parsed", parsed);
-
-  //   // if (
-  //   //   !parsedPost ||
-  //   //   Object.values(parsedPost).includes("") ||
-  //   //   !hasArticle ||
-  //   //   parsed.success !== true
-  //   // ) {
-  //   //   // router.replace("/add-post");
-
-  //   // }
-  // }, [previewPost]);
-
-  // useEffect(() => {
-  //   const parsed = postSchema.safeParse(previewPost);
-
-  //   if (hasPost && parsed.success !== true) redirect("/add-post");
-  // }, [hasPost]);
-
-  // console.log("article", removeHtmlTags(previewPost.article));
-
+  // with server action
   const handlePublish = async () => {
     // console.log("previewPost", previewPost);
     setIsSubmitting(true);
     const toastPublish = toast.loading("Loading...");
 
-    const url = "/api/post";
+    const result = await addPost({ values: previewPost });
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(previewPost),
-    });
+    console.log("result", result);
 
-    const data = await response.json();
-
-    if (response.ok) {
-      toast.success("Post created successfully", {
+    if (result.success) {
+      toast.success(result.success, {
         id: toastPublish,
       });
-      console.log("success", data);
-      const slug = data.response.slug;
-      // router.refresh();
-      revalidateAllRoutes();
+
+      const slug = result.data.slug;
+
       router.replace(`/post/${slug}`);
 
-      // setDraftPost("");
       localStorage.removeItem("draftPost");
-    } else {
-      toast.error(`${data.error}`, {
+    } else if (result.error) {
+      toast.error(result.error, {
         id: toastPublish,
       });
-      console.log("error", data);
+    } else {
+      toast.error("Error", {
+        id: toastPublish,
+      });
     }
 
     setIsSubmitting(false);
   };
 
+  // // with route handler
+  // const handlePublish = async () => {
+  //   // console.log("previewPost", previewPost);
+  //   setIsSubmitting(true);
+  //   const toastPublish = toast.loading("Loading...");
+
+  //   const url = "/api/post";
+
+  //   const response = await fetch(url, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(previewPost),
+  //   });
+
+  //   const data = await response.json();
+
+  //   if (response.ok) {
+  //     toast.success("Post created successfully", {
+  //       id: toastPublish,
+  //     });
+  //     console.log("success", data);
+  //     const slug = data.response.slug;
+  //     // router.refresh();
+  //     revalidateAllRoutes();
+  //     router.replace(`/post/${slug}`);
+
+  //     // setDraftPost("");
+  //     localStorage.removeItem("draftPost");
+  //   } else {
+  //     toast.error(`${data.error}`, {
+  //       id: toastPublish,
+  //     });
+  //     console.log("error", data);
+  //   }
+
+  //   setIsSubmitting(false);
+  // };
+
   if (!hasPost) {
     return (
       <div className="min-h-[calc(100dvh-75px)] lg:min-h-[calc(100vh-75px)] flex justify-center items-center">
         <div className="opacity-60">
-        <Loader width="50" />
-      </div>
+          <Loader width="50" />
+        </div>
       </div>
     );
   }
@@ -206,12 +201,6 @@ function PostPreviewPage() {
 
       <div className="flex justify-end items-center gap-6 mt-5 mb-5">
         <Link href="/add-post">
-          {/* <button
-            className="min-w-[120px] py-[9px] hover:text-white dark:hover:text-gray-900 border border-gray-800 dark:border-gray-200 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors duration-200 rounded-md text-sm font-bold disabled:cursor-not-allowed disabled:opacity-50"
-            disabled={isSubmitting}
-          >
-            Edit
-          </button> */}
           <Button
             type="button"
             aria-label="edit post"

@@ -9,22 +9,6 @@ import { Session } from "next-auth";
 import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/ui/button";
 
-// type NavLinksProps = (
-//   | {
-//       name: string;
-//       link: string;
-//       subLinks?: undefined;
-//     }
-//   | {
-//       name: string;
-//       subLinks: {
-//         name: string;
-//         link: string;
-//       }[];
-//       link?: undefined;
-//     }
-// )[];
-
 type NavLinksProps = (
   | {
       name: string;
@@ -79,24 +63,13 @@ function Sidebar({
     signOut({
       // redirect: false,
       callbackUrl: `${window.location.origin}${pathname}`,
+    }).then(() => {
+      localStorage.removeItem("draftPost");
     });
-
-    // router.refresh();
-    // router.push("/signin");
   };
 
   // for closing the sidebarSubmenu when clicking on a link without submenu. closing the submenu with onClick on links causes the submenu to close before the sidebar closes.
   useEffect(() => {
-    // const subLinks = navLinks
-    //   .flatMap((navLink) => navLink.subLinks?.map((subLink) => subLink.link))
-    //   .filter((link) => link !== undefined);
-
-    // const links = navLinks.map((navLink) => navLink.link);
-    // pathnameDecoded &&
-    //   (!subLinks.includes(pathnameDecoded) ||
-    //     links.includes(pathnameDecoded)) &&
-    //   setShowSidebarSubMenu(null);
-
     const links = navLinks.map((navLink) => navLink.link);
 
     links.includes(pathnameDecoded) && setShowSidebarSubMenu(null);
@@ -111,9 +84,6 @@ function Sidebar({
     if (pathnameDecoded === value?.link && showSidebarSubMenu !== navName) {
       return "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-100";
     }
-    // else {
-    //   return "hover:bg-gray-200 dark:hover:bg-gray-600";
-    // }
   };
 
   const menu = (navName: string | null) => {
@@ -259,7 +229,6 @@ function Sidebar({
                       ) : (
                         <Link href={navLink.link}>
                           <p
-                            // onClick={() => setShowSidebarSubMenu(null)}
                             className={`py-3 pl-5 rounded-lg cursor-pointer flex items-center gap-1 ${activeSubLinkClass(
                               navLink.subLinks,
                               navLink.name

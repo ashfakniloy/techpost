@@ -1,15 +1,15 @@
 "use client";
 
+import { useTransition } from "react";
+import { toast } from "react-hot-toast";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import useToggle from "@/hooks/useToggle";
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "react-hot-toast";
+import { deleteComment } from "@/db/mutations/user/post/deleteComment";
+import { deleteCommentReply } from "@/db/mutations/user/post/deleteCommentReply";
 
 function CommentOption({
   commentId,
@@ -20,51 +20,84 @@ function CommentOption({
   commentReplyId?: string;
   type: "Comment" | "Reply";
 }) {
-  // const { node, toggle: showOptions, setToggle: setShowOptions } = useToggle();
-  const [disableDelete, setDisableDelete] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
-  const router = useRouter();
-
-  const handleDelete = async () => {
-    console.log("delete postid", commentId);
-    setDisableDelete(true);
-
-    const toastDeletePost = toast.loading("Loading...");
-
-    const getUrl = () => {
+  // with server action
+  const handleDelete = () => {
+    startTransition(async () => {
       if (type === "Comment") {
-        return `/api/post/comment?commentId=${commentId}`;
+        if (!commentId) return;
+        const result = await deleteComment({ commentId });
+
+        console.log("result", result);
+
+        if (result.success) {
+          toast.success(result.success);
+        } else if (result.error) {
+          toast.error(result.error);
+        } else {
+          toast.error("Error");
+        }
       }
+
       if (type === "Reply") {
-        return `/api/post/comment/commentReply?commentReplyId=${commentReplyId}`;
+        if (!commentReplyId) return;
+        const result = await deleteCommentReply({ commentReplyId });
+
+        console.log("result", result);
+
+        if (result.success) {
+          toast.success(result.success);
+        } else if (result.error) {
+          toast.error(result.error);
+        } else {
+          toast.error("Error");
+        }
       }
-    };
-
-    const url = getUrl();
-
-    const response = await fetch(url!, {
-      method: "DELETE",
     });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      toast.success(`${type} deleted`, {
-        id: toastDeletePost,
-      });
-      router.refresh();
-
-      console.log("success", data);
-    } else {
-      toast.error(data.error, {
-        id: toastDeletePost,
-      });
-      console.log("error", data);
-    }
-
-    setDisableDelete(false);
-    // setShowOptions(false);
   };
+
+  // // with route handler
+  // const handleDelete = async () => {
+  //   console.log("delete postid", commentId);
+  //   setDisableDelete(true);
+
+  //   const toastDeletePost = toast.loading("Loading...");
+
+  //   const getUrl = () => {
+  //     if (type === "Comment") {
+  //       return `/api/post/comment?commentId=${commentId}`;
+  //     }
+  //     if (type === "Reply") {
+  //       return `/api/post/comment/commentReply?commentReplyId=${commentReplyId}`;
+  //     }
+  //   };
+
+  //   const url = getUrl();
+
+  //   const response = await fetch(url!, {
+  //     method: "DELETE",
+  //   });
+
+  //   const data = await response.json();
+
+  //   if (response.ok) {
+  //     toast.success(`${type} deleted`, {
+  //       id: toastDeletePost,
+  //     });
+  //     router.refresh();
+
+  //     console.log("success", data);
+  //   } else {
+  //     toast.error(data.error, {
+  //       id: toastDeletePost,
+  //     });
+  //     console.log("error", data);
+  //   }
+
+  //   setDisableDelete(false);
+  //   // setShowOptions(false);
+  // };
 
   const keyByType =
     (type === "Comment" && commentId) ||
@@ -80,9 +113,9 @@ function CommentOption({
       </PopoverTrigger>
       <PopoverContent className="absolute bottom-0 right-7 z-10 p-0 w-[100px] lg:w-[120px] flex flex-col rounded-md font-montserrat text-black dark:text-gray-50 bg-gray-50 dark:bg-custom-gray2 text-xs lg:text-sm border border-gray-300 dark:border-gray-700 shadow whitespace-nowrap">
         <button
-          className="w-full px-3 py-2 hover:bg-gray-200 dark:hover:bg-custom-gray3 text-start  disabled:cursor-not-allowed disabled:opacity-70"
+          className="w-full px-3 py-2 hover:bg-gray-200 dark:hover:bg-custom-gray3 text-start disabled:pointer-events-none disabled:opacity-70"
           onClick={handleDelete}
-          disabled={disableDelete}
+          disabled={isPending}
         >
           Delete
         </button>

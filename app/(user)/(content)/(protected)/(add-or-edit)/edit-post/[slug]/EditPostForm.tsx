@@ -10,7 +10,7 @@ import { ImageField } from "@/components/Form/ImageField";
 import { Button } from "@/components/ui/button";
 import { RichTextField } from "@/components/Form/RichTextField";
 import { PostFormProps, postSchema } from "@/schemas/postSchema";
-import { revalidateAllRoutes } from "@/actions/revalidateAllRoutes";
+import { editPost } from "@/db/mutations/user/post/editPost";
 
 type Props = {
   id: string;
@@ -47,36 +47,64 @@ function EditPostForm({
     formState: { isSubmitting },
   } = form;
 
+  // // with server action
   const onSubmit = async (values: PostFormProps) => {
     const toastEditPost = toast.loading("Loading...");
 
-    const url = `/api/post?postId=${post.id}`;
-    const response = await fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
+    const result = await editPost({ values: values, postId: post.id });
 
-    const data = await response.json();
-    const slug = data?.response?.slug;
+    console.log("result", result);
 
-    if (response.ok) {
-      console.log("success", data);
-      toast.success(data.success, {
+    if (result.success) {
+      toast.success(result.success, {
         id: toastEditPost,
       });
-      revalidateAllRoutes();
-      // router.refresh();
+
+      const slug = result.data.slug;
+
       router.push(`/post/${slug}`);
+    } else if (result.error) {
+      toast.error(result.error, {
+        id: toastEditPost,
+      });
     } else {
-      console.log("error", data);
-      toast.error(data.error, {
+      toast.error("Error", {
         id: toastEditPost,
       });
     }
   };
+
+  // // with route handler
+  // const onSubmit = async (values: PostFormProps) => {
+  //   const toastEditPost = toast.loading("Loading...");
+
+  //   const url = `/api/post?postId=${post.id}`;
+  //   const response = await fetch(url, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(values),
+  //   });
+
+  //   const data = await response.json();
+  //   const slug = data?.response?.slug;
+
+  //   if (response.ok) {
+  //     console.log("success", data);
+  //     toast.success(data.success, {
+  //       id: toastEditPost,
+  //     });
+  //     revalidateAllRoutes();
+  //     // router.refresh();
+  //     router.push(`/post/${slug}`);
+  //   } else {
+  //     console.log("error", data);
+  //     toast.error(data.error, {
+  //       id: toastEditPost,
+  //     });
+  //   }
+  // };
 
   return (
     <div className="overflow-hidden">
