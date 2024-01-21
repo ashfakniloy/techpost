@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 import { getAuthSession } from "@/lib/next-auth";
 import { categorySchema } from "@/schemas/categorySchema";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 // import { Prisma } from "@prisma/client";
 
 export async function POST(request: NextRequest) {
@@ -67,6 +67,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    revalidatePath("/", "layout");
     revalidateTag("categories");
     revalidateTag(`category-${name.toLowerCase()}`);
     revalidateTag("editorsChoice");
@@ -179,6 +180,7 @@ export async function PUT(request: NextRequest) {
       });
     }
 
+    revalidatePath("/", "layout");
     revalidateTag("categories");
     revalidateTag(`category-${name.toLowerCase()}`);
     revalidateTag("editorsChoice");

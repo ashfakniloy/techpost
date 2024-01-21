@@ -71,10 +71,6 @@ const Tiptap = ({
     editor?.commands.setContent(article);
   }, [editor?.contentComponent]);
 
-  // useEffect(() => {
-  //   resetRichText && editor?.chain().clearContent(true).run();
-  // }, [resetRichText]);
-
   useEffect(() => {
     !article && editor?.chain().clearContent(true).run();
   }, [article]);

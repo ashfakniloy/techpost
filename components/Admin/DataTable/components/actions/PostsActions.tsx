@@ -30,7 +30,7 @@ export function PostsActions<TData>({ row }: PostsActions<TData>) {
 
   // with server action
   const handleDelete = async () => {
-    // console.log("delete id", post.id);
+    console.log("delete id", post.id);
     setIsDeleting(true);
 
     const toastDeletePost = toast.loading("Loading...");

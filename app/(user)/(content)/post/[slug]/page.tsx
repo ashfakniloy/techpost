@@ -7,16 +7,16 @@ import parser from "html-react-parser";
 import { BASE_URL } from "@/config";
 import Counts from "./Counts";
 import Comment from "@/components/Post/Comment";
-import OptionButton from "@/components/Post/OptionButton";
 import { ClientFormattedDate } from "@/components/ClientFormattedDate";
 import EditorsChoiceBadge from "@/components/EditorsChoiceBadge";
 import SocialShare from "@/components/Post/SocialShare";
 import { capitalizeWords } from "@/utils/capitalizeWords";
 import { getSinglePost } from "@/db/queries/getSinglePost";
-import { getAuthSession } from "@/lib/next-auth";
 import CountsSkeleton from "@/components/Skeleton/CountsSkeleton";
 import "@/components/TextEditor/Tiptap/styles.css";
 import { getAllSlugs } from "@/db/queries/getAllSlugs";
+import PostOption from "./PostOption";
+
 // import { getImagePlaceholder } from "@/utils/getImagePlaceholder";
 
 // export const revalidate = 0;
@@ -96,10 +96,8 @@ export async function generateMetadata({
 
 async function SinglePostPage({
   params: { slug },
-  searchParams: { showComments },
+  searchParams,
 }: SinglePostPageProps) {
-  const session = await getAuthSession();
-
   const { data: post } = await getSinglePost({ slug });
 
   if (!post) {
@@ -108,7 +106,14 @@ async function SinglePostPage({
 
   const articleUrl = `${BASE_URL}/post/${slug}`;
 
-  // const blurDataUrl = await getImagePlaceholder(post.imageUrl);
+  // const blurDataURL = await getImagePlaceholder(post.imageUrl);
+
+  const blurDataURL = post.imageUrl.replace(
+    "/upload/",
+    "/upload/w_10/e_blur:100,q_100/"
+  );
+
+  // console.log("blurdataurl", blurDataURL);
 
   return (
     <div className="relative flex-1 max-w-full lg:max-w-[796px]">
@@ -129,6 +134,7 @@ async function SinglePostPage({
             </div>
           )}
         </div>
+
         <article>
           <div className="flex flex-col min-h-[100px] lg:min-h-[135px]">
             <h1 className="text-2xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 font-montserrat">
@@ -167,14 +173,14 @@ async function SinglePostPage({
                     </p>
                   </div>
 
-                  {session?.user.id === post.user.id && (
-                    <OptionButton
+                  <Suspense fallback={null}>
+                    <PostOption
                       title={post.title}
-                      postId={post.id}
                       slug={post.slug}
-                      redirectAfterDelete={"/"}
+                      postId={post.id}
+                      userId={post.userId}
                     />
-                  )}
+                  </Suspense>
                 </div>
               </div>
 
@@ -193,6 +199,7 @@ async function SinglePostPage({
                     </p>
                   )}
                 </div>
+
                 <div className="flex items-center gap-10">
                   <SocialShare
                     articleUrl={articleUrl}
@@ -207,8 +214,8 @@ async function SinglePostPage({
           <div className="mt-5 h-[280px] lg:h-[470px] relative">
             <Image
               src={post.imageUrl}
-              // placeholder="blur"
-              // blurDataURL={blurDataUrl}
+              placeholder="blur"
+              blurDataURL={blurDataURL}
               alt="post image"
               fill
               sizes="(max-width: 768px) 100vw, 800px"
@@ -236,7 +243,7 @@ async function SinglePostPage({
             postId={post.id}
             authorId={post.userId}
             slug={post.slug}
-            showCommentsParam={showComments}
+            searchParams={searchParams}
           />
         </Suspense>
       </div>

@@ -14,13 +14,19 @@ async function Comment({
   postId,
   authorId,
   slug,
-  showCommentsParam,
+  // showCommentsParam,
+  searchParams,
 }: {
   postId: string;
   authorId: string;
   slug: string;
-  showCommentsParam: string;
+  // showCommentsParam: string;
+  searchParams: {
+    showComments: string;
+  };
 }) {
+  const { showComments: showCommentsParam } = searchParams;
+
   const session = await getAuthSession();
 
   const addComments = 5;

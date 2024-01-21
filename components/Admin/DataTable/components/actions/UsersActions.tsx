@@ -29,7 +29,7 @@ export function UsersActions<TData>({ row }: UsersActions<TData>) {
 
   // with server action
   const handleDelete = async () => {
-    // console.log("delete id", user.id);
+    console.log("delete id", user.id);
     setIsDeleting(true);
 
     const toastDeleteUser = toast.loading("Loading...");

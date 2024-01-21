@@ -1,5 +1,5 @@
 import PostsCardSkeleton from "@/components/Skeleton/PostsCardSkeleton";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import RelatedPosts from "./RelatedPosts";
 import { getSinglePost } from "@/db/queries/getSinglePost";
 import { notFound } from "next/navigation";
@@ -18,6 +18,7 @@ async function PostLayout({
   if (!post) {
     notFound();
   }
+
   return (
     <div className="flex justify-between gap-5">
       <Suspense fallback={<SinglePostSkeleton />}>{children}</Suspense>

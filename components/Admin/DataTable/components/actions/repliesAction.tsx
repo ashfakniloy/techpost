@@ -27,7 +27,7 @@ export function RepliesAction<TData>({ row }: PostsActions<TData>) {
 
   // with server action
   const handleDelete = async () => {
-    // console.log("delete id", commentReply.id);
+    console.log("delete id", commentReply.id);
     // return;
 
     setIsDeleting(true);

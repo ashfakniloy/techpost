@@ -5,6 +5,7 @@ import { getAuthSession } from "@/lib/next-auth";
 import type { PostItem } from "@/types";
 import { PER_PAGE } from "@/config";
 import { getMultipleImagePlaceholder } from "@/utils/getImagePlaceholder";
+import { Suspense } from "react";
 
 async function PostsView({
   posts,
@@ -36,7 +37,9 @@ async function PostsView({
 
           {postCount > (limit || PER_PAGE) && (
             <div className="mt-8">
-              <Pagination postCount={postCount} limit={limit || PER_PAGE} />
+              <Suspense fallback={null}>
+                <Pagination postCount={postCount} limit={limit || PER_PAGE} />
+              </Suspense>
             </div>
           )}
         </>

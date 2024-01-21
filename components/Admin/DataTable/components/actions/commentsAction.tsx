@@ -27,7 +27,7 @@ export function CommentsAction<TData>({ row }: PostsActions<TData>) {
 
   // with server action
   const handleDelete = async () => {
-    // console.log("delete id", comment.id);
+    console.log("delete id", comment.id);
     // return;
 
     setIsDeleting(true);

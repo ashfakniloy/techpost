@@ -28,7 +28,7 @@ function UserOption({ id, username }: UserOptionProps) {
 
   // with server action
   const handleDelete = async () => {
-    // console.log("delete id", id);
+    console.log("delete id", id);
     setIsDeleting(true);
 
     const toastDeleteUser = toast.loading("Loading...");

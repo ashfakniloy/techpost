@@ -40,9 +40,9 @@ export default function RootLayout({
               duration: 3000,
             }}
           />
-          <div className="break-words">
-            <SessionProvider>{children}</SessionProvider>
-          </div>
+          <SessionProvider>
+            <div className="break-words">{children}</div>
+          </SessionProvider>
         </ThemeWrapper>
         <Log />
         <Analytics />
